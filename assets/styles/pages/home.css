@@ -19,9 +19,11 @@
 .main-banner-letter{
     color: var(--red);
 }
+
 .img-actu-slider{
     height: 376px;
 }
+
 .blog-categories{
     display: flex;
     justify-content: end;
