@@ -12,5 +12,3 @@ import './styles/base/style.css';
 import './styles/base/responsive.css';
 import './styles/base/main.css';
 import './styles/base/demo.css';
-
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');

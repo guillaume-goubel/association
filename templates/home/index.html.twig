@@ -21,8 +21,13 @@
         <section class="bg-very-light-gray pt-20px pb-20px sm-pt-40px" data-anime='{ "opacity": [0, 1], "translateY": [0, 0], "easing": "easeOutQuad", "duration": 1000,"staggervalue": 300, "delay": 600 }'>
             <div class="container overlap-section">
                 <div class="row justify-content-center overlap-section border-radius-6px overflow-hidden g-0 box-shadow-extra-large">
-                    <div class="col-lg-9 text-center fw-600 fs-24 lg-fs-22 ls-minus-05px text-dark-gray bg-white p-30px md-p-20px"><strong>Bientôt !! </strong><a href="demo-hosting-domain.html" class="fw-700 text-base-color text-decoration-line-bottom-medium">Le 09/08/2024</a>   Randonnée Parc Wattignies</div>
-                    <div class="col-lg-3 text-center bg-yellow pt-30px pb-30px md-p-20px"><a href="demo-hosting-pricing.html" class="fw-700 text-dark-gray text-dark-gray-hover fs-24 lg-fs-20 ls-minus-05px">Inscrivez-vous ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
+                    <div class="col-lg-9 text-center fw-600 fs-24 lg-fs-22 ls-minus-05px text-dark-gray bg-white p-30px md-p-20px"><strong class="pe-5">Bientôt !</strong><span class="fw-700 text-base-color">09/08/2024</span> 
+                        <span class="ps-5 pe-2">Randonnée Parc Wattignies</span> 
+                        <span class="feature-box-icon me-20px mb-5px">
+                            <i class="fa-solid fa-person-hiking align-middle icon-medium text-base-color"></i>
+                        </span>
+                    </div>
+                    <div class="col-lg-3 text-center bg-yellow pt-30px pb-30px md-p-20px"><a href="demo-hosting-pricing.html" class="fw-700 text-dark-gray text-dark-gray-hover fs-24 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
                 </div>
             </div>
         </section>
@@ -33,24 +38,28 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center mb-6 sm-mb-50px position-relative">
                     <div class="col-lg-6 col-md-10 position-relative md-mb-30px" data-anime='{ "effect": "slide", "color": "#ffffff", "direction":"lr", "easing": "easeOutQuad", "delay":50}'> 
-                        <img class="w-100" src="{{ customAsset('app/exemple_event.jpg')}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
+                        <img style="opacity:1!important" class="w-100" src="{{ customAsset('app/exemple_event.jpg')}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
                     </div>
                     <div class="col-lg-5 offset-lg-1 last-paragraph-no-margin" data-anime='{ "el": "childs", "opacity": [0, 1], "rotateY": [-90, 0], "rotateZ": [-10, 0], "translateY": [80, 0], "translateZ": [50, 0], "staggervalue": 200, "duration": 900, "delay": 300, "easing": "easeOutCirc" }'>
                         <span class="text-base-color fw-600 mb-15px text-uppercase d-block">Notre dernier événement</span>
                         
                         <ul class="p-0 mb-25px mt-15px list-style-01 w-90 lg-w-100">
                             <li class="border-color-extra-medium-gray fw-600 text-dark-gray d-flex align-items-center pt-15px pb-15px">
-                                <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div>
-                                Le 07/08/2024.
+                                {# <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div> #}
+                                <span class="pe-4"><i class="fa-regular fa-calendar align-middle icon-medium"></i></span>
+                                07/08/2024
                             </li>
                             <li class="border-color-extra-medium-gray fw-600 text-dark-gray d-flex align-items-center pt-15px pb-15px">
-                                <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div>
-                                Lille.
+                                {# <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div> #}
+                                <span class="pe-3"><i class="fa-solid fa-map-location-dot align-middle icon-medium"></i></span>
+                                Lille
                             </li>
                         </ul>
                         
-                        <h2 class="fw-600 text-dark-gray w-90 lg-w-100 text-dark-gray fw-700 ls-minus-2px">Vive les JO !!</h2>
-                        <p class="w-90 sm-w-100">La flamme olympique est venue rendre visite à l'Arsméli...Merci à tous pour votre investissement !!</p>
+                        <h3 class="fw-600 text-dark-gray w-90 lg-w-100 text-dark-gray fw-700 ls-minus-2px">Vive les JO !!</h3>
+                        <p class="w-90 sm-w-100">
+                            La flamme olympique est venue rendre visite à l'Arsméli...Merci à tous pour votre investissement !!
+                        </p>
 
                         <a href="{{ path('blog_index') }}" class="btn btn-large btn-dark-gray btn-box-shadow btn-rounded btn-switch-text mt-4">
                             <span>
@@ -111,14 +120,152 @@
         </section>
         <!-- end section -->
 
+        <!--ACTIVITES start section -->
+        <section id="activity-section" class="cover-background section-dark bg-midnight-dark-blue extra-big-section" style="background-image: url('images/demo-hosting-home-02.png')">
+            <div class="container"> 
+                
+                <div class="row justify-content-center mb-3">
+                    <div class="col-lg-8 text-center" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 900, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                        <span class="text-white opacity-5 mb-5px text-uppercase d-block"></span>
+                        <h2 class="text-white fw-700 ls-minus-1px">Nos activités</h2>
+                    </div>
+                </div>
+
+                <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 justify-content-center ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                    
+                    {% for i in 1..2 %}
+
+                        <!-- start features box item -->
+                        <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                            <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div class="feature-box-icon">
+                                    <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                </div>
+                                <div class="feature-box-content">
+                                    <span class="d-inline-block text-white fw-500 lh-24">Randonnées</span> 
+                                </div>
+                                <div class="feature-box-overlay bg-white"></div>
+                            </div>  
+                        </a>
+                        <!-- end features box item -->
+
+                        <!-- start features box item -->
+                        <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                            <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div class="feature-box-icon">
+                                    <i class="fa-solid fa-person-biking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                </div>
+                                <div class="feature-box-content">
+                                    <span class="d-inline-block text-white fw-500 lh-24">Vélo</span> 
+                                </div>
+                                <div class="feature-box-overlay bg-white"></div>
+                            </div>  
+                        </a>
+                        <!-- end features box item -->
+                        
+                        <!-- start features box item -->
+                        <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                            <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div class="feature-box-icon">
+                                    <i class="fa-solid fa-binoculars align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                </div>
+                                <div class="feature-box-content">
+                                    <span class="d-inline-block text-white fw-500 lh-24">Découvertes</span> 
+                                </div>
+                                <div class="feature-box-overlay bg-white"></div>
+                            </div>  
+                        </a>
+                        <!-- end features box item -->
+
+                        <!-- start features box item -->
+                        <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                            <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div class="feature-box-icon">
+                                    <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
+                                </div>
+                                <div class="feature-box-content">
+                                    <span class="d-inline-block text-white fw-500 lh-24">Séjours</span> 
+                                </div>
+                                <div class="feature-box-overlay bg-white"></div>
+                            </div>  
+                        </a>
+                        <!-- end features box item -->
+
+                    {% endfor %}
+                    
+
+                </div>
+
+                <div class="row position-relative clients-style-08 pt-5" data-anime='{ "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    <div class="col swiper text-center feather-shadow" data-slider-options='{ "slidesPerView": 2, "spaceBetween":0, "speed": 10000, "loop": true, "pagination": { "el": ".slider-four-slide-pagination-2", "clickable": false }, "allowTouchMove": false, "autoplay": { "delay":0, "disableOnInteraction": false }, "navigation": { "nextEl": ".slider-four-slide-next-2", "prevEl": ".slider-four-slide-prev-2" }, "keyboard": { "enabled": true, "onlyInViewport": true }, "breakpoints": { "1200": { "slidesPerView": 5 }, "992": { "slidesPerView": 0 }, "768": { "slidesPerView": 0 } }, "effect": "slide" }'>
+                        <div class="swiper-wrapper marquee-slide">
+                            <!-- start client item -->
+                            <div class="swiper-slide">
+                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                            </div>
+                            <!-- end client item -->
+                            <!-- start client item -->
+                            <div class="swiper-slide">
+                                <a href="#"><img src="{{ customAsset('app/exemple_event.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                            </div>
+                            <!-- end client item -->
+                            <!-- start client item -->
+                            <div class="swiper-slide">
+                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                            </div>
+                            <!-- end client item -->
+                            <!-- start client item -->
+                            <div class="swiper-slide">
+                                <a href="#"><img src="{{ customAsset('app/last_event.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                            </div>
+                            <!-- end client item -->
+                            <!-- start client item -->
+                            <div class="swiper-slide">
+                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                            </div>
+                            <!-- end client item -->
+                            <!-- start client item -->
+                            <div class="swiper-slide">
+                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                            </div>
+                            <!-- end client item -->
+                            <!-- start client item -->
+                            <div class="swiper-slide">
+                                <a href="#"><img src="{{ customAsset('app/last_event.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                            </div>
+                            <!-- end client item -->
+                            <!-- start client item -->
+                            <div class="swiper-slide">
+                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                            </div>
+                            <!-- end client item -->
+                        </div> 
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- end section -->
+
+
         <!-- start page title -->
-        <section class="pb-0 md-pt-0 pt-0">
+        <section id="agenda-section" class="pb-0 bg-very-light-gray">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-12 col-xl-6 col-lg-8 text-center position-relative page-title-double-large">
                         <div class="d-flex flex-column justify-content-center extra-very-small-screen">
-                            <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">A venir</h1>
-                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Rejoignez-nous pour nos prochains événements</h2>
+                            <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">Agenda</h1>
+                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Nos prochains événements</h2>
+                            
+                            <div class="overflow-hidden pt-5px">
+                                <a href="demo-hosting-hosting.html" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                                    <span>
+                                        <span class="btn-double-text" data-text="Tous nos événements">Tous nos événements</span>
+                                        <span><i class="feather icon-feather-arrow-right"></i></span>
+                                    </span>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -127,63 +274,84 @@
         <!-- end page title -->
 
         <!-- start section -->
-        <section class="pt-0 ps-10 pe-10 xl-ps-2 xl-pe-2 sm-mx-0 border-bottom border-color-extra-medium-gray">
+        <section class="pt-0 ps-10 pe-10 xl-ps-2 xl-pe-2 sm-mx-0 border-bottom border-color-extra-medium-gray bg-very-light-gray">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-12 pt-5">
                         <ul class="blog-date blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-2col md-grid-2col sm-grid-1col xs-grid-1col gutter-extra-large">
                             <li class="grid-sizer"></li>
+                            
                             <!-- start blog item -->
                             <li class="grid-item">
-                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                    <div class="feature-box-icon">
-                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                            <span class="date d-block fs-30 lh-28">28</span>
-                                            <span class="month d-block lh-24">Jun</span>
-                                        </time>
+                                
+                                <a href="">
+                                    <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                        <div class="feature-box-icon d-flex align-items-center flex-column">
+                                            <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                                <span class="date d-block fs-30 lh-28">28</span>
+                                                <span class="month d-block lh-24">Jun</span>
+                                            </time>
+                                            <div class="mt-20px">
+                                                <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
+                                            </div>
+                                        </div>
+                                        <div class="feature-box-content">
+                                            {# <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Andy glamer</a></div> #}
+                                            <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</a>
+                                            <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                        </div>
                                     </div>
-                                    <div class="feature-box-content">
-                                        <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Andy glamer</a></div>
-                                        <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</a>
-                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                    </div>
-                                </div>
+                                </a>
+
                             </li>
                             <!-- end blog item -->
+
                             <!-- start blog item -->
                             <li class="grid-item">
-                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                    <div class="feature-box-icon">
-                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                            <span class="date d-block fs-30 lh-28">26</span>
-                                            <span class="month d-block lh-24">Jun</span>
-                                        </time>
+                                <a href="">
+                                    <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                        <div class="feature-box-icon d-flex align-items-center flex-column">
+                                            <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                                <span class="date d-block fs-30 lh-28">28</span>
+                                                <span class="month d-block lh-24">Jun</span>
+                                            </time>
+                                            <div class="mt-20px">
+                                                <i class="fa-solid fa-person-biking align-middle icon-large text-base-color"></i>
+                                            </div>
+                                        </div>
+                                        <div class="feature-box-content">
+                                            {# <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Andy glamer</a></div> #}
+                                            <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</a>
+                                            <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                        </div>
                                     </div>
-                                    <div class="feature-box-content">
-                                        <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Walton smith</a></div>
-                                        <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Good work for good people good design is a language.</a>
-                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                    </div>
-                                </div>
+                                </a>
                             </li>
                             <!-- end blog item -->
+
                             <!-- start blog item -->
                             <li class="grid-item">
-                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                    <div class="feature-box-icon">
-                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                            <span class="date d-block fs-30 lh-28">24</span>
-                                            <span class="month d-block lh-24">Jun</span>
-                                        </time>
+                                <a href="">
+                                    <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                        <div class="feature-box-icon d-flex align-items-center flex-column">
+                                            <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                                <span class="date d-block fs-30 lh-28">28</span>
+                                                <span class="month d-block lh-24">Jun</span>
+                                            </time>
+                                            <div class="mt-20px">
+                                                <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
+                                            </div>
+                                        </div>
+                                        <div class="feature-box-content">
+                                            {# <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Andy glamer</a></div> #}
+                                            <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</a>
+                                            <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                        </div>
                                     </div>
-                                    <div class="feature-box-content">
-                                        <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Bill gardner</a></div>
-                                        <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Everything is designed things are good designed.</a>
-                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                    </div>
-                                </div>
+                                </a>
                             </li>
                             <!-- end blog item -->
+
                         </ul>
                     </div>
                     {# <div class="col-12 mt-4 d-flex justify-content-center">
@@ -202,26 +370,37 @@
         <!-- end section -->
 
         <!-- start page title -->
-        <section class="pb-0 md-pt-0 pt-0">
+        <section id="retro-section" class="pb-0">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-12 col-xl-6 col-lg-8 text-center position-relative page-title-double-large">
                         <div class="d-flex flex-column justify-content-center extra-very-small-screen">
-                            <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">Nos événements</h1>
-                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Suivez nos actualités</h2>
+                            <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">Rétrospective</h1>
+                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Suivez nos actualités {{ "now"|date('Y') }}</h2>
+
+                            <div class="overflow-hidden pt-5px">
+                                <a href="demo-hosting-hosting.html" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                                    <span>
+                                        <span class="btn-double-text" data-text="Archives">Archives</span>
+                                        <span><i class="feather icon-feather-arrow-right"></i></span>
+                                    </span>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
         <!-- end page title -->
 
         <!-- start section -->
-        <section class="pt-0">
+        <section class="pt-0">    
             
             <div class="container">
                 <div class="row">
-                    <div class="col-12 text-center">
+                    <div class="col-12 text-center pt-5">
                         <!-- filter navigation --> 
                         <ul class="portfolio-filter nav nav-tabs justify-content-center border-0 fw-500 alt-font pb-5">
                             <li class="nav active"><a data-filter="*" href="#">Tout</a></li>
@@ -496,93 +675,107 @@
                     </div>
                 </div>
             </div>
+
         </section>
         <!-- end section -->
 
         <!-- start section -->
-        <section class="cover-background pt-5 xs-pt-8 pb-5" style="background-image: url('https://via.placeholder.com/1920x751')"> 
-            <div class="container">  
-                <div class="row justify-content-center mb-3">
-                    <div class="col-lg-8 text-center" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 900, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <span class="text-base-color fw-600 mb-5px text-uppercase d-block">Qui sommes nous ?</span>
-                        <h2 class="text-dark-gray fw-700 ls-minus-2px">Nos valeurs</h2>
-                    </div>
+        <section id="whoare-section" class="background-position-left-top background-no-repeat position-relative extra-big-section" style="background-image: url('images/demo-hosting-home-bg.jpg')">
+            <div class="container">
+                <div class="text-center position-absolute top-minus-40px left-0px right-0px z-index-1 d-none d-md-inline-block" data-anime='{ "opacity": [0, 1], "translate": [0, 0], "staggervalue": 100, "easing": "easeOutQuad" }'>
+                    <a href="#" class="d-block section-link">
+                        <div class="d-flex justify-content-center align-items-center mx-auto box-shadow-medium-bottom rounded-circle h-70px w-70px text-dark-gray bg-white">
+                            <i class="fa-solid fa-question"></i>
+                        </div>
+                    </a>
                 </div>
-                <div class="row row-cols-1 row-cols-lg-4 row-cols-sm-2 justify-content-center" data-anime='{ "el": "childs",  "translateY": [0, 0], "perspective": [1200, 1200], "scale": [1.05, 1], "rotateX": [50, 0], "opacity": [0,1], "duration":600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                    <!-- start features box item -->
-                    <div class="col icon-with-text-style-07 transition-inner-all md-mb-30px">
-                        <div class="bg-white feature-box h-100 justify-content-start box-shadow-quadruple-large box-shadow-quadruple-large-hover text-start p-17 sm-p-14 border-radius-6px">
-                            <div class="feature-box-icon mb-30px"> 
-                                <img src="images/demo-hosting-home-icon-02.svg" class="h-50px" alt="">
+                <div class="row justify-content-center">                    
+                    <div class="col-lg-5 col-md-10 position-relative md-mb-40px sm-mb-25px" data-anime='{ "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                        <div class="icon-with-text-style-08 mb-20px">
+                            <div class="feature-box feature-box-left-icon-middle">
+                                <div class="feature-box-content last-paragraph-no-margin">
+                                    <span class="d-inline-block alt-font fs-19 fw-500 ls-minus-05px text-white">Qui sommes-nous ?</span>
+                                </div>
                             </div>
-                            <div class="feature-box-content">
-                                <span class="d-inline-block fw-600 text-dark-gray fs-18 ls-minus-05px">Online store</span>
-                                <p class="mb-10px">Lorem dummy printing type setting industry.</p>
-                                <a href="demo-hosting-hosting.html" class="btn btn-link btn-hover-animation-switch btn-extra-large text-base-color text-uppercase-inherit">
-                                    <span>
-                                        <span class="btn-text">Learn more</span>
-                                        <span class="btn-icon"><i class="feather icon-feather-arrow-right"></i></span>
-                                        <span class="btn-icon"><i class="feather icon-feather-arrow-right"></i></span>
-                                    </span> 
-                                </a>
-                            </div>                        
+                        </div>
+                        <h2 class="alt-font text-yellow fw-600 ls-minus-3px mx-auto">
+                            Un esprit serein dans un corps en mouvement
+                        </h2>
+                        
+                        <div class="alt-font text-white mx-auto">
+                            Nous favorisons la convivialité dans chacun de nos sports, la sécurité et le maintien de votre forme.</br></br>
+                            Membre de la <strong>F</strong>édération <strong>F</strong>rancaise de <strong>R</strong>etraite <strong>S</strong>portive, fédération nationale multisports adaptée aux plus de 50 ans. 
+                        </div>
+                        
+                        <div class="overflow-hidden pt-55px">
+                            <a href="demo-hosting-hosting.html" class="btn btn-extra-large btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                                <span>
+                                    <span class="btn-double-text" data-text="c'est ici !">Plus d'informations ?</span>
+                                    <span><i class="feather icon-feather-arrow-right"></i></span>
+                                </span>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-6 col-lg-7 col-md-10 offset-xl-1 position-relative mt-minus-1">
+                        <div class="row row-cols-auto row-cols-sm-2" data-anime='{ "el": "childs", "translateX": [30, 0], "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                            <!-- start features box item -->
+                            <div class="col align-self-start">
+                                <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
+                                    <div class="feature-box-icon position-absolute left-0px top-0px">
+                                        <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">01</h2>
+                                    </div>
+                                    <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
+                                        <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Sport</span>
+                                        <p>eLearning allows learners to quickly and more easily complete their training.</p>
+                                        <span class="w-60px h-3px bg-yellow d-inline-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end features box item -->
+                            <!-- start features box item -->
+                            <div class="col align-self-end mt-25 xs-mt-30px">
+                                <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
+                                    <div class="feature-box-icon position-absolute left-0px top-0px">
+                                        <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">02</h2>
+                                    </div>
+                                    <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
+                                        <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Bien-être</span>
+                                        <p>eLearning allows learners to quickly and more easily complete their training.</p>
+                                        <span class="w-60px h-3px bg-yellow d-inline-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end features box item -->
+                            <!-- start features box item -->
+                            <div class="col align-self-start mt-minus-12 xs-mt-30px">
+                                <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
+                                    <div class="feature-box-icon position-absolute left-0px top-0px">
+                                        <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">03</h2>
+                                    </div>
+                                    <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
+                                        <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Rencontres</span>
+                                        <p>eLearning allows learners to quickly and more easily complete their training.</p>
+                                        <span class="w-60px h-3px bg-yellow d-inline-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end features box item -->
                         </div>
                     </div>
-                    <!-- end features box item -->
-                    <!-- start features box item -->
-                    <div class="col icon-with-text-style-07 transition-inner-all md-mb-30px">
-                        <div class="bg-white feature-box h-100 justify-content-start box-shadow-quadruple-large box-shadow-quadruple-large-hover text-start p-17 sm-p-14 border-radius-6px">
-                            <div class="feature-box-icon mb-30px"> 
-                                <img src="images/demo-hosting-home-icon-03.svg" class="h-50px" alt="">
-                            </div>
-                            <div class="feature-box-content">
-                                <span class="d-inline-block fw-600 text-dark-gray fs-18 ls-minus-05px">Web hosting</span>
-                                <p class="mb-10px">Lorem dummy printing type setting industry.</p>
-                                <a href="demo-hosting-hosting.html" class="btn btn-link btn-hover-animation-switch btn-extra-large text-base-color text-uppercase-inherit">
-                                    <span>
-                                        <span class="btn-text">Learn more</span>
-                                        <span class="btn-icon"><i class="feather icon-feather-arrow-right"></i></span>
-                                        <span class="btn-icon"><i class="feather icon-feather-arrow-right"></i></span>
-                                    </span> 
-                                </a>
-                            </div>                        
-                        </div>
-                    </div>
-                    <!-- end features box item -->
-                    <!-- start features box item -->
-                    <div class="col icon-with-text-style-07 transition-inner-all xs-mb-30px">
-                        <div class="bg-white feature-box h-100 justify-content-start box-shadow-quadruple-large box-shadow-quadruple-large-hover text-start p-17 sm-p-14 border-radius-6px">
-                            <div class="feature-box-icon mb-30px"> 
-                                <img src="images/demo-hosting-home-icon-04.svg" class="h-50px" alt="">
-                            </div>
-                            <div class="feature-box-content">
-                                <span class="d-inline-block fw-600 text-dark-gray fs-18 ls-minus-05px">Business email</span>
-                                <p class="mb-10px">Lorem dummy printing type setting industry.</p>
-                                <a href="demo-hosting-hosting.html" class="btn btn-link btn-hover-animation-switch btn-extra-large text-base-color text-uppercase-inherit">
-                                    <span>
-                                        <span class="btn-text">Learn more</span>
-                                        <span class="btn-icon"><i class="feather icon-feather-arrow-right"></i></span>
-                                        <span class="btn-icon"><i class="feather icon-feather-arrow-right"></i></span>
-                                    </span> 
-                                </a>
-                            </div>                        
-                        </div>
-                    </div>
-                    <!-- end features box item -->
                 </div>
             </div>
         </section>
-        <!-- end section --> 
+        <!-- end section -->
 
         <!-- start section -->
-        <section class="pt-5">
+        <section id="faq-section" class="extra-big-section">
             <div class="container"> 
                 <div class="row justify-content-center align-items-center mb-3">
                     <div class="col-lg-7 col-md-8 sm-mb-15px" data-anime='{ "translateX": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <h2 class="text-dark-gray fw-700 ls-minus-1px mb-0">Have a question?</h2>
+                        <h2 class="text-dark-gray fw-700 ls-minus-1px mb-0">Foire aux questions</h2>
                     </div>
                     <div class="col-lg-3 col-md-4 text-start text-md-end" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <span class="text-dark-gray fs-30 align-middle fancy-text-style-4 ls-minus-1px">&#128075; Say <span class="fw-600" data-fancy-text='{ "effect": "rotate", "string": ["hello!", "hallå!", "salve!"] }'></span></span>
                     </div>
                 </div>
                 <div class="row justify-content-center"> 
@@ -593,7 +786,7 @@
                                 <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-01" aria-expanded="true" data-bs-parent="#accordion-style-02">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                            <i class="feather icon-feather-chevron-up icon-extra-medium"></i><span class="fw-600 fs-18">How long is this site live?</span>
+                                            <i class="feather icon-feather-chevron-up icon-extra-medium"></i><span class="fw-600 fs-18">Lorem ipsum is simply dummy textv ?</span>
                                         </div>
                                     </a>
                                 </div>
@@ -609,7 +802,7 @@
                                 <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-02" aria-expanded="false" data-bs-parent="#accordion-style-02">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Can i install/upload anything is want on there?</span>
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Lorem ipsum has been the industry's standard?</span>
                                         </div>
                                     </a>
                                 </div>
@@ -625,7 +818,7 @@
                                 <div class="accordion-header border-bottom border-color-light-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-03" aria-expanded="false" data-bs-parent="#accordion-style-02">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">How can i migrate to another site?</span>
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Standard dummy text ever unknown printer took?</span>
                                         </div>
                                     </a>
                                 </div>
@@ -641,7 +834,7 @@
                                 <div class="accordion-header border-bottom border-color-transparent">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-04" aria-expanded="false" data-bs-parent="#accordion-style-02">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Can i change the domain you give me?</span>
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Dummy text ever unknown printer took a galley of?</span>
                                         </div>
                                     </a>
                                 </div>

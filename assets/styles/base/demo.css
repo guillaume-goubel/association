@@ -35,7 +35,8 @@ body{
     font-size: 15px;
 }
 header .navbar-brand img {
-    max-height: 32px;
+    max-height: 80px;
+    border-radius: 50%;
 }
 .sticky .header-transparent .header-button .btn {
     background-color: var(--dark-gray);
@@ -49,7 +50,7 @@ header .navbar-brand img {
 }
 /* bg background color */
 .bg-midnight-dark-blue {
-    background-color: #191d3c;
+    background-color: #475ac1;
 }
 .bg-dark-blue {
     background-color: #0d1229; 

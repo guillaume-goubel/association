@@ -27,9 +27,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         let data = $(this).data('anchor');
 
         if (data) {
-            let sectionCible = document.getElementById(data);
-            console.log(sectionCible);
-            sectionCible.scrollIntoView({ behavior: 'smooth' });
+            document.getElementById(data).scrollIntoView({ behavior: 'smooth' });;
         }
 
     });

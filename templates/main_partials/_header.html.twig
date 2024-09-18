@@ -1,25 +1,24 @@
 <header class="header-with-topbar">
-	<div class="header-top-bar top-bar-dark cover-background" style="background-image: url('images/demo-hosting-header-bg.jpg')">
+	{# <div class="header-top-bar top-bar-dark cover-background" style="background-image: url('images/demo-hosting-header-bg.jpg')">
 		<div class="container-fluid">
 			<div class="row h-42px align-items-center m-0">
 				<div class="col-md-7 text-center text-md-start">
-					<div class="fs-13 text-white"><span class="opacity-6 me-5px">Get a hosting plans, as low as starting at only</span><span class="fw-600">$2.78/mo*</span></div>
+					<div class="fs-13 text-white"><span class="opacity-6 me-5px"></span><span class="fw-600">Association SPORT BIEN-ÊTRE</span></div>
 				</div>
 				<div class="col-5 text-end d-none d-md-flex">
-					<a href="demo-hosting-contact.html" class="widget fs-13 me-20px text-white opacity-8 d-none d-lg-inline-block"><i class="feather icon-feather-phone"></i>Customer service</a> 
 					<a href="mailto:support@domain.com" class="widget fs-13 text-white text-white-hover opacity-8"><i class="feather icon-feather-mail text-white position-relative top-1px"></i>support@domain.com</a>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> #}
 	<!-- start navigation -->
 	<nav class="navbar navbar-expand-lg header-transparent bg-transparent header-reverse" data-header-hover="light">
 		<div class="container-fluid">
 			<div class="col-auto col-lg-2 me-lg-0 me-auto">
-				<a class="navbar-brand" href="demo-hosting.html">
-					<img src="images/demo-hosting-logo-white.png" data-at2x="images/demo-hosting-logo-white@2x.png" alt="" class="default-logo">
-					<img src="images/demo-hosting-logo-black.png" data-at2x="images/demo-hosting-logo-black@2x.png" alt="" class="alt-logo">
-					<img src="images/demo-hosting-logo-black.png" data-at2x="images/demo-hosting-logo-black@2x.png" alt="" class="mobile-logo"> 
+				<a data-anchor="main-banner-section" class="navbar-brand header-link" href="#">
+					<img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="default-logo">
+					<img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="alt-logo">
+					<img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="mobile-logo"> 
 				</a>
 			</div>
 			<div class="col-auto menu-order position-static">
@@ -31,19 +30,19 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav"> 
 					<ul class="navbar-nav"> 
-						<li class="nav-item"><a href="demo-hosting.html" class="nav-link">Home</a></li>
-						<li class="nav-item"><a href="demo-hosting-about.html" class="nav-link">About</a></li>
-						<li class="nav-item"><a href="demo-hosting-hosting.html" class="nav-link">Hosting</a></li>
-						<li class="nav-item"><a href="demo-hosting-domain.html" class="nav-link">Domain</a></li>
-						<li class="nav-item"><a href="demo-hosting-pricing.html" class="nav-link">Pricing</a></li>
-						<li class="nav-item"><a href="demo-hosting-support.html" class="nav-link">Support</a></li>
-						<li class="nav-item"><a href="demo-hosting-contact.html" class="nav-link">Contact</a></li>
+						<li data-anchor="main-banner-section" class="nav-item header-link"><a href="#" class="nav-link">Accueil</a></li>
+						<li data-anchor="activity-section" class="nav-item header-link"><a href="#" class="nav-link">Activités</a></li>
+						<li data-anchor="agenda-section" class="nav-item header-link"><a href="#" class="nav-link">Agenda</a></li>
+						<li data-anchor="retro-section" class="nav-item header-link"><a href="#" class="nav-link">Rétrospective</a></li>
+						<li data-anchor="whoare-section" class="nav-item header-link"><a href="#" class="nav-link">Qui sommes-nous ?</a></li>
+						<li data-anchor="faq-section" class="nav-item header-link"><a href="#" class="nav-link">FAQ</a></li>
+						<li class="nav-item header-link"><a href="#" class="nav-link">Contact</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="col-auto col-lg-2 text-end lg-pe-5px">
 				<div class="header-icon">
-					<div class="header-search-icon icon d-none d-sm-flex">
+					{# <div class="header-search-icon icon d-none d-sm-flex">
 						<a href="#" class="search-form-icon header-search-form"><i class="align-middle feather icon-feather-search fs-18 me-5px xl-me-0"></i><span class="align-middle d-none d-xxl-inline-block"> Search</span></a> 
 						<div class="search-form-wrapper">
 							<button title="Close" type="button" class="search-close">×</button>
@@ -57,11 +56,11 @@
 								</div>
 							</form>
 						</div>
-					</div> 
+					</div>  #}
 					<div class="header-button ms-30px xxl-ms-10px xs-ms-0">
 						<a href="#" class="btn btn-white btn-small btn-rounded btn-box-shadow btn-switch-text fw-600">
 							<span>
-								<span class="btn-double-text" data-text="Sign up">Sign up</span> 
+								<span class="btn-double-text" data-text="Mon compte">Mon compte</span> 
 							</span>
 						</a>
 					</div>
