@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!
+{% block title %}Accueil assocation arsméli
 {% endblock %}
 
 {% block stylesheets %}{% endblock %}
@@ -10,7 +10,7 @@
 	<body data-mobile-nav-trigger-alignment="right" data-mobile-nav-style="modern" data-mobile-nav-bg-color="#383632"> 
     
     <!-- start header -->
-	{% include 'main_partials/_header.html.twig' %}
+	{% include 'home/partials/_header.html.twig' %}
 	<!-- end header -->
 
 	    <!-- start banner -->
@@ -121,7 +121,7 @@
         <!-- end section -->
 
         <!--ACTIVITES start section -->
-        <section id="activity-section" class="cover-background section-dark bg-midnight-dark-blue extra-big-section" style="background-image: url('images/demo-hosting-home-02.png')">
+        <section id="activity-section" class="background-position-left-top background-no-repeat position-relative extra-big-section" style="background-image: url('images/demo-hosting-home-bg.jpg')">
             <div class="container"> 
                 
                 <div class="row justify-content-center mb-3">
@@ -246,7 +246,6 @@
             </div>
         </section>
         <!-- end section -->
-
 
         <!-- start page title -->
         <section id="agenda-section" class="pb-0 bg-very-light-gray">
@@ -876,6 +875,6 @@
 
 {% block baseJavascripts %}
     {% block importmap %}
-        {{ importmap(['app', 'home']) }}
+        {{ importmap(['app','base','home']) }}
     {% endblock %}
 {% endblock %}

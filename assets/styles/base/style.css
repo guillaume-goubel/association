@@ -6830,7 +6830,7 @@ header .container-fluid {
   padding-right: 45px;
 }
 header.sticky .navbar-brand {
-  padding: 20px 0;
+  padding: 8px 0;
 }
 header.sticky .navbar {
   -webkit-transform: translateY(-100%);
@@ -7000,7 +7000,7 @@ header .navbar.mini-header .navbar-brand img {
 header .navbar-brand {
   margin-right: 0;
   vertical-align: middle;
-  padding: 30px 0;
+  padding: 8px 0;
   display: inline-block;
   font-size: 0;
 }
