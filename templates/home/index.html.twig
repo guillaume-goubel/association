@@ -120,129 +120,105 @@
         </section>
         <!-- end section -->
 
-        <!--ACTIVITES start section -->
-        <section id="activity-section" class="background-position-left-top background-no-repeat position-relative extra-big-section" style="background-image: url('images/demo-hosting-home-bg.jpg')">
-            <div class="container"> 
-                
-                <div class="row justify-content-center mb-3">
-                    <div class="col-lg-8 text-center" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 900, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <span class="text-white opacity-5 mb-5px text-uppercase d-block"></span>
-                        <h2 class="text-white fw-700 ls-minus-1px">Nos activités</h2>
-                    </div>
-                </div>
-
-                <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 justify-content-center ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
+        <!-- start section -->
+        <section id="activity-section" class="background-position-left-top background-no-repeat position-relative pt-0 pb-0 overflow-hidden">
+            <div class="container-fluid px-0">
+                <div class="row g-0">
                     
-                    {% for i in 1..2 %}
+                    <div class="col-md-8 p-3 cover-background"  data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 600, "delay":150, "staggervalue": 150, "easing": "easeOutQuad" }' style="background-image: url('images/demo-hosting-home-bg.jpg')">
+                        <div class="row justify-content-center my-5 pt-5">
+                            <div class="col-lg-8 text-center" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 900, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                                <span class="text-white opacity-5 mb-5px text-uppercase d-block"></span>
+                                <h2 class="text-white fw-700 ls-minus-1px highlight-separator" data-shadow-animation="true" data-animation-delay="1500">
+                                    Nos activités<span><img src="images/highlight-separator.svg" alt=""></span>
+                                </h2>
+                            </div>
+                        </div>
 
-                        <!-- start features box item -->
-                        <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                            <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                <div class="feature-box-icon">
-                                    <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                </div>
-                                <div class="feature-box-content">
-                                    <span class="d-inline-block text-white fw-500 lh-24">Randonnées</span> 
-                                </div>
-                                <div class="feature-box-overlay bg-white"></div>
-                            </div>  
-                        </a>
-                        <!-- end features box item -->
+                        <div class="row row-cols-2 row-cols-lg-5 row-cols-md-3 row-cols-sm-2 justify-content-start ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                            
+                            {% for i in 1..3 %}
 
-                        <!-- start features box item -->
-                        <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                            <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                <div class="feature-box-icon">
-                                    <i class="fa-solid fa-person-biking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                </div>
-                                <div class="feature-box-content">
-                                    <span class="d-inline-block text-white fw-500 lh-24">Vélo</span> 
-                                </div>
-                                <div class="feature-box-overlay bg-white"></div>
-                            </div>  
-                        </a>
-                        <!-- end features box item -->
+                                <!-- start features box item -->
+                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                    <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                        <div class="feature-box-icon">
+                                            <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                        </div>
+                                        <div class="feature-box-content">
+                                            <span class="d-inline-block text-white fw-500 lh-24">Randonnées</span> 
+                                        </div>
+                                        <div class="feature-box-overlay bg-white"></div>
+                                    </div>  
+                                </a>
+                                <!-- end features box item -->
+
+                                <!-- start features box item -->
+                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                    <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                        <div class="feature-box-icon">
+                                            <i class="fa-solid fa-person-biking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                        </div>
+                                        <div class="feature-box-content">
+                                            <span class="d-inline-block text-white fw-500 lh-24">Vélo</span> 
+                                        </div>
+                                        <div class="feature-box-overlay bg-white"></div>
+                                    </div>  
+                                </a>
+                                <!-- end features box item -->
+                                
+                                <!-- start features box item -->
+                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                    <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                        <div class="feature-box-icon">
+                                            <i class="fa-solid fa-binoculars align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                        </div>
+                                        <div class="feature-box-content">
+                                            <span class="d-inline-block text-white fw-500 lh-24">Découvertes</span> 
+                                        </div>
+                                        <div class="feature-box-overlay bg-white"></div>
+                                    </div>  
+                                </a>
+                                <!-- end features box item -->
+
+                                <!-- start features box item -->
+                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                    <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                        <div class="feature-box-icon">
+                                            <i class="fa-solid fa-person-swimming align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
+                                        </div>
+                                        <div class="feature-box-content">
+                                            <span class="d-inline-block text-white fw-500 lh-24">Piscine</span> 
+                                        </div>
+                                        <div class="feature-box-overlay bg-white"></div>
+                                    </div>  
+                                </a>
+                                <!-- end features box item -->
+
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 position-relative" data-anime='{ "translateX": [50, 0], "opacity": [0,1], "duration": 600, "delay":150, "staggervalue": 150, "easing": "easeOutQuad" }'>
                         
-                        <!-- start features box item -->
-                        <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                            <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                <div class="feature-box-icon">
-                                    <i class="fa-solid fa-binoculars align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                </div>
-                                <div class="feature-box-content">
-                                    <span class="d-inline-block text-white fw-500 lh-24">Découvertes</span> 
-                                </div>
-                                <div class="feature-box-overlay bg-white"></div>
-                            </div>  
-                        </a>
-                        <!-- end features box item -->
+                        <div style="z-index:9;background-color: #16233f;" class="opacity-extra-medium bg-blue-whale"></div>
 
-                        <!-- start features box item -->
-                        <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                            <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                <div class="feature-box-icon">
-                                    <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
+                        <div class="swiper position-relative h-100" data-slider-options='{ "slidesPerView": 1, "loop": true, "allowTouchMove": true, "autoplay": { "delay": 8000, "disableOnInteraction": false }, "navigation": { "nextEl": ".slider-one-slide-next-1", "prevEl": ".slider-one-slide-prev-1" }, "effect": "fade" }'>
+                            <div class="swiper-wrapper">
+                                <!-- start text slider item -->
+                                <div class="swiper-slide cover-background h-100 text-center" style="background-image: url({{ customAsset('app/sport1.webp') }})">
                                 </div>
-                                <div class="feature-box-content">
-                                    <span class="d-inline-block text-white fw-500 lh-24">Séjours</span> 
+                                <div class="swiper-slide cover-background h-100 text-center" style="background-image: url({{ customAsset('app/sport2.jpg') }})">
                                 </div>
-                                <div class="feature-box-overlay bg-white"></div>
-                            </div>  
-                        </a>
-                        <!-- end features box item -->
-
-                    {% endfor %}
-                    
-
-                </div>
-
-                <div class="row position-relative clients-style-08 pt-5" data-anime='{ "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                    <div class="col swiper text-center feather-shadow" data-slider-options='{ "slidesPerView": 2, "spaceBetween":0, "speed": 10000, "loop": true, "pagination": { "el": ".slider-four-slide-pagination-2", "clickable": false }, "allowTouchMove": false, "autoplay": { "delay":0, "disableOnInteraction": false }, "navigation": { "nextEl": ".slider-four-slide-next-2", "prevEl": ".slider-four-slide-prev-2" }, "keyboard": { "enabled": true, "onlyInViewport": true }, "breakpoints": { "1200": { "slidesPerView": 5 }, "992": { "slidesPerView": 0 }, "768": { "slidesPerView": 0 } }, "effect": "slide" }'>
-                        <div class="swiper-wrapper marquee-slide">
-                            <!-- start client item -->
-                            <div class="swiper-slide">
-                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
+                                <div class="swiper-slide cover-background h-100 text-center" style="background-image: url({{ customAsset('app/sport5.jpg') }})">
+                                </div>
                             </div>
-                            <!-- end client item -->
-                            <!-- start client item -->
-                            <div class="swiper-slide">
-                                <a href="#"><img src="{{ customAsset('app/exemple_event.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
-                            </div>
-                            <!-- end client item -->
-                            <!-- start client item -->
-                            <div class="swiper-slide">
-                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
-                            </div>
-                            <!-- end client item -->
-                            <!-- start client item -->
-                            <div class="swiper-slide">
-                                <a href="#"><img src="{{ customAsset('app/last_event.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
-                            </div>
-                            <!-- end client item -->
-                            <!-- start client item -->
-                            <div class="swiper-slide">
-                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
-                            </div>
-                            <!-- end client item -->
-                            <!-- start client item -->
-                            <div class="swiper-slide">
-                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
-                            </div>
-                            <!-- end client item -->
-                            <!-- start client item -->
-                            <div class="swiper-slide">
-                                <a href="#"><img src="{{ customAsset('app/last_event.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
-                            </div>
-                            <!-- end client item -->
-                            <!-- start client item -->
-                            <div class="swiper-slide">
-                                <a href="#"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" class="h-100px xs-h-30px" alt="" /></a>
-                            </div>
-                            <!-- end client item -->
-                        </div> 
+                        </div>
+                        
                     </div>
-                </div>
 
+                </div>
             </div>
         </section>
         <!-- end section -->
@@ -253,18 +229,16 @@
                 <div class="row align-items-center justify-content-center">
                     <div class="col-12 col-xl-6 col-lg-8 text-center position-relative page-title-double-large">
                         <div class="d-flex flex-column justify-content-center extra-very-small-screen">
-                            <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">Agenda</h1>
-                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Nos prochains événements</h2>
-                            
+                            <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">Agenda</h1>    
+                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Nos événements et sejours</h2>
                             <div class="overflow-hidden pt-5px">
-                                <a href="demo-hosting-hosting.html" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                                <a href="#" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
                                     <span>
-                                        <span class="btn-double-text" data-text="Tous nos événements">Tous nos événements</span>
+                                        <span class="btn-double-text" data-text="Tout l'agenda">Tout l'agenda</span>
                                         <span><i class="feather icon-feather-arrow-right"></i></span>
                                     </span>
                                 </a>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -274,102 +248,203 @@
 
         <!-- start section -->
         <section class="pt-0 ps-10 pe-10 xl-ps-2 xl-pe-2 sm-mx-0 border-bottom border-color-extra-medium-gray bg-very-light-gray">
-            <div class="container-fluid">
+            
+            <div class="container">
+                <div class="row align-items-end mb-2">
+                    <div class="col-md-5 sm-mb-20px d-flex" data-anime='{ "el": "childs", "translateX": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                        <i class="fa-regular fa-calendar align-middle icon-large text-base-color"></i>
+                        <h4 class="text-base-color fw-600 mb-0 ps-4">Evénements</h4>
+                    </div>
+                    <div class="col-md-6 offset-md-1 last-paragraph-no-margin" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                        <p class="w-80 xl-w-85 lg-w-100">Découvrez les événements qui se déroulent sur une seule journée. Ces rendez-vous vous offrent une journée complète d'activités, de rencontres et d'échanges.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-start">
+                    <ul class="pagination pagination-style-01 fs-13 fw-500 mb-0">
+                        <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></a></li>
+                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                        <li class="page-item"><a class="page-link" href="#">02</a></li>
+                        <li class="page-item"><a class="page-link" href="#">03</a></li>
+                        <li class="page-item"><a class="page-link" href="#">04</a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
+                    </ul>
+                </div>
+
                 <div class="row">
-                    <div class="col-12 pt-5">
+                    <ul class="blog-date blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-2col md-grid-2col sm-grid-1col xs-grid-1col gutter-extra-large">
+                         <li class="grid-sizer"></li>
+                         
+                         <li class="grid-item">
+                             <a href="">
+                                 <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                     <div class="feature-box-icon d-flex align-items-center flex-column">
+                                         <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                             <span class="date d-block fs-30 lh-28">28</span>
+                                             <span class="month d-block lh-24">Jun</span>
+                                         </time>
+                                         <div class="mt-20px">
+                                             <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
+                                         </div>
+                                     </div>
+                                     <div class="feature-box-content">
+                                         <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
+                                         <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                     </div>
+                                 </div>
+                             </a>
+                         </li>
+                         <!-- end blog item -->
+ 
+                         <!-- start blog item -->
+                         <li class="grid-item">
+                             <a href="#">
+                                 <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                     <div class="feature-box-icon d-flex align-items-center flex-column">
+                                         <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                             <span class="date d-block fs-30 lh-28">28</span>
+                                             <span class="month d-block lh-24">Jun</span>
+                                         </time>
+                                         <div class="mt-20px">
+                                             <i class="fa-solid fa-person-biking align-middle icon-large text-base-color"></i>
+                                         </div>
+                                     </div>
+                                     <div class="feature-box-content">
+                                         <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
+                                         <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                     </div>
+                                 </div>
+                             </a>
+                         </li>
+                         <!-- end blog item -->
+ 
+                         <!-- start blog item -->
+                         <li class="grid-item">
+                             <a href="#">
+                                 <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                     <div class="feature-box-icon d-flex align-items-center flex-column">
+                                         <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                             <span class="date d-block fs-30 lh-28">28</span>
+                                             <span class="month d-block lh-24">Jun</span>
+                                         </time>
+                                         <div class="mt-20px">
+                                             <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
+                                         </div>
+                                     </div>
+                                     <div class="feature-box-content">
+                                         <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
+                                         <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                     </div>
+                                 </div>
+                             </a>
+                         </li>
+                         <!-- end blog item -->
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container mt-5">
+                <div class="row align-items-end mb-2">
+                    <div class="col-md-5 sm-mb-20px d-flex" data-anime='{ "el": "childs", "translateX": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                        <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color"></i>
+                        <h4 class="text-base-color fw-600 mb-0 ps-4">Séjours</h4>
+                    </div>
+                    <div class="col-md-6 offset-md-1 last-paragraph-no-margin" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                        <p class="w-80 xl-w-85 lg-w-100">Découvrez nos événements organisés sur plusieurs jours, offrant une expérience complète alliant activités, détente et rencontres enrichissantes.</p>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-start">
+                    <ul class="pagination pagination-style-01 fs-13 fw-500 mb-0">
+                        <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></a></li>
+                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
+                        <li class="page-item"><a class="page-link" href="#">02</a></li>
+                        <li class="page-item"><a class="page-link" href="#">03</a></li>
+                        <li class="page-item"><a class="page-link" href="#">04</a></li>
+                        <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">        
                         <ul class="blog-date blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-2col md-grid-2col sm-grid-1col xs-grid-1col gutter-extra-large">
                             <li class="grid-sizer"></li>
                             
-                            <!-- start blog item -->
-                            <li class="grid-item">
-                                
-                                <a href="">
-                                    <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                        <div class="feature-box-icon d-flex align-items-center flex-column">
-                                            <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                                <span class="date d-block fs-30 lh-28">28</span>
-                                                <span class="month d-block lh-24">Jun</span>
-                                            </time>
-                                            <div class="mt-20px">
-                                                <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
-                                            </div>
-                                        </div>
-                                        <div class="feature-box-content">
-                                            {# <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Andy glamer</a></div> #}
-                                            <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</a>
-                                            <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                        </div>
-                                    </div>
-                                </a>
-
-                            </li>
-                            <!-- end blog item -->
-
-                            <!-- start blog item -->
                             <li class="grid-item">
                                 <a href="">
                                     <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
                                         <div class="feature-box-icon d-flex align-items-center flex-column">
-                                            <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                                <span class="date d-block fs-30 lh-28">28</span>
-                                                <span class="month d-block lh-24">Jun</span>
-                                            </time>
-                                            <div class="mt-20px">
-                                                <i class="fa-solid fa-person-biking align-middle icon-large text-base-color"></i>
+                                            
+                                            <div class="d-flex flex-column">
+                                                
+                                                <div class="d-flex flex-column">
+                                                    <div>Du </div>
+                                                    <time class="mb-2 text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                                        <span class="date d-block fs-30 lh-28">28</span>
+                                                        <span class="month d-block lh-24">Jun</span>
+                                                    </time>
+                                                </div>
+
+                                                <div class="d-flex flex-column">
+                                                    <div>Au </div>
+                                                    <time class="mb-4 text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                                        <span class="date d-block fs-30 lh-28">28</span>
+                                                        <span class="month d-block lh-24">Jun</span>
+                                                    </time>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="feature-box-content">
-                                            {# <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Andy glamer</a></div> #}
-                                            <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</a>
+                                            <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
                                             <p>Lorem ipsum been the industry way standard dummy text...</p>
                                         </div>
                                     </div>
                                 </a>
                             </li>
-                            <!-- end blog item -->
 
-                            <!-- start blog item -->
                             <li class="grid-item">
                                 <a href="">
                                     <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
                                         <div class="feature-box-icon d-flex align-items-center flex-column">
-                                            <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                                <span class="date d-block fs-30 lh-28">28</span>
-                                                <span class="month d-block lh-24">Jun</span>
-                                            </time>
-                                            <div class="mt-20px">
-                                                <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
+                                            
+                                            <div class="d-flex flex-column">
+                                                
+                                                <div class="d-flex flex-column">
+                                                    <div>Du </div>
+                                                    <time class="mb-2 text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                                        <span class="date d-block fs-30 lh-28">28</span>
+                                                        <span class="month d-block lh-24">Jun</span>
+                                                    </time>
+                                                </div>
+
+                                                <div class="d-flex flex-column">
+                                                    <div>Au </div>
+                                                    <time class="mb-4 text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                                        <span class="date d-block fs-30 lh-28">28</span>
+                                                        <span class="month d-block lh-24">Jun</span>
+                                                    </time>
+                                                </div>
+
                                             </div>
                                         </div>
                                         <div class="feature-box-content">
-                                            {# <div class="alt-font fs-13 lh-24 text-uppercase mb-5px d-inline-block text-gradient-sky-blue-pink fw-700">By <a href="blog-masonry.html">Andy glamer</a></div> #}
-                                            <a href="demo-web-agency-blog-single-creative.html" class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</a>
+                                            <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
                                             <p>Lorem ipsum been the industry way standard dummy text...</p>
                                         </div>
                                     </div>
                                 </a>
                             </li>
-                            <!-- end blog item -->
-
+                            
                         </ul>
                     </div>
-                    {# <div class="col-12 mt-4 d-flex justify-content-center">
-                        <ul class="pagination pagination-style-01 fs-13 fw-500 mb-0">
-                            <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></a></li>
-                            <li class="page-item"><a class="page-link" href="#">01</a></li>
-                            <li class="page-item active"><a class="page-link" href="#">02</a></li>
-                            <li class="page-item"><a class="page-link" href="#">03</a></li>
-                            <li class="page-item"><a class="page-link" href="#">04</a></li>
-                            <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
-                        </ul>
-                    </div>  #}
                 </div>
             </div>
         </section>
         <!-- end section -->
 
         <!-- start page title -->
-        <section id="retro-section" class="pb-0">
+        <section id="retro-section" class="bg-very-light-gray pb-0">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-12 col-xl-6 col-lg-8 text-center position-relative page-title-double-large">
@@ -389,13 +464,12 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
         <!-- end page title -->
 
         <!-- start section -->
-        <section class="pt-0">    
+        {# <section class="pt-0">    
             
             <div class="container">
                 <div class="row">
@@ -419,275 +493,111 @@
                         <ul class="portfolio-boxed portfolio-wrapper grid-loading grid grid-3col grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-large text-center">
                             <li class="grid-sizer"></li>
                             <!-- start portfolio item -->
-                            <li class="grid-item selected digital transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <a href="{{ path('blog_index') }}" class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </a>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #637c8e;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Branding</div>
-                                        <div class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Stream stones</d>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item web branding transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
+                            
+                            {% for i in 1..6 %}
+                                <li class="grid-item selected digital transition-inner-all">
+                                    <div class="portfolio-box border-radius-4px">
+                                        <div class="portfolio-image border-radius-4px">
+                                            <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
+                                            <a href="{{ path('blog_index') }}" class="portfolio-hover d-flex justify-content-center flex-column">
+                                            </a>
+                                            <div class="portfolio-overlay bg-dark-gray" style="background-color: #637c8e;"></div>
                                         </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #636853;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Graphics</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Skoda corporate</a>                                        
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item web digital transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
+                                        <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
+                                            <div class="fs-14 lh-20 text-uppercase">Branding</div>
+                                            <div class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Stream stones</d>
                                         </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #a17e67;"></div>
                                     </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Photography</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Potato islands</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item web branding transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px" >
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #926b6b;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Brochure</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Daimler financial</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item web digital transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #a77e5a;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Packaging</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Pixflow branding</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item selected branding transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #a2816f;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Portfolio</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Visionen book</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item selected digital transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #567754;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Typography</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Crop identity</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item selected branding transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #42667f;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Digital</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Herbal beauty</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item web digital transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #af6e6e;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Packaging</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Cortifiel look</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item selected branding transition-inner-all ">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #989494;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Development</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Mass movie</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item selected digital transition-inner-all ">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #6c8d9f;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">E-commerce</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Truenorth web</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
-                            <!-- start portfolio item -->
-                            <li class="grid-item branding web transition-inner-all">
-                                <div class="portfolio-box border-radius-4px">
-                                    <div class="portfolio-image border-radius-4px">
-                                        <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                        <div class="portfolio-hover d-flex justify-content-center flex-column">
-                                            {# <div class="portfolio-icon d-flex flex-row justify-content-center align-items-center">
-                                                <a href="demo-digital-agency-single-project-minimal.html" class="d-flex flex-column justify-content-center text-dark-gray text-dark-gray-hover rounded-circle bg-white w-60px h-60px move-bottom-top">
-                                                    <i class="fa-solid fa-plus icon-small" aria-hidden="true"></i>
-                                                </a>
-                                            </div> #}
-                                        </div>
-                                        <div class="portfolio-overlay bg-dark-gray" style="background-color: #5a6c45;"></div>
-                                    </div>
-                                    <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                        <div class="fs-14 lh-20 text-uppercase">Branding</div>
-                                        <a href="demo-digital-agency-single-project-minimal.html" class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Armchair mojo</a>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end portfolio item -->
+                                </li> 
+                            {% endfor %}
+
                         </ul>
                     </div>
                 </div>
             </div>
 
+        </section> #}
+        <!-- end section -->
+        
+        <section class="bg-very-light-gray pt-0"> 
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 p-md-0">
+                        <ul class="blog-grid blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                            <li class="grid-sizer"></li>
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="demo-consulting-blog-single-modern.html" class="d-block"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <a href="demo-consulting-blog-single-modern.html" class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Build up healthy habits and strong peaceful life</a>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">30 August 2021</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div><i class="fa-solid fa-person-hiking icon-large text-base-color"></i></div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="demo-consulting-blog-single-modern.html" class="d-block"><img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">How to bring the season into your great work</div>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">28 August 2021</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div><i class="fa-solid fa-person-swimming icon-large text-base-color"></i></div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="demo-consulting-blog-single-modern.html" class="d-block"><img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <a href="demo-consulting-blog-single-modern.html" class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Be the strong willed one the public relationship</a>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">26 August 2021</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div><i class="fa-solid fa-person-biking icon-large text-base-color"></i></div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </section>
         <!-- end section -->
 
         <!-- start section -->
-        <section id="whoare-section" class="background-position-left-top background-no-repeat position-relative extra-big-section" style="background-image: url('images/demo-hosting-home-bg.jpg')">
+        <section id="whoare-section" class="background-position-left-top cover-background position-relative extra-big-section" style="background-image: url('images/demo-hosting-home-bg.jpg')">
             <div class="container">
-                <div class="text-center position-absolute top-minus-40px left-0px right-0px z-index-1 d-none d-md-inline-block" data-anime='{ "opacity": [0, 1], "translate": [0, 0], "staggervalue": 100, "easing": "easeOutQuad" }'>
-                    <a href="#" class="d-block section-link">
-                        <div class="d-flex justify-content-center align-items-center mx-auto box-shadow-medium-bottom rounded-circle h-70px w-70px text-dark-gray bg-white">
-                            <i class="fa-solid fa-question"></i>
-                        </div>
-                    </a>
-                </div>
                 <div class="row justify-content-center">                    
                     <div class="col-lg-5 col-md-10 position-relative md-mb-40px sm-mb-25px" data-anime='{ "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
                         <div class="icon-with-text-style-08 mb-20px">
@@ -771,8 +681,23 @@
         <section id="faq-section" class="extra-big-section">
             <div class="container"> 
                 <div class="row justify-content-center align-items-center mb-3">
-                    <div class="col-lg-7 col-md-8 sm-mb-15px" data-anime='{ "translateX": [50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <h2 class="text-dark-gray fw-700 ls-minus-1px mb-0">Foire aux questions</h2>
+                    
+                    {# <div class="d-inline-block" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900 }'>
+                        <div class="highlight-separator" data-shadow-animation="true" data-animation-delay="1500">
+                            ARSMéLI<span><img src="images/highlight-separator.svg" alt=""></span>
+                        </div>
+                        <img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
+                    </div> #}
+                    
+                    
+                    <div class="col-lg-7 col-md-8 sm-mb-15px d-flex align-items-center">
+                        <h2 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                            Foire aux questions<span><img src="images/highlight-separator.svg" alt=""></span>
+                        </h2>
+                        <img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
+
+                        
+                        
                     </div>
                     <div class="col-lg-3 col-md-4 text-start text-md-end" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                     </div>
