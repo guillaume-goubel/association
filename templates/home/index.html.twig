@@ -3,7 +3,15 @@
 {% block title %}Accueil assocation arsméli
 {% endblock %}
 
-{% block stylesheets %}{% endblock %}
+{% block stylesheets %}
+
+<style>
+    .hover-box.light-hover:hover img{
+        filter: invert(1) grayscale(1);
+    }
+</style>
+
+{% endblock %}
 
 {% block body %}
 
@@ -61,7 +69,7 @@
                             La flamme olympique est venue rendre visite à l'Arsméli...Merci à tous pour votre investissement !!
                         </p>
 
-                        <a href="{{ path('blog_index') }}" class="btn btn-large btn-dark-gray btn-box-shadow btn-rounded btn-switch-text mt-4">
+                        <a href="{{ path('blog_index') }}" class="btn btn-large btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
                             <span>
                                 <span class="btn-double-text" data-text="Infos">Infos</span>
                                 <span><i class="feather icon-feather-arrow-right"></i></span>
@@ -137,66 +145,149 @@
 
                         <div class="row row-cols-2 row-cols-lg-5 row-cols-md-3 row-cols-sm-2 justify-content-start ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
                             
-                            {% for i in 1..3 %}
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <img style="width: 50px;padding-bottom: 13px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Randonnées</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
 
-                                <!-- start features box item -->
-                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                    <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                        <div class="feature-box-icon">
-                                            <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                        </div>
-                                        <div class="feature-box-content">
-                                            <span class="d-inline-block text-white fw-500 lh-24">Randonnées</span> 
-                                        </div>
-                                        <div class="feature-box-overlay bg-white"></div>
-                                    </div>  
-                                </a>
-                                <!-- end features box item -->
+                                                        <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Marche Nordique</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
 
-                                <!-- start features box item -->
-                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                    <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                        <div class="feature-box-icon">
-                                            <i class="fa-solid fa-person-biking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                        </div>
-                                        <div class="feature-box-content">
-                                            <span class="d-inline-block text-white fw-500 lh-24">Vélo</span> 
-                                        </div>
-                                        <div class="feature-box-overlay bg-white"></div>
-                                    </div>  
-                                </a>
-                                <!-- end features box item -->
-                                
-                                <!-- start features box item -->
-                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                    <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                        <div class="feature-box-icon">
-                                            <i class="fa-solid fa-binoculars align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                        </div>
-                                        <div class="feature-box-content">
-                                            <span class="d-inline-block text-white fw-500 lh-24">Découvertes</span> 
-                                        </div>
-                                        <div class="feature-box-overlay bg-white"></div>
-                                    </div>  
-                                </a>
-                                <!-- end features box item -->
-
-                                <!-- start features box item -->
-                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                    <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                        <div class="feature-box-icon">
-                                            <i class="fa-solid fa-person-swimming align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
-                                        </div>
-                                        <div class="feature-box-content">
-                                            <span class="d-inline-block text-white fw-500 lh-24">Piscine</span> 
-                                        </div>
-                                        <div class="feature-box-overlay bg-white"></div>
-                                    </div>  
-                                </a>
-                                <!-- end features box item -->
-
-                            {% endfor %}
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <i class="fa-solid fa-person-biking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Vélo</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
                             
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <i class="fa-solid fa-table-tennis-paddle-ball align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Tennis de table</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
+
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <i class="line-icon-Tennis align-middle text-base-color icon-extra-large text-white mb-15px"></i>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Tennis</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
+
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <img style="width:60px;" src="{{ customAsset('app/badminton.png')}}" alt="">
+                                        {# <i class="fa-solid fa-neuter align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i> #}
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Badminton</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
+
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <img style="width:60px;" src="{{ customAsset('app/dance.png')}}" alt="">
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Danse</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
+
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <img style="width:60px;" src="{{ customAsset('app/gymnastic.png')}}" alt="">
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-22" style="font-size: 16px;">Gymnastique</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
+
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <i class="fa-solid fa-chess-board align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Jeux de société</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
+
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <i class="fa-solid fa-bowling-ball align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Bowling</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
+
+
+
                         </div>
                     </div>
 
@@ -230,9 +321,9 @@
                     <div class="col-12 col-xl-6 col-lg-8 text-center position-relative page-title-double-large">
                         <div class="d-flex flex-column justify-content-center extra-very-small-screen">
                             <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">Agenda</h1>    
-                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Nos événements et sejours</h2>
+                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Nos événements et séjours</h2>
                             <div class="overflow-hidden pt-5px">
-                                <a href="#" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                                <a href="{{ path('agenda_index') }}" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
                                     <span>
                                         <span class="btn-double-text" data-text="Tout l'agenda">Tout l'agenda</span>
                                         <span><i class="feather icon-feather-arrow-right"></i></span>
@@ -260,7 +351,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 d-flex justify-content-start">
+                {# <div class="col-12 d-flex justify-content-start">
                     <ul class="pagination pagination-style-01 fs-13 fw-500 mb-0">
                         <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></a></li>
                         <li class="page-item active"><a class="page-link" href="#">01</a></li>
@@ -269,78 +360,80 @@
                         <li class="page-item"><a class="page-link" href="#">04</a></li>
                         <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
                     </ul>
-                </div>
+                </div> #}
 
                 <div class="row">
+                    <strong>Les 3 prochains événements</strong>
                     <ul class="blog-date blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-2col md-grid-2col sm-grid-1col xs-grid-1col gutter-extra-large">
-                         <li class="grid-sizer"></li>
-                         
-                         <li class="grid-item">
-                             <a href="">
-                                 <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                     <div class="feature-box-icon d-flex align-items-center flex-column">
-                                         <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                             <span class="date d-block fs-30 lh-28">28</span>
-                                             <span class="month d-block lh-24">Jun</span>
-                                         </time>
-                                         <div class="mt-20px">
-                                             <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
-                                         </div>
-                                     </div>
-                                     <div class="feature-box-content">
-                                         <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
-                                         <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                     </div>
-                                 </div>
-                             </a>
-                         </li>
-                         <!-- end blog item -->
- 
-                         <!-- start blog item -->
-                         <li class="grid-item">
-                             <a href="#">
-                                 <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                     <div class="feature-box-icon d-flex align-items-center flex-column">
-                                         <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                             <span class="date d-block fs-30 lh-28">28</span>
-                                             <span class="month d-block lh-24">Jun</span>
-                                         </time>
-                                         <div class="mt-20px">
-                                             <i class="fa-solid fa-person-biking align-middle icon-large text-base-color"></i>
-                                         </div>
-                                     </div>
-                                     <div class="feature-box-content">
-                                         <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
-                                         <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                     </div>
-                                 </div>
-                             </a>
-                         </li>
-                         <!-- end blog item -->
- 
-                         <!-- start blog item -->
-                         <li class="grid-item">
-                             <a href="#">
-                                 <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                     <div class="feature-box-icon d-flex align-items-center flex-column">
-                                         <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                             <span class="date d-block fs-30 lh-28">28</span>
-                                             <span class="month d-block lh-24">Jun</span>
-                                         </time>
-                                         <div class="mt-20px">
-                                             <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
-                                         </div>
-                                     </div>
-                                     <div class="feature-box-content">
-                                         <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
-                                         <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                     </div>
-                                 </div>
-                             </a>
-                         </li>
-                         <!-- end blog item -->
+                        <li class="grid-sizer"></li>
+                        
+                        <li class="grid-item">
+                            <a href="{{ path('blog_index2') }}">
+                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                    <div class="feature-box-icon d-flex align-items-center flex-column">
+                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                            <span class="date d-block fs-30 lh-28">28</span>
+                                            <span class="month d-block lh-24">Jun</span>
+                                        </time>
+                                        <div class="mt-20px">
+                                            <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
+                                        </div>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
+                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- end blog item -->
+
+                        <!-- start blog item -->
+                        <li class="grid-item">
+                            <a href="{{ path('blog_index2') }}">
+                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                    <div class="feature-box-icon d-flex align-items-center flex-column">
+                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                            <span class="date d-block fs-30 lh-28">28</span>
+                                            <span class="month d-block lh-24">Jun</span>
+                                        </time>
+                                        <div class="mt-20px">
+                                            <i class="fa-solid fa-person-biking align-middle icon-large text-base-color"></i>
+                                        </div>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
+                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- end blog item -->
+
+                        <!-- start blog item -->
+                        <li class="grid-item">
+                            <a href="{{ path('blog_index2') }}">
+                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
+                                    <div class="feature-box-icon d-flex align-items-center flex-column">
+                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
+                                            <span class="date d-block fs-30 lh-28">28</span>
+                                            <span class="month d-block lh-24">Jun</span>
+                                        </time>
+                                        <div class="mt-20px">
+                                            <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
+                                        </div>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
+                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <!-- end blog item -->
                     </ul>
                 </div>
+                
             </div>
 
             <div class="container mt-5">

@@ -13,6 +13,15 @@ class BlogController extends AbstractController
     public function index(): Response
     {
         return $this->render('blog/post_page/index.html.twig', [
+            'is_passed' => true,
+        ]);
+    }
+
+    #[Route('/index2', name: 'index2')]
+    public function index2(): Response
+    {
+        return $this->render('blog/post_page/index.html.twig', [
+            'is_passed' => false,
         ]);
     }
 }

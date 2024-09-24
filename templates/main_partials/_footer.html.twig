@@ -1,4 +1,4 @@
-<footer class="pb-0 bg-very-light-gray contain-background background-position-center-top sm-background-image-none">
+{# <footer class="pb-0 bg-very-light-gray contain-background background-position-center-top sm-background-image-none">
     <div class="container">
         <div
             class="row row-cols-1 row-cols-lg-4 row-cols-sm-2 justify-content-center mt-13 md-mt-15 sm-mt-0 mb-5 sm-mb-50px">
@@ -56,6 +56,68 @@
                             </a>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer> #}
+
+<footer class="bg-nero-grey pb-0 pt-4 md-pt-6 sm-pt-9 xs-pt-11 background-position-center-top" style="background-image: url('images/demo-hosting-home-bg.jpg')">
+    <div class="container">
+        <div class="row align-items-center mb-3 md-mb-5 xs-mb-8">
+            <div class="col-sm-10 text-center text-sm-start order-2 order-sm-1">
+                <h6 class="fw-400 d-inline-block align-middle mb-0">SPORTS - SENIORS -  <span class="text-white">SANTE</span></h6>
+                <div class="separator-line-1px d-none d-sm-inline-block align-middle ms-20px me-20px lg-ms-10px lg-me-10px mt-5px w-70px lg-w-50px bg-base-color"></div>
+                <div class="text-base-color fs-26 fw-500 d-inline-block align-middle">ARSMéli</div>
+            </div>
+            <div class="col-sm-2 text-center text-sm-end order-1 order-sm-2 xs-mb-15px">
+                <div class="footer-logo d-inline-block">
+                    <img style="border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="">
+                </div>
+            </div>
+        </div> 
+        {# <div class="row align-items-end mb-6 xs-mb-9"> 
+            <!-- start footer column -->
+            <div class="col-lg-3 col-sm-6 last-paragraph-no-margin text-center text-sm-start md-mb-30px">
+                <span class="text-white d-block fs-12 fw-600 ls-2px text-uppercase">Crafto - London</span>
+                <p class="w-80 lg-w-95 md-w-70 sm-w-85 xs-mx-auto text-medium-gray fs-15 lh-28">401 Broadway, 24th floor, Orchard view, London, UK</p>
+            </div>
+            <!-- end footer column -->  
+            <!-- start footer column -->
+            <div class="col-lg-3 col-sm-6 last-paragraph-no-margin text-center text-sm-start md-mb-30px">
+                <span class="text-white d-block fs-12 fw-600 ls-2px text-uppercase">Crafto - France</span>
+                <p class="w-80 lg-w-95 md-w-70 sm-w-85 xs-mx-auto text-medium-gray fs-15 lh-28">27 Eden walk eden centre, Orchard view, Paris, France</p>
+            </div>
+            <!-- end footer column -->
+            <!-- start footer column -->
+            <div class="col-lg-3 col-sm-6 last-paragraph-no-margin text-center text-sm-start xs-mb-30px">
+                <span class="text-white d-block fs-12 fw-600 ls-2px text-uppercase">Crafto - Switzerland</span>
+                <p class="w-80 lg-w-95 md-w-70 sm-w-85 xs-mx-auto text-medium-gray fs-15 lh-28">701 Sondanella, 24th floor, Gunsberg, Switzerland</p>
+            </div>
+            <!-- end footer column -->
+            <!-- start footer column -->
+            <div class="col-lg-3 col-sm-6 last-paragraph-no-margin ms-auto text-center text-sm-start text-lg-end fs-19"> 
+                <a href="tel:1235678901" class="text-white">+ 123 567 8901</a><br>
+                <a href="mailto:info@domain.com" class="text-white fw-500 text-decoration-line-bottom">info@domain.com</a>
+            </div>
+            <!-- end footer column -->
+        </div> #}
+    </div> 
+    <div class="footer-bottom p-20px border-top border-color-transparent-white-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-7 text-center text-lg-start md-mb-10px"> 
+                    <ul class="footer-navbar fs-15 lh-normal">
+						<li data-anchor="main-banner-section" class="nav-item header-link"><a href="#" class="nav-link">Accueil</a></li>
+						<li data-anchor="activity-section" class="nav-item header-link"><a href="#" class="nav-link">Activités</a></li>
+						<li data-anchor="agenda-section" class="nav-item header-link"><a href="#" class="nav-link">Agenda</a></li>
+						<li data-anchor="retro-section" class="nav-item header-link"><a href="#" class="nav-link">Rétrospective</a></li>
+						<li data-anchor="whoare-section" class="nav-item header-link"><a href="#" class="nav-link">Qui sommes-nous ?</a></li>
+						<li class="nav-item header-link"><a href="#" class="nav-link">Contact</a></li>                    
+                    </ul>
+                </div>   
+                <div class="col-lg-5 text-center text-lg-end"> 
+                    <span class="fs-15">&copy; {{ 'now'|date('Y') }} Powered by <a href="https://guillaume-goubel.fr" target="_blank" class="text-decoration-line-bottom text-white">guillaume-goubel.fr</a></span>
                 </div>
             </div>
         </div>

@@ -137,9 +137,6 @@ header .navbar-brand img {
 footer {
     padding-top: 100px;
 }
-footer .footer-logo img {
-    max-height: 32px;
-}
 .footer-dark a:hover {
     color: var(--white);
 }
