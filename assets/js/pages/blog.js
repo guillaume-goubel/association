@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
         // Initialisation de la carte avec différents paramètres selon si on est sur mobile ou non
         var map = L.map('map', {
-            center: [50.65, 3.2], // Coordonnées de Paris
+            center: [50.52716064453125, 3.1717026233673096], // Coordonnées de Paris
             zoom: 13,
             scrollWheelZoom: false, // Désactive le zoom automatique à la molette sur desktop
             touchZoom: isMobile() // Active le pinch-to-zoom uniquement sur mobile
@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         }).addTo(map);
 
         // Ajoute un marqueur (facultatif)
-        var marker = L.marker([50.65, 3.2]).addTo(map);
-        marker.bindPopup("<b>Lieu de rendez-vous</b><br>15 Allée des champs, 59510 Hem").openPopup();
+        var marker = L.marker([50.52716064453125, 3.1717026233673096]).addTo(map);
+        marker.bindPopup("<b>Lieu de rendez-vous</b><br>parking centre ville, rue d’Anchin, 59242 TEMPLEUVE EN PEVELE").openPopup();
 
         // Ajoute le contrôle plein écran en haut à droite
         L.control.fullscreen({

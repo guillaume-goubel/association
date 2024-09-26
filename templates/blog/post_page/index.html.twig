@@ -31,6 +31,9 @@
             font-size: 16px;
             text-align: center;
         }
+        #map{
+            height: 200px!important;
+        }
     </style>
 {% endblock %}
 
@@ -49,113 +52,131 @@
                 <div class="col-12 col-lg-8 blog-standard md-mb-50px sm-mb-40px">
 
                     <div class="col-12 blog-details mb-12"> 
-                        
+ 
                         <div class="entry-meta mb-20px fs-15">
-                            <span><i class="text-dark-gray feather icon-feather-calendar"></i>07 Aout 2024</span>
-                            <span><i class="text-dark-gray feather icon-feather-user"></i>Jonse robbert</span>
-                            <span><i class="text-dark-gray feather icon-feather-folder"></i>Creative</span> 
-                        </div>
-                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-6">Fête des Jeux Olympiques à Lille</h5>
-
-                        {# END EVENT INFOS #}
-                        {% if is_passed %}
-                        
-                            <div class="row justify-content-center align-items-center bg-base-color pt-2 pb-2 ps-6 pe-6 lg-p-5 border-radius-6px g-0 mb-1">
-                                <div class="d-flex col-12 md-mb-25px sm-mb-15px position-relative text-center text-lg-start"> 
-                                    <div style="width:80%;" class="fs-30 alt-font fw-500 text-white ls-minus-1px mb-10px shadow-none" data-shadow-animation="true" data-animation-delay="700">Cet événement est<span class="fw-700 text-highlight d-inline-block ms-2">terminé<span class="bg-white h-5px bottom-1px opacity-3 separator-animation"></span></span></div>
-                                    <div class="w-75px sm-w-50px sm-mb-10px">
-                                        <img src="{{ customAsset('app/main-logo.png') }}" class="rounded-circle" alt="">
+                            <div class="row d-flex">
+                                <div class="col-12 col-md-7">
+                                   
+                                    <div class="d-flex">
+                                        <time class="text-center post-date border-radius-3px bg-medium-gray text-white text-uppercase fw-500 d-inline-block p-2">
+                                            <span class="date d-block fs-30 lh-28">24</span>
+                                            <span class="month d-block lh-24">Octobre</span>
+                                        </time>
+                                        <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                            <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                            <div class="text-white px-1">12,4 Km</div>
+                                        </div>
                                     </div>
+                                    <div>Randonnée</div>
+                                    <div class="event-time fw-500 mt-2">
+                                        
+                                        {% if is_passed == false %}
+                                            <i class="feather icon-feather-clock me-5px"></i>14:00
+                                        {% endif %}
+                                        
+                                        <i class="feather icon-feather-map-pin me-5px"></i>TEMPLEUVE-EN-PEVELE
+                                    </div>                                                 
                                 </div>
-                            </div>
-
-                        {% endif %}
-
-                        {# IMAGE GALLERY #} 
-                        <div class="container-fluid p-0">
-                            <ul class="image-gallery-style-01 mb-7 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-small">
-                                <li class="grid-sizer"></li> 
-                                
-                                <!-- start gallery item -->
-                                <li class="grid-item transition-inner-all">
-                                    <div class="gallery-box">
-                                        <a href="{{ customAsset('app/home/banner/banner.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                            <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                <img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" />
-                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                        <i class="feather icon-feather-search text-white icon-small"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <!-- end gallery item -->
-                                
-                                <!-- start gallery item -->
-                                <li class="grid-item transition-inner-all">
-                                    <div class="gallery-box">
-                                        <a href="{{ customAsset('app/home/banner/last_event.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                            <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                <img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" />
-                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                        <i class="feather icon-feather-search text-white icon-small"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <!-- end gallery item -->
-                                
-                                <!-- start gallery item -->
-                                <li class="grid-item transition-inner-all">
-                                    <div class="gallery-box">
-                                        <a href="{{ customAsset('app/home/banner/exemple_event.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                            <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                <img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" />
-                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                        <i class="feather icon-feather-search text-white icon-small"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <!-- end gallery item -->
-
-                            </ul>
-                        </div>
-
-                        {# TEXT PRESENTATION #}
-                        <div class="row">
-                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
-                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
-                            <blockquote class="alt-font border-4 border-start border-color-base-color text-dark-gray fw-500 ps-40px mt-7 mb-7 ms-60px lg-ms-30px sm-ms-0 lg-ps-30px">
-                                <footer class="fs-14 fw-600 text-base-color d-inline-block text-uppercase">Informations importantes</footer>
-                                <p>Tomorrow is the most important thing in life. Comes into us at midnight very clean. It's perfect when it arrives and it puts itself in our hands. It hopes we've learned something from yesterday.</p>
-                            </blockquote>
-                        </div>
-
-                        {% if is_passed == false %}
-
-                            {# MAP SECTION #}    
-                            <div class="container-fluid p-0">
-                                <div class="row g-0">
-                                    <div class="col-md-12">
-                                        <div id="map" style="z-index: 9;position: relative;margin-top: 20px;">
-                                            <div id="mapOverlay">
-                                                <div id="zoomNotification">Appuyez sur <strong>Ctrl</strong> et utilisez la molette pour zoomer OU passez en plein écran</div>
+                                <div class="col-12 col-md-5 d-flex flex-column">
+                                    <div class="trainer-box col-auto position-relative">
+                                        <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
+                                            <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
+                                            <div class="col bg-white position-relative p-25px">
+                                                <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
+                                                <span class="fs-15 lh-20 d-block">Animatrice</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
+                        
+                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 my-5">Lorem ipsum dolor sit amet consectetur adipisicing elit.</h5>
+                        
+                        {% if is_passed == false %}
+                            <div class="text-medium-gray my-5 d-flex" style="background-color: white;padding: 2rem;">
+                                <div class="col-12">
+                                    <div id="map" style="z-index: 9;position: relative;">
+                                        <div id="mapOverlay">
+                                            <div id="zoomNotification">Appuyez sur <strong>Ctrl</strong> et utilisez la molette pour zoomer OU passez en plein écran</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         {% endif %}
+
+                        {# IMAGE GALLERY #} 
+                        {% if is_passed %}
+                            <div class="container-fluid p-0">
+                                <ul class="image-gallery-style-01 mb-2 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-small">
+                                    <li class="grid-sizer"></li> 
+                                    
+                                    <!-- start gallery item -->
+                                    <li class="grid-item transition-inner-all">
+                                        <div class="gallery-box">
+                                            <a href="{{ customAsset('app/home/banner/banner.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
+                                                <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                    <img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" />
+                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                            <i class="feather icon-feather-search text-white icon-small"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <!-- end gallery item -->
+                                    
+                                    <!-- start gallery item -->
+                                    <li class="grid-item transition-inner-all">
+                                        <div class="gallery-box">
+                                            <a href="{{ customAsset('app/home/banner/last_event.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
+                                                <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                    <img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" />
+                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                            <i class="feather icon-feather-search text-white icon-small"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <!-- end gallery item -->
+                                    
+                                    <!-- start gallery item -->
+                                    <li class="grid-item transition-inner-all">
+                                        <div class="gallery-box">
+                                            <a href="{{ customAsset('app/home/banner/exemple_event.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
+                                                <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                    <img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" />
+                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                            <i class="feather icon-feather-search text-white icon-small"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <!-- end gallery item -->
+
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        {# TEXT PRESENTATION #}
+                        <div class="row pt-4">
+                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
+                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
+                            {% if is_passed == false %}
+                                <blockquote class="alt-font border-4 border-start border-color-base-color text-dark-gray fw-500 ps-40px mt-4 mb-4 ms-60px lg-ms-30px sm-ms-0 lg-ps-30px">
+                                    <footer class="fs-14 fw-600 text-base-color d-inline-block text-uppercase">Informations importantes pour la préparation de l'événement</footer>
+                                    <p>Tomorrow is the most important thing in life. Comes into us at midnight very clean. It's perfect when it arrives and it puts itself in our hands. It hopes we've learned something from yesterday.</p>
+                                </blockquote>
+                            {% endif %}
+                        </div>
 
                     </div>
 
@@ -163,7 +184,6 @@
             </div>
         </div>
     </section>
-
 
     {# <section class="bg-very-light-gray"> 
         <div class="container">

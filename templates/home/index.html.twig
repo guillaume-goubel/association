@@ -9,6 +9,14 @@
     .hover-box.light-hover:hover img{
         filter: invert(1) grayscale(1);
     }
+    @media (max-width: 575px) {
+        .pagination-style-01 .page-item .page-link {
+            margin: 0 0px!important;
+        }
+    }
+    .d-block img{
+        height:240px;
+    }
 </style>
 
 {% endblock %}
@@ -29,13 +37,10 @@
         <section class="bg-very-light-gray pt-20px pb-20px sm-pt-40px" data-anime='{ "opacity": [0, 1], "translateY": [0, 0], "easing": "easeOutQuad", "duration": 1000,"staggervalue": 300, "delay": 600 }'>
             <div class="container overlap-section">
                 <div class="row justify-content-center overlap-section border-radius-6px overflow-hidden g-0 box-shadow-extra-large">
-                    <div class="col-lg-9 text-center fw-600 fs-24 lg-fs-22 ls-minus-05px text-dark-gray bg-white p-30px md-p-20px"><strong class="pe-5">Bientôt !</strong><span class="fw-700 text-base-color">09/08/2024</span> 
+                    <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5">Bientôt !</strong><span class="fw-700 text-base-color">09/08/2024</span> 
                         <span class="ps-5 pe-2">Randonnée Parc Wattignies</span> 
-                        <span class="feature-box-icon me-20px mb-5px">
-                            <i class="fa-solid fa-person-hiking align-middle icon-medium text-base-color"></i>
-                        </span>
                     </div>
-                    <div class="col-lg-3 text-center bg-yellow pt-30px pb-30px md-p-20px"><a href="demo-hosting-pricing.html" class="fw-700 text-dark-gray text-dark-gray-hover fs-24 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
+                    <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index') }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-24 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
                 </div>
             </div>
         </section>
@@ -137,9 +142,9 @@
                         <div class="row justify-content-center my-5 pt-5">
                             <div class="col-lg-8 text-center" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 900, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                                 <span class="text-white opacity-5 mb-5px text-uppercase d-block"></span>
-                                <h2 class="text-white fw-700 ls-minus-1px highlight-separator" data-shadow-animation="true" data-animation-delay="1500">
+                                <h3 class="text-white fw-700 ls-minus-1px highlight-separator" data-shadow-animation="true" data-animation-delay="1500">
                                     Nos activités<span><img src="images/highlight-separator.svg" alt=""></span>
-                                </h2>
+                                </h3>
                             </div>
                         </div>
 
@@ -159,11 +164,11 @@
                             </a>
                             <!-- end features box item -->
 
-                                                        <!-- start features box item -->
+                            <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
                                 <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
-                                        <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                        <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white mb-15px"></i>
                                     </div>
                                     <div class="feature-box-content">
                                         <span class="d-inline-block text-white fw-500 lh-24">Marche Nordique</span> 
@@ -285,9 +290,6 @@
                                 </div>  
                             </a>
                             <!-- end features box item -->
-
-
-
                         </div>
                     </div>
 
@@ -317,373 +319,321 @@
         <!-- start page title -->
         <section id="agenda-section" class="pb-0 bg-very-light-gray">
             <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-12 col-xl-6 col-lg-8 text-center position-relative page-title-double-large">
-                        <div class="d-flex flex-column justify-content-center extra-very-small-screen">
-                            <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">Agenda</h1>    
-                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Nos événements et séjours</h2>
-                            <div class="overflow-hidden pt-5px">
-                                <a href="{{ path('agenda_index') }}" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
-                                    <span>
-                                        <span class="btn-double-text" data-text="Tout l'agenda">Tout l'agenda</span>
-                                        <span><i class="feather icon-feather-arrow-right"></i></span>
-                                    </span>
-                                </a>
+                
+                <div class="row align-items-center mb-1 p-2">
+                    <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                        <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                            Notre agenda<span><img src="images/highlight-separator.svg" alt=""></span>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="row pb-5">
+                    <div class="col-lg-5 md-mb-50px sm-mb-30px">
+                        <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Un programme riche en activités et en rencontres</h3>
+                        <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Participez à vos sports favoris ou venez découvrir avec nous de nouvelles pratiques sportives et culturelles.</p> 
+                        <a href="{{ path('agenda_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Tout le programme</a>
+                    </div>
+                    <div class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                        <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="icon-feather-minus" data-inactive-icon="icon-feather-plus">
+                            <!-- start accordion item -->
+                            <div class="accordion-item">
+                                <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                    <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-01" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Encadrement par des animateurs agréés</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="accordion-style-07-01" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                    <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                    </div>
+                                </div>
                             </div>
+                            <!-- end accordion item -->
+                            <!-- start accordion item -->
+                            <div class="accordion-item">
+                                <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                    <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-02" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Des activités toute l'année</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="accordion-style-07-02" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                    <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
+                            <!-- start accordion item -->
+                            <div class="accordion-item">
+                                <div class="accordion-header border-bottom border-color-transparent">
+                                    <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-03" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Pour débutants et confirmés</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="accordion-style-07-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                    <div class="accordion-body last-paragraph-no-margin border-bottom border-color-transparent">
+                                        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end accordion item -->
                         </div>
                     </div>
                 </div>
+
+                <div class="row align-items-center justify-content-center pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    <!-- start pricing item -->
+                    <div class="fw-600">Nos 3 prochains rendez-vous</div>
+                    
+                    <div class="col-lg-4 col-md-8 md-mb-30px">
+                        <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-15 ps-18 pe-18 xl-p-13 text-center"> 
+                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">17 Octobre</span> 
+                            <span class="fs-18 mb-25px d-inline-block">2024</span>
+                            <div class="row align-items-center">
+                                <div class="col-sm-5 pe-sm-0">
+                                    <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                        <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                        <div class="text-white px-1">13 Km</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-sm-5 text-center text-sm-start last-paragraph-no-margin fs-15 lh-24">
+                                    <p>Randonnée</p>
+                                </div>
+                            </div>
+                            <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
+                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Bouvines</li>
+                                <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>14:00</li>
+                                <li style="height:115px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
+                                    <div class="fs-12 mb-4">Rendez-vous</div>
+                                    <div class="fw-500">parking de la mairie, chaussée, Brunehaut</d>
+                                </li> 
+                            </ul>
+                            <div class="pricing-footer w-100">
+                                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-8 md-mb-30px">
+                        <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-15 ps-18 pe-18 xl-p-13 text-center"> 
+                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">24 Octobre</span> 
+                            <span class="fs-18 mb-25px d-inline-block">2024</span>
+                            <div class="row align-items-center">
+                                <div class="col-sm-5 pe-sm-0">
+                                    <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                        <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                        <div class="text-white px-1">12 Km</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-sm-5 text-center text-sm-start last-paragraph-no-margin fs-15 lh-24">
+                                    <p>Randonnée</p>
+                                </div>
+                            </div>
+                            <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
+                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Templeuve-en-Pévèle</li>
+                                <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>14:00</li>
+                                <li style="height:115px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
+                                    <div class="fs-12 mb-4">Rendez-vous</div>
+                                    <div class="fw-500">Parking centre ville, rue d’Anchin</d>
+                                </li> 
+                            </ul>
+                            <div class="pricing-footer w-100">
+                                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="col-lg-4 col-md-8 md-mb-30px">
+                        <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-15 ps-18 pe-18 xl-p-13 text-center"> 
+                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">26 Octobre</span> 
+                            <span class="fs-18 mb-25px d-inline-block">2024</span>
+                            <div class="row align-items-center">
+                                <div class="col-sm-5 pe-sm-0">
+                                    <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                        <img style="width: 40px;" src="{{ customAsset('app/gymnastic.png')}}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-7 col-sm-5 text-center text-sm-start last-paragraph-no-margin fs-15 lh-24">
+                                    <p>Gymnastique</p>
+                                </div>
+                            </div>
+                            <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
+                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Lambersart</li>
+                                <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>11:00</li>
+                                <li style="height:115px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
+                                    <div class="fs-12 mb-4">Rendez-vous</div>
+                                    <div class="fw-500">Salle de sport Nobert Segard</d>
+                                </li> 
+                            </ul>
+                            <div class="pricing-footer w-100">
+                                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                            </div>
+                        </div>
+                    </div> 
+
+                </div>  
+
             </div>
         </section>
         <!-- end page title -->
 
-        <!-- start section -->
-        <section class="pt-0 ps-10 pe-10 xl-ps-2 xl-pe-2 sm-mx-0 border-bottom border-color-extra-medium-gray bg-very-light-gray">
-            
+        <section id="retro-section" class="border-top border-color-extra-medium-gray bg-very-light-gray"> 
             <div class="container">
-                <div class="row align-items-end mb-2">
-                    <div class="col-md-5 sm-mb-20px d-flex" data-anime='{ "el": "childs", "translateX": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                        <i class="fa-regular fa-calendar align-middle icon-large text-base-color"></i>
-                        <h4 class="text-base-color fw-600 mb-0 ps-4">Evénements</h4>
+                
+                <div class="row align-items-center mb-1 p-2">
+                    <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                        <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                            Retrospective<span><img src="images/highlight-separator.svg" alt=""></span>
+                        </h3>
                     </div>
-                    <div class="col-md-6 offset-md-1 last-paragraph-no-margin" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                        <p class="w-80 xl-w-85 lg-w-100">Découvrez les événements qui se déroulent sur une seule journée. Ces rendez-vous vous offrent une journée complète d'activités, de rencontres et d'échanges.</p>
+
+                    <div class="row pb-5">
+                        <div class="col-lg-5 md-mb-50px sm-mb-30px">
+                            <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Au coeur de notre territoire</h3>
+                            <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Venez découvrir ou redécouvrir notre patrimoine naturel ou culturel grâce au sport</p> 
+                            <a href="{{ path('archive_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Tous nos évènements</a>
+                        </div>
+                        <div class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                            <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="icon-feather-minus" data-inactive-icon="icon-feather-plus">
+                                <!-- start accordion item -->
+                                <div class="accordion-item">
+                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-01" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                            <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                                <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En métropole Lilloise</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="accordion-style-07-01" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end accordion item -->
+                                <!-- start accordion item -->
+                                <div class="accordion-item">
+                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-02" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                            <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                                <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En Belgique</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="accordion-style-07-02" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end accordion item -->
+                                <!-- start accordion item -->
+                                <div class="accordion-item">
+                                    <div class="accordion-header border-bottom border-color-transparent">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-03" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                            <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                                <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En territoire rural & urbain</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="accordion-style-07-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-transparent">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end accordion item -->
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                {# <div class="col-12 d-flex justify-content-start">
-                    <ul class="pagination pagination-style-01 fs-13 fw-500 mb-0">
-                        <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></a></li>
-                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                        <li class="page-item"><a class="page-link" href="#">04</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
-                    </ul>
-                </div> #}
-
-                <div class="row">
-                    <strong>Les 3 prochains événements</strong>
-                    <ul class="blog-date blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-2col md-grid-2col sm-grid-1col xs-grid-1col gutter-extra-large">
-                        <li class="grid-sizer"></li>
-                        
-                        <li class="grid-item">
-                            <a href="{{ path('blog_index2') }}">
-                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                    <div class="feature-box-icon d-flex align-items-center flex-column">
-                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                            <span class="date d-block fs-30 lh-28">28</span>
-                                            <span class="month d-block lh-24">Jun</span>
-                                        </time>
-                                        <div class="mt-20px">
-                                            <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
-                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <!-- end blog item -->
-
-                        <!-- start blog item -->
-                        <li class="grid-item">
-                            <a href="{{ path('blog_index2') }}">
-                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                    <div class="feature-box-icon d-flex align-items-center flex-column">
-                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                            <span class="date d-block fs-30 lh-28">28</span>
-                                            <span class="month d-block lh-24">Jun</span>
-                                        </time>
-                                        <div class="mt-20px">
-                                            <i class="fa-solid fa-person-biking align-middle icon-large text-base-color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
-                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <!-- end blog item -->
-
-                        <!-- start blog item -->
-                        <li class="grid-item">
-                            <a href="{{ path('blog_index2') }}">
-                                <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                    <div class="feature-box-icon d-flex align-items-center flex-column">
-                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                            <span class="date d-block fs-30 lh-28">28</span>
-                                            <span class="month d-block lh-24">Jun</span>
-                                        </time>
-                                        <div class="mt-20px">
-                                            <i class="fa-solid fa-person-hiking align-middle icon-large text-base-color"></i>
-                                        </div>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
-                                        <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        <!-- end blog item -->
-                    </ul>
                 </div>
                 
-            </div>
-
-            <div class="container mt-5">
-                <div class="row align-items-end mb-2">
-                    <div class="col-md-5 sm-mb-20px d-flex" data-anime='{ "el": "childs", "translateX": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                        <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color"></i>
-                        <h4 class="text-base-color fw-600 mb-0 ps-4">Séjours</h4>
-                    </div>
-                    <div class="col-md-6 offset-md-1 last-paragraph-no-margin" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                        <p class="w-80 xl-w-85 lg-w-100">Découvrez nos événements organisés sur plusieurs jours, offrant une expérience complète alliant activités, détente et rencontres enrichissantes.</p>
-                    </div>
-                </div>
-
-                <div class="col-12 d-flex justify-content-start">
-                    <ul class="pagination pagination-style-01 fs-13 fw-500 mb-0">
-                        <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></a></li>
-                        <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                        <li class="page-item"><a class="page-link" href="#">02</a></li>
-                        <li class="page-item"><a class="page-link" href="#">03</a></li>
-                        <li class="page-item"><a class="page-link" href="#">04</a></li>
-                        <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
-                    </ul>
-                </div>
-
                 <div class="row">
-                    <div class="col-12">        
-                        <ul class="blog-date blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-2col md-grid-2col sm-grid-1col xs-grid-1col gutter-extra-large">
+                    <div class="col-12 p-md-0">
+                        <ul class="blog-grid blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
                             <li class="grid-sizer"></li>
-                            
-                            <li class="grid-item">
-                                <a href="">
-                                    <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                        <div class="feature-box-icon d-flex align-items-center flex-column">
-                                            
-                                            <div class="d-flex flex-column">
-                                                
-                                                <div class="d-flex flex-column">
-                                                    <div>Du </div>
-                                                    <time class="mb-2 text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                                        <span class="date d-block fs-30 lh-28">28</span>
-                                                        <span class="month d-block lh-24">Jun</span>
-                                                    </time>
-                                                </div>
 
-                                                <div class="d-flex flex-column">
-                                                    <div>Au </div>
-                                                    <time class="mb-4 text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                                        <span class="date d-block fs-30 lh-28">28</span>
-                                                        <span class="month d-block lh-24">Jun</span>
-                                                    </time>
-                                                </div>
+                            {% for i in 1..1 %}
 
+                                <li class="grid-item">
+                                    <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                        <div class="blog-image">
+                                            <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" /></a>
+                                        </div>
+                                        <div class="card-body p-13 md-p-11">
+                                            <div  class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Build up healthy habits and strong peaceful life</div>
+                                            <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                            <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                                <div class="me-auto">
+                                                    <span class="d-inline-block">30 Septembre 2024</span>
+                                                </div>
+                                                <div class="like-count fs-15 fw-600">
+                                                    <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                        <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                                    </div>
+                                                </div>  
                                             </div>
                                         </div>
-                                        <div class="feature-box-content">
-                                            <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
-                                            <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                        </div>
                                     </div>
-                                </a>
-                            </li>
-
-                            <li class="grid-item">
-                                <a href="">
-                                    <div class="feature-box border-radius-10px feature-box-left-icon bg-white box-shadow-extra-large box-shadow-extra-large-hover p-11 last-paragraph-no-margin">
-                                        <div class="feature-box-icon d-flex align-items-center flex-column">
-                                            
-                                            <div class="d-flex flex-column">
-                                                
-                                                <div class="d-flex flex-column">
-                                                    <div>Du </div>
-                                                    <time class="mb-2 text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                                        <span class="date d-block fs-30 lh-28">28</span>
-                                                        <span class="month d-block lh-24">Jun</span>
-                                                    </time>
-                                                </div>
-
-                                                <div class="d-flex flex-column">
-                                                    <div>Au </div>
-                                                    <time class="mb-4 text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block">
-                                                        <span class="date d-block fs-30 lh-28">28</span>
-                                                        <span class="month d-block lh-24">Jun</span>
-                                                    </time>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        <div class="feature-box-content">
-                                            <div class="card-title text-dark-gray text-dark-gray-hover mb-10px fs-18 lh-28 fw-600 d-block">Leopard is an animal my designs come from nature.</div>
-                                            <p>Lorem ipsum been the industry way standard dummy text...</p>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- end section -->
-
-        <!-- start page title -->
-        <section id="retro-section" class="bg-very-light-gray pb-0">
-            <div class="container">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-12 col-xl-6 col-lg-8 text-center position-relative page-title-double-large">
-                        <div class="d-flex flex-column justify-content-center extra-very-small-screen">
-                            <h1 class="text-dark-gray alt-font ls-minus-1px fw-700">Rétrospective</h1>
-                            <h2 class="text-dark-gray d-inline-block fw-400 ls-0px w-80 xs-w-100 mx-auto">Suivez nos actualités {{ "now"|date('Y') }}</h2>
-
-                            <div class="overflow-hidden pt-5px">
-                                <a href="demo-hosting-hosting.html" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
-                                    <span>
-                                        <span class="btn-double-text" data-text="Archives">Archives</span>
-                                        <span><i class="feather icon-feather-arrow-right"></i></span>
-                                    </span>
-                                </a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- end page title -->
-
-        <!-- start section -->
-        {# <section class="pt-0">    
+                                </li>
             
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center pt-5">
-                        <!-- filter navigation --> 
-                        <ul class="portfolio-filter nav nav-tabs justify-content-center border-0 fw-500 alt-font pb-5">
-                            <li class="nav active"><a data-filter="*" href="#">Tout</a></li>
-                            <li class="nav"><a data-filter=".selected" href="#">Randonnée</a></li>
-                            <li class="nav"><a data-filter=".digital" href="#">Culturel</a></li>
-                            <li class="nav"><a data-filter=".branding" href="#">Détente</a></li>
-                            <li class="nav"><a data-filter=".web" href="#">Fête</a></li>
-                        </ul>
-                        <!-- end filter navigation -->
-                    </div>
-                </div>
-            </div>
-           
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 filter-content">
-                        <ul class="portfolio-boxed portfolio-wrapper grid-loading grid grid-3col grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-large text-center">
-                            <li class="grid-sizer"></li>
-                            <!-- start portfolio item -->
-                            
-                            {% for i in 1..6 %}
-                                <li class="grid-item selected digital transition-inner-all">
-                                    <div class="portfolio-box border-radius-4px">
-                                        <div class="portfolio-image border-radius-4px">
-                                            <img src="{{ customAsset('app/exemple_event.jpg')}}" alt="" />
-                                            <a href="{{ path('blog_index') }}" class="portfolio-hover d-flex justify-content-center flex-column">
-                                            </a>
-                                            <div class="portfolio-overlay bg-dark-gray" style="background-color: #637c8e;"></div>
+                                <li class="grid-item">
+                                    <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                        <div class="blog-image">
+                                            <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" /></a>
                                         </div>
-                                        <div class="portfolio-caption pt-30px pb-30px lg-pt-20px lg-pb-20px">
-                                            <div class="fs-14 lh-20 text-uppercase">Branding</div>
-                                            <div class="fs-17 fw-600 text-dark-gray text-dark-gray-hover">Stream stones</d>
+                                        <div class="card-body p-13 md-p-11">
+                                            <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">How to bring the season into your great work</div>
+                                            <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                            <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                                <div class="me-auto">
+                                                    <span class="d-inline-block">28 Août 2024</span>
+                                                </div>
+                                                <div class="like-count fs-15 fw-600">
+                                                    <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                        <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white"></i>
+                                                    </div>
+                                                </div>  
+                                            </div>
                                         </div>
                                     </div>
-                                </li> 
+                                </li>
+                                <li class="grid-item">
+                                    <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                        <div class="blog-image">
+                                            <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" /></a>
+                                        </div>
+                                        <div class="card-body p-13 md-p-11">
+                                            <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Be the strong willed one the public relationship</div>
+                                            <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                            <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                                <div class="me-auto">
+                                                    <span class="d-inline-block">13 Août 2024</span>
+                                                </div>
+                                                <div class="like-count fs-15 fw-600">
+                                                    <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                        <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white"></i>
+                                                    </div>
+                                                </div>  
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
                             {% endfor %}
 
                         </ul>
                     </div>
                 </div>
-            </div>
 
-        </section> #}
-        <!-- end section -->
-        
-        <section class="bg-very-light-gray pt-0"> 
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 p-md-0">
-                        <ul class="blog-grid blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                            <li class="grid-sizer"></li>
-                            <!-- start blog item -->
-                            <li class="grid-item">
-                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
-                                    <div class="blog-image">
-                                        <a href="demo-consulting-blog-single-modern.html" class="d-block"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="card-body p-13 md-p-11">
-                                        <a href="demo-consulting-blog-single-modern.html" class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Build up healthy habits and strong peaceful life</a>
-                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
-                                            <div class="me-auto">
-                                                <span class="d-inline-block">30 August 2021</span>
-                                            </div>
-                                            <div class="like-count fs-15 fw-600">
-                                                <div><i class="fa-solid fa-person-hiking icon-large text-base-color"></i></div>
-                                            </div>  
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end blog item -->
-                            <!-- start blog item -->
-                            <li class="grid-item">
-                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
-                                    <div class="blog-image">
-                                        <a href="demo-consulting-blog-single-modern.html" class="d-block"><img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="card-body p-13 md-p-11">
-                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">How to bring the season into your great work</div>
-                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
-                                            <div class="me-auto">
-                                                <span class="d-inline-block">28 August 2021</span>
-                                            </div>
-                                            <div class="like-count fs-15 fw-600">
-                                                <div><i class="fa-solid fa-person-swimming icon-large text-base-color"></i></div>
-                                            </div>  
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end blog item -->
-                            <!-- start blog item -->
-                            <li class="grid-item">
-                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
-                                    <div class="blog-image">
-                                        <a href="demo-consulting-blog-single-modern.html" class="d-block"><img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="card-body p-13 md-p-11">
-                                        <a href="demo-consulting-blog-single-modern.html" class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Be the strong willed one the public relationship</a>
-                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
-                                            <div class="me-auto">
-                                                <span class="d-inline-block">26 August 2021</span>
-                                            </div>
-                                            <div class="like-count fs-15 fw-600">
-                                                <div><i class="fa-solid fa-person-biking icon-large text-base-color"></i></div>
-                                            </div>  
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <!-- end blog item -->
-                        </ul>
-                    </div>
-                </div>
             </div>
         </section>
         <!-- end section -->
@@ -774,23 +724,11 @@
         <section id="faq-section" class="extra-big-section">
             <div class="container"> 
                 <div class="row justify-content-center align-items-center mb-3">
-                    
-                    {# <div class="d-inline-block" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900 }'>
-                        <div class="highlight-separator" data-shadow-animation="true" data-animation-delay="1500">
-                            ARSMéLI<span><img src="images/highlight-separator.svg" alt=""></span>
-                        </div>
-                        <img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
-                    </div> #}
-                    
-                    
                     <div class="col-lg-7 col-md-8 sm-mb-15px d-flex align-items-center">
                         <h2 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
                             Foire aux questions<span><img src="images/highlight-separator.svg" alt=""></span>
                         </h2>
-                        <img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
-
-                        
-                        
+                        <img style="width:7rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
                     </div>
                     <div class="col-lg-3 col-md-4 text-start text-md-end" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                     </div>
@@ -803,7 +741,7 @@
                                 <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-01" aria-expanded="true" data-bs-parent="#accordion-style-02">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                            <i class="feather icon-feather-chevron-up icon-extra-medium"></i><span class="fw-600 fs-18">Lorem ipsum is simply dummy textv ?</span>
+                                            <i class="feather icon-feather-chevron-up icon-extra-medium"></i><span class="fw-600 fs-18">Faut-il habiter obligatoirement en Métropole Lilloise pour adhérer ?</span>
                                         </div>
                                     </a>
                                 </div>
@@ -819,7 +757,7 @@
                                 <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-02" aria-expanded="false" data-bs-parent="#accordion-style-02">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Lorem ipsum has been the industry's standard?</span>
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Existe-t-il une cotisation ?</span>
                                         </div>
                                     </a>
                                 </div>
@@ -835,7 +773,7 @@
                                 <div class="accordion-header border-bottom border-color-light-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-03" aria-expanded="false" data-bs-parent="#accordion-style-02">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Standard dummy text ever unknown printer took?</span>
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Faut-il être à la retraite pour adhérer ?</span>
                                         </div>
                                     </a>
                                 </div>
@@ -851,7 +789,7 @@
                                 <div class="accordion-header border-bottom border-color-transparent">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-04" aria-expanded="false" data-bs-parent="#accordion-style-02">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Dummy text ever unknown printer took a galley of?</span>
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Comment devenir animateur au sein de l'association ?</span>
                                         </div>
                                     </a>
                                 </div>

@@ -8,6 +8,19 @@
     .event-style-03 .accordion .accordion-title .event-time{
         max-width: 354px!important;
     }
+    /* Par défaut, on applique un filtre sur les éléments non sélectionnés */
+    .accordion-item {
+        transition: filter 0.3s ease;
+    }
+
+    .accordion-item.inactive {
+        filter: opacity(0.2); /* Baisse l'opacité des éléments non actifs */
+    }
+
+    /* Style de l'élément actif */
+    .accordion-item.active {
+        filter: opacity(1); /* Opacité pleine pour l'élément actif */
+    }
 </style>
 {% endblock %}
 
@@ -20,143 +33,83 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="mt-5">
+    <section class="top-space-margin bg-very-light-gray">
         <div class="container">
             
             <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
-                <div class="col-xl-6 text-center">
-                    <h2 class="alt-font fw-700 ls-minus-2px text-dark-gray mb-15px">Agenda</h2>
-                    <p class="mb-0">2024</p>
+                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                    <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                        Programme<span><img src="../images/highlight-separator.svg" alt=""></span>
+                    </h3>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-center">
-                <ul class="row d-flex pagination pagination-style-01 fs-13 fw-500 mb-0">
+            <div class="d-flex justify-content-center pt-1">
+                <ul class="row d-flex pagination pagination-style-01 fs-14 fw-600 mb-0">
                     <li class="page-item d-none"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-none"></i></a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Jan.</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Fév.</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Mars</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Avril</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Mai</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Juin</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Juil.</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Août</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Sept.</a></li>
-                    <li class=" col-2 page-item active"><a class="page-link" href="#">Oct.</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Nov.</a></li>
-                    <li class=" col-2 page-item"><a class="page-link" href="#">Déc.</a></li>
-                    <li class=" col-2 page-item d-none"><a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
+                    <li class=" col-2 page-item"><a class="page-link" >Jan.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Fév.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Mars</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Avril</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Mai</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Juin</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Juil.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Août</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Sept.</a></li>
+                    <li class=" col-2 page-item active"><a class="page-link">Oct.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Nov.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Déc.</a></li>
+                    <li class=" col-2 page-item d-none"><a class="page-link"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
                 </ul>
             </div>
 
-            <div class="row g-0 mb-5 sm-mb-30px mt-5">
+            <div class="row g-0 pb-5 sm-pb-30px mt-5">
                 <div class="col event-style-03 bg-white box-shadow-quadruple-large">
-                    <ul class="nav nav-tabs flex-wrap flex-md-nowrap fs-17 md-fs-15 fw-500 alt-font text-center bg-dark-gray border-color-white">
-                        <li class="nav-item p-1 text-white">Octobre</li>
-                    </ul>
-                    <div class="tab-content ps-65px pe-65px pt-45px pb-45px sm-p-30px xs-p-20px">
+                    <div class="tab-content ps-65px pe-65px pt-15px pb-45px sm-p-30px xs-p-20px">
                         <!-- start tab content -->
                         <div class="tab-pane fade in active show">
-                            <div class="accordion accordion-style-02" id="accordion-style-02" data-active-icon="fa-angle-up" data-inactive-icon="fa-angle-down">
-                               
-                               <!-- start accordion item -->
-                                <div class="accordion-item">
-                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-01" aria-expanded="true" data-bs-parent="#accordion-style-02">
-                                            <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
-                                                
-                                                <div>
-                                                    <div class="d-flex">
-                                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block p-2">
-                                                            <span class="date d-block fs-30 lh-28">04</span>
-                                                            <span class="month d-block lh-24">Octobre</span>
-                                                        </time>
-                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
-                                                            <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
-                                                        </div>
-                                                    </div>
-                                                    <div class="event-time fw-500 mt-2">
-                                                        <i class="feather icon-feather-clock me-5px"></i>08:00
-                                                        <i class="feather icon-feather-map-pin me-5px"></i>Lambersart
-                                                    </div>
-                                                </div>
-
-                                                <div class="fs-18 fw-600">Dynamic movement training</div>
-                                                <i class="fa-solid fa-angle-up"></i>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    <div id="accordion-style-02-01" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
-                                        <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
-                                            <div class="trainer-box col-auto position-relative">
-                                                <span class="fs-12 lh-24 fw-600 text-white bg-orange d-inline-block border-radius-26px position-absolute top-minus-13px z-index-1 right-15px ps-10px pe-10px">Terminé</span>
-                                                <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
-                                                    <div class="col bg-white position-relative p-25px">
-                                                        <span class="text-dark-gray fw-600 d-block">Randonnée</span>
-                                                        <div class="fs-15 lh-20 d-flex align-items-center">
-
-                                                            <a href="{{ path('blog_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
-                                                                <span>
-                                                                    <span class="btn-double-text" data-text="Infos">Infos</span>
-                                                                    <span><i class="feather icon-feather-arrow-right"></i></span>
-                                                                </span>
-                                                            </a>
-                                                  
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="trainer-description col last-paragraph-no-margin">
-                                                <p>Lorem ipsum dolor consectetur adipiscing mauris varius fermentum sollicitudin molestie lectus lobortis mollis sed sit lectus an adipiscing mauris varius nibh fermentum sollicitudin adipiscing mauris fermentum sollicitudin molestie lectus sollicitudin.</p>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="fa-angle-up" data-inactive-icon="fa-angle-down">
                             
                                 <div class="accordion-item">
                                     <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-02" aria-expanded="true" data-bs-parent="#accordion-style-02">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-01" aria-expanded="true" data-bs-parent="#accordion-style-07">
                                             <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
                                                 
                                                 <div>
                                                     <div class="d-flex">
-                                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block p-2">
-                                                            <span class="date d-block fs-30 lh-28">04</span>
+                                                        <time class="text-center post-date border-radius-3px bg-medium-gray text-white text-uppercase fw-500 d-inline-block p-2">
+                                                            <span class="date d-block fs-30 lh-28">17</span>
                                                             <span class="month d-block lh-24">Octobre</span>
                                                         </time>
                                                         <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
                                                             <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                                            <div class="text-white px-1">13 Km</div>
                                                         </div>
                                                     </div>
                                                     <div class="event-time fw-500 mt-2">
-                                                        <i class="feather icon-feather-clock me-5px"></i>08:00
-                                                        <i class="feather icon-feather-map-pin me-5px"></i>Lambersart
+                                                        <i class="feather icon-feather-clock me-5px"></i>14:00
+                                                        <i class="feather icon-feather-map-pin me-5px"></i>BOUVINES
                                                     </div>
                                                 </div>
 
-                                                <div class="fs-18 fw-600">Dynamic movement training</div>
+                                                <div>
+                                                    <div class="fs-18 fw-600">Randonnée historique à Bouvines</div>
+                                                    <div class="text-medium-gray"><div class="fs-12 fw-500">Rendez-vous: </div><div style="line-height:2px;">Parking de la mairie, chaussée, Brunehaut</div></div>
+                                                </div>
                                                 <i class="fa-solid fa-angle-up"></i>
                                             </div>
                                         </a>
                                     </div>
-                                    <div id="accordion-style-02-02" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
+                                    <div id="accordion-style-07-01" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
-                                            <div class="trainer-box col-auto position-relative">
-                                                <span class="fs-12 lh-24 fw-600 text-white bg-orange d-inline-block border-radius-26px position-absolute top-minus-13px z-index-1 right-15px ps-10px pe-10px">Terminé</span>
-                                                <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
-                                                    <div class="col bg-white position-relative p-25px">
-                                                        <span class="text-dark-gray fw-600 d-block">Randonnée</span>
-                                                        <div class="fs-15 lh-20 d-flex align-items-center">
-
-                                                            <a href="{{ path('blog_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
-                                                                <span>
-                                                                    <span class="btn-double-text" data-text="Infos">Infos</span>
-                                                                    <span><i class="feather icon-feather-arrow-right"></i></span>
-                                                                </span>
-                                                            </a>
-                                                  
+                                            
+                                            <div class="d-flex flex-column">
+                                                <div class="trainer-box col-auto position-relative">
+                                                    <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
+                                                        <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
+                                                        <div class="col bg-white position-relative p-25px">
+                                                            <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
+                                                            <span class="fs-15 lh-20 d-block">Animatrice</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -164,6 +117,7 @@
 
                                             <div class="trainer-description col last-paragraph-no-margin">
                                                 <p>Lorem ipsum dolor consectetur adipiscing mauris varius fermentum sollicitudin molestie lectus lobortis mollis sed sit lectus an adipiscing mauris varius nibh fermentum sollicitudin adipiscing mauris fermentum sollicitudin molestie lectus sollicitudin.</p>
+                                                <a href="{{ path('blog_index2') }}" class="mt-4 btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
                                             </div>
 
                                         </div>
@@ -172,53 +126,157 @@
 
                                 <div class="accordion-item">
                                     <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-03" aria-expanded="true" data-bs-parent="#accordion-style-02">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-03" aria-expanded="true" data-bs-parent="#accordion-style-07">
                                             <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
-                                                
                                                 <div>
                                                     <div class="d-flex">
-                                                        <time class="text-center post-date border-radius-3px bg-dark-gray text-white text-uppercase fw-500 d-inline-block p-2">
-                                                            <span class="date d-block fs-30 lh-28">04</span>
+                                                        <time class="text-center post-date border-radius-3px bg-medium-gray text-white text-uppercase fw-500 d-inline-block p-2">
+                                                            <span class="date d-block fs-30 lh-28">24</span>
                                                             <span class="month d-block lh-24">Octobre</span>
                                                         </time>
                                                         <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
                                                             <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                                            <div class="text-white px-1">12 Km</div>
                                                         </div>
                                                     </div>
                                                     <div class="event-time fw-500 mt-2">
-                                                        <i class="feather icon-feather-clock me-5px"></i>08:00
-                                                        <i class="feather icon-feather-map-pin me-5px"></i>Lambersart
+                                                        <i class="feather icon-feather-clock me-5px"></i>14:00
+                                                        <i class="feather icon-feather-map-pin me-5px"></i>TEMPLEUVE-EN-PEVELE
                                                     </div>
                                                 </div>
 
-                                                <div class="fs-18 fw-600">Dynamic movement training</div>
+                                                <div>
+                                                    <div class="fs-18 fw-600">Au coeur de la Pévèle</div>
+                                                    <div class="text-medium-gray"><div class="fs-12 fw-500">Rendez-vous: </div><div style="line-height:2px;">Parking centre ville, rue d’Anchin</div></div>
+                                                </div>
                                                 <i class="fa-solid fa-angle-up"></i>
                                             </div>
                                         </a>
                                     </div>
-                                    <div id="accordion-style-02-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
+                                    <div id="accordion-style-07-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
-                                            <div class="trainer-box col-auto position-relative">
-                                                <span class="fs-12 lh-24 fw-600 text-white bg-orange d-inline-block border-radius-26px position-absolute top-minus-13px z-index-1 right-15px ps-10px pe-10px">Terminé</span>
-                                                <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
-                                                    <div class="col bg-white position-relative p-25px">
-                                                        <span class="text-dark-gray fw-600 d-block">Randonnée</span>
-                                                        <div class="fs-15 lh-20 d-flex align-items-center">
-
-                                                            <a href="{{ path('blog_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
-                                                                <span>
-                                                                    <span class="btn-double-text" data-text="Infos">Infos</span>
-                                                                    <span><i class="feather icon-feather-arrow-right"></i></span>
-                                                                </span>
-                                                            </a>
-                                                  
+                                            
+                                            <div class="d-flex flex-column">
+                                                <div class="trainer-box col-auto position-relative">
+                                                    <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
+                                                        <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
+                                                        <div class="col bg-white position-relative p-25px">
+                                                            <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
+                                                            <span class="fs-15 lh-20 d-block">Animatrice</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                             <div class="trainer-description col last-paragraph-no-margin">
-                                                <p>Lorem ipsum dolor consectetur adipiscing mauris varius fermentum sollicitudin molestie lectus lobortis mollis sed sit lectus an adipiscing mauris varius nibh fermentum sollicitudin adipiscing mauris fermentum sollicitudin molestie lectus sollicitudin.</p>
+                                                <p>Lorem ipsum dolor consectetur adipiscing mauris varius fermentum sollicitudin molestie lectus !!.</p>
+                                                <a href="{{ path('blog_index2') }}" class="mt-4 btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-04" aria-expanded="true" data-bs-parent="#accordion-style-07">
+                                            <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
+                                                <div>
+                                                    <div class="d-flex">
+                                                        <time class="text-center post-date border-radius-3px bg-medium-gray text-white text-uppercase fw-500 d-inline-block p-2">
+                                                            <span class="date d-block fs-30 lh-28">26</span>
+                                                            <span class="month d-block lh-24">Octobre</span>
+                                                        </time>
+                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                            <img style="width: 40px;" src="{{ customAsset('app/gymnastic.png')}}" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="event-time fw-500 mt-2">
+                                                        <i class="feather icon-feather-clock me-5px"></i>11:00
+                                                        <i class="feather icon-feather-map-pin me-5px"></i>LAMBERSART
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div class="fs-18 fw-600">Une remise en forme pour affronter l'automne</div>
+                                                    <div class="text-medium-gray"><div class="fs-12 fw-500">Rendez-vous: </div><div style="line-height:2px;">Salle de sport Nobert Segard</div></div>
+                                                </div>
+
+                                                <i class="fa-solid fa-angle-up"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="accordion-style-07-04" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
+                                            
+                                            <div class="d-flex flex-column">
+                                                <div class="trainer-box col-auto position-relative">
+                                                    <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
+                                                        <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
+                                                        <div class="col bg-white position-relative p-25px">
+                                                            <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
+                                                            <span class="fs-15 lh-20 d-block">Animatrice</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="trainer-description col last-paragraph-no-margin">
+                                                <p>Lobortis mollis sed sit lectus an adipiscing mauris varius nibh fermentum sollicitudin adipiscing mauris fermentum sollicitudin molestie lectus sollicitudin.</p>
+                                                <a href="{{ path('blog_index2') }}" class="mt-4 btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-item">
+                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-05" aria-expanded="true" data-bs-parent="#accordion-style-07">
+                                            <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
+                                                <div>
+                                                    <div class="d-flex">
+                                                        <time class="text-center post-date border-radius-3px bg-medium-gray text-white text-uppercase fw-500 d-inline-block p-2">
+                                                            <span class="date d-block fs-30 lh-28">31</span>
+                                                            <span class="month d-block lh-24">Octobre</span>
+                                                        </time>
+                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                            <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                                            <div class="text-white px-1">12,4 Km</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="event-time fw-500 mt-2">
+                                                        <i class="feather icon-feather-clock me-5px"></i>14:00
+                                                        <i class="feather icon-feather-map-pin me-5px"></i>ZILLEBEKE (Belgique)
+                                                    </div>
+                                                </div>
+
+                                                <div>
+                                                    <div class="fs-18 fw-600">Un bol d'air en Belgique</div>
+                                                    <div class="text-medium-gray"><div class="fs-12 fw-500">Rendez-vous: </div><div style="line-height:2px;">seelbachdreef - parking OC in “t riet”</div></div>
+                                                </div>
+                                                <i class="fa-solid fa-angle-up"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="accordion-style-07-05" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
+                                            
+                                            <div class="d-flex flex-column">
+                                                <div class="trainer-box col-auto position-relative">
+                                                    <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
+                                                        <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
+                                                        <div class="col bg-white position-relative p-25px">
+                                                            <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
+                                                            <span class="fs-15 lh-20 d-block">Animatrice</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="trainer-description col last-paragraph-no-margin">
+                                                <p>Adipiscing mauris fermentum sollicitudin molestie lectus sollicitudin.</p>
+                                                <a href="{{ path('blog_index2') }}" class="mt-4 btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
                                             </div>
 
                                         </div>
@@ -235,7 +293,6 @@
         </div>
     </section>
     <!-- end section -->
-
 
     <!-- start footer -->
     {% include 'main_partials/_footer.html.twig' %}
@@ -262,7 +319,7 @@
 {% block baseJavascripts %}
     
     {% block importmap %}
-        {{ importmap(['app', 'base', 'blog']) }}
+        {{ importmap(['app', 'base', 'agenda']) }}
     {% endblock %}
 
 {% endblock %}

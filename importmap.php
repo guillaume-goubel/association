@@ -20,6 +20,10 @@ return [
         'path' => './assets/js/pages/blog.js',
         'entrypoint' => true,
     ],
+    'agenda' => [
+        'path' => './assets/js/pages/agenda.js',
+        'entrypoint' => true,
+    ],
     'app' => [
         'path' => './assets/app.js',
         'entrypoint' => true,

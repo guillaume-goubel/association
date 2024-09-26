@@ -9586,6 +9586,32 @@ button:focus {
 .accordion-style-06 .accordion-item.active-accordion i {
   opacity: 0.15;
 }
+
+/* Accordion style 07 */
+.accordion-style-07 .accordion-item {
+  background-color: transparent;
+}
+.accordion-style-07 .accordion-item .accordion-header {
+  margin-bottom: 0;
+  padding: 15px 0;
+}
+.accordion-style-07 .accordion-item .accordion-header .accordion-title i {
+  right: 0;
+}
+.accordion-style-07 .accordion-item.active-accordion .accordion-header {
+  border-bottom-color: transparent !important;
+}
+.accordion-style-07 .accordion-item .accordion-body {
+  padding: 0 25px 30px 0;
+}
+.accordion-style-07 .right-icon {
+  background-color: var(--white);
+  color: var(--dark-gray);
+}
+.accordion-style-07 .right-icon:hover {
+  background-color: var(--base-color);
+  color: var(--white);
+}
 /* Alert box */
 .alert-success {
   background-color: #f1fbec;
@@ -17504,7 +17530,7 @@ canvas {
   line-height: 40px;
 }
 .pagination-style-01 .page-item .page-link:hover {
-  background: var(--white);
+  background: var(--yellow);
   color: var(--dark-gray);
   box-shadow: 0 0 10px rgba(23, 23, 23, 0.15) !important;
 }
@@ -17512,7 +17538,7 @@ canvas {
   box-shadow: none;
 }
 .pagination-style-01 .page-item.active .page-link {
-  background: var(--dark-gray);
+  background: var(--base-color);
   color: var(--white);
   box-shadow: 0 0 10px rgba(23, 23, 23, 0.15) !important;
 }

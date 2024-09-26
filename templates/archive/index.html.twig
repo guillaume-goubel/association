@@ -1,0 +1,257 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .event-style-03 .accordion .accordion-title .event-time{
+        max-width: 354px!important;
+    }
+    /* Par défaut, on applique un filtre sur les éléments non sélectionnés */
+    .accordion-item {
+        transition: filter 0.3s ease;
+    }
+
+    .accordion-item.inactive {
+        filter: opacity(0.2); /* Baisse l'opacité des éléments non actifs */
+    }
+
+    /* Style de l'élément actif */
+    .accordion-item.active {
+        filter: opacity(1); /* Opacité pleine pour l'élément actif */
+    }
+    .d-block img{
+        height:240px;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+
+    <!-- start header -->
+	{% include 'blog/partials/_blog_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section -->
+    <section class="top-space-margin bg-very-light-gray">
+        <div class="container">
+            
+            <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
+                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                    <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                        Nos événements<span><img src="../images/highlight-separator.svg" alt=""></span>
+                    </h3>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center pt-1">
+                <ul class="row d-flex pagination pagination-style-01 fs-14 fw-600 mb-0">
+                    <li class="page-item d-none"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-none"></i></a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Jan.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Fév.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Mars</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Avril</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Mai</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Juin</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Juil.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Août</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Sept.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Oct.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Nov.</a></li>
+                    <li class=" col-2 page-item"><a class="page-link">Déc.</a></li>
+                    <li class=" col-2 page-item d-none"><a class="page-link"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
+                </ul>
+            </div>
+            
+            <div class="row g-0 pb-5 sm-pb-30px mt-5">
+                <div class="col-12 p-md-0">
+                    <ul class="blog-grid blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                        
+                        <li class="grid-sizer"></li>
+                        
+                        {% for i in 1..2 %}
+
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <div  class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Build up healthy habits and strong peaceful life</div>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">30 Septembre 2024</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                    <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">How to bring the season into your great work</div>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">28 Août 2024</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                    <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white"></i>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Be the strong willed one the public relationship</div>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">13 Août 2024</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                    <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white"></i>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">How to bring the season into your great work</div>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">28 Août 2024</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                    <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white"></i>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/sport2.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">How to bring the season into your great work</div>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">28 Août 2024</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                    <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white"></i>
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+                            <!-- start blog item -->
+                            <li class="grid-item">
+                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                    <div class="blog-image">
+                                        <a href="{{ path('blog_index') }}" class="d-block"><img src="{{ customAsset('app/sport3.jpg') }}" alt="" /></a>
+                                    </div>
+                                    <div class="card-body p-13 md-p-11">
+                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Be the strong willed one the public relationship</div>
+                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
+                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
+                                            <div class="me-auto">
+                                                <span class="d-inline-block">13 Août 2024</span>
+                                            </div>
+                                            <div class="like-count fs-15 fw-600">
+                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                    <img style="width: 40px;" src="{{ customAsset('app/gymnastic.png')}}" alt="">
+                                                </div>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <!-- end blog item -->
+
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            </div>
+            
+
+        </div>
+    </section>
+    <!-- end section -->
+
+
+    <!-- start footer -->
+    {% include 'main_partials/_footer.html.twig' %}
+    <!-- end footer -->
+
+    <!-- start scroll progress -->
+    <div class="scroll-progress d-none d-xxl-block">
+        <a href="#" class="scroll-top" aria-label="scroll">
+            <span class="scroll-text">
+                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
+            </span>
+            <span class="scroll-line">
+                <span class="scroll-point"></span>
+            </span>
+        </a>
+    </div>
+    <!-- end scroll progress -->
+
+</body>
+<!-- end subscription popup -->
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base']) }}
+    {% endblock %}
+
+{% endblock %}

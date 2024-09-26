@@ -1,0 +1,123 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    .event-style-03 .accordion .accordion-title .event-time{
+        max-width: 354px!important;
+    }
+    /* Par défaut, on applique un filtre sur les éléments non sélectionnés */
+    .accordion-item {
+        transition: filter 0.3s ease;
+    }
+
+    .accordion-item.inactive {
+        filter: opacity(0.2); /* Baisse l'opacité des éléments non actifs */
+    }
+
+    /* Style de l'élément actif */
+    .accordion-item.active {
+        filter: opacity(1); /* Opacité pleine pour l'élément actif */
+    }
+    .d-block img{
+        height:240px;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+
+    <!-- start header -->
+	{% include 'blog/partials/_blog_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section --> 
+    <section class="big-section bg-gradient-very-light-gray">
+        <div class="container"> 
+            <div class="row g-0 justify-content-center">
+                <div class="col-lg-4 col-md-6" data-anime='{ "translateX": [15, 0], "opacity": [0,1], "duration": 600, "delay": 100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    <div class="bg-base-color p-18 lg-p-15 h-100"> 
+                        <span class="text-white text-decoration-line-bottom mb-10px d-inline-block">Vous voulez adhérer ?</span>
+                        <p class="text-white opacity-8">Sélectionnez "Demande d'adhésion" dans le formulaire, nous reprendrons contact au plus vite !</p>
+                        <span class="text-white text-decoration-line-bottom mb-10px d-inline-block">Vous êtes déjà adhérent ?</span>
+                        <p class="text-white opacity-8">Sélectionnez "Je suis déjà adhérent" dans le formulaire et précisez-nous votre question ou votre problème</p>
+                        <span class="text-white text-decoration-line-bottom mb-10px d-inline-block">Ni l'un, ni l'autre ?</span>
+                        <p class="text-white opacity-8">Sélectionnez "Simple renseignements" dans le formulaire, nous nous ferons un plaisir de revenir vers vous</p>
+                        <span class="text-white text-decoration-line-bottom mb-10px d-inline-block">Nous contacter par téléphone ?</span>
+                        <a href="mailto:info@yourdomain.com" class="text-white opacity-8 d-block">du lundi au vendredi 16h / 20h</a>
+                        <a href="03201545623" class="text-white opacity-8 d-block">03 20 15 45 62</a>  
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-1">  
+                    <div class="pt-5 md-pt-45px contact-form-style-01" data-anime='{ "translateX": [0, 0], "opacity": [0,1], "duration": 600, "delay": 300, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                        <h4 class="d-inline-block fw-600 text-dark-gray ls-minus-1px mb-30px">Comment vous aider ?</h4>
+                        <!-- start contact form -->
+                        <form action="email-templates/contact-form.php" method="post">
+                            <div class="position-relative form-group mb-20px">
+                                <select class="form-select" aria-label="Default select example">
+                                    <option selected>Demande d'adhésion</option>
+                                    <option value="1">Je suis déjà adhérent</option>
+                                    <option value="1">Simple renseignements</option>
+                                </select>
+                            </div> 
+                            <div class="position-relative form-group mb-20px">
+                                <span class="form-icon"><i class="bi bi-emoji-smile"></i></span>
+                                <input type="text" name="name" class="form-control" placeholder="Votre nom">
+                            </div>
+                            <div class="position-relative form-group mb-20px">
+                                <span class="form-icon"><i class="bi bi-envelope"></i></span>
+                                <input type="email" name="email" class="form-control required" placeholder="Votre adresse mail*">
+                            </div> 
+                            <div class="position-relative form-group mb-20px">
+                                <span class="form-icon"><i class="bi bi-telephone"></i></span>
+                                <input type="text" name="name" class="form-control" placeholder="Votre téléphone">
+                            </div>
+                            <div class="position-relative form-group form-textarea">
+                                <span class="form-icon"><i class="bi bi-chat-square-dots"></i></span>
+                                <textarea placeholder="Votre message" name="comment" class="form-control" rows="11"></textarea>
+                                <button class="btn btn-small btn-round-edge btn-dark-gray btn-box-shadow mt-20px m-auto submit" type="submit">Envoyer le message</button>
+                                <div class="form-results mt-20px d-none"></div>
+                            </div>
+                        </form>
+                        <!-- end contact form -->
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </section> 
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/_footer.html.twig' %}
+    <!-- end footer -->
+
+    <!-- start scroll progress -->
+    <div class="scroll-progress d-none d-xxl-block">
+        <a href="#" class="scroll-top" aria-label="scroll">
+            <span class="scroll-text">
+                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
+            </span>
+            <span class="scroll-line">
+                <span class="scroll-point"></span>
+            </span>
+        </a>
+    </div>
+    <!-- end scroll progress -->
+
+</body>
+<!-- end subscription popup -->
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base']) }}
+    {% endblock %}
+
+{% endblock %}
