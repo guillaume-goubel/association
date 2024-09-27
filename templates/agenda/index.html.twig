@@ -21,6 +21,12 @@
     .accordion-item.active {
         filter: opacity(1); /* Opacité pleine pour l'élément actif */
     }
+    .activity-logo{
+        width: 127px;
+    }
+    .pagination li{
+        cursor: pointer;
+    }
 </style>
 {% endblock %}
 
@@ -39,7 +45,7 @@
             <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
                 <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
                     <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
-                        Programme<span><img src="../images/highlight-separator.svg" alt=""></span>
+                        Programme<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
                     </h3>
                 </div>
             </div>
@@ -70,7 +76,7 @@
                         <div class="tab-pane fade in active show">
                             <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="fa-angle-up" data-inactive-icon="fa-angle-down">
                             
-                                <div class="accordion-item active-accordion active">
+                                <div class="accordion-item" style="pointer-events: none;">
                                     <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                         <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-01" aria-expanded="true" data-bs-parent="#accordion-style-07">
                                             <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
@@ -81,9 +87,12 @@
                                                             <span class="date d-block fs-30 lh-28">17</span>
                                                             <span class="month d-block lh-24">Octobre</span>
                                                         </time>
-                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                        <div class="activity-logo d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
                                                             <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
                                                             <div class="text-white px-1">13 Km</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon ms-2">
+                                                            <img style="width: 60px;border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="event-time fw-500 mt-2">
@@ -94,37 +103,21 @@
 
                                                 <div>
                                                     <div class="fs-18 fw-600">Randonnée historique à Bouvines</div>
-                                                    <div class="text-medium-gray"><div class="fs-12 fw-500">Rendez-vous: </div><div style="line-height:2px;">Parking de la mairie, chaussée, Brunehaut</div></div>
+                                                    <div class="text-medium-gray"><div>RDV : Parking de la mairie, chaussée, Brunehaut</div></div>
+                                                    <div class="text-medium-gray"><div>Animateur : Martine P</div></div>
                                                 </div>
-                                                <i class="fa-solid fa-angle-up"></i>
+                                                <i class="fa-solid fa-angle-up d-none"></i>
                                             </div>
                                         </a>
                                     </div>
-                                    <div id="accordion-style-07-01" class="accordion-collapse collapse show" data-bs-parent="#accordion-style-07">
+                                    <div id="accordion-style-07-01" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
                                             
-                                            <div class="d-flex flex-column">
-                                                <div class="trainer-box col-auto position-relative">
-                                                    <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
-                                                        <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
-                                                        <div class="col bg-white position-relative p-25px">
-                                                            <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
-                                                            <span class="fs-15 lh-20 d-block">Animatrice</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="trainer-description col last-paragraph-no-margin">
-                                                <p>Lorem ipsum dolor consectetur adipiscing mauris varius fermentum sollicitudin molestie lectus lobortis mollis sed sit lectus an adipiscing mauris varius nibh fermentum sollicitudin adipiscing mauris fermentum sollicitudin molestie lectus sollicitudin.</p>
-                                                <a href="{{ path('blog_index2') }}" class="mt-4 btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="accordion-item inactive">
+                                <div class="accordion-item">
                                     <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                         <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-03" aria-expanded="true" data-bs-parent="#accordion-style-07">
                                             <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
@@ -134,9 +127,12 @@
                                                             <span class="date d-block fs-30 lh-28">24</span>
                                                             <span class="month d-block lh-24">Octobre</span>
                                                         </time>
-                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                        <div class="activity-logo d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
                                                             <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
                                                             <div class="text-white px-1">12 Km</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon ms-2">
+                                                            <img style="width: 60px;border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="event-time fw-500 mt-2">
@@ -147,7 +143,8 @@
 
                                                 <div>
                                                     <div class="fs-18 fw-600">Au coeur de la Pévèle</div>
-                                                    <div class="text-medium-gray"><div class="fs-12 fw-500">Rendez-vous: </div><div style="line-height:2px;">Parking centre ville, rue d’Anchin</div></div>
+                                                    <div class="text-medium-gray"><div>RDV : Parking centre ville, rue d’Anchin</div></div>
+                                                    <div class="text-medium-gray"><div>Animateur : Martine P</div></div>
                                                 </div>
                                                 <i class="fa-solid fa-angle-up"></i>
                                             </div>
@@ -156,28 +153,15 @@
                                     <div id="accordion-style-07-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
                                             
-                                            <div class="d-flex flex-column">
-                                                <div class="trainer-box col-auto position-relative">
-                                                    <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
-                                                        <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
-                                                        <div class="col bg-white position-relative p-25px">
-                                                            <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
-                                                            <span class="fs-15 lh-20 d-block">Animatrice</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="trainer-description col last-paragraph-no-margin">
+                                            <div class="trainer-description col last-paragraph-no-margin px-4">
                                                 <p>Lorem ipsum dolor consectetur adipiscing mauris varius fermentum sollicitudin molestie lectus !!.</p>
-                                                <a href="{{ path('blog_index2') }}" class="mt-4 btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
                                             </div>
 
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="accordion-item inactive">
+                                <div class="accordion-item">
                                     <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                         <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-04" aria-expanded="true" data-bs-parent="#accordion-style-07">
                                             <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
@@ -187,8 +171,11 @@
                                                             <span class="date d-block fs-30 lh-28">26</span>
                                                             <span class="month d-block lh-24">Octobre</span>
                                                         </time>
-                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                        <div class="activity-logo d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
                                                             <img style="width: 40px;" src="{{ customAsset('app/gymnastic.png')}}" alt="">
+                                                        </div>
+                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon ms-2">
+                                                            <img style="width: 60px;border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="event-time fw-500 mt-2">
@@ -199,7 +186,8 @@
 
                                                 <div>
                                                     <div class="fs-18 fw-600">Une remise en forme pour affronter l'automne</div>
-                                                    <div class="text-medium-gray"><div class="fs-12 fw-500">Rendez-vous: </div><div style="line-height:2px;">Salle de sport Nobert Segard</div></div>
+                                                    <div class="text-medium-gray"><div>RDV : Salle de sport Nobert Segard</div></div>
+                                                    <div class="text-medium-gray"><div>Animateur : Martine P</div></div>
                                                 </div>
 
                                                 <i class="fa-solid fa-angle-up"></i>
@@ -208,29 +196,17 @@
                                     </div>
                                     <div id="accordion-style-07-04" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
-                                            
-                                            <div class="d-flex flex-column">
-                                                <div class="trainer-box col-auto position-relative">
-                                                    <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
-                                                        <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
-                                                        <div class="col bg-white position-relative p-25px">
-                                                            <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
-                                                            <span class="fs-15 lh-20 d-block">Animatrice</span>
-                                                        </div>
-                                                    </div>
+                                            <div class="trainer-description col last-paragraph-no-margin px-4">
+                                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quidem odit at ipsum nemo possimus ad, mollitia perspiciatis sapiente incidunt debitis maiores saepe et iure. Eveniet harum reprehenderit ipsum itaque temporibus [...]</p>
+                                                <div class="mt-1">
+                                                    <a href="{{ path('blog_index2') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge border-1">Plus d'informations</a>
                                                 </div>
                                             </div>
-
-                                            <div class="trainer-description col last-paragraph-no-margin">
-                                                <p>Lobortis mollis sed sit lectus an adipiscing mauris varius nibh fermentum sollicitudin adipiscing mauris fermentum sollicitudin molestie lectus sollicitudin.</p>
-                                                <a href="{{ path('blog_index2') }}" class="mt-4 btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="accordion-item inactive">
+                                <div class="accordion-item" style="pointer-events: none;">
                                     <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                         <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-05" aria-expanded="true" data-bs-parent="#accordion-style-07">
                                             <div class="accordion-title position-relative alt-font text-dark-gray d-flex flex-column align-items-start flex-sm-row align-items-sm-center mb-0">
@@ -240,9 +216,12 @@
                                                             <span class="date d-block fs-30 lh-28">31</span>
                                                             <span class="month d-block lh-24">Octobre</span>
                                                         </time>
-                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+                                                        <div class="activity-logo d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
                                                             <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
                                                             <div class="text-white px-1">12,4 Km</div>
+                                                        </div>
+                                                        <div class="d-flex align-items-center justify-content-center feature-box-icon ms-2">
+                                                            <img style="width: 60px;border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="">
                                                         </div>
                                                     </div>
                                                     <div class="event-time fw-500 mt-2">
@@ -253,32 +232,16 @@
 
                                                 <div>
                                                     <div class="fs-18 fw-600">Un bol d'air en Belgique</div>
-                                                    <div class="text-medium-gray"><div class="fs-12 fw-500">Rendez-vous: </div><div style="line-height:2px;">seelbachdreef - parking OC in “t riet”</div></div>
+                                                    <div class="text-medium-gray"><div>RDV : Seelbachdreef - parking OC in “t riet”</div></div>
+                                                    <div class="text-medium-gray"><div>Animateur : Martine P</div></div>
                                                 </div>
-                                                <i class="fa-solid fa-angle-up"></i>
+                                                <i class="fa-solid fa-angle-up d-none"></i>
                                             </div>
                                         </a>
                                     </div>
                                     <div id="accordion-style-07-05" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-body d-flex align-items-start align-items-lg-center flex-column flex-lg-row border-bottom border-color-light-medium-gray">
                                             
-                                            <div class="d-flex flex-column">
-                                                <div class="trainer-box col-auto position-relative">
-                                                    <div class="d-flex overflow-hidden border-radius-6px border box-shadow-quadruple-large border-color-extra-medium-gray">
-                                                        <div class="col-auto w-90px cover-background" style="background-image: url(https://via.placeholder.com/200x200)"></div>
-                                                        <div class="col bg-white position-relative p-25px">
-                                                            <span class="text-dark-gray fw-600 d-block">MARTINE P</span>
-                                                            <span class="fs-15 lh-20 d-block">Animatrice</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="trainer-description col last-paragraph-no-margin">
-                                                <p>Adipiscing mauris fermentum sollicitudin molestie lectus sollicitudin.</p>
-                                                <a href="{{ path('blog_index2') }}" class="mt-4 btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +258,7 @@
     <!-- end section -->
 
     <!-- start footer -->
-    {% include 'main_partials/_footer.html.twig' %}
+    {% include 'main_partials/_footer_minimum.html.twig' %}
     <!-- end footer -->
 
     <!-- start scroll progress -->

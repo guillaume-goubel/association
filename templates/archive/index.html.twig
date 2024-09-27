@@ -43,7 +43,7 @@
             <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
                 <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
                     <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
-                        Nos événements<span><img src="../images/highlight-separator.svg" alt=""></span>
+                        Nos événements<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
                     </h3>
                 </div>
             </div>
@@ -225,9 +225,8 @@
     </section>
     <!-- end section -->
 
-
     <!-- start footer -->
-    {% include 'main_partials/_footer.html.twig' %}
+    {% include 'main_partials/_footer_minimum.html.twig' %}
     <!-- end footer -->
 
     <!-- start scroll progress -->

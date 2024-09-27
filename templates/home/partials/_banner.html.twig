@@ -1,4 +1,4 @@
-<section id="main-banner-section" class="cover-background full-screen bg-dark-gray ipad-top-space-margin position-relative section-dark md-h-auto" style="background-image: url('images/demo-hosting-home-bg.jpg')"> 
+<section id="main-banner-section" class="cover-background full-screen bg-dark-gray ipad-top-space-margin position-relative section-dark md-h-auto" style="background-image: url('{{ asset('app/demo-hosting-home-bg.jpg') }}')"> 
     <div id="particles-style-01" class="h-100 position-absolute left-0px top-0 w-100" data-particle="true" data-particle-options='{"particles": {"number": {"value": 12,"density": {"enable": true,"value_area": 2000}},"color": {"value": ["#ECBA23", "#ECBA23", "#ECBA23", "#ECBA23"]},"shape": {"type": "circle","stroke":{"width":0,"color":"#000000"}},"opacity": {"value": 0.8,"random": false,"anim": {"enable": false,"speed": 1,"sync": false}},"size": {"value": 5,"random": true,"anim": {"enable": false,"sync": true}},"line_linked":{"enable":false,"distance":0,"color":"#ffffff","opacity":0.4,"width":1},"move": {"enable": true,"speed":1,"direction": "right","random": false,"straight": false}},"interactivity": {"detect_on": "canvas","events": {"onhover": {"enable": false,"mode": "repulse"},"onclick": {"enable": false,"mode": "push"},"resize": true}},"retina_detect": false}'></div>
     <div class="container h-100">
         <div class="row align-items-center justify-content-center h-100">
@@ -6,7 +6,7 @@
                 <div class="fs-90 sm-fs-80 xs-fs-70 fw-600 mb-20px ls-minus-4px overflow-hidden">
                     <div class="d-inline-block" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900 }'>
                         <div class="highlight-separator" data-shadow-animation="true" data-animation-delay="1500">
-                            ARSMéLI<span><img src="images/highlight-separator.svg" alt=""></span>
+                            ARSMéLI<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
                         </div>
                         <img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
                     </div>
@@ -20,7 +20,7 @@
                 <div class="overflow-hidden pt-5px">
                     <a href="{{ path('contact_index') }}" class="btn btn-extra-large btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
                         <span>
-                            <span class="btn-double-text" data-text="c'est ici !">Nous rejoindre ?</span>
+                            <span class="btn-double-text" data-text="Nous rejoindre ?">Nous rejoindre ?</span>
                             <span><i class="feather icon-feather-arrow-right"></i></span>
                         </span>
                     </a>

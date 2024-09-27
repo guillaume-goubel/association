@@ -106,66 +106,64 @@
                         {% endif %}
 
                         {# IMAGE GALLERY #} 
-                        {% if is_passed %}
-                            <div class="container-fluid p-0">
-                                <ul class="image-gallery-style-01 mb-2 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-small">
-                                    <li class="grid-sizer"></li> 
-                                    
-                                    <!-- start gallery item -->
-                                    <li class="grid-item transition-inner-all">
-                                        <div class="gallery-box">
-                                            <a href="{{ customAsset('app/home/banner/banner.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                                <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                    <img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" />
-                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                            <i class="feather icon-feather-search text-white icon-small"></i>
-                                                        </div>
+                        <div class="container-fluid p-0">
+                            <ul class="image-gallery-style-01 mb-2 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-small">
+                                <li class="grid-sizer"></li> 
+                                
+                                <!-- start gallery item -->
+                                <li class="grid-item transition-inner-all">
+                                    <div class="gallery-box">
+                                        <a href="{{ customAsset('app/home/banner/banner.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
+                                            <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                <img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" />
+                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                        <i class="feather icon-feather-search text-white icon-small"></i>
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <!-- end gallery item -->
-                                    
-                                    <!-- start gallery item -->
-                                    <li class="grid-item transition-inner-all">
-                                        <div class="gallery-box">
-                                            <a href="{{ customAsset('app/home/banner/last_event.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                                <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                    <img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" />
-                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                            <i class="feather icon-feather-search text-white icon-small"></i>
-                                                        </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <!-- end gallery item -->
+                                
+                                <!-- start gallery item -->
+                                <li class="grid-item transition-inner-all">
+                                    <div class="gallery-box">
+                                        <a href="{{ customAsset('app/home/banner/last_event.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
+                                            <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                <img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" />
+                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                        <i class="feather icon-feather-search text-white icon-small"></i>
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <!-- end gallery item -->
-                                    
-                                    <!-- start gallery item -->
-                                    <li class="grid-item transition-inner-all">
-                                        <div class="gallery-box">
-                                            <a href="{{ customAsset('app/home/banner/exemple_event.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
-                                                <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                    <img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" />
-                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                            <i class="feather icon-feather-search text-white icon-small"></i>
-                                                        </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <!-- end gallery item -->
+                                
+                                <!-- start gallery item -->
+                                <li class="grid-item transition-inner-all">
+                                    <div class="gallery-box">
+                                        <a href="{{ customAsset('app/home/banner/exemple_event.jpg') }}" data-group="lightbox-gallery" title="Lightbox gallery image title">
+                                            <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                <img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" />
+                                                <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                    <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                        <i class="feather icon-feather-search text-white icon-small"></i>
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <!-- end gallery item -->
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <!-- end gallery item -->
 
-                                </ul>
-                            </div>
-                        {% endif %}
-
+                            </ul>
+                        </div>
+                      
                         {# TEXT PRESENTATION #}
                         <div class="row pt-4">
                             <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
@@ -185,137 +183,8 @@
         </div>
     </section>
 
-    {# <section class="bg-very-light-gray"> 
-        <div class="container">
-            <div class="row justify-content-center mb-2">
-                <div class="col-12 col-lg-7 text-center">
-                    <span class="fs-15 fw-500 text-uppercase d-inline-block">You may also like</span>
-                    <h4 class="text-dark-gray fw-600">Related posts</h4>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <ul class="blog-grid blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large">
-                        <li class="grid-sizer"></li>
-                        <!-- start blog item -->
-                        <li class="grid-item">
-                            <div class="card border-0 border-radius-4px box-shadow-extra-large box-shadow-extra-large-hover">
-                                <div class="blog-image">
-                                    <a href="demo-business-blog-single-modern.html" class="d-block"><img src="https://via.placeholder.com/800x570" alt="" /></a>
-                                    <div class="blog-categories">
-                                        <a href="blog-classic.html" class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Agency</a>
-                                    </div>
-                                </div>
-                                <div class="card-body p-12">
-                                    <a href="demo-business-blog-single-modern.html" class="card-title mb-15px fw-600 fs-17 lh-26 text-dark-gray text-dark-gray-hover d-inline-block">How to bring the season into your great marketing.</a>
-                                    <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                    <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
-                                        <div class="me-auto">
-                                            <span class="blog-date fw-500 d-inline-block">30 August 2023</span>
-                                            <div class="d-inline-block author-name">By <a href="blog-classic.html" class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom fw-600">Den viliamson</a></div>
-                                        </div>
-                                        <div class="like-count">
-                                            <a href="demo-business-blog-single-modern.html"><i class="fa-regular fa-heart text-red d-inline-block"></i><span class="text-dark-gray align-middle fw-600">65</span></a>
-                                        </div>  
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- end blog item -->
-                        <!-- start blog item -->
-                        <li class="grid-item">
-                            <div class="card border-0 border-radius-4px box-shadow-extra-large box-shadow-extra-large-hover">
-                                <div class="blog-image">
-                                    <a href="demo-business-blog-single-modern.html" class="d-block"><img src="https://via.placeholder.com/800x570" alt="" /></a>
-                                    <div class="blog-categories">
-                                        <a href="blog-classic.html" class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Luxurious</a>
-                                    </div>
-                                </div>
-                                <div class="card-body p-12">
-                                    <a href="demo-business-blog-single-modern.html" class="card-title mb-15px fw-600 fs-17 lh-26 text-dark-gray text-dark-gray-hover d-inline-block">Build up healthy habits and strong peaceful life.</a>
-                                    <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                    <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
-                                        <div class="me-auto">
-                                            <span class="blog-date fw-500 d-inline-block">28 August 2023</span>
-                                            <div class="d-inline-block author-name">By <a href="blog-classic.html" class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom fw-600">Hugh macleod</a></div>
-                                        </div>
-                                        <div class="like-count">
-                                            <a href="demo-business-blog-single-modern.html"><i class="fa-regular fa-heart text-red d-inline-block"></i><span class="text-dark-gray align-middle fw-600">25</span></a>
-                                        </div>  
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- end blog item -->
-                        <!-- start blog item -->
-                        <li class="grid-item">
-                            <div class="card border-0 border-radius-4px box-shadow-extra-large box-shadow-extra-large-hover">
-                                <div class="blog-image">
-                                    <a href="demo-business-blog-single-modern.html" class="d-block"><img src="https://via.placeholder.com/800x570" alt="" /></a>
-                                    <div class="blog-categories">
-                                        <a href="blog-classic.html" class="categories-btn bg-white text-dark-gray text-dark-gray-hover text-uppercase alt-font fw-700">Business</a>
-                                    </div>
-                                </div>
-                                <div class="card-body p-12">
-                                    <a href="demo-business-blog-single-modern.html" class="card-title mb-15px fw-600 fs-17 lh-26 text-dark-gray text-dark-gray-hover d-inline-block">Make business easy with beautiful application.</a>
-                                    <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                    <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-14 text-uppercase">
-                                        <div class="me-auto">
-                                            <span class="blog-date fw-500 d-inline-block">26 August 2023</span>
-                                            <div class="d-inline-block author-name">By <a href="blog-classic.html" class="text-dark-gray text-dark-gray-hover text-decoration-line-bottom fw-600">Walton smith</a></div>
-                                        </div>
-                                        <div class="like-count">
-                                            <a href="demo-business-blog-single-modern.html"><i class="fa-regular fa-heart text-red d-inline-block"></i><span class="text-dark-gray align-middle fw-600">30</span></a>
-                                        </div>  
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <!-- end blog item -->
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section> #}
-    <!-- end section -->
-    <!-- start section -->
-
-    <!-- end section -->
-    <!-- start section -->
-    {# <section id="comments" class="pt-0">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-9 mb-4">
-                    <h5 class="text-dark-gray fw-600 mb-5px">Write a comment</h5>
-                    <div class="mb-5px">Your email address will not be published. Required fields are marked *</div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-9">
-                    <form action="email-templates/contact-form.php" method="post" class="row contact-form-style-02">
-                        <div class="col-md-6 mb-40px">
-                            <input class="input-name border-radius-4px form-control required" type="text" name="name" placeholder="Enter your name*">
-                        </div> 
-                        <div class="col-md-6 mb-40px">
-                            <input class="border-radius-4px form-control required" type="email" name="email" placeholder="Enter your email address*">
-                        </div> 
-                        <div class="col-md-12 mb-40px">
-                            <textarea class="border-radius-4px form-control" cols="40" rows="4" name="comment" placeholder="Your message"></textarea>
-                        </div> 
-                        <div class="col-12">
-                            <input type="hidden" name="redirect" value="">
-                            <button class="btn btn-dark-gray btn-small btn-round-edge submit fw-600" type="submit">Post Comment</button>
-                            <div class="form-results mt-20px d-none"></div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section> #}
-    <!-- end section -->
-
     <!-- start footer -->
-    {% include 'main_partials/_footer.html.twig' %}
+    {% include 'main_partials/_footer_minimum.html.twig' %}
     <!-- end footer -->
 
     <!-- start scroll progress -->
