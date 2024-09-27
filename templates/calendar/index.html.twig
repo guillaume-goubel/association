@@ -1,0 +1,172 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+
+    /* Applique un fond bleu pour les jours avec événements */
+    .highlight-day {
+        background-color: var(--base-color);
+        color: white!important;
+        position: relative; 
+    }
+
+    .highlight-day.journey {
+        background-color: var(--orange);
+    }
+
+    .highlight-day a{
+        color: white!important; /* Rendre le texte blanc pour être visible */
+    }
+
+    .highlight-day:hover {
+        background-color: #4581cc;
+        color: white!important; 
+        cursor: pointer;
+    }
+
+    .fc-theme-standard .fc-popover {
+        background-color: #4581cc;
+        color: white!important; /* Rendre le texte blanc pour être visible */
+    }
+
+    /* Styles pour la modale */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-content {
+        background-color: white;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover, .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .fc-daygrid-day-events{
+        display: none!important;
+    }
+
+    .fade:not(.show) {
+        opacity: inherit!important;;
+    }
+
+    .event-number {
+        color: white;
+        padding: 1px; 
+        font-weight: bold; 
+        position: absolute; 
+        bottom: 4px; 
+        left: 7px; 
+        font-size: 13px;
+    }
+
+    .fc-day-disabled .event-number{
+        display: none;
+        pointer-events: none;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+    
+    <!-- start header -->
+	{% include 'blog/partials/_blog_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section -->
+    <section class="top-space-margin bg-very-light-gray">
+        <div class="container">
+            
+            <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
+                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                    <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                        Calendrier<span><img src="../images/highlight-separator.svg" alt=""></span>
+                    </h3>
+                </div>
+            </div>
+
+            <div id="calendar"></div>
+
+            {# <div id="eventModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Détails de l'événement</h2>
+                    <div id="eventDetails"></div>
+                </div>
+            </div> #}
+
+            <!-- Modal -->
+            <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel"></h5>
+                            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div data-blog-url="{{ path('blog_index2') }}"  id="eventDetails" class="modal-body">
+                            ...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/_footer.html.twig' %}
+    <!-- end footer -->
+
+    <!-- start scroll progress -->
+    <div class="scroll-progress d-none d-xxl-block">
+        <a href="#" class="scroll-top" aria-label="scroll">
+            <span class="scroll-text">
+                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
+            </span>
+            <span class="scroll-line">
+                <span class="scroll-point"></span>
+            </span>
+        </a>
+    </div>
+    <!-- end scroll progress -->
+
+</body>
+<!-- end subscription popup -->
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+
+    {% block importmap %}
+        {{ importmap(['app', 'base', 'calendar']) }}
+    {% endblock %}
+
+{% endblock %}

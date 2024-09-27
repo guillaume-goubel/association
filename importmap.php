@@ -24,6 +24,10 @@ return [
         'path' => './assets/js/pages/agenda.js',
         'entrypoint' => true,
     ],
+    'calendar' => [
+        'path' => './assets/js/pages/calendar.js',
+        'entrypoint' => true,
+    ],
     'app' => [
         'path' => './assets/app.js',
         'entrypoint' => true,

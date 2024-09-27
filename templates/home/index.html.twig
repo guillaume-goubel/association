@@ -17,6 +17,10 @@
     .d-block img{
         height:240px;
     }
+
+    header .navbar-brand .default-logo {
+        opacity: 0!important;
+    }
 </style>
 
 {% endblock %}
@@ -148,7 +152,7 @@
                             </div>
                         </div>
 
-                        <div class="row row-cols-2 row-cols-lg-5 row-cols-md-3 row-cols-sm-2 justify-content-start ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                        <div style="pointer-events: none;" class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 justify-content-start ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
                             
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
@@ -265,6 +269,20 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div class="feature-box-icon">
+                                        <i class="fa-solid fa-bowling-ball align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-white fw-500 lh-24">Bowling</span> 
+                                    </div>
+                                    <div class="feature-box-overlay bg-white"></div>
+                                </div>  
+                            </a>
+                            <!-- end features box item -->
+
+                            <!-- start features box item -->
+                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
                                 <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <i class="fa-solid fa-chess-board align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
@@ -279,12 +297,12 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div class="feature-box hover-box h-100 transition bg-orange border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
-                                        <i class="fa-solid fa-bowling-ball align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
+                                        <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
                                     </div>
                                     <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Bowling</span> 
+                                        <span class="d-inline-block text-white fw-500 lh-24">Séjours</span> 
                                     </div>
                                     <div class="feature-box-overlay bg-white"></div>
                                 </div>  
@@ -332,9 +350,12 @@
                     <div class="col-lg-5 md-mb-50px sm-mb-30px">
                         <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Un programme riche en activités et en rencontres</h3>
                         <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Participez à vos sports favoris ou venez découvrir avec nous de nouvelles pratiques sportives et culturelles.</p> 
-                        <a href="{{ path('agenda_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Tout le programme</a>
+                        <div>
+                            <a href="{{ path('agenda_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Le programme au mois</a>
+                            <a href="{{ path('calendar_index') }}" href="#" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Calendrier</a>
+                        </div>                       
                     </div>
-                    <div class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                    <div style="position:relative;" class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
                         <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="icon-feather-minus" data-inactive-icon="icon-feather-plus">
                             <!-- start accordion item -->
                             <div class="accordion-item">
@@ -357,7 +378,7 @@
                                 <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-02" aria-expanded="false" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray">
-                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Des activités toute l'année</span>
+                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Des séjours thématiques</span>
                                         </div>
                                     </a>
                                 </div>
@@ -370,7 +391,7 @@
                             <!-- end accordion item -->
                             <!-- start accordion item -->
                             <div class="accordion-item">
-                                <div class="accordion-header border-bottom border-color-transparent">
+                                <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-03" aria-expanded="false" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray">
                                             <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Pour débutants et confirmés</span>
@@ -385,13 +406,20 @@
                             </div>
                             <!-- end accordion item -->
                         </div>
+
+                        <div style="position:absolute;bottom:0;" class="mb-1">
+                            <a href="{{ asset('app/pdf/walk_agenda.pdf') }}" class="btn btn-small btn-transparent-dark-gray d-table d-lg-inline-block lg-mb-15px">Les randonnées 2024 en PDF<i class="fa-solid fa-file-pdf"></i></a>
+                        </div>
+
                     </div>
                 </div>
 
                 <div class="row align-items-center justify-content-center pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    
+                    <div id="calendar"></div>
+
                     <!-- start pricing item -->
                     <div class="fw-600">Nos 3 prochains rendez-vous</div>
-                    
                     <div class="col-lg-4 col-md-8 md-mb-30px">
                         <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-15 ps-18 pe-18 xl-p-13 text-center"> 
                             <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">17 Octobre</span> 
@@ -646,7 +674,8 @@
                         <div class="icon-with-text-style-08 mb-20px">
                             <div class="feature-box feature-box-left-icon-middle">
                                 <div class="feature-box-content last-paragraph-no-margin">
-                                    <span class="d-inline-block alt-font fs-19 fw-500 ls-minus-05px text-white">Qui sommes-nous ?</span>
+                                    <img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
+                                    <div class="ms-2 d-inline-block alt-font fs-19 fw-500 ls-minus-05px text-white">Qui sommes-nous ?</div>
                                 </div>
                             </div>
                         </div>
@@ -656,11 +685,13 @@
                         
                         <div class="alt-font text-white mx-auto">
                             Nous favorisons la convivialité dans chacun de nos sports, la sécurité et le maintien de votre forme.</br></br>
-                            Membre de la <strong>F</strong>édération <strong>F</strong>rancaise de <strong>R</strong>etraite <strong>S</strong>portive, fédération nationale multisports adaptée aux plus de 50 ans. 
+                            L'ARSMéLI est membre de la <strong>F</strong>édération <strong>F</strong>rancaise de <strong>R</strong>etraite <strong>S</strong>portive, fédération nationale multisports adaptée aux plus de 50 ans. 
                         </div>
+
+                        <a href="https://www.ffrs-retraite-sportive.org/" target="_blank"><img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/ffrs.png') }}"></a>
                         
                         <div class="overflow-hidden pt-55px">
-                            <a href="demo-hosting-hosting.html" class="btn btn-extra-large btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                            <a class="btn btn-extra-large btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
                                 <span>
                                     <span class="btn-double-text" data-text="c'est ici !">Plus d'informations ?</span>
                                     <span><i class="feather icon-feather-arrow-right"></i></span>
