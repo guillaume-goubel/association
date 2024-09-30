@@ -28,6 +28,18 @@
                 padding: 7px 0;
             }
         }
+        .text-too-long {
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* Limiter à 3 lignes */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis; /* Ajoute les "..." */
+        }
+
+        .text-expanded {
+            -webkit-line-clamp: unset; /* Retire la limite */
+            overflow: visible;
+        }
     </style>
 
 {% endblock %}
@@ -82,7 +94,7 @@
                         
                         <h3 class="fw-600 text-dark-gray w-90 lg-w-100 text-dark-gray fw-700 ls-minus-2px">Vive les JO !!</h3>
                         <p class="w-90 sm-w-100">
-                            La flamme olympique est venue rendre visite à l'Arsméli...Merci à tous pour votre investissement !!
+                            La flamme olympique est venue rendre visite à l'ARSMéLI...Merci à tous pour votre investissement !!
                         </p>
 
                         <a href="{{ path('blog_index') }}" class="btn btn-large btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
@@ -372,7 +384,7 @@
                     </div>
                 </div>
 
-                <div class="row align-items-center justify-content-center pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                     
                     <div id="calendar"></div>
 
@@ -404,7 +416,7 @@
                                     <div class="fs-12 mb-4">Rendez-vous</div>
                                     <a style="color:#275997;text-decoration: underline;" href="#" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Parking de la mairie, Brunehaut</div></a>
                                 </li>
-                                <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li>
+                                <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li>
 
                             </ul>
                             <div style="visibility:hidden;" class="pricing-footer w-100">
@@ -438,7 +450,7 @@
                                     <div class="fs-12 mb-4">Rendez-vous</div>
                                     <a style="color:#275997;text-decoration: underline;" href="#" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Parking centre ville, rue d’Anchin</div></a>
                                 </li>
-                                <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit, amet consectetur adipisicing elite</li>
+                                <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit, amet consectetur adipisicing elite</li>
 
                             </ul>
                             <div style="visibility:hidden;" class="pricing-footer w-100">
@@ -472,7 +484,7 @@
                                     <div class="fs-12 mb-4">Rendez-vous</div>
                                     <a style="color:#275997;text-decoration: underline;" href="#" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Salle des sports Norbert Segard</div></a>
                                 </li>
-                                <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Consectetur adipisicing elit. Dolor corrupti ratione deserunt, quisquam sunt. </br> Lorem ipsum dolor sit amet consectetur [...]</li>
+                                <li style="height:95px;overflow:auto;" class="text-to-long border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim eligendi voluptates maiores reprehenderit placeat ullam dolores. Laboriosam praesentium, error iste, eveniet, ipsa explicabo itaque ullam quae aut nesciunt adipisci obcaecati.orem ipsum dolor sit amet consectetur, adipisicing elit. Enim eligendi voluptates maiores reprehenderit placeat ullam dolores. Laboriosam praesentium, error iste, eveniet, ipsa explicabo itaque ullam quae aut nesciunt adipisci obcaecati.</li>
 
                             </ul>
                             <div class="pricing-footer w-100">
@@ -480,6 +492,40 @@
                             </div>
                         </div>
                     </div> 
+
+                    <!-- start pricing item -->
+                    <div class="fw-600 pt-5 pb-1">Nos prochains séjours</div>
+
+                    <div class="col-lg-4 col-md-8 md-mb-30px">
+                        <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
+                            
+                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
+                                <span class="fs-14">du</span> 18 Décembre
+                            </span> 
+                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
+                                <span class="fs-14">au</span> 22 Décembre
+                            </span> 
+
+                            <span class="fs-18 mb-25px d-inline-block fw-600">2024</span>
+                            <div class="row align-items-center">
+                                <div class="col-6 pe-sm-0">
+                                    <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-orange border-radius-3px p-2 ms-2">
+                                        <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color icon-extra-large text-white"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
+                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Strasbourg</li>
+                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex">Visite du marché de Noël</li>
+                                <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At velit dolorum soluta provident dolore architecto ipsam animi, error quis dolores repellat consequuntur libero. Blanditiis explicabo consectetur enim corrupti veniam molestias.</li>
+
+                            </ul>
+                            <div class="pricing-footer w-100">
+                                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                            </div>
+                        </div>
+                    </div> 
+
 
                 </div>  
 
@@ -497,7 +543,7 @@
                         </h3>
                     </div>
 
-                    <div class="row pb-5">
+                    <div class="row">
                         <div class="col-lg-5 md-mb-50px sm-mb-30px">
                             <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Au coeur de notre territoire</h3>
                             <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Venez découvrir ou redécouvrir notre patrimoine naturel ou culturel grâce au sport</p> 
@@ -666,9 +712,9 @@
                         <a href="https://www.ffrs-retraite-sportive.org/" target="_blank"><img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/ffrs.png') }}"></a>
                         
                         <div class="overflow-hidden pt-55px">
-                            <a class="btn btn-extra-large btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                            <a href="{{ path('about_index') }}" class="btn btn-extra-large btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
                                 <span>
-                                    <span class="btn-double-text" data-text="c'est ici !">Plus d'informations ?</span>
+                                    <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
                                     <span><i class="feather icon-feather-arrow-right"></i></span>
                                 </span>
                             </a>
@@ -817,22 +863,8 @@
 		{% include 'main_partials/_footer.html.twig' %}
 		<!-- end footer -->
 
-        <div class="modal fade" id="mapModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div id="map"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-red" data-bs-dismiss="modal">Fermer</button>
-                </div>
-                </div>
-            </div>
-        </div>
+        <!-- Modal -->
+        {% include 'main_partials/_map_modal.html.twig' %}
 
         <!-- start scroll progress -->
         <div class="scroll-progress d-none d-xxl-block">

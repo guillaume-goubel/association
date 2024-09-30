@@ -21,9 +21,42 @@ document.addEventListener("DOMContentLoaded", (event) => {
         position: 'topright' // Change la position du bouton plein écran
     }).addTo(map);
     
+
+     //  ----------------------------------------------------------------
+
     var blogIndexUrl = document.getElementById('eventUrlInfos').getAttribute('data-blog-url');
-    
     var calendarEl = document.getElementById('calendar');
+    
+    var events = [
+        {
+            title: 'Randonnée à Bouvines',
+            start: '2024-10-17T14:00:00',
+            end: '2024-10-17T16:00:00',
+            extendedProps: { genre: 'Randonnée', rdv: 'Parking de la mairie, chaussée, Brunehaut', type: 'activity', infosDisplay: false }
+        },
+        {
+            title: 'Randonnée à Templeuve-en-Pévèle',
+            start: '2024-10-24T11:00:00',
+            extendedProps: { genre: 'Randonnée', rdv: 'Parking centre ville, rue d’Anchin', type: 'activity', infosDisplay: false }
+        },
+        {
+            title: 'Gymnastique à Lambersart',
+            start: '2024-10-26T14:00:00',
+            extendedProps: { genre: 'Gymnastique', rdv: 'Salle des sports Norbert Segard', type: 'activity', infosDisplay: true }
+        },
+        {
+            title: 'Randonnée à Zillebeck (Belgique)',
+            start: '2024-10-31T14:00:00',
+            extendedProps: { genre: 'Randonnée', rdv: 'Salle des sports Norbert Segard', type: 'activity', infosDisplay: false }
+        },
+        {
+            title: 'Séjour au marché de Noël Strasbourg',
+            start: '2024-12-16',
+            end: '2024-12-21',
+            extendedProps: { genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: false }
+        },
+    ];
+    
     var calendar = new FullCalendar.Calendar(calendarEl, {
         timeZone: 'UTC',
         initialView: 'multiMonthYear',
@@ -36,211 +69,55 @@ document.addEventListener("DOMContentLoaded", (event) => {
             day: "Jour",
             list: "Liste"
         },
-        events: [
-            {
-                title: 'Randonnée à Bouvines',
-                start: '2024-10-17T14:00:00',
-                end: '2024-10-17T16:00:00',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Randonnée',
-                    rdv: 'Parking de la mairie, chaussée, Brunehaut',
-                    type: 'activity',
-                    infosDisplay: false
-                }
-            },
-            {
-                title: 'Randonnée à Templeuve-en-Pévèle',
-                start: '2024-10-24T11:00:00',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Randonnée',
-                    rdv: 'Parking centre ville, rue d’Anchin',
-                    type: 'activity',
-                    infosDisplay: false
-                }
-            },
-            {
-                title: 'Gymnastique à Lambersart',
-                start: '2024-10-26T14:00:00',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Gymnastique',
-                    rdv: 'Salle des sports Norbert Segard',
-                    type: 'activity',
-                    infosDisplay: true
-                }
-            },
-            {
-                title: 'Randonnée à Zillebeck (Belgique)',
-                start: '2024-10-31T14:00:00',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Randonnée',
-                    rdv: false,
-                    type: 'activity',
-                    infosDisplay: false
-                }
-            },
-            {
-                title: 'Séjour au marché de Noël Strasbourg',
-                start: '2024-12-16',
-                end: '2024-12-16',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Séjour culture',
-                    rdv: false,
-                    type: 'journey',
-                    infosDisplay: false
-                }
-            },
-            {
-                title: 'Séjour au marché de Noël Strasbourg',
-                start: '2024-12-17',
-                end: '2024-12-17',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Séjour culture',
-                    rdv: false,
-                    type: 'journey',
-                    infosDisplay: false
-                }
-            },
-            {
-                title: 'Séjour au marché de Noël Strasbourg',
-                start: '2024-12-18',
-                end: '2024-12-18',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Séjour culture',
-                    rdv: false,
-                    type: 'journey',
-                    infosDisplay: false
-                }
-            },
-            {
-                title: 'Séjour au marché de Noël Strasbourg',
-                start: '2024-12-19',
-                end: '2024-12-19',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Séjour culture',
-                    rdv: false,
-                    type: 'journey',
-                    infosDisplay: false
-                }
-            },
-            {
-                title: 'Séjour au marché de Noël Strasbourg',
-                start: '2024-12-20',
-                end: '2024-12-20',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Séjour culture',
-                    rdv: false,
-                    type: 'journey',
-                    infosDisplay: false
-                }
-            },
-            {
-                title: 'Séjour au marché de Noël Strasbourg',
-                start: '2024-12-21',
-                end: '2024-12-21',
-                color: '#275997',
-                extendedProps: {
-                    genre: 'Séjour culture',
-                    rdv: false,
-                    type: 'journey',
-                    infosDisplay: false
-                }
-            },
-        ],
+        events: events,
         dayCellDidMount: function(info) {
-            // Vérifier s'il y a des événements pour ce jour
-            var events = calendar.getEvents();
-            var eventExists = events.some(function(event) {
-                var eventDate = FullCalendar.formatDate(event.start, { 
-                    year: 'numeric', 
-                    month: '2-digit', 
-                    day: '2-digit' 
-                });
-                var cellDate = FullCalendar.formatDate(info.date, { 
-                    year: 'numeric', 
-                    month: '2-digit', 
-                    day: '2-digit' 
-                });
-                return eventDate === cellDate;
+            var eventCount = calendar.getEvents().filter(function(event) {
+                return FullCalendar.formatDate(event.start, { year: 'numeric', month: '2-digit', day: '2-digit' }) === 
+                    FullCalendar.formatDate(info.date, { year: 'numeric', month: '2-digit', day: '2-digit' });
             });
-
-            if (eventExists) {
+    
+            // Si des événements existent, ajouter les styles
+            if (eventCount.length > 0) {
                 info.el.classList.add('highlight-day');
-        
-                // Compter le nombre d'événements pour ce jour
-                var eventCount = events.filter(function(event) {
-                    var eventDate = FullCalendar.formatDate(event.start, { 
-                        year: 'numeric', 
-                        month: '2-digit', 
-                        day: '2-digit' 
-                    });
-                    return eventDate === FullCalendar.formatDate(info.date, { 
-                        year: 'numeric', 
-                        month: '2-digit', 
-                        day: '2-digit' 
-                    });
-                });
-        
-                // Ajouter le compteur d'événements dans la cellule uniquement si le nombre d'événements est supérieur à 1
                 if (eventCount.length > 1) {
                     var countEl = document.createElement('div');
                     countEl.classList.add('event-number');
                     countEl.innerText = '+ ' + eventCount.length;
                     info.el.appendChild(countEl);
                 }
-        
                 // Ajouter les classes de type d'événement si défini
                 eventCount.forEach(function(event) {
-                    if (event.extendedProps && event.extendedProps.type) {  // Vérifiez si event.extendedProps.type est défini
-                        info.el.classList.add(event.extendedProps.type); // Ajoute la classe du type d'événement
+                    if (event.extendedProps && event.extendedProps.type) {
+                        info.el.classList.add(event.extendedProps.type);
                     }
                 });
             }
         },
         dateClick: function(info) {
-            // Trouver les événements pour cette date
-            var events = calendar.getEvents();
-            var selectedDateEvents = events.filter(function(event) {
-                var eventDate = FullCalendar.formatDate(event.start, { 
-                    year: 'numeric', 
-                    month: '2-digit', 
-                    day: '2-digit' 
-                });
-                var clickedDate = FullCalendar.formatDate(info.date, { 
-                    year: 'numeric', 
-                    month: '2-digit', 
-                    day: '2-digit' 
-                });
-                return eventDate === clickedDate;
+            var selectedDateEvents = calendar.getEvents().filter(function(event) {
+                return FullCalendar.formatDate(event.start, { year: 'numeric', month: '2-digit', day: '2-digit' }) === 
+                    FullCalendar.formatDate(info.date, { year: 'numeric', month: '2-digit', day: '2-digit' });
             });
-
-            // Si des événements existent pour cette date, les afficher dans la modale
+    
             if (selectedDateEvents.length > 0) {
                 var eventDetails = selectedDateEvents.map(function(event) {
                     return `
                         <p>
                             <strong>${event.title}</strong><br>
-                            Rendez-vous : ${event.extendedProps.rdv}</br>
-                            ${event.start.toLocaleString()}<br>
+                            Rendez-vous : ${event.extendedProps.rdv || 'Non spécifié'}<br>
+                            ${new Date(event.start).toLocaleString()}<br>
                             ${event.extendedProps.infosDisplay ? `<a href="${blogIndexUrl}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge border-1 w-100 mt-4">Plus d'informations</a>` : ''}
                         </p>`;
                 }).join('');
-
+    
                 document.getElementById('eventDetails').innerHTML = eventDetails;
-                openModal();
+                openModal();  // Assurez-vous que cette fonction est définie dans votre code
             }
         }
     });
-
+    
     calendar.render();
+    
 
     // Fonctions pour gérer l'affichage de la modale
     function openModal() {

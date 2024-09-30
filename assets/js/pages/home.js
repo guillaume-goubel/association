@@ -48,4 +48,26 @@ document.addEventListener("DOMContentLoaded", (event) => {
         map.invalidateSize();  // Recalculer les dimensions de la carte
     });
 
+    // // Sélectionner tous les éléments avec la classe 'text-too-long'
+    // var longTexts = document.querySelectorAll('.text-too-long');
+
+    // // Boucle à travers chaque texte long
+    // longTexts.forEach(function(text) {
+    //     // Sélectionner le bouton associé
+    //     var toggleBtn = text.nextElementSibling; // Le bouton est juste après le texte long
+
+    //     // Ajouter un event listener pour le bouton
+    //     toggleBtn.addEventListener('click', function() {
+    //         // Vérifier si le texte est actuellement tronqué ou non
+    //         if (text.classList.contains('text-expanded')) {
+    //             // Si le texte est actuellement étendu, le replier
+    //             text.classList.remove('text-expanded');
+    //             toggleBtn.textContent = 'Voir plus';  // Changer le bouton en "Voir plus"
+    //         } else {
+    //             // Si le texte est tronqué, l'étendre
+    //             text.classList.add('text-expanded');
+    //             toggleBtn.textContent = 'Voir moins'; // Changer le bouton en "Voir moins"
+    //         }
+    //     });
+    // });
 });

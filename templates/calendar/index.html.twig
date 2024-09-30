@@ -115,28 +115,12 @@
             </div>
 
             <div id="calendar"></div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title"></h5>
-                            <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div id="eventUrlInfos" data-blog-url="{{ path('blog_index2') }}" class="modal-body">
-                            
-                            <div id="eventDetails"></div>
-                            <div id="map"></div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
     <!-- end section -->
+
+    <!-- Modal -->
+    {% include 'calendar/partials/_map_modal.html.twig' %}
 
     <!-- start footer -->
     {% include 'main_partials/_footer_minimum.html.twig' %}
