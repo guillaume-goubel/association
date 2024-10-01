@@ -5,26 +5,12 @@
 
 {% block stylesheets %}
 <style>
-    .event-style-03 .accordion .accordion-title .event-time{
-        max-width: 354px!important;
-    }
-    /* Par défaut, on applique un filtre sur les éléments non sélectionnés */
-    .accordion-item {
-        transition: filter 0.3s ease;
-    }
-
-    .accordion-item.inactive {
-        filter: opacity(0.2); /* Baisse l'opacité des éléments non actifs */
-    }
-
-    /* Style de l'élément actif */
-    .accordion-item.active {
-        filter: opacity(1); /* Opacité pleine pour l'élément actif */
-    }
     .d-block img{
         height:240px;
     }
-
+    .page-link{
+        cursor: pointer;
+    }
 </style>
 {% endblock %}
 
@@ -41,10 +27,17 @@
         <div class="container">
             
             <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
-                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center flex-column">
                     <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
                         Nos événements<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
                     </h3>
+                    <div>
+                        <select class="form-select" aria-label="year choice">
+                            <option>2025</option>
+                            <option selected>2024</option>
+                            <option value="1">2023</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 

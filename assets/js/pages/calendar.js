@@ -22,46 +22,72 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }).addTo(map);
     
 
-     //  ----------------------------------------------------------------
+    //  CALENDAR PART ----------------------------------------------------------------
 
     var blogIndexUrl = document.getElementById('eventUrlInfos').getAttribute('data-blog-url');
     var calendarEl = document.getElementById('calendar');
-    
+
     var events = [
         {
-            title: 'Randonnée à Bouvines',
-            start: '2024-10-17T14:00:00',
-            end: '2024-10-17T16:00:00',
-            extendedProps: { genre: 'Randonnée', rdv: 'Parking de la mairie, chaussée, Brunehaut', type: 'activity', infosDisplay: false }
+            start: '2024-10-17', // Date/Heure au format ISO
+            end: '2024-10-17',
+            backgroundColor: '#4581cc',
+            extendedProps: { title: 'Randonnée à Bouvines', genre: 'Randonnée', rdv: 'Parking de la mairie, chaussée, Brunehaut', type: 'activity', infosDisplay: false }
         },
         {
-            title: 'Randonnée à Templeuve-en-Pévèle',
-            start: '2024-10-24T11:00:00',
-            extendedProps: { genre: 'Randonnée', rdv: 'Parking centre ville, rue d’Anchin', type: 'activity', infosDisplay: false }
+            
+            start: '2024-10-24',
+            backgroundColor: '#4581cc',
+            extendedProps: { title: 'Randonnée à Templeuve-en-Pévèle', genre: 'Randonnée', rdv: 'Parking centre ville, rue d’Anchin', type: 'activity', infosDisplay: false }
         },
         {
-            title: 'Gymnastique à Lambersart',
-            start: '2024-10-26T14:00:00',
-            extendedProps: { genre: 'Gymnastique', rdv: 'Salle des sports Norbert Segard', type: 'activity', infosDisplay: true }
+            
+            start: '2024-10-26',
+            backgroundColor: '#4581cc',
+            extendedProps: { title: 'Gymnastique à Lambersart', genre: 'Gymnastique', rdv: 'Salle des sports Norbert Segard', type: 'activity', infosDisplay: true }
         },
         {
-            title: 'Randonnée à Zillebeck (Belgique)',
-            start: '2024-10-31T14:00:00',
-            extendedProps: { genre: 'Randonnée', rdv: 'Salle des sports Norbert Segard', type: 'activity', infosDisplay: false }
+            start: '2024-10-31',
+            backgroundColor: '#4581cc',
+            extendedProps: { title: 'Randonnée à Zillebeck (Belgique)', genre: 'Randonnée', rdv: 'Salle des sports Norbert Segard', type: 'activity', infosDisplay: false }
         },
         {
-            title: 'Séjour au marché de Noël Strasbourg',
-            start: '2024-12-16',
-            end: '2024-12-21',
-            extendedProps: { genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: false }
+            start: '2024-12-18',
+            backgroundColor: '#EF991F',
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+        },
+        {
+            start: '2024-12-19',
+            backgroundColor: '#EF991F',
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+        },
+        {
+            start: '2024-12-20',
+            backgroundColor: '#EF991F',
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+        },
+        {
+            start: '2024-12-21',
+            backgroundColor: '#EF991F',
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+        },
+        {
+            start: '2024-12-22',
+            backgroundColor: '#EF991F',
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
         },
     ];
-    
+
     var calendar = new FullCalendar.Calendar(calendarEl, {
         timeZone: 'UTC',
         initialView: 'multiMonthYear',
         locale: 'fr',
         firstDay: 1,
+        views: {
+            timeGrid: {
+              dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
+            }
+        },
         buttonText: {
             today: "Aujourd'hui",
             month: "Mois",
@@ -70,29 +96,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
             list: "Liste"
         },
         events: events,
-        dayCellDidMount: function(info) {
-            var eventCount = calendar.getEvents().filter(function(event) {
-                return FullCalendar.formatDate(event.start, { year: 'numeric', month: '2-digit', day: '2-digit' }) === 
-                    FullCalendar.formatDate(info.date, { year: 'numeric', month: '2-digit', day: '2-digit' });
-            });
-    
-            // Si des événements existent, ajouter les styles
-            if (eventCount.length > 0) {
-                info.el.classList.add('highlight-day');
-                if (eventCount.length > 1) {
-                    var countEl = document.createElement('div');
-                    countEl.classList.add('event-number');
-                    countEl.innerText = '+ ' + eventCount.length;
-                    info.el.appendChild(countEl);
-                }
-                // Ajouter les classes de type d'événement si défini
-                eventCount.forEach(function(event) {
-                    if (event.extendedProps && event.extendedProps.type) {
-                        info.el.classList.add(event.extendedProps.type);
-                    }
-                });
-            }
-        },
         dateClick: function(info) {
             var selectedDateEvents = calendar.getEvents().filter(function(event) {
                 return FullCalendar.formatDate(event.start, { year: 'numeric', month: '2-digit', day: '2-digit' }) === 
@@ -111,13 +114,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 }).join('');
     
                 document.getElementById('eventDetails').innerHTML = eventDetails;
-                openModal();  // Assurez-vous que cette fonction est définie dans votre code
+                openModal();  
             }
         }
     });
-    
+
+
     calendar.render();
-    
+    calendar.updateSize();
+    document.getElementById('loader-container').style.display = 'none' 
 
     // Fonctions pour gérer l'affichage de la modale
     function openModal() {

@@ -99,6 +99,29 @@ h2 {
 .portfolio{
     position: fixed;
 }
+.return-container{
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+}
+
+.social-container{
+    width: 75px;
+    height: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: white;
+}
 @media (max-width: 1399px){
     .social-icon-style-06 ul li a {
         padding: 0 15px;
@@ -150,6 +173,19 @@ h2 {
         </div>
     </header>
     <!-- end header -->
+
+    <!-- start return -->
+    <div class="return-container">
+        <div class="header-button d-flex">
+            <a id="backButton" href="#" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
+                <span>
+                    <span class="btn-double-text" data-text="Retour">Retour</span>
+                </span> 
+            </a> 
+        </div>
+    </div>
+
+    <!-- end return -->
     
     <!-- start section -->
     <section class="text-very-light-gray cover-background py-0 overflow-hidden position-relative ipad-top-space" style="background-image: url({{ asset('app/demo-hosting-home-bg.jpg') }})">
@@ -157,26 +193,20 @@ h2 {
             <div class="row g-0 h-100 flex-column-reverse">
                 <div style="position:relative;" class="col-lg-6 pt-6 pb-6 ps-8 pe-8 xxl-ps-4 xxl-pe-6 lg-ps-4 lg-pe-8 md-ps-15px md-pe-15px">
                     
-                    {# return buton #}
-                    <div class="header-button d-flex">
-                        <a id="backButton" href="#" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
-                            <span>
-                                <span class="btn-double-text" data-text="Retour">Retour</span>
-                            </span> 
-                        </a> 
-                    </div>
-                    
                     <div class="h-100"> 
                         <div class="row mb-13 xl-mb-70px sm-mb-50px">
                             <div class="col-12">
-                                <h1 class="fs-60 xxl-fs-60 lg-fs-50 ls-minus-7px md-ls-minus-2px mb-20px d-block">Association</h1>
+                                <h1 class="fs-40 xxl-fs-40 lg-fs-40 mb-20px d-block">Association Loi 1901</h1>
                             </div> 
-                            <div class="col-xl-10 offset-xl-2 col-lg-12">
+                            <div class="col-12">
                                 <div class="fs-70 xxl-fs-70 lg-fs-70 lh-100 lg-lh-60 fw-700 ls-minus-5px md-ls-minus-2px mb-8 md-outside-box-right-7 xs-outside-box-right-0 md-mb-30px">ARSMéLI <img class="ms-1" style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}"></div>
+                                <span class="d-inline-block lh-32" data-anime='{ "translateY": [10, 0], "easing": "easeOutCubic", "duration": 900, "delay": 300 }'><strong>A</strong>ssociation de <strong>R</strong>etraite <strong>S</strong>portive de la <strong>Mé</strong>tropole <strong>L</strong>illoise</span>
                             </div>
                             
-                            <div class="col-xxl-9 offset-xxl-2 last-paragraph-no-margin">
+                            <div class="col-12 last-paragraph-no-margin">
                                 <p class="md-w-65 sm-w-80 xs-w-100">Fondé en ... Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia, nisi fuga minima officia at eligendi quaerat magnam nesciunt tempore, quod explicabo, aspernatur neque fugiat quasi dignissimos delectus voluptates. Perferendis, quae?</p>
+                                <p class="md-w-65 sm-w-80 xs-w-100">Quaerat magnam nesciunt tempore, quod explicabo, aspernatur neque fugiat quasi dignissimos delectus voluptates. Perferendis dolor sit amet consectetur adipisicing elit. Mollitia, nisi fuga minima officia at eligendi quaerat magnam nesciunt tempore, quod explicabo</p>
+                                <p class="md-w-65 sm-w-80 xs-w-100">Fondé en ... Lorem ipsum, dolor sit amet consectetur adipisicing elit. Mollitia, nisi fuga minima officia at eligendi quaerat magnam nesciunt tempore, quod explicabo, aspernatur neque fugiat quasi dignissimos delectus voluptates.Adipisicing elit. Mollitia, nisi fuga minima officia at eligendi quaerat magnam nesciunt tempore</p>
                             </div>
                             
                         </div>
@@ -193,20 +223,20 @@ h2 {
                         <div class="row mb-13 xl-mb-50px">
                             <div class="col-xxl-5 col-lg-6 col-sm-4 xs-mb-15px">
                                 <ul class="p-0 m-0 list-style-02" data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Bien-être</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Accessibilité</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Solidarité</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Esprit communautaire</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Équilibre de vie</li>
                                 </ul>
                             </div>
                             <div class="col-xxl-5 col">
                                 <ul class="p-0 m-0 list-style-02" data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
-                                    <li><i class="fa-solid fa-plus fs-12 me-10px"></i>Lorem Ipsum</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Respect</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Epanouissement personnel</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Sécurité</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Engagement citoyen</li>
+                                    <li><i class="fa-regular fa-circle-dot fs-12 me-10px"></i>Partage intergénérationnel</li>
                                 </ul>
                             </div>
                         </div>
@@ -283,26 +313,31 @@ h2 {
                         </div>
 
                         <div class="row text-lg-start text-center">
-                            <div class="col-12">
-                                <span class="fs-50 lg-fs-40 ls-minus-3px lg-ls-minus-2px mb-10px md-outside-box-left-8 xs-outside-box-left-0 d-block">New project in mind?</span>
-                            </div>
-                            <div class="col-12 text-lg-end text-center">
-                                <a href="mailto:info@domain.com" class="alt-font fs-60 xl-fs-50 lg-fs-40 fw-700 ls-minus-3px xl-ls-minus-1px xs-ls-minus-2px md-outside-box-right-7 xs-outside-box-right-0">info@domain.com</a>
+                            <div class="col-12 d-flex align-items-center justify-content-center">
+                                <div class="col-12 col-md-6 fs-50 lg-fs-40 ls-minus-3px lg-ls-minus-2px mb-10px md-outside-box-left-8 xs-outside-box-left-0"><img class="ms-1" style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}"></div>
+                                <div class="col-12 col-md-6 overflow-hidden">
+                                    <a href="{{ path('contact_index') }}" class="btn btn-extra-large btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                                        <span>
+                                            <span class="btn-double-text" data-text="Nous rejoindre ?">Nous rejoindre ?</span>
+                                            <span><i class="feather icon-feather-arrow-right"></i></span>
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
 
-                        <div class="row">
+                        {# <div class="row">
                             <div class="col-12 mb-45px mt-45px xl-mb-30px xl-mt-30px">
                                 <div class="separator-line-1px w-100 d-block bg-black"></div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col elements-social social-icon-style-06 d-flex justify-content-center">
-                                <ul class="medium-icon fw-600">
-                                    <li><a class="facebook" href="https://www.facebook.com" target="_blank"><span class="brand-label">Fb</span><span class="brand-icon fa-brands fa-facebook-f"></span></a></li>
+                                <ul class="social-container medium-icon fw-600">
+                                    <li><a class="facebook" href="https://www.facebook.com/p/Arsmeli-Association-Retraite-Sportive-M%C3%A9tropole-Lilloise-100094102424341/?_rdr" target="_blank"><span style="color:#0866FF" class="brand-label">Fb</span><span style="color:#0866FF" class="brand-icon fa-brands fa-facebook-f"></span></a></li>
                                 </ul> 
                             </div>
-                        </div>
+                        </div> #}
                     </div>
                 </div>
                 <div class="portfolio col-lg-6 h-100 position-md-relative top-0px right-0px bg-black">

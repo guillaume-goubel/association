@@ -40,6 +40,9 @@
             -webkit-line-clamp: unset; /* Retire la limite */
             overflow: visible;
         }
+        button.mfp-close:before, button.mfp-close:active:before {
+            font-size: 35px!important;
+        }
     </style>
 
 {% endblock %}
@@ -60,8 +63,8 @@
         <section class="bg-very-light-gray pt-20px pb-20px sm-pt-40px" data-anime='{ "opacity": [0, 1], "translateY": [0, 0], "easing": "easeOutQuad", "duration": 1000,"staggervalue": 300, "delay": 600 }'>
             <div class="container overlap-section">
                 <div class="row justify-content-center overlap-section border-radius-6px overflow-hidden g-0 box-shadow-extra-large">
-                    <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5">Bientôt !</strong><span class="fw-700 text-base-color">09/08/2024</span> 
-                        <span class="ps-5 pe-2">Randonnée Parc Wattignies</span> 
+                    <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5">Bientôt !</strong><span class="fw-700 text-base-color">17/10/2024</span> 
+                        <span class="ps-5 pe-2">Randonnée Bouvines</span> 
                     </div>
                     <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index') }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-20 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
                 </div>
@@ -124,11 +127,11 @@
                             </div>
                         </div>
 
-                        <div style="pointer-events: none;" class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 justify-content-start ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                        <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 justify-content-start ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
                             
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity"  class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <img style="width: 60px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
                                     </div>
@@ -141,8 +144,8 @@
                             <!-- end features box item -->
 
                             <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                            <a  href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white mb-15px"></i>
                                     </div>
@@ -156,7 +159,7 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <i class="fa-solid fa-person-biking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
                                     </div>
@@ -170,7 +173,7 @@
                             
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <i class="fa-solid fa-table-tennis-paddle-ball align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
                                     </div>
@@ -184,7 +187,7 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <i class="line-icon-Tennis align-middle text-base-color icon-extra-large text-white mb-15px"></i>
                                     </div>
@@ -198,7 +201,7 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <img style="width:60px;" src="{{ customAsset('app/badminton.png')}}" alt="">
                                         {# <i class="fa-solid fa-neuter align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i> #}
@@ -213,7 +216,7 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <img style="width:60px;" src="{{ customAsset('app/dance.png')}}" alt="">
                                     </div>
@@ -227,7 +230,7 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <img style="width:60px;" src="{{ customAsset('app/gymnastic.png')}}" alt="">
                                     </div>
@@ -241,7 +244,7 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <i class="fa-solid fa-bowling-ball align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
                                     </div>
@@ -255,7 +258,7 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <i class="fa-solid fa-chess-board align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
                                     </div>
@@ -269,14 +272,14 @@
 
                             <!-- start features box item -->
                             <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div class="feature-box hover-box h-100 transition bg-orange border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition bg-orange border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                     <div class="feature-box-icon">
                                         <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
                                     </div>
                                     <div class="feature-box-content">
                                         <span class="d-inline-block text-white fw-500 lh-24">Séjours</span> 
                                     </div>
-                                    <div class="feature-box-overlay bg-white"></div>
+                                    <div class="feature-box-overlay bg-orange"></div>
                                 </div>  
                             </a>
                             <!-- end features box item -->
@@ -865,6 +868,34 @@
 
         <!-- Modal -->
         {% include 'main_partials/_map_modal.html.twig' %}
+        {% include 'main_partials/_activity_modal.html.twig' %}
+
+        <!-- start popup -->
+        <div id="activity-popup" class="mfp-hide subscribe-popup">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-9 col-md-10 bg-white">
+                        <div class="row position-relative box-shadow-quadruple-large">
+                            <div class="col-lg-12 newsletter-popup p-8 pt-10 pb-10 lg-p-5 md-p-6 xs-p-8 position-relative">
+                                
+                                <div class="d-flex align-items-center">
+                                    <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2">
+                                        <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
+                                    </div>
+                                    <h4 class="d-inline-block alt-font text-dark-gray ps-2 mb-0">Randonnée</h4>
+                                </div>
+
+                                <div class="d-inline-block w-100 newsletter-style-05 position-relative mt-5 mb-20px">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est excepturi suscipit dolores nobis possimus sed voluptatum corrupti cupiditate magni. Nam ad ratione labore eius eos sed hic exercitationem consectetur eum?</p>
+                                </div>
+                            </div>
+                            <button title="Fermer (echap)" type="button" class="mfp-close text-dark-gray"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end subscription popup -->
 
         <!-- start scroll progress -->
         <div class="scroll-progress d-none d-xxl-block">

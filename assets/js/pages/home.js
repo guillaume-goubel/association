@@ -48,26 +48,33 @@ document.addEventListener("DOMContentLoaded", (event) => {
         map.invalidateSize();  // Recalculer les dimensions de la carte
     });
 
-    // // Sélectionner tous les éléments avec la classe 'text-too-long'
-    // var longTexts = document.querySelectorAll('.text-too-long');
+    /* ===================================
+    Subscribe popup on page load
+    ====================================== */
+    $('.activity-container').on('click', function(e) {
+        e.preventDefault(); // Empêche l'action par défaut du lien
 
-    // // Boucle à travers chaque texte long
-    // longTexts.forEach(function(text) {
-    //     // Sélectionner le bouton associé
-    //     var toggleBtn = text.nextElementSibling; // Le bouton est juste après le texte long
+        // Récupère la valeur de data-activity de l'élément cliqué
+        var activity = $(this).data('activity');
 
-    //     // Ajouter un event listener pour le bouton
-    //     toggleBtn.addEventListener('click', function() {
-    //         // Vérifier si le texte est actuellement tronqué ou non
-    //         if (text.classList.contains('text-expanded')) {
-    //             // Si le texte est actuellement étendu, le replier
-    //             text.classList.remove('text-expanded');
-    //             toggleBtn.textContent = 'Voir plus';  // Changer le bouton en "Voir plus"
-    //         } else {
-    //             // Si le texte est tronqué, l'étendre
-    //             text.classList.add('text-expanded');
-    //             toggleBtn.textContent = 'Voir moins'; // Changer le bouton en "Voir moins"
-    //         }
-    //     });
-    // });
+        // Montre la popup en fonction de l'activité
+        $.magnificPopup.open({
+            showCloseBtn: false,
+            items: {
+                // Utilise une condition ou une logique pour changer le contenu de la popup en fonction de l'activité
+                src: '#' + activity + '-popup' // Ici, on suppose que vous avez des éléments avec des IDs correspondants
+            },
+            type: 'inline',
+            mainClass: 'my-mfp-zoom-in',
+            callbacks: {
+                close: function () {
+                    if ($('#newsletter-off').is(':checked')) {
+                        setCookie(cookieName, 'shown', expireDays);
+                    }
+                }
+            }
+        });
+    });
+
+
 });
