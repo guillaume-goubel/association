@@ -10460,6 +10460,11 @@ blockquote footer {
   border-color: var(--extra-medium-gray);
   color: var(--dark-gray);
 }
+.btn.btn-transparent-yellow-light {
+  background-color: transparent;
+  border-color: var(--extra-medium-gray);
+  color: var(--white);
+}
 .btn.btn-transparent-yellow:hover, .btn.btn-transparent-yellow:active {
   background-color: var(--yellow);
   border-color: var(--yellow);

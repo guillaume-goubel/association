@@ -107,12 +107,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 var eventDetails = selectedDateEvents.map(function(event) {
                     return `
                         
-                        <h5 class="fs-18"><strong>${event.extendedProps.genre}</strong></h5>
                         <p>
-                            ${event.extendedProps.title}<br>
-                            ${event.extendedProps.rdv ? `<span class="fs-14">Rendez-vous </span>${event.extendedProps.rdv}</span><br>` : ''}
+                            <strong class="me-1">${event.extendedProps.genre}</strong>${event.extendedProps.title}<br>
+                            ${event.extendedProps.rdv ? `<span class="fs-14">Rendez-vous </span>${event.extendedProps.rdv}</span><a href="https://www.google.com/maps?q=50.650000,3.200000" target="_blank"><img width="70px" src="../app/google_maps_logo.png" alt=""></a><br>` : ''}
                             ${event.extendedProps.rdvDate ? `<span>Le ${event.extendedProps.rdvDate}</span>` : ''}
-                            ${event.extendedProps.rdvTime ? `<span>À ${event.extendedProps.rdvTime}</span>` : ''}
+                            ${event.extendedProps.rdvTime ? `<span>à ${event.extendedProps.rdvTime}</span>` : ''}
                             </br>
                         </p>
 
