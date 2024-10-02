@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", (event) => {
 
-    // Sélectionner tous les éléments d'accordéon
+    // ACCORDION PART ----------------------------------------------------------------
     const accordionItems = document.querySelectorAll('.accordion-item');
 
     accordionItems.forEach((item) => {
@@ -30,7 +30,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     });
 
     // MAP PART ----------------------------------------------------------------
-
     // Initialisation de la carte avec différents paramètres selon si on est sur mobile ou non
     var map = L.map('map', {
         scrollWheelZoom: true, 
@@ -55,34 +54,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         map.setView([50.52716064453125, 3.1717026233673096], 13);
 
         map.invalidateSize();  // Recalculer les dimensions de la carte
-    });
-
-    // OPEN MODAL
-    // Sélectionner tous les liens avec la classe .link-to-map
-    document.querySelectorAll('.link-to-map').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-            // Empêche le comportement par défaut
-            e.preventDefault();
-
-            // Ouvre la modale
-            const modal = new bootstrap.Modal(document.getElementById('mapModal'));
-            modal.show();
-        });
-    });
-
-    // Événement pour réinitialiser le contenu ou autre chose lorsque la modale est fermée
-    document.getElementById('mapModal').addEventListener('hidden.bs.modal', function () {
-        // Supprimez la classe 'modal-backdrop fade' si elle est présente
-        var backdrop = document.querySelector('.modal-backdrop');
-        if (backdrop) {
-            backdrop.classList.remove('fade');
-            backdrop.remove(); // Supprime le backdrop complètement
-        }
-        // Supprimer la classe modal-open manuellement
-        document.body.classList.remove('modal-open');
-        // Réinitialiser le style overflow et padding-right
-        document.body.style.overflow = '';
-        document.body.style.paddingRight = '';
     });
 
 });

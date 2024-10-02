@@ -32,49 +32,49 @@ document.addEventListener("DOMContentLoaded", (event) => {
             start: '2024-10-17', // Date/Heure au format ISO
             end: '2024-10-17',
             backgroundColor: '#4581cc',
-            extendedProps: { title: 'Randonnée à Bouvines', genre: 'Randonnée', rdv: 'Parking de la mairie, chaussée, Brunehaut', type: 'activity', infosDisplay: false }
+            extendedProps: { title: 'Randonnée à Bouvines', genre: 'Randonnée', rdv: 'Parking de la mairie, chaussée, Brunehaut', 'rdvDate': '17/10/2024', 'rdvTime': '14h:00', type: 'activity', infosDisplay: false }
         },
         {
             
             start: '2024-10-24',
             backgroundColor: '#4581cc',
-            extendedProps: { title: 'Randonnée à Templeuve-en-Pévèle', genre: 'Randonnée', rdv: 'Parking centre ville, rue d’Anchin', type: 'activity', infosDisplay: false }
+            extendedProps: { title: 'Randonnée à Templeuve-en-Pévèle', genre: 'Randonnée', rdv: 'Parking centre ville, rue d’Anchin', 'rdvDate': '24/10/2024', 'rdvTime': '14h:00', type: 'activity', infosDisplay: false }
         },
         {
             
             start: '2024-10-26',
             backgroundColor: '#4581cc',
-            extendedProps: { title: 'Gymnastique à Lambersart', genre: 'Gymnastique', rdv: 'Salle des sports Norbert Segard', type: 'activity', infosDisplay: true }
+            extendedProps: { title: 'Gymnastique à Lambersart', genre: 'Gymnastique', rdv: 'Salle des sports Norbert Segard', 'rdvDate': '26/10/2024', 'rdvTime': '10h:00', type: 'activity', infosDisplay: true }
         },
         {
             start: '2024-10-31',
             backgroundColor: '#4581cc',
-            extendedProps: { title: 'Randonnée à Zillebeck (Belgique)', genre: 'Randonnée', rdv: 'Salle des sports Norbert Segard', type: 'activity', infosDisplay: false }
+            extendedProps: { title: 'Randonnée à Zillebeck (Belgique)', genre: 'Randonnée', rdv: 'Seelbachdreef - parking OC in “t riet”', 'rdvDate': '31/10/2024', 'rdvTime': '14h:00', type: 'activity', infosDisplay: false }
         },
         {
             start: '2024-12-18',
             backgroundColor: '#EF991F',
-            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart', 'rdvDate': '18/12/2024', 'rdvTime': '5h:30', type: 'journey', infosDisplay: true }
         },
         {
             start: '2024-12-19',
             backgroundColor: '#EF991F',
-            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart', 'rdvDate': '18/12/2024', 'rdvTime': '5h:30', type: 'journey', infosDisplay: true }
         },
         {
             start: '2024-12-20',
             backgroundColor: '#EF991F',
-            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart', 'rdvDate': '18/12/2024', 'rdvTime': '5h:30', type: 'journey', infosDisplay: true }
         },
         {
             start: '2024-12-21',
             backgroundColor: '#EF991F',
-            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart', 'rdvDate': '18/12/2024', 'rdvTime': '5h:30', type: 'journey', infosDisplay: true }
         },
         {
             start: '2024-12-22',
             backgroundColor: '#EF991F',
-            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: false, type: 'journey', infosDisplay: true }
+            extendedProps: { title: 'Séjour au marché de Noël Strasbourg', genre: 'Séjour culture', rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart', 'rdvDate': '18/12/2024', 'rdvTime': '5h:30', type: 'journey', infosDisplay: true }
         },
     ];
 
@@ -83,6 +83,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         initialView: 'multiMonthYear',
         locale: 'fr',
         firstDay: 1,
+        contentHeight: 'auto',
         views: {
             timeGrid: {
               dayMaxEventRows: 6 // adjust to 6 only for timeGridWeek/timeGridDay
@@ -105,13 +106,20 @@ document.addEventListener("DOMContentLoaded", (event) => {
             if (selectedDateEvents.length > 0) {
                 var eventDetails = selectedDateEvents.map(function(event) {
                     return `
+                        
+                        <h5 class="fs-18"><strong>${event.extendedProps.genre}</strong></h5>
                         <p>
-                            <strong>${event.title}</strong><br>
-                            Rendez-vous : ${event.extendedProps.rdv || 'Non spécifié'}<br>
-                            ${new Date(event.start).toLocaleString()}<br>
-                            ${event.extendedProps.infosDisplay ? `<a href="${blogIndexUrl}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge border-1 w-100 mt-4">Plus d'informations</a>` : ''}
-                        </p>`;
-                }).join('');
+                            ${event.extendedProps.title}<br>
+                            ${event.extendedProps.rdv ? `<span class="fs-14">Rendez-vous </span>${event.extendedProps.rdv}</span><br>` : ''}
+                            ${event.extendedProps.rdvDate ? `<span>Le ${event.extendedProps.rdvDate}</span>` : ''}
+                            ${event.extendedProps.rdvTime ? `<span>À ${event.extendedProps.rdvTime}</span>` : ''}
+                            </br>
+                        </p>
+
+                        ${event.extendedProps.infosDisplay ? `<a href="${blogIndexUrl}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge border-1 w-100 my-2">Plus d'informations</a>` : ''}
+
+                        `;
+                }).join('-------');
     
                 document.getElementById('eventDetails').innerHTML = eventDetails;
                 openModal();  

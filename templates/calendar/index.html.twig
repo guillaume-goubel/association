@@ -9,35 +9,9 @@
 
 <style>
 
-    /* Applique un fond bleu pour les jours avec événements */
-    {# .highlight-day {
-        background-color: var(--base-color);
-        color: white!important;
-        position: relative; 
+    #map {
+        height: 300px!important;
     }
-
-    .highlight-day.journey {
-        background-color: var(--orange);
-    }
-
-    .highlight-day a{
-        color: white!important; /* Rendre le texte blanc pour être visible */
-    }
-
-    .highlight-day:hover {
-        background-color: #4581cc;
-        color: white!important; 
-        cursor: pointer;
-    }
-
-    .fc-theme-standard .fc-popover {
-        background-color: #4581cc;
-        color: white!important; /* Rendre le texte blanc pour être visible */
-    } #}
-
-    {# .fc-daygrid-day-events{
-        display: none!important;
-    } #}
 
     .fc-more-popover{
         display: none!important;
@@ -45,17 +19,14 @@
 
     /* Styles pour la modale */
     .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
     }
 
-    .modal-content {
+    .btn.btn-small{
+        max-width: 200px;
+    }
+
+    {# .modal-content {
         background-color: white;
         margin: 15% auto;
         padding: 20px;
@@ -68,7 +39,7 @@
         float: right;
         font-size: 28px;
         font-weight: bold;
-    }
+    } #}
 
     .close:hover, .close:focus {
         color: black;
@@ -192,7 +163,7 @@
 
     <!-- start section -->
     <section class="top-space-margin bg-very-light-gray">
-        <div class="container" style="min-height:100vh;">
+        <div class="container">
             
             <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
                 <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
@@ -207,12 +178,11 @@
     </section>
     <!-- end section -->
 
-    <!-- Modal -->
-    {% include 'calendar/partials/_map_modal.html.twig' %}
-
     <!-- start footer -->
     {% include 'main_partials/_footer_minimum.html.twig' %}
     <!-- end footer -->
+
+    {% include 'calendar/partials/_map_modal.html.twig' %}
 
     <!-- start scroll progress -->
     <div class="scroll-progress d-none d-xxl-block">

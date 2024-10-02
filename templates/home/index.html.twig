@@ -417,7 +417,7 @@
                                 <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>14:00</li>
                                 <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
                                     <div class="fs-12 mb-4">Rendez-vous</div>
-                                    <a style="color:#275997;text-decoration: underline;" href="#" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Parking de la mairie, Brunehaut</div></a>
+                                    <a style="color:#275997;text-decoration: underline;" href="#" class="link-to-map" data-rdv="Parking de la mairie, Brunehaut" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Parking de la mairie, Brunehaut</div></a>
                                 </li>
                                 <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li>
 
@@ -451,7 +451,7 @@
                                 <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>14:00</li>
                                 <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
                                     <div class="fs-12 mb-4">Rendez-vous</div>
-                                    <a style="color:#275997;text-decoration: underline;" href="#" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Parking centre ville, rue d’Anchin</div></a>
+                                    <a style="color:#275997;text-decoration: underline;" href="#" class="link-to-map" data-rdv="Parking centre ville, rue d’Anchin" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Parking centre ville, rue d’Anchin</div></a>
                                 </li>
                                 <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit, amet consectetur adipisicing elite</li>
 
@@ -464,7 +464,7 @@
 
                     <div class="col-lg-4 col-md-8 md-mb-30px">
                         <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
-                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">31 Octobre</span> 
+                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">26 Octobre</span> 
                             <span class="fs-18 mb-25px d-inline-block fw-600">Gymnastique</span>
                             <div class="row align-items-center">
                                 <div class="col-6 pe-sm-0">
@@ -485,7 +485,7 @@
                                 <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>10:00</li>
                                 <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
                                     <div class="fs-12 mb-4">Rendez-vous</div>
-                                    <a style="color:#275997;text-decoration: underline;" href="#" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Salle des sports Norbert Segard</div></a>
+                                    <a style="color:#275997;text-decoration: underline;" class="link-to-map" data-rdv="Salle des sports Norbert Segard" href="#" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Salle des sports Norbert Segard</div></a>
                                 </li>
                                 <li style="height:95px;overflow:auto;" class="text-to-long border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim eligendi voluptates maiores reprehenderit placeat ullam dolores. Laboriosam praesentium, error iste, eveniet, ipsa explicabo itaque ullam quae aut nesciunt adipisci obcaecati.orem ipsum dolor sit amet consectetur, adipisicing elit. Enim eligendi voluptates maiores reprehenderit placeat ullam dolores. Laboriosam praesentium, error iste, eveniet, ipsa explicabo itaque ullam quae aut nesciunt adipisci obcaecati.</li>
 
@@ -920,6 +920,6 @@
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
 
     {% block importmap %}
-        {{ importmap(['app','base','home']) }}
+        {{ importmap(['app','base','mapModale','home']) }}
     {% endblock %}
 {% endblock %}

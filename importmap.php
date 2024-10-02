@@ -16,6 +16,10 @@ return [
         'path' => './assets/js/base/base.js',
         'entrypoint' => true,
     ],
+    'mapModale' => [
+        'path' => './assets/js/base/map-modal.js',
+        'entrypoint' => true,
+    ],
     'blog' => [
         'path' => './assets/js/pages/blog.js',
         'entrypoint' => true,
