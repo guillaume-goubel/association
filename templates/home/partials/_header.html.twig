@@ -14,7 +14,7 @@
 	<!-- start navigation -->
 	<nav class="navbar navbar-expand-lg header-transparent bg-transparent header-reverse" data-header-hover="light">
 		<div class="container-fluid">
-			<div class="col-auto col-lg-2 me-lg-0 me-auto">
+			<div class="col-auto col-lg-2 me-lg-0 me-auto d-flex align-items-center">
 				<a data-anchor="main-banner-section" class="navbar-brand header-link" href="#">
 					<img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="default-logo">
 					<img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="alt-logo">
@@ -58,15 +58,24 @@
 						</div>
 					</div>  #}
 					<div class="header-button ms-30px xxl-ms-10px xs-ms-0">
-						<a href="#" class="btn btn-white btn-small btn-rounded btn-box-shadow btn-switch-text fw-600">
-							<span>
-								<span class="btn-double-text" data-text="Mon compte">Mon compte</span> 
-							</span>
-						</a>
+												
+						{% if is_granted('ROLE_ADMIN') %}
+							<a href="{{ path('admin_index') }}" class="btn btn-yellow btn-small btn-rounded btn-box-shadow btn-switch-text fw-600">
+								<span>
+									<span class="btn-double-text" data-text="Admin">Admin</span> 
+								</span>
+							</a>
+						{% else %}
+							<a href="{{ path('app_login') }}" class="btn btn-white btn-small btn-rounded btn-box-shadow btn-switch-text fw-600">
+								<span>
+									<span class="btn-double-text" data-text="Connexion">Connexion</span> 
+								</span>
+							</a>
+						{% endif %}
+
 					</div>
 				</div>  
 			</div>
 		</div>
 	</nav>
-	<!-- end navigation -->
 </header>

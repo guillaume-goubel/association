@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+
+    <!-- start header -->
+	{% include 'blog/partials/_blog_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section --> 
+    <section>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-lg-2 row-cols-md-1 g-0 justify-content-center overflow-hidden">
+                <div class="col contact-form-style-04">
+                    <div class="p-13 md-p-10 bg-white">
+                        <h3 class="d-inline-block fw-600 text-dark-gray mb-8 ls-minus-1px">Mon compte</h3>
+                    <form method="post">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="mb-3">
+                                Vous êtes connectés en tant que {{ app.user.userIdentifier }} <a href="{{ path('app_logout') }}">Déconnexion</a>
+                            </div>
+                        {% endif %}
+
+                        <label class="text-dark-gray mb-10px fw-500" for="username">Email<span class="text-red">*</span></label>
+                        <input class="mb-20px bg-very-light-gray form-control required" type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+                        <label class="text-dark-gray mb-10px fw-500" for="password">Mot de passe<span class="text-red">*</span></label>
+                        <input class="mb-20px bg-very-light-gray form-control required" type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                        {# <div class="checkbox mb-3">
+                            <label>
+                                <input type="checkbox" name="_remember_me"> Se souvenir de moi
+                            </label>
+                        </div> #}
+                        
+                        <button class="btn btn-large btn-round-edge btn-dark-gray btn-box-shadow w-100 mb-20px" type="submit">
+                            Me connecter
+                        </button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+    <!-- start scroll progress -->
+    <div class="scroll-progress d-none d-xxl-block">
+        <a href="#" class="scroll-top" aria-label="scroll">
+            <span class="scroll-text">
+                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
+            </span>
+            <span class="scroll-line">
+                <span class="scroll-point"></span>
+            </span>
+        </a>
+    </div>
+    <!-- end scroll progress -->
+
+</body>
+<!-- end subscription popup -->
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base']) }}
+    {% endblock %}
+
+{% endblock %}

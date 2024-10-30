@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+
+    <!-- start header -->
+	{% include 'admin/partials/_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section -->
+    <section class="top-space-margin right-side-bar">
+        <div class="container">
+            <div class="row justify-content-center">
+                
+                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                    <!-- start blog details  -->
+                    <div class="col-12 blog-details mb-3"> 
+                        <div class="entry-meta mb-20px fs-15">
+                            <span><i class="text-dark-gray feather icon-feather-user"></i><a href="blog-grid.html">{{ app.user.userIdentifier }}</a></span>
+                        </div>
+                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-6">Administration - ACTIVITES</h5>
+                    </div>
+                    <div class="col-12">
+                        <div class="row mb-50px sm-mb-30px">
+                            
+                            <div class="card" style="width: 18rem;">
+                                <img src="..." class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card title</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                    <a href="#" class="btn btn-primary">Voir</a>
+                                    <a href="#" class="btn btn-primary">Modifier</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- end blog details -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+    <!-- start scroll progress -->
+    <div class="scroll-progress d-none d-xxl-block">
+        <a href="#" class="scroll-top" aria-label="scroll">
+            <span class="scroll-text">
+                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
+            </span>
+            <span class="scroll-line">
+                <span class="scroll-point"></span>
+            </span>
+        </a>
+    </div>
+    <!-- end scroll progress -->
+
+</body>
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base']) }}
+    {% endblock %}
+
+{% endblock %}
