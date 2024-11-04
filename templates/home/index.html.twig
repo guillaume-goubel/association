@@ -129,159 +129,26 @@
 
                         <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 justify-content-start ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
                             
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity"  class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <img style="width: 60px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Randonnées</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
+                            {% for activity in activities %}
+                                
+                                <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
+                                    <div data-activity="activity"  class="activity-container feature-box h-100 {{ activity.classColor }} transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                        <div class="feature-box-icon">
+                                            {% if activity.pictureType == "image" %}
+                                                <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                                            {% else %}
+                                                <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
+                                            {% endif %}
+                                        </div>
+                                        <div class="feature-box-content">
+                                            <span class="d-inline-block text-white fw-500 lh-24">{{ activity.name|capitalize }}</span> 
+                                        </div>
+                                        <div class="feature-box-overlay {{ activity.classColorHover }}"></div>
+                                    </div>  
+                                </a>
+                                
+                            {% endfor %}
 
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white mb-15px"></i>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Marche Nordique</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <i class="fa-solid fa-person-biking align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Vélo</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-                            
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <i class="fa-solid fa-table-tennis-paddle-ball align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Tennis de table</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <i class="line-icon-Tennis align-middle text-base-color icon-extra-large text-white mb-15px"></i>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Tennis</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <img style="width:60px;" src="{{ customAsset('app/badminton.png')}}" alt="">
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Badminton</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <img style="width:60px;" src="{{ customAsset('app/dance.png')}}" alt="">
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Danse</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <img style="width:60px;" src="{{ customAsset('app/gymnastic.png')}}" alt="">
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-22" style="font-size: 16px;">Gymnastique</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <i class="fa-solid fa-bowling-ball align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Bowling</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <i class="fa-solid fa-chess-board align-middle icon-large text-base-color text-base-color icon-extra-large text-white mb-15px"></i>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Jeux de société</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-white"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
-
-                            <!-- start features box item -->
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity" class="activity-container feature-box hover-box h-100 transition bg-orange border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color icon-extra-large text-white mb-15px"></i>
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">Séjours</span> 
-                                    </div>
-                                    <div class="feature-box-overlay bg-orange"></div>
-                                </div>  
-                            </a>
-                            <!-- end features box item -->
                         </div>
                     </div>
 

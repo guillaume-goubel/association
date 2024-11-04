@@ -20,6 +20,15 @@ class Activity
     #[ORM\Column(length: 140)]
     private ?string $name = null;
 
+    #[ORM\Column(length: 25, nullable: true)]
+    private ?string $color = null;
+
+    #[ORM\Column(length: 40, nullable: true)]
+    private ?string $classColor = null;
+
+    #[ORM\Column(length: 40, nullable: true)]
+    private ?string $classColorHover = null;
+
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
@@ -31,6 +40,9 @@ class Activity
 
     #[ORM\Column]
     private ?bool $isEnabled = null;
+
+    #[ORM\Column(length: 10, nullable: true)]
+    private ?string $pictureType = null;
 
     public function getId(): ?int
     {
@@ -45,6 +57,42 @@ class Activity
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getColor(): ?string
+    {
+        return $this->color;
+    }
+
+    public function setColor(string $color): static
+    {
+        $this->color = $color;
+
+        return $this;
+    }
+
+    public function getClassColor(): ?string
+    {
+        return $this->classColor;
+    }
+
+    public function setClassColor(string $classColor): static
+    {
+        $this->classColor = $classColor;
+
+        return $this;
+    }
+
+    public function getClassColorHover(): ?string
+    {
+        return $this->classColorHover;
+    }
+
+    public function setClassColorHover(string $classColorHover): static
+    {
+        $this->classColorHover = $classColorHover;
 
         return $this;
     }
@@ -93,6 +141,18 @@ class Activity
     public function setEnabled(bool $isEnabled): static
     {
         $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    public function getPictureType(): ?string
+    {
+        return $this->pictureType;
+    }
+
+    public function setPictureType(?string $pictureType): static
+    {
+        $this->pictureType = $pictureType;
 
         return $this;
     }

@@ -30,15 +30,34 @@
                     <div class="col-12">
                         <div class="row mb-50px sm-mb-30px">
                             
-                            <div class="card" style="width: 18rem;">
-                                <img src="..." class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Voir</a>
-                                    <a href="#" class="btn btn-primary">Modifier</a>
+                            {% for activity in activities %}
+                                
+                                <div class="card col-12 col-md-4 m-1">
+                                    <div class="feature-box-icon" style="background-color:{{activity.color}}">
+                                        {% if activity.pictureType == "image" %}
+                                            <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                                        {% else %}
+                                            <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ activity.name|capitalize }}</h5>
+                                        <p class="card-text preformatted">
+                                        
+                                            {% if activity.description|length > 100 %}
+                                                {{ activity.description|slice(0, 100)|raw ~ '...' }}
+                                            {% else %}
+                                                {{ activity.description|trim|raw }}
+                                            {% endif %}
+                                        
+                                        </p>
+
+                                        <a href="#" class="btn btn-primary">Voir</a>
+                                        <a href="#" class="btn btn-primary">Modifier</a>
+                                    </div>
                                 </div>
-                            </div>
+
+                            {% endfor %}
 
                         </div>
                     </div>
@@ -74,7 +93,7 @@
 {% block baseJavascripts %}
     
     {% block importmap %}
-        {{ importmap(['app', 'base']) }}
+        {{ importmap(['app', 'base', 'admin-activity']) }}
     {% endblock %}
 
 {% endblock %}

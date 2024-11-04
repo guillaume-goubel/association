@@ -17,12 +17,4 @@ class adminHomeController extends AbstractController
         ]);
     }
 
-    #[Route('/activities', name: 'activities')]
-    public function activities(): Response
-    {      
-        
-
-        return $this->render('admin/activities.html.twig', [
-        ]);
-    }
 }
