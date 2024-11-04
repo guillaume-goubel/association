@@ -45,6 +45,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $lastName = null;
 
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Animator $animator = null;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -183,6 +186,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(?string $lastName): static
     {
         $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    public function getAnimator(): ?Animator
+    {
+        return $this->animator;
+    }
+
+    public function setAnimator(?Animator $animator): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($animator === null && $this->animator !== null) {
+            $this->animator->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($animator !== null && $animator->getUser() !== $this) {
+            $animator->setUser($this);
+        }
+
+        $this->animator = $animator;
 
         return $this;
     }

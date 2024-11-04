@@ -47,6 +47,9 @@ class Event
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateEndAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?Animator $animator = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -180,6 +183,18 @@ class Event
     public function setDateEndAt(?\DateTimeInterface $dateEndAt): static
     {
         $this->dateEndAt = $dateEndAt;
+
+        return $this;
+    }
+
+    public function getAnimator(): ?Animator
+    {
+        return $this->animator;
+    }
+
+    public function setAnimator(?Animator $animator): static
+    {
+        $this->animator = $animator;
 
         return $this;
     }
