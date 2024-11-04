@@ -53,6 +53,9 @@ class Activity
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'activities')]
     private Collection $users;
 
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $type = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -202,5 +205,17 @@ class Activity
     public function isActivityInUserControl(User $user): bool
     { 
         return $user->getActivities()->contains($this);
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
     }   
 }
