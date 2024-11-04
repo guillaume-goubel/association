@@ -1,20 +1,153 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello activityController!{% endblock %}
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<body data-mobile-nav-style="classic">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/guillaume/projets/arsmeli/src/Controller/Admin/activityController.php</code></li>
-        <li>Your template at <code>/home/guillaume/projets/arsmeli/templates/admin/activity/index.html.twig</code></li>
-    </ul>
-</div>
+    <!-- start header -->
+	{% include 'admin/partials/_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section -->
+    <section class="top-space-margin right-side-bar">
+        <div class="container">
+            <div class="row justify-content-center">
+                
+                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                    <!-- start blog details  -->
+                    <div class="col-12 blog-details mb-3"> 
+                        <div class="entry-meta fs-15 text-white">
+                            <span><i class="text-dark-gray feather icon-feather-user"></i><a href="blog-grid.html">{{ app.user.firstName }} {{ app.user.lastName }}</a></span>
+                        </div>
+                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-6">ACTIVITES</h5>
+                    </div>
+                    <div class="col-12">
+                        <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Mes activités dont je suis responsable <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                        <div class="row mb-50px sm-mb-30px">
+                            
+                            {% for activity in userActivityArray %}
+                                
+                                <div class="card col-12 col-md-4 m-1">
+                                    <div class="feature-box-icon" style="background-color:{{activity.color}}">
+                                        {% if activity.pictureType == "image" %}
+                                            <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                                        {% else %}
+                                            <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ activity.name|capitalize }}</h5>
+                                        <p class="card-text preformatted">
+                                        
+                                            {% if activity.description|length > 100 %}
+                                                {{ activity.description|slice(0, 100)|raw ~ '...' }}
+                                            {% else %}
+                                                {{ activity.description|trim|raw }}
+                                            {% endif %}
+                                        
+                                        </p>
+                                        <div class="d-flex align-items-center">
+                                            <a href="#" class="btn btn-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
+                                            <a href="#" class="btn btn-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="fs-10">Responsable(s) de l'activité</div>
+                                        <div class="row">
+                                            {% for user in activity.users %}
+                                                {% if user.id != app.user.id %}
+                                                     <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les autres activités <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                        <div class="row mb-50px sm-mb-30px">
+                            
+                            {% for activity in noUserActivityArray %}
+                                
+                                <div class="card col-12 col-md-4 m-1">
+                                    <div class="feature-box-icon" style="background-color:{{activity.color}}">
+                                        {% if activity.pictureType == "image" %}
+                                            <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                                        {% else %}
+                                            <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ activity.name|capitalize }}</h5>
+                                        <p class="card-text preformatted">
+                                        
+                                            {% if activity.description|length > 100 %}
+                                                {{ activity.description|slice(0, 100)|raw ~ '...' }}
+                                            {% else %}
+                                                {{ activity.description|trim|raw }}
+                                            {% endif %}
+                                        
+                                        </p>
+                                        <a href="#" class="btn btn-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
+
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="fs-10">Responsable(s) de l'activité</div>
+                                        <div class="row">
+                                            {% for user in activity.users %}
+                                                <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                    <!-- end blog details -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+    <!-- start scroll progress -->
+    <div class="scroll-progress d-none d-xxl-block">
+        <a href="#" class="scroll-top" aria-label="scroll">
+            <span class="scroll-text">
+                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
+            </span>
+            <span class="scroll-line">
+                <span class="scroll-point"></span>
+            </span>
+        </a>
+    </div>
+    <!-- end scroll progress -->
+
+</body>
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base', 'admin-activity']) }}
+    {% endblock %}
+
 {% endblock %}

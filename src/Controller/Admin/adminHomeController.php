@@ -12,8 +12,12 @@ class adminHomeController extends AbstractController
 {
     #[Route('/index', name: 'index')]
     public function index(): Response
-    {
+    {   
+        $user = $this->getUser();
+        $activitiesForThisUser = $user->getActivitiesByOrdering();
+
         return $this->render('admin/index.html.twig', [
+            "activitiesForThisUser" => $activitiesForThisUser,
         ]);
     }
 

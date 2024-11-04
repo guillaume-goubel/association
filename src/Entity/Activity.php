@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Util\TimestampableTrait;
+use App\Entity\User;
 use Doctrine\DBAL\Types\Types;
+use App\Util\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ActivityRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ActivityRepository::class)]
 class Activity
@@ -36,13 +39,24 @@ class Activity
     private ?string $picture = null;
 
     #[ORM\Column]
-    private ?int $ordering = null;
+    private ?int $ordering = 0;
 
     #[ORM\Column]
     private ?bool $isEnabled = null;
 
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $pictureType = null;
+
+    /**
+     * @var Collection<int, User>
+     */
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'activities')]
+    private Collection $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -125,6 +139,7 @@ class Activity
     {
         return $this->ordering;
     }
+    
 
     public function setOrdering(int $ordering): static
     {
@@ -156,4 +171,36 @@ class Activity
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): static
+    {
+        if (!$this->users->contains($user)) {
+            $this->users->add($user);
+            $user->addActivity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): static
+    {
+        if ($this->users->removeElement($user)) {
+            $user->removeActivity($this);
+        }
+
+        return $this;
+    }
+
+    public function isActivityInUserControl(User $user): bool
+    { 
+        return $user->getActivities()->contains($this);
+    }   
 }
