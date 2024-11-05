@@ -112,13 +112,13 @@ class EventType extends AbstractType
                 'multiple' => true,
                 'required' => false,
             ])
-            // ->add('user', EntityType::class, [
-            //     'label' => 'Rattacher un administrateur',
-            //     'attr' => ['class' => 'form-control'],
-            //     'class' => User::class,
-            //     'choice_label' => 'completeName',
-            //     'required' => true,
-            // ])
+            ->add('user', EntityType::class, [
+                'label' => 'Rattacher un administrateur',
+                'attr' => ['class' => 'form-control'],
+                'class' => User::class,
+                'choice_label' => 'completeName',
+                'required' => true,
+            ])
         ;
     }
 

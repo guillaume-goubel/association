@@ -70,6 +70,12 @@ class Event
     #[ORM\ManyToOne]
     private ?User $lastUserUpdate = null;
 
+    /**
+     * @var list<string> The photos
+     */
+    #[ORM\Column(nullable: true)]
+    private array $photos = [];
+
     public function __construct()
     {
         $this->animators = new ArrayCollection();
@@ -268,6 +274,18 @@ class Event
     public function setLastUserUpdate(?User $lastUserUpdate): static
     {
         $this->lastUserUpdate = $lastUserUpdate;
+
+        return $this;
+    }
+
+    public function getPhotos(): ?array
+    {
+        return $this->photos;
+    }
+
+    public function setPhotos(array $photos): self
+    {
+        $this->photos = $photos;
 
         return $this;
     }

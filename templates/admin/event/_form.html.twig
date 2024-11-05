@@ -41,7 +41,6 @@
     </div>
 
     <div class="row d-flex">
-
         <div class="col-12 mt-1">
             {{ form_row(form.description) }}
         </div>
@@ -50,7 +49,15 @@
             {{ form_row(form.preparationInfos) }}
         </div>
 
+        <div class="col-12 mt-1">
+            {{ form_row(form.user) }}
+        </div>
     </div>
+
+    {# <div class="form-group">
+        <label for="photos">Photos de l'événement</label>
+        <div id="dropzone" class="dropzone"></div>
+    </div> #}
 
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

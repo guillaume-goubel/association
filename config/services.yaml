@@ -6,6 +6,7 @@
 parameters:
     asset:
         version: 25042024_1
+    uploads_directory: '%kernel.project_dir%/public/data/uploads/photos'
 
 services:
     # default configuration for services in *this* file
