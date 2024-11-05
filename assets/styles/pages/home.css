@@ -4,9 +4,7 @@
 #main-banner-circle{
     background-color: #818D81;
 }
-
 @media only screen and (max-width: 600px) {
-    
     #main-banner-time-infos{
         margin: auto;
         position: absolute;
@@ -15,16 +13,46 @@
         right: 0;
     }
 }
-
 .main-banner-letter{
     color: var(--red);
 }
-
 .img-actu-slider{
     height: 376px;
 }
-
 .blog-categories{
     display: flex;
     justify-content: end;
+}
+.hover-box.light-hover:hover img{
+    filter: invert(1) grayscale(1);
+}
+@media (max-width: 575px) {
+    .pagination-style-01 .page-item .page-link {
+        margin: 0 0px!important;
+    }
+}
+.d-block img{
+    height:240px;
+}
+header .navbar-brand .default-logo {
+    opacity: 0!important;
+}
+@media (max-width: 991px) {
+    header .navbar-brand {
+        padding: 7px 0;
+    }
+}
+.text-too-long {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limiter à 3 lignes */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Ajoute les "..." */
+}
+.text-expanded {
+    -webkit-line-clamp: unset; /* Retire la limite */
+    overflow: visible;
+}
+button.mfp-close:before, button.mfp-close:active:before {
+    font-size: 35px!important;
 }

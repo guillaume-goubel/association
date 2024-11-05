@@ -178,6 +178,19 @@ footer .elements-social ul li:last-child {
 .help-text{
     font-size: 12px;
 }
+.avatar-stack {
+    display: flex;
+    align-items: center;
+}
+.avatar {
+    width: 60px;               /* Taille du cercle */
+    height: 60px;              /* Taille du cercle */
+    border-radius: 50%;        /* Rendre l'image circulaire */
+    border: 2px solid #fff;    /* Bordure blanche pour un effet de contour */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ombre pour du relief */
+    margin-left: -15px;        /* Chevauchement entre les cercles */
+    object-fit: cover;         /* Remplir le cercle avec l'image */
+}
 /* media query responsive */
 @media (max-width: 1199px) {
     header .btn.btn-switch-text.btn-small > span {

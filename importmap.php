@@ -44,6 +44,10 @@ return [
         'path' => './assets/js/pages/admin/activity.js',
         'entrypoint' => true,
     ],
+    'admin-event' => [
+        'path' => './assets/js/pages/admin/event.js',
+        'entrypoint' => true,
+    ],
     '@hotwired/stimulus' => [
         'version' => '3.2.2',
     ],

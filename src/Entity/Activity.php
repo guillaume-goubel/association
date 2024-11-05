@@ -42,7 +42,7 @@ class Activity
     private ?int $ordering = 0;
 
     #[ORM\Column]
-    private ?bool $isEnabled = null;
+    private ?bool $isEnabled = true;
 
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $pictureType = null;

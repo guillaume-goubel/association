@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 
-    <style>
+    {# <style>
         .hover-box.light-hover:hover img{
             filter: invert(1) grayscale(1);
         }
@@ -43,7 +43,7 @@
         button.mfp-close:before, button.mfp-close:active:before {
             font-size: 35px!important;
         }
-    </style>
+    </style> #}
 
 {% endblock %}
 
@@ -260,141 +260,44 @@
                     <!-- start pricing item -->
                     <div class="fw-600 py-3">Nos 3 prochains rendez-vous</div>
                     
-                    <div class="col-lg-4 col-md-8 md-mb-30px">
-                        <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
-                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">17 Octobre</span> 
-                            <span class="fs-18 mb-25px d-inline-block fw-600">Randonnée</span>
-                            <div class="row align-items-center">
-                                <div class="col-6 pe-sm-0">
-                                    <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
-                                        <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
-                                        <div class="text-white px-1">13 Km</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 text-center text-sm-start last-paragraph-no-margin fs-15 lh-24">
-                                    <div class="d-flex align-items-center justify-content-center flex-column">
-                                        <div><img style="width: 60px;border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt=""></div>
-                                        <div><p>Martine P</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
-                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Bouvines</li>
-                                <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>14:00</li>
-                                <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
-                                    <div class="fs-12 mb-4">Rendez-vous</div>
-                                    <a style="color:#275997;text-decoration: underline;" href="#" class="link-to-map" data-rdv="Parking de la mairie, Brunehaut" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Parking de la mairie, Brunehaut</div></a>
-                                </li>
-                                <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li>
-
-                            </ul>
-                            <div style="visibility:hidden;" class="pricing-footer w-100">
-                                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
-                            </div>
-                        </div>
-                    </div> 
-
-                    <div class="col-lg-4 col-md-8 md-mb-30px">
-                        <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
-                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">24 Octobre</span> 
-                            <span class="fs-18 mb-25px d-inline-block fw-600">Randonnée</span>
-                            <div class="row align-items-center">
-                                <div class="col-6 pe-sm-0">
-                                    <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
-                                        <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
-                                        <div class="text-white px-1">12 Km</div>
-                                    </div>
-                                </div>
-                                <div class="col-6 text-center text-sm-start last-paragraph-no-margin fs-15 lh-24">
-                                    <div class="d-flex align-items-center justify-content-center flex-column">
-                                        <div><img style="width: 60px;border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt=""></div>
-                                        <div><p>Martine P</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
-                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Templeuve-en-Pévèle</li>
-                                <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>14:00</li>
-                                <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
-                                    <div class="fs-12 mb-4">Rendez-vous</div>
-                                    <a style="color:#275997;text-decoration: underline;" href="#" class="link-to-map" data-rdv="Parking centre ville, rue d’Anchin" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Parking centre ville, rue d’Anchin</div></a>
-                                </li>
-                                <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit, amet consectetur adipisicing elite</li>
-
-                            </ul>
-                            <div style="visibility:hidden;" class="pricing-footer w-100">
-                                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
-                            </div>
-                        </div>
-                    </div> 
-
-                    <div class="col-lg-4 col-md-8 md-mb-30px">
-                        <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
-                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">26 Octobre</span> 
-                            <span class="fs-18 mb-25px d-inline-block fw-600">Gymnastique</span>
-                            <div class="row align-items-center">
-                                <div class="col-6 pe-sm-0">
-                                    <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
-                                        <img style="width: 40px;" src="{{ customAsset('app/gymnastic.png')}}" alt="">
-                                        <div class="text-white px-1"></div>
-                                    </div>
-                                </div>
-                                <div class="col-6 text-center text-sm-start last-paragraph-no-margin fs-15 lh-24">
-                                    <div class="d-flex align-items-center justify-content-center flex-column">
-                                        <div><img style="width: 60px;border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt=""></div>
-                                        <div><p>Martine P</p></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
-                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Lambersart</li>
-                                <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i>10:00</li>
-                                <li style="height:95px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
-                                    <div class="fs-12 mb-4">Rendez-vous</div>
-                                    <a style="color:#275997;text-decoration: underline;" class="link-to-map" data-rdv="Salle des sports Norbert Segard" href="#" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">Salle des sports Norbert Segard</div></a>
-                                </li>
-                                <li style="height:95px;overflow:auto;" class="text-to-long border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim eligendi voluptates maiores reprehenderit placeat ullam dolores. Laboriosam praesentium, error iste, eveniet, ipsa explicabo itaque ullam quae aut nesciunt adipisci obcaecati.orem ipsum dolor sit amet consectetur, adipisicing elit. Enim eligendi voluptates maiores reprehenderit placeat ullam dolores. Laboriosam praesentium, error iste, eveniet, ipsa explicabo itaque ullam quae aut nesciunt adipisci obcaecati.</li>
-
-                            </ul>
-                            <div class="pricing-footer w-100">
-                                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
-                            </div>
-                        </div>
-                    </div> 
+                    {% for event in events_regular %}
+                        {% include 'main_partials/_event_card.html.twig' %}
+                    {% endfor %}
 
                     <!-- start pricing item -->
                     <div class="fw-600 pt-5 pb-1">Nos prochains séjours</div>
 
-                    <div class="col-lg-4 col-md-8 md-mb-30px">
-                        <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
-                            
-                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
-                                <span class="fs-14">du</span> 18 Décembre
-                            </span> 
-                            <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
-                                <span class="fs-14">au</span> 22 Décembre
-                            </span> 
+                    {% for event in events_journey %}
+                        <div class="col-lg-4 col-md-8 md-mb-30px">
+                            <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
+                                
+                                <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
+                                    <span class="fs-14">du</span> 18 Décembre
+                                </span> 
+                                <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
+                                    <span class="fs-14">au</span> 22 Décembre
+                                </span> 
 
-                            <span class="fs-18 mb-25px d-inline-block fw-600">2024</span>
-                            <div class="row align-items-center">
-                                <div class="col-6 pe-sm-0">
-                                    <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-orange border-radius-3px p-2 ms-2">
-                                        <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color icon-extra-large text-white"></i>
+                                <span class="fs-18 mb-25px d-inline-block fw-600">2024</span>
+                                <div class="row align-items-center">
+                                    <div class="col-6 pe-sm-0">
+                                        <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-orange border-radius-3px p-2 ms-2">
+                                            <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color icon-extra-large text-white"></i>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
-                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Strasbourg</li>
-                                <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex">Visite du marché de Noël</li>
-                                <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At velit dolorum soluta provident dolore architecto ipsam animi, error quis dolores repellat consequuntur libero. Blanditiis explicabo consectetur enim corrupti veniam molestias.</li>
+                                <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
+                                    <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Strasbourg</li>
+                                    <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex">Visite du marché de Noël</li>
+                                    <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At velit dolorum soluta provident dolore architecto ipsam animi, error quis dolores repellat consequuntur libero. Blanditiis explicabo consectetur enim corrupti veniam molestias.</li>
 
-                            </ul>
-                            <div class="pricing-footer w-100">
-                                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                                </ul>
+                                <div class="pricing-footer w-100">
+                                    <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                                </div>
                             </div>
-                        </div>
-                    </div> 
-
+                        </div> 
+                    {% endfor %}
 
                 </div>  
 
@@ -782,9 +685,6 @@
 {% endblock %}
 
 {% block baseJavascripts %}
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-
     {% block importmap %}
         {{ importmap(['app','base','mapModale','home']) }}
     {% endblock %}

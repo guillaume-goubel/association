@@ -20,7 +20,7 @@ class Event
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -76,9 +76,66 @@ class Event
     #[ORM\Column(nullable: true)]
     private array $photos = [];
 
+    #[ORM\Column]
+    private ?bool $isEnabled = true;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $mainPicture = null;
+    private $mainPictureFile;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture2 = null;
+    private $picture2File;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $picture3 = null;
+    private $picture3File;
+
+    #[ORM\Column(length: 180, nullable: true)]
+    private ?string $rdvAddress = null;
+
+    #[ORM\Column(length: 150, nullable: true)]
+    private ?string $rdvCity = null;
+
     public function __construct()
     {
         $this->animators = new ArrayCollection();
+    }
+
+    public function getPicture2File()
+    {
+        return $this->picture2File;
+    }
+
+    public function setPicture2File($picture2File): self
+    {
+        $this->picture2File = $picture2File;
+
+        return $this;
+    }
+
+    public function getPicture3File()
+    {
+        return $this->picture3File;
+    }
+
+    public function setPicture3File($picture3File): self
+    {
+        $this->picture3File = $picture3File;
+
+        return $this;
+    }
+
+    public function getMainPictureFile()
+    {
+        return $this->mainPictureFile;
+    }
+
+    public function setMainPictureFile($mainPictureFile): self
+    {
+        $this->mainPictureFile = $mainPictureFile;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -286,6 +343,78 @@ class Event
     public function setPhotos(array $photos): self
     {
         $this->photos = $photos;
+
+        return $this;
+    }
+
+    public function isEnabled(): ?bool
+    {
+        return $this->isEnabled;
+    }
+
+    public function setEnabled(bool $isEnabled): static
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    public function getMainPicture(): ?string
+    {
+        return $this->mainPicture;
+    }
+
+    public function setMainPicture(?string $mainPicture): static
+    {
+        $this->mainPicture = $mainPicture;
+
+        return $this;
+    }
+    
+    public function getPicture2(): ?string
+    {
+        return $this->picture2;
+    }
+
+    public function setPicture2(?string $picture2): static
+    {
+        $this->picture2 = $picture2;
+
+        return $this;
+    }
+
+    public function getPicture3(): ?string
+    {
+        return $this->picture3;
+    }
+
+    public function setPicture3(?string $picture3): static
+    {
+        $this->picture3 = $picture3;
+
+        return $this;
+    }
+
+    public function getRdvAddress(): ?string
+    {
+        return $this->rdvAddress;
+    }
+
+    public function setRdvAddress(?string $rdvAddress): static
+    {
+        $this->rdvAddress = $rdvAddress;
+
+        return $this;
+    }
+
+    public function getRdvCity(): ?string
+    {
+        return $this->rdvCity;
+    }
+
+    public function setRdvCity(?string $rdvCity): static
+    {
+        $this->rdvCity = $rdvCity;
 
         return $this;
     }

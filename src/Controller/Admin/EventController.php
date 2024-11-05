@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\EventRepository;
 use App\Repository\ActivityRepository;
+use App\Service\EventService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, ActivityRepository $activityRepository): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
     {
         $event = new Event();
         $user = $this->getUser();
@@ -49,6 +50,9 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+                        
+            $eventService->process($event);
+
             $entityManager->persist($event);
             $entityManager->flush();
 

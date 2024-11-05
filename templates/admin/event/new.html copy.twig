@@ -4,21 +4,84 @@
 {% endblock %}
 
 {% block stylesheets %}
-<style>
-    #pac-container{
-        min-width: 500px ;
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tomickigrzegorz/autocomplete@1.8.6/dist/css/autocomplete.min.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+  integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+  crossorigin=""/>
+    <style>
+ 
+    #mapid { height: 50vh; }
+
+    .leaflet-control-geocoder-ban-form input {
+      line-height: 50px !important;
     }
-    .aside-form{
-        padding-left:25px;
+
+    .leaflet-control-geocoder-ban-selected {
+        background-color: rgba(128, 204, 40, 0.3) !important;
     }
-    #pac-card{
-        background-color:#1d2f8f;
-        color:white;
+
+    .searchBar {
+        border: 2px solid transparent !important;
+        min-height: 50px !important;
+        min-width: 50% !important;
+        font-size: 1.3em;
+        position: absolute;
+        top: 0;
+        z-index: 999;
+        left: 100px;
+        right: 100px;
     }
-    .gm-style .gm-style-iw-tc::after {
-        background: white!important;
+
+    .leaflet-control-geocoder-ban-icon{
+        display:none;
     }
-</style>
+
+    .leaflet-touch .leaflet-bar a {
+        line-height: 30px;
+    }
+
+    .leaflet-touch .leaflet-bar a {
+        width: 100%!important;
+        height: 30px;
+        line-height: 30px;
+        text-align: left;
+    }
+
+    a strong{
+        width: 100%;
+    }
+
+    ul.leaflet-control-geocoder-ban-alternatives {
+        background-color: white;
+    }
+
+    .leaflet-control-geocoder-ban-alternatives-minimized {
+        display: none;
+    }
+
+    .validate-address-button {
+        background-color: #28a745;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        display: none; /* Masqué par défaut */
+    }
+
+    .clear-address-button {
+        background-color: red;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+        display: none; /* Masqué par défaut */
+    }
+
+  </style>
 {% endblock %}
 
 {% block body %}
@@ -49,7 +112,7 @@
 
                 </div>
 
-                <div class="col-10">
+                <div class="col-12">
                     <div class="row mb-50px sm-mb-30px">     
                         {{ include('admin/event/_form.html.twig') }}
                     </div>
@@ -83,9 +146,9 @@
 
 {% block baseJavascripts %}   
     
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>    
     {% block importmap %}
         {{ importmap(['app', 'base']) }}
     {% endblock %}
-
 {% endblock %}
 

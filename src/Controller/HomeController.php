@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\EventRepository;
 use App\Repository\ActivityRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,12 +11,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'home_index')]
-    public function index(ActivityRepository $activityRepository): Response
+    public function index(ActivityRepository $activityRepository, EventRepository $eventRepository): Response
     {
-        $activities = $activityRepository->findBy(["isEnabled"=>1], ['ordering' => 'ASC']);
 
         return $this->render('home/index.html.twig', [
-            "activities" => $activities,
+            "activities" => $activityRepository->findBy(["isEnabled"=>1], ['ordering' => 'ASC']),
+            'events_regular' => $eventRepository->findEventsByRegularActivity(),
+            'events_journey' => $eventRepository->findEventsByJourneyActivity()
         ]);
     }
 

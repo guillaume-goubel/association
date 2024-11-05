@@ -10,7 +10,10 @@ use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -25,9 +28,9 @@ class EventType extends AbstractType
 
         $builder
             ->add('name', TextType::class, [
-                'label' => "Le nom de l'événement - OBLIGATOIRE",
+                'label' => "Le nom de l'événement",
                 'attr' => ['class' => 'form-control'],
-                'required' => true,
+                'required' => false,
             ])
             ->add('description', TextareaType::class, [
                 'label' => "La description de l'événement",
@@ -50,20 +53,43 @@ class EventType extends AbstractType
                 ],
             ])
             ->add('eventDistance', NumberType::class, [
-                'label' => "L'évènement comporte-t-il une distance en km ",
-                'help' => '(comme pour les randonnées par exemple : 13km)',
+                 'label' => "L'évènement comporte-t-il un parcours (en km) ",
+                'help' => 'ex: comme pour une randonnée de 13 (km)',
                 'attr' => ['class' => 'form-control'],
                 'data' => null,
                 'html5' => true,
                 'required' => false,
             ])
             ->add('rdvPlaceName', TextType::class, [
-                'label' => "Le lieux de rendez-vous ",
+                'label' => "Complément du lieu de rendez-vous",
                 'attr' => ['class' => 'form-control'],
+                'help' => "ex : devant la Mairie, en face du magasin de bricolage...",
                 'required' => false,
             ])
-            ->add('rdvLatitude')
-            ->add('rdvLongitude')
+            ->add('rdvAddress', TextType::class, [
+                'label' => "Adresse complète du rendez-vous ",
+                'attr' => ['class' => 'form-control'],
+                'help' => "Peut être renseigné automatiquement via la recherche sur la carte ...",
+                'required' => false,
+            ])
+            ->add('rdvCity', TextType::class, [
+                'label' => "Ville du rendez-vous ",
+                'attr' => ['class' => 'form-control'],
+                'help' => "Peut être renseigné automatiquement via la recherche sur la carte ...",
+                'required' => false,
+            ])
+            ->add('rdvLatitude', TextType::class, [
+                'label' => "Coodonnées de latitude du rendez-vous ",
+                'attr' => ['class' => 'form-control'],
+                'help' => "Peut être renseigné automatiquement via la recherche sur la carte ...",
+                'required' => false,
+            ])
+            ->add('rdvLongitude', TextType::class, [
+                'label' => "Coodonnées de longitude du rendez-vous ",
+                'attr' => ['class' => 'form-control'],
+                'help' => "Peut être renseigné automatiquement via la recherche sur la carte ...",
+                'required' => false,
+            ])
             ->add('timeStartAt', TimeType::class, [
                 'label' => 'Commence à  ... ',
                 'attr' => ['class' => 'form-control'],
@@ -90,7 +116,7 @@ class EventType extends AbstractType
             ])
             ->add('activity', EntityType::class, [
                 'class' => Activity::class,
-                'label' => "Rattacher à un type d'activité - OBLIGATOIRE",
+                'label' => "Rattacher à un type d'activité",
                 'choice_label' => 'name',
                 'attr' => ['class' => 'form-control'],
                 'required' => true,
@@ -101,11 +127,10 @@ class EventType extends AbstractType
                         ->andwhere('a.isEnabled = :enabled')
                         ->setParameter('enabled', true);
                 },
-    
             ])
             ->add('animators', EntityType::class, [
                 'label' => 'Rattacher à un/des animateurs',
-                'help' => '(Appuyer sur la touche "CONTROL" pour faire les sélections)',
+                'help' => 'Appuyer sur la touche "CONTROL" en cliquant pour faire des sélections multiples',
                 'attr' => ['class' => 'form-control'],
                 'class' => Animator::class,
                 'choice_label' => 'completeName',
@@ -118,6 +143,60 @@ class EventType extends AbstractType
                 'class' => User::class,
                 'choice_label' => 'completeName',
                 'required' => true,
+            ])
+            ->add('mainPictureFile', FileType::class, [
+                'label' => 'Image principale',
+                'label_attr' => [
+                    'class' => 'labelCustom'
+                ],
+                'attr' => ['class' => 'form-control'],
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => 'image/*',
+                        'maxSize' => '2M',
+                    ]),
+                    new Image([
+                        'maxHeight' => 1100,
+                        'maxWidth' => 2000,
+                    ])
+                ]
+            ])
+            ->add('picture2File', FileType::class, [
+                'label' => 'Image n°2',
+                'label_attr' => [
+                    'class' => 'labelCustom'
+                ],
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => 'image/*',
+                        'maxSize' => '2M',
+                    ]),
+                    new Image([
+                        'maxHeight' => 1100,
+                        'maxWidth' => 2000,
+                    ])
+                ]
+            ])
+            ->add('picture3File', FileType::class, [
+                'label' => 'Image n°3',
+                'label_attr' => [
+                    'class' => 'labelCustom'
+                ],
+                'required' => false,
+                'attr' => ['class' => 'form-control'],
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => 'image/*',
+                        'maxSize' => '2M',
+                    ]),
+                    new Image([
+                        'maxHeight' => 1100,
+                        'maxWidth' => 2000,
+                    ])
+                ]
             ])
         ;
     }
