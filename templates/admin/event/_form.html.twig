@@ -1,0 +1,56 @@
+{{ form_start(form) }}
+    
+    <div class="row d-flex">
+        <div class="col-6 mt-1">
+            {{ form_row(form.activity) }}
+        </div>
+
+        <div class="col-6 mt-1">
+            {{ form_row(form.animators) }}
+        </div>
+    </div>
+    
+    <div class="row d-flex">
+        <div class="col-12 mt-1">
+            {{ form_row(form.name) }}
+        </div>
+    </div>
+
+    <div class="row d-flex">
+        <div class="col-6 mt-1">
+            {{ form_row(form.dateStartAt) }}
+        </div>
+
+        <div class="col-6 mt-1">
+            {{ form_row(form.timeStartAt) }}
+        </div>
+    </div>
+
+    <div class="row d-flex">
+        <div class="col-6 mt-1">
+            {{ form_row(form.dateEndAt) }}
+        </div>
+
+        <div class="col-6 mt-1">
+            {{ form_row(form.timeEndAt) }}
+        </div>
+
+        <div class="col-6 mt-1">
+            {{ form_row(form.eventDistance) }}
+        </div>
+    </div>
+
+    <div class="row d-flex">
+
+        <div class="col-12 mt-1">
+            {{ form_row(form.description) }}
+        </div>
+
+        <div class="col-12 mt-1">
+            {{ form_row(form.preparationInfos) }}
+        </div>
+
+    </div>
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

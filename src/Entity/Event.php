@@ -10,6 +10,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Event
 {
     use TimestampableTrait;

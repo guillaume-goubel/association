@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Event{% endblock %}
+
+{% block body %}
+    <h1>Event</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ event.name }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ event.description }}</td>
+            </tr>
+            <tr>
+                <th>PreparationInfos</th>
+                <td>{{ event.preparationInfos }}</td>
+            </tr>
+            <tr>
+                <th>EventDistance</th>
+                <td>{{ event.eventDistance }}</td>
+            </tr>
+            <tr>
+                <th>RdvPlaceName</th>
+                <td>{{ event.rdvPlaceName }}</td>
+            </tr>
+            <tr>
+                <th>RdvLatitude</th>
+                <td>{{ event.rdvLatitude }}</td>
+            </tr>
+            <tr>
+                <th>RdvLongitude</th>
+                <td>{{ event.rdvLongitude }}</td>
+            </tr>
+            <tr>
+                <th>TimeStartAt</th>
+                <td>{{ event.timeStartAt ? event.timeStartAt|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>TimeEndAt</th>
+                <td>{{ event.timeEndAt ? event.timeEndAt|date('H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateStartAt</th>
+                <td>{{ event.dateStartAt ? event.dateStartAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>DateEndAt</th>
+                <td>{{ event.dateEndAt ? event.dateEndAt|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ event.createdAt ? event.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>UpdatedAt</th>
+                <td>{{ event.updatedAt ? event.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_event_index') }}">back to list</a>
+
+    <a href="{{ path('app_event_edit', {'id': event.id}) }}">edit</a>
+
+    {{ include('event/_delete_form.html.twig') }}
+{% endblock %}
