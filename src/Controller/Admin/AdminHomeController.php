@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin', name: 'admin_')]
 
-class adminHomeController extends AbstractController
+class AdminHomeController extends AbstractController
 {
     #[Route('/index', name: 'index')]
     public function index(): Response

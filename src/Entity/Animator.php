@@ -36,7 +36,7 @@ class Animator
     /**
      * @var Collection<int, Event>
      */
-    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'animator')]
+    #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'animators')]
     private Collection $events;
 
     public function __construct()
@@ -133,7 +133,7 @@ class Animator
     {
         if (!$this->events->contains($event)) {
             $this->events->add($event);
-            $event->setAnimator($this);
+            $event->addAnimator($this);
         }
 
         return $this;
@@ -142,12 +142,10 @@ class Animator
     public function removeEvent(Event $event): static
     {
         if ($this->events->removeElement($event)) {
-            // set the owning side to null (unless already changed)
-            if ($event->getAnimator() === $this) {
-                $event->setAnimator(null);
-            }
+            $event->removeAnimator($this);
         }
 
         return $this;
     }
+
 }

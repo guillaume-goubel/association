@@ -15,15 +15,19 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="top-space-margin right-side-bar">
+    <section class="main-section top-space-margin right-side-bar">
         <div class="container">
             <div class="row justify-content-center">
                 
                 <div class="col-12 col-lg-8 blog-standard md-mb-50px sm-mb-40px">
                     <!-- start blog details  -->
                     <div class="col-12 blog-details mb-12"> 
-                        <div class="entry-meta fs-15 text-white">
-                            <span><i class="text-dark-gray feather icon-feather-user"></i><a href="blog-grid.html">{{ app.user.firstName }} {{ app.user.lastName }}</a></span>
+                        <div class="entry-meta fs-15">
+                            <span>
+                            <i class="text-dark-gray feather icon-feather-user"></i>
+                            {{ app.user.firstName }} {{ app.user.lastName }}
+                            </span>
+                            <a href="{{ path('app_logout')}}">Déconnexion</a>
                         </div>
                         <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-6">ACCUEIL</h5>
                         <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>

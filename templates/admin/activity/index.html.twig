@@ -15,66 +15,80 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="top-space-margin right-side-bar">
+    <section class="main-section top-space-margin right-side-bar">
         <div class="container">
             <div class="row justify-content-center">
                 
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
-                    <!-- start blog details  -->
+                    
                     <div class="col-12 blog-details mb-3"> 
-                        <div class="entry-meta fs-15 text-white">
-                            <span><i class="text-dark-gray feather icon-feather-user"></i><a href="blog-grid.html">{{ app.user.firstName }} {{ app.user.lastName }}</a></span>
+                        <div class="entry-meta fs-15">
+                            <span>
+                            <i class="text-dark-gray feather icon-feather-user"></i>
+                            {{ app.user.firstName }} {{ app.user.lastName }}
+                            </span>
+                            <a href="{{ path('app_logout')}}">Déconnexion</a>
                         </div>
                         <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-6">ACTIVITES</h5>
                     </div>
-                    <div class="col-12">
-                        <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Mes activités dont je suis responsable <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
-                        <div class="row mb-50px sm-mb-30px">
-                            
-                            {% for activity in userActivityArray %}
+
+                    {% if not is_granted('ROLE_SUPER_ADMIN') %}
+                        <div class="col-12">
+                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les activités dont je suis responsable<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                            <div class="row mb-50px sm-mb-30px">
                                 
-                                <div class="card col-12 col-md-4 m-1">
-                                    <div class="feature-box-icon" style="background-color:{{activity.color}}">
-                                        {% if activity.pictureType == "image" %}
-                                            <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
-                                        {% else %}
-                                            <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ activity.name|capitalize }}</h5>
-                                        <p class="card-text preformatted">
-                                        
-                                            {% if activity.description|length > 100 %}
-                                                {{ activity.description|slice(0, 100)|raw ~ '...' }}
+                                {% for activity in userActivityArray %}
+                                    
+                                    <div class="card col-12 col-md-4 m-1">
+                                        <div class="feature-box-icon" style="background-color:{{activity.color}}">
+                                            {% if activity.pictureType == "image" %}
+                                                <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
                                             {% else %}
-                                                {{ activity.description|trim|raw }}
+                                                <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
                                             {% endif %}
-                                        
-                                        </p>
-                                        <div class="d-flex align-items-center">
-                                            <a href="#" class="btn btn-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
-                                            <a href="#" class="btn btn-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
                                         </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <div class="fs-10">Responsable(s) de l'activité</div>
-                                        <div class="row">
-                                            {% for user in activity.users %}
-                                                {% if user.id != app.user.id %}
-                                                     <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ activity.name|capitalize }}</h5>
+                                            <p class="card-text preformatted">
+                                            
+                                                {% if activity.description|length > 100 %}
+                                                    {{ activity.description|slice(0, 100)|raw ~ '...' }}
+                                                {% else %}
+                                                    {{ activity.description|trim|raw }}
                                                 {% endif %}
-                                            {% endfor %}
+                                            
+                                            </p>
+                                            <div class="d-flex align-items-center">
+                                                <a href="#" class="btn btn-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
+                                                <a href="#" class="btn btn-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="fs-10">Responsable(s) de l'activité</div>
+                                            <div class="row">
+                                                {% if activity.users is empty %}
+                                                    <div class="col-6 fs-13 text-red fw-600">SANS</div>
+                                                {% else %}
+                                                     {% for user in activity.users %}
+                                                        <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                            {% endfor %}
+                                {% endfor %}
 
+                            </div>
                         </div>
-                    </div>
+                    {% endif %}
+
                     <div class="col-12">
-                        <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les autres activités <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                        
+                        {% if not is_granted('ROLE_SUPER_ADMIN') %}
+                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les autres activités <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                        {% endif %}
+
                         <div class="row mb-50px sm-mb-30px">
                             
                             {% for activity in noUserActivityArray %}
@@ -99,14 +113,20 @@
                                         
                                         </p>
                                         <a href="#" class="btn btn-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
-
+                                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                            <a href="#" class="btn btn-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
+                                        {% endif %}
                                     </div>
                                     <div class="card-footer">
                                         <div class="fs-10">Responsable(s) de l'activité</div>
                                         <div class="row">
-                                            {% for user in activity.users %}
-                                                <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
-                                            {% endfor %}
+                                            {% if activity.users is empty %}
+                                                    <div class="col-6 fs-13 text-red c">SANS</div>
+                                            {% else %}
+                                                {% for user in activity.users %}
+                                                    <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
+                                                {% endfor %}
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -115,7 +135,7 @@
 
                         </div>
                     </div>
-                    <!-- end blog details -->
+
                 </div>
 
             </div>

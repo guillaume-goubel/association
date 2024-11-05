@@ -59,7 +59,7 @@
 					</div>  #}
 					<div class="header-button ms-30px xxl-ms-10px xs-ms-0">
 												
-						{% if is_granted('ROLE_ADMIN') %}
+						{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')  %}
 							<a href="{{ path('admin_index') }}" class="btn btn-yellow btn-small btn-rounded btn-box-shadow btn-switch-text fw-600">
 								<span>
 									<span class="btn-double-text" data-text="Admin">Admin</span> 

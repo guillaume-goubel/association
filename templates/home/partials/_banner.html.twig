@@ -7,7 +7,7 @@
             {% if app.user %}
                 <div style="z-index:9999;" class="d-flex justify-content-center">
                     <div class="text-white fs-14">
-                        Connecté en tant que {{ app.user.userIdentifier }}
+                        Connecté en tant que {{ app.user.firstName }} {{ app.user.lastName }}
                         <a href="{{ path('app_logout')}}">Déconnexion</a>
                     </div>
                 </div>

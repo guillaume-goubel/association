@@ -9,14 +9,18 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin', name: 'admin_')]
 
-class activityController extends AbstractController
+class ActivityController extends AbstractController
 {
     #[Route('/activity', name: 'activity')]
     public function index(ActivityRepository $activityRepository): Response
     {   
         $user = $this->getUser();
-
-        $activities = $activityRepository->findBy(["isEnabled"=>1], ['ordering' => 'ASC']);
+        
+        if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+            $activities = $activityRepository->findAll();
+        }else{
+            $activities = $activityRepository->findBy(["isEnabled" => 1], ['ordering' => 'ASC']);
+        }
 
         $userActivityArray = [];
         $noUserActivityArray = [];

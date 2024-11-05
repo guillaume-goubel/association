@@ -172,6 +172,10 @@ footer .elements-social ul li:last-child {
     font-size: 13px;
     letter-spacing: 1px;
 }
+.main-section{
+    min-height: 80vh;
+}
+
 /* media query responsive */
 @media (max-width: 1199px) {
     header .btn.btn-switch-text.btn-small > span {

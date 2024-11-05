@@ -1,6 +1,4 @@
-<header class="header-with-topbar">
-
-	<!-- start navigation -->
+<header>
 	<nav style="background-color:#1D2F8F!important;" class="navbar navbar-expand-lg header-transparent header-reverse" data-header-hover="dark">
 		<div class="container-fluid">
 			<div class="col-auto col-lg-2 me-lg-0 me-auto d-flex align-items-center">
@@ -21,7 +19,13 @@
 					<ul class="navbar-nav"> 
 						<li class="nav-item"><a href="{{ path('admin_index') }}" class="nav-link">Accueil</a></li>
 						<li class="nav-item"><a href="{{ path('admin_activity') }}" class="nav-link">Activités</a></li>
-						<li class="nav-item"><a href="#" class="nav-link">Evénements</a></li>
+						<li class="nav-item"><a href="{{ path('admin_event') }}" class="nav-link">Evénements</a></li>
+						
+						{% if is_granted('ROLE_SUPER_ADMIN') %}
+							<li class="nav-item"><a href="{{ path('admin_administrator') }}" class="nav-link">Administrateurs</a></li>
+							<li class="nav-item"><a href="{{ path('admin_animator') }}" class="nav-link">Animateurs</a></li>
+						{% endif %}
+
 					</ul>
 				</div>
 			</div>
@@ -29,7 +33,7 @@
 				<div class="header-icon">
 					<div class="header-button ms-30px xxl-ms-10px xs-ms-0">
 												
-						{% if is_granted('ROLE_ADMIN') %}
+						{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
 							<a href="{{ path('home_index') }}" class="btn btn-yellow btn-small btn-rounded btn-box-shadow btn-switch-text fw-600">
 								<span>
 									<span class="btn-double-text" data-text="Application">Application</span> 
@@ -48,5 +52,4 @@
 			</div>
 		</div>
 	</nav>
-	
 </header>

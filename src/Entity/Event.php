@@ -2,13 +2,18 @@
 
 namespace App\Entity;
 
-use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
+use App\Util\TimestampableTrait;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EventRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 class Event
 {
+    use TimestampableTrait;
+    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -48,7 +53,26 @@ class Event
     private ?\DateTimeInterface $dateEndAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]
-    private ?Animator $animator = null;
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Activity $activity = null;
+
+    /**
+     * @var Collection<int, Animator>
+     */
+    #[ORM\ManyToMany(targetEntity: Animator::class, inversedBy: 'events')]
+    private Collection $animators;
+
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
+    #[ORM\ManyToOne]
+    private ?User $lastUserUpdate = null;
+
+    public function __construct()
+    {
+        $this->animators = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -187,15 +211,64 @@ class Event
         return $this;
     }
 
-    public function getAnimator(): ?Animator
+    public function getActivity(): ?Activity
     {
-        return $this->animator;
+        return $this->activity;
     }
 
-    public function setAnimator(?Animator $animator): static
+    public function setActivity(?Activity $activity): static
     {
-        $this->animator = $animator;
+        $this->activity = $activity;
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Animator>
+     */
+    public function getAnimators(): Collection
+    {
+        return $this->animators;
+    }
+
+    public function addAnimator(Animator $animator): static
+    {
+        if (!$this->animators->contains($animator)) {
+            $this->animators->add($animator);
+        }
+
+        return $this;
+    }
+
+    public function removeAnimator(Animator $animator): static
+    {
+        $this->animators->removeElement($animator);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLastUserUpdate(): ?User
+    {
+        return $this->lastUserUpdate;
+    }
+
+    public function setLastUserUpdate(?User $lastUserUpdate): static
+    {
+        $this->lastUserUpdate = $lastUserUpdate;
+
+        return $this;
+    }
+
 }

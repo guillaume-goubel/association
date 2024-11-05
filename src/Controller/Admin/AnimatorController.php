@@ -8,14 +8,13 @@ use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/admin', name: 'admin_')]
 
-class EventController extends AbstractController
+class AnimatorController extends AbstractController
 {
-    #[Route('/event', name: 'event')]
+    #[Route('/animator', name: 'animator')]
     public function index(): Response
-    {   
-        
-        return $this->render('admin/event/index.html.twig', [
+    {
+        return $this->render('admin/animator/index.html.twig', [
+            'controller_name' => 'AnimatorController',
         ]);
-
     }
 }
