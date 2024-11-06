@@ -112,7 +112,7 @@ class EventType extends AbstractType
                 'label' => 'Termine le ... ',
                 'attr' => ['class' => 'form-control'],
                 'widget' => 'single_text',
-                'required' => true,
+                'required' => false,
             ])
             ->add('activity', EntityType::class, [
                 'class' => Activity::class,

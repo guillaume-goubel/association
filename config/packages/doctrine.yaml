@@ -24,6 +24,16 @@ doctrine:
                 alias: App
         controller_resolver:
             auto_mapping: true
+        dql:
+            datetime_functions:
+                DAY: DoctrineExtensions\Query\Mysql\Day
+                MONTH: DoctrineExtensions\Query\Mysql\Month
+                YEAR: DoctrineExtensions\Query\Mysql\Year
+                DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
+            string_functions:
+                IFNULL: DoctrineExtensions\Query\Mysql\IfNull
+                RAND: DoctrineExtensions\Query\Mysql\Rand
+                FIELD: DoctrineExtensions\Query\Mysql\Field
 
 when@test:
     doctrine:

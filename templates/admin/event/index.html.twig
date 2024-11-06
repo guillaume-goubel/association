@@ -17,7 +17,7 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="main-section top-space-margin right-side-bar">
+    <section class="main-section right-side-bar">
         <div class="container">
             <div class="row">
                 
@@ -31,7 +31,7 @@
                                 </span>
                                 <a href="{{ path('app_logout')}}">Déconnexion</a>
                             </div>
-                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS</h5>
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS - Liste</h5>
                         </div>
                         <div class="col-2">
                             <a href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-medium text-base-color me-2"></i>Ajouter</a>
@@ -46,18 +46,18 @@
                                 <div class="input-group">
                                     <!-- Élément select -->
                                     <select name="monthChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
-                                        {% for item in months %}
-                                            <option value="{{item.month_number}}">{{item.month_name}}</option>
+                                        {% for item in monthsList %}
+                                            <option {{ monthChoice == item.month_number ? 'selected' : '' }} value="{{item.month_number}}">{{item.month_name}}</option>
                                         {% endfor %}
                                     </select>
                                     <select name="yearChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
-                                        {% for item in years %}
-                                            <option value="{{item.year}}">{{item.year}}</option>
+                                        {% for item in yearsList %}
+                                            <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{item.year}}">{{item.year}}</option>
                                         {% endfor %}
                                     </select>
                                     <select name="creatorChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
-                                        {% for item in creators %}
-                                            <option value="{{item.user_id}}">{{item.creator}}</option>
+                                        {% for item in creatorsList %}
+                                            <option {{ creatorChoice == item.user_id ? 'selected' : '' }} value="{{item.user_id}}">{{item.creator}}</option>
                                         {% endfor %}
                                     </select>
                                     <!-- Bouton de recherche -->
@@ -71,7 +71,11 @@
                 <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5">
 
                     {% for event in events %}
-                        {% include 'main_partials/_event_card.html.twig' %}
+                        {% if event.activity.type == 'regular' %}
+                            {% include 'main_partials/_event_regular_card.html.twig' %}
+                        {% else %}
+                            {% include 'main_partials/_event_journey_card.html.twig' %}    
+                        {% endif %}
                     {% endfor %}
                     
                 </div>
@@ -99,6 +103,8 @@
         </a>
     </div>
     <!-- end scroll progress -->
+
+    {% include 'main_partials/notifications/_notyFlashMessage.html.twig' %}
 
 </body>
 

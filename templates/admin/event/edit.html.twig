@@ -1,13 +1,87 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Event{% endblock %}
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+<style>
+    #pac-container{
+        min-width: 500px ;
+    }
+    .aside-form{
+        padding-left:25px;
+    }
+    #pac-card{
+        background-color:#1d2f8f;
+        color:white;
+    }
+    .gm-style .gm-style-iw-tc::after {
+        background: white!important;
+    }
+</style>
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Event</h1>
 
-    {{ include('event/_form.html.twig', {'button_label': 'Update'}) }}
+<body data-mobile-nav-style="classic">
 
-    <a href="{{ path('app_event_index') }}">back to list</a>
+    <!-- start header -->
+	{% include 'admin/partials/_header.html.twig' %}
+	<!-- end header -->
 
-    {{ include('event/_delete_form.html.twig') }}
+    <!-- start section -->
+    <section class="main-section right-side-bar">
+        <div class="container">
+            <div class="row justify-content-center">
+                
+                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                    <div class="row blog-details mb-3 d-flex align-items-center"> 
+                        <div class="col-10">
+                            <div class="entry-meta fs-15">
+                                <span>
+                                <i class="text-dark-gray feather icon-feather-user"></i>
+                                {{ app.user.firstName }} {{ app.user.lastName }}
+                                </span>
+                                <a href="{{ path('app_logout')}}">Déconnexion</a>
+                            </div>
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS - Modifier</h5>
+                        </div>
+                        <div class="col-2">
+                            <a href="{{ path('admin_event_index') }}"><i class="fa-solid fa-circle-left align-middle icon-medium text-base-color me-2"></i>Retour</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-10">
+                    <div class="row mb-50px sm-mb-30px">     
+                        {{ include('admin/event/_form.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+        {{ include('admin/event/_delete_form.html.twig') }} 
+
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+    <!-- start scroll progress -->
+    <div class="scroll-progress d-none d-xxl-block">
+        <a href="#" class="scroll-top" aria-label="scroll">
+            <span class="scroll-text">
+                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
+            </span>
+            <span class="scroll-line">
+                <span class="scroll-point"></span>
+            </span>
+        </a>
+    </div>
+    <!-- end scroll progress -->
+
+</body>
 {% endblock %}

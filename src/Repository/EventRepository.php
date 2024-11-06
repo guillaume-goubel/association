@@ -54,7 +54,7 @@ class EventRepository extends ServiceEntityRepository
 
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "    SELECT DISTINCT(YEAR(created_at)) as year
+        $sql = "    SELECT DISTINCT(YEAR(date_start_at)) as year
                     FROM `event`
                     ORDER BY year DESC
                ";
@@ -68,13 +68,13 @@ class EventRepository extends ServiceEntityRepository
     {
         $sql_yearChoice = "";
         if ($yearChoice != null) {
-            $sql_yearChoice = " WHERE YEAR(A.created_at) = :yearChoice ";
+            $sql_yearChoice = " WHERE YEAR(A.date_start_at) = :yearChoice ";
         }
 
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "SELECT DISTINCT(MONTH(A.created_at)) AS month_number,
-                    ELT(MONTH(A.created_at),
+        $sql = "SELECT DISTINCT(MONTH(A.date_start_at)) AS month_number,
+                    ELT(MONTH(A.date_start_at),
                         'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
                         'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre') AS month_name
                 FROM `event` A
@@ -113,21 +113,21 @@ class EventRepository extends ServiceEntityRepository
         $stmt = $this->createQueryBuilder('e');
 
         if ($yearChoice) {
-            $stmt->andwhere('YEAR(e.createdAt) = :year');
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
             $stmt->setParameter('year', $yearChoice);
         }
 
-        // if ($monthChoice) {
-        //     $stmt->andwhere('MONTH(e.createdAt) = :month');
-        //     $stmt->setParameter('month', $monthChoice);
-        // }
+        if ($monthChoice) {
+            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
+            $stmt->setParameter('month', $monthChoice);
+        }
 
-        // if ($creatorChoice) {
-        //     $stmt->andwhere('e.user = :user');
-        //     $stmt->setParameter('user', $creatorChoice);
-        // }
+        if ($creatorChoice) {
+            $stmt->andwhere('e.user = :user');
+            $stmt->setParameter('user', $creatorChoice);
+        }
 
-        $stmt->addOrderBy('e.createdAt', 'DESC');
+        $stmt->addOrderBy('e.dateStartAt', 'DESC');
         return $stmt->getQuery()->getResult();
     }
 

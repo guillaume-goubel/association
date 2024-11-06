@@ -26,15 +26,18 @@ class EventController extends AbstractController
         $eventList = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice);
 
         // Distinct month / year createdAt for select
-        $years = $eventRepository->getDistincYearCreatedAt();
-        $months = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
-        $creators = $eventRepository->getDistinctCreator();
+        $yearsList = $eventRepository->getDistincYearCreatedAt();
+        $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
+        $creatorsList = $eventRepository->getDistinctCreator();
 
         return $this->render('admin/event/index.html.twig', [
             'events' => $eventList,
-            'years' => $years,
-            'months' => $months,
-            'creators' => $creators,
+            'yearsList' => $yearsList,
+            'monthsList' => $monthsList,
+            'creatorsList' => $creatorsList,
+            'yearChoice' => $yearChoice,
+            'monthChoice' => $monthChoice,
+            'creatorChoice' => $creatorChoice,
         ]);
     }
 
@@ -88,16 +91,36 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Event $event, EntityManagerInterface $entityManager): Response
-    {
-        $form = $this->createForm(EventType::class, $event);
+    public function edit(Request $request, Event $event, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
+    {   
+        $user = $this->getUser();
+        $userActivityArray = [];
+
+        if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+            foreach ($activityRepository->findAll() as $activity) {
+                array_push($userActivityArray, $activity->getId());
+            }
+        }else{
+            foreach ($activityRepository->findBy(["isEnabled" => 1], ['ordering' => 'ASC']) as $activity) {
+                if ($activity->isActivityInUserControl($user) === true) {
+                    array_push($userActivityArray, $activity->getId());
+                }
+            }
+        }
+        
+        $form = $this->createForm(EventType::class, $event, [
+            'activity_ids' => $userActivityArray,
+        ]);
+        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_event_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin_event_index', [], Response::HTTP_SEE_OTHER);
         }
+
+        $this->addFlash('notice', 'Opération effectuée');
 
         return $this->render('admin/event/edit.html.twig', [
             'event' => $event,
