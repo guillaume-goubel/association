@@ -17,10 +17,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventController extends AbstractController
 {
     #[Route('/index', name: 'index', methods: ['GET'])]
-    public function index(EventRepository $eventRepository): Response
+    public function index(Request $request, EventRepository $eventRepository): Response
     {
+        $yearChoice = $request->query->get('yearChoice') ?? date("Y");
+        $monthChoice = $request->query->get('monthChoice') ?? date("m");
+        $creatorChoice = $request->query->get('creatorChoice') ?? $this->getUser()->getId();
+
+        $eventList = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice);
+
+        // Distinct month / year createdAt for select
+        $years = $eventRepository->getDistincYearCreatedAt();
+        $months = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
+        $creators = $eventRepository->getDistinctCreator();
+
         return $this->render('admin/event/index.html.twig', [
-            'events' => $eventRepository->findAll(),
+            'events' => $eventList,
+            'years' => $years,
+            'months' => $months,
+            'creators' => $creators,
         ]);
     }
 

@@ -49,4 +49,86 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getDistincYearCreatedAt()
+    {
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "    SELECT DISTINCT(YEAR(created_at)) as year
+                    FROM `event`
+                    ORDER BY year DESC
+               ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
+    public function getDistinctMonthCreatedAt($yearChoice)
+    {
+        $sql_yearChoice = "";
+        if ($yearChoice != null) {
+            $sql_yearChoice = " WHERE YEAR(A.created_at) = :yearChoice ";
+        }
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT DISTINCT(MONTH(A.created_at)) AS month_number,
+                    ELT(MONTH(A.created_at),
+                        'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                        'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre') AS month_name
+                FROM `event` A
+                " . $sql_yearChoice . "
+
+                ORDER BY month_number";
+
+        $stmt = $conn->prepare($sql);
+        if ($yearChoice != null) {
+            $stmt->bindValue(':yearChoice', $yearChoice);
+        }
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
+    public function getDistinctCreator()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "    SELECT U.id AS user_id, CONCAT(U.last_name, ' ', U.first_name) AS creator
+                    FROM `event` E 
+                    LEFT JOIN user U 
+                    ON U.id = E.user_id
+
+                    GROUP BY U.id
+                    ORDER BY U.last_name ASC
+               ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
+    public function getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice)
+    {
+        $stmt = $this->createQueryBuilder('e');
+
+        if ($yearChoice) {
+            $stmt->andwhere('YEAR(e.createdAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
+        // if ($monthChoice) {
+        //     $stmt->andwhere('MONTH(e.createdAt) = :month');
+        //     $stmt->setParameter('month', $monthChoice);
+        // }
+
+        // if ($creatorChoice) {
+        //     $stmt->andwhere('e.user = :user');
+        //     $stmt->setParameter('user', $creatorChoice);
+        // }
+
+        $stmt->addOrderBy('e.createdAt', 'DESC');
+        return $stmt->getQuery()->getResult();
+    }
+
 }

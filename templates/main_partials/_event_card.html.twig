@@ -4,13 +4,13 @@
 
         <span class="fs-18 mb-25px d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
         <div class="row align-items-center">
-            <div class="col-6 pe-sm-0">
-                <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
+            <div style="width:135px;" class="col-6 pe-sm-0 me-3">
+                <div style="height:60px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
 
                     {% if event.activity.pictureType == "image" %}
-                        <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
+                        <img class="my-2" style="width: 35px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
                     {% else %}
-                        <i class="{{ event.activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
+                        <i class="{{ event.activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
                     {% endif %}
                     
                     <div class="text-white px-1">
@@ -29,8 +29,7 @@
                     
                         <div class="avatar-stack">
                             {% for animator in event.animators %}
-                                <img style="width: 60px;border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar">
-                                {# <div><p>{{animator.firstname|capitalize}}</p></div> #}
+                                <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar">
                             {% endfor %}
                         </div>
                         
@@ -42,7 +41,20 @@
         <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
             <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{event.name}}</li>
             <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>{{event.rdvCity}}</li>
-            <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex"><i class="feather icon-feather-clock me-5px"></i><span class="me-5">{{event.timeStartAt|date('H:i')}}</span> <span>{{event.timeEndAt|date('H:i')}}</span></li>
+            <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex">
+            <i class="feather icon-feather-clock me-5px"></i>
+                
+                 <div style="width:95px;" class="me-5 d-flex">
+                    <div class="fs-11 me-1">Début :</div>
+                    <div>{{event.timeStartAt|date('H:i')}}</div>
+                 </div>
+ 
+                 <div style="width:95px;" class="d-flex">
+                    <div class="fs-11 me-1">Fin :</div>
+                    <div>{{event.timeEndAt|date('H:i')}}</div>
+                </div>
+
+            </li>
             <li style="height:75px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
                 <div class="fs-12 mb-4">Rendez-vous</div>
                 <a style="color:#275997;text-decoration: underline;" href="#" class="link-to-map" data-rdv="{{event.rdvAddress}} {{event.rdvPlaceName}}" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">{{event.rdvAddress}} {{event.rdvPlaceName}}</div></a>
@@ -52,7 +64,7 @@
         </ul>
         <div class="pricing-footer w-100" style="height:35px;">
             {% if event.description != null or event.preparationInfos != null %}
-                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-light-gray btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
             {% endif %}
         </div>
     </div>

@@ -35,18 +35,21 @@
             <div class="row justify-content-center">
                 
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
-                    
-                    <div class="col-12 blog-details mb-3"> 
-                        <div class="entry-meta fs-15">
-                            <span>
-                            <i class="text-dark-gray feather icon-feather-user"></i>
-                            {{ app.user.firstName }} {{ app.user.lastName }}
-                            </span>
-                            <a href="{{ path('app_logout')}}">Déconnexion</a>
+                    <div class="row blog-details mb-3 d-flex align-items-center"> 
+                        <div class="col-10">
+                            <div class="entry-meta fs-15">
+                                <span>
+                                <i class="text-dark-gray feather icon-feather-user"></i>
+                                {{ app.user.firstName }} {{ app.user.lastName }}
+                                </span>
+                                <a href="{{ path('app_logout')}}">Déconnexion</a>
+                            </div>
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS</h5>
                         </div>
-                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-6">Créer un NOUVEL EVENEMENT</h5>
+                        <div class="col-2">
+                            <a href="{{ path('admin_event_index') }}"><i class="fa-solid fa-circle-left align-middle icon-medium text-base-color me-2"></i>Retour</a>
+                        </div>
                     </div>
-
                 </div>
 
                 <div class="col-10">

@@ -19,11 +19,10 @@
     <!-- start section -->
     <section class="main-section top-space-margin right-side-bar">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row">
                 
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
-                    <div class="row blog-details mb-3"> 
-                        
+                    <div class="row blog-details d-flex align-items-center"> 
                         <div class="col-10">
                             <div class="entry-meta fs-15">
                                 <span>
@@ -34,13 +33,40 @@
                             </div>
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS</h5>
                         </div>
-                       
                         <div class="col-2">
-                            <a href="{{ path('admin_event_new') }}">Create new</a>
+                            <a href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-medium text-base-color me-2"></i>Ajouter</a>
                         </div>
-
                     </div>
                 </div>
+
+                <form action="" method="get">
+                    <div class="col-12 blog-standard mb-3">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <!-- Élément select -->
+                                    <select name="monthChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
+                                        {% for item in months %}
+                                            <option value="{{item.month_number}}">{{item.month_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select name="yearChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
+                                        {% for item in years %}
+                                            <option value="{{item.year}}">{{item.year}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <select name="creatorChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
+                                        {% for item in creators %}
+                                            <option value="{{item.user_id}}">{{item.creator}}</option>
+                                        {% endfor %}
+                                    </select>
+                                    <!-- Bouton de recherche -->
+                                    <button style="border-radius:8px;" class="btn btn-medium btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto" type="submit"><i style="font-size:15px;margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
                 <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5">
 
