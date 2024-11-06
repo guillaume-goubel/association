@@ -4,21 +4,6 @@
 {% endblock %}
 
 {% block stylesheets %}
-<style>
-    #pac-container{
-        min-width: 500px ;
-    }
-    .aside-form{
-        padding-left:25px;
-    }
-    #pac-card{
-        background-color:#1d2f8f;
-        color:white;
-    }
-    .gm-style .gm-style-iw-tc::after {
-        background: white!important;
-    }
-</style>
 {% endblock %}
 
 {% block body %}
@@ -82,6 +67,16 @@
         </a>
     </div>
     <!-- end scroll progress -->
+    
+    {% include 'main_partials/notifications/_notyFlashMessage.html.twig' %}
 
 </body>
+{% endblock %}
+
+{% block baseJavascripts %}   
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base', 'admin-event']) }}
+    {% endblock %}
+
 {% endblock %}

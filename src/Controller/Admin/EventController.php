@@ -7,6 +7,7 @@ use App\Form\EventType;
 use App\Repository\EventRepository;
 use App\Repository\ActivityRepository;
 use App\Service\EventService;
+use App\Service\MediaService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,21 +24,20 @@ class EventController extends AbstractController
         $monthChoice = $request->query->get('monthChoice') ?? date("m");
         $creatorChoice = $request->query->get('creatorChoice') ?? $this->getUser()->getId();
 
-        $eventList = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice);
-
         // Distinct month / year createdAt for select
         $yearsList = $eventRepository->getDistincYearCreatedAt();
         $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
         $creatorsList = $eventRepository->getDistinctCreator();
 
         return $this->render('admin/event/index.html.twig', [
-            'events' => $eventList,
+            'events' => $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice),
             'yearsList' => $yearsList,
             'monthsList' => $monthsList,
             'creatorsList' => $creatorsList,
             'yearChoice' => $yearChoice,
             'monthChoice' => $monthChoice,
             'creatorChoice' => $creatorChoice,
+            'isEventActionsButtonVisible' => true,
         ]);
     }
 
@@ -70,23 +70,20 @@ class EventController extends AbstractController
                         
             $eventService->process($event);
 
+            if(!in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+                $event->setUser($user);
+            }
+            
             $entityManager->persist($event);
             $entityManager->flush();
-
+            
+            $this->addFlash('success', 'Opération effectuée');
             return $this->redirectToRoute('admin_event_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/event/new.html.twig', [
             'event' => $event,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Event $event): Response
-    {
-        return $this->render('admin/event/show.html.twig', [
-            'event' => $event,
         ]);
     }
 
@@ -115,12 +112,19 @@ class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $eventService->process($event);
+            
+            if(!in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+                $event->setUser($user);
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('admin_event_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Opération effectuée');
+            return $this->redirectToRoute('admin_event_edit', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        $this->addFlash('notice', 'Opération effectuée');
 
         return $this->render('admin/event/edit.html.twig', [
             'event' => $event,
@@ -128,14 +132,62 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, Event $event, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/delete', name: 'delete', methods: ['GET'])]
+    public function delete(Request $request, Event $event, EntityManagerInterface $entityManager, EventService $eventService): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$event->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($event);
-            $entityManager->flush();
-        }
+        // delete images
+        $eventService->deleteAllPictures($event); 
 
+        // Edit data base 
+        $entityManager->remove($event);
+        $entityManager->flush();
+        
+        $this->addFlash('success', 'Opération effectuée');
         return $this->redirectToRoute('admin_event_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/pictureFileMain_delete', name: 'pictureFileMain_delete')]
+    public function pictureFileMainDelete(Event $event, MediaService $mediaService, EntityManagerInterface $em)
+    {
+        // Delete data
+        $mediaService->delete($event->getMainPicture());
+
+        // Delete on base
+        $event->setMainPicture(NULL);
+        $em->flush();
+
+        $this->addFlash('success', 'Opération effectuée');
+        return $this->redirectToRoute('admin_event_edit', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
+
+    }
+
+    #[Route('/{id}/pictureFile2_delete', name: 'pictureFile2_delete')]
+    public function pictureFile2Delete(Event $event, MediaService $mediaService, EntityManagerInterface $em)
+    {
+        // Delete data
+        $mediaService->delete($event->getPicture2());
+
+        // Delete on base
+        $event->setPicture2(NULL);
+        $em->flush();
+
+        $this->addFlash('success', 'Opération effectuée');
+        return $this->redirectToRoute('admin_event_edit', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
+
+    }
+
+    #[Route('/{id}/pictureFile3_delete', name: 'pictureFile3_delete')]
+    public function pictureFile3Delete(Event $event, MediaService $mediaService, EntityManagerInterface $em)
+    {
+        // Delete data
+        $mediaService->delete($event->getPicture3());
+
+        // Delete on base
+        $event->setPicture3(NULL);
+        $em->flush();
+
+        $this->addFlash('success', 'Opération effectuée');
+        return $this->redirectToRoute('admin_event_edit', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
+
     }
 }

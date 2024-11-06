@@ -131,4 +131,36 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
+    public function findNextUpcomingEvent()
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0); // On enlève l'heure pour exclure toute date du jour
+
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.dateStartAt > :today')        
+            ->andWhere('e.isEnabled = :isEnabled')      
+            ->setParameter('today', $today)
+            ->setParameter('isEnabled', true)
+            ->orderBy('e.dateStartAt', 'ASC')          
+            ->setMaxResults(1)                          
+            ->getQuery()
+            ->getOneOrNullResult();                     
+    }
+
+    public function findLastPastEvent()
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.dateStartAt < :today')        
+            ->andWhere('e.isEnabled = :isEnabled')     
+            ->setParameter('today', $today)
+            ->setParameter('isEnabled', true)
+            ->orderBy('e.dateStartAt', 'DESC')          
+            ->setMaxResults(1)                         
+            ->getQuery()
+            ->getOneOrNullResult();                    
+    }
+
 }

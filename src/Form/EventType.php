@@ -28,7 +28,7 @@ class EventType extends AbstractType
 
         $builder
             ->add('name', TextType::class, [
-                'label' => "Le nom de l'événement",
+                'label' => "Le nom de l'événement ou une courte description",
                 'attr' => ['class' => 'form-control'],
                 'required' => false,
             ])
@@ -138,7 +138,7 @@ class EventType extends AbstractType
                 'required' => false,
             ])
             ->add('user', EntityType::class, [
-                'label' => 'Rattacher un administrateur',
+                'label' => 'Rattacher à un administrateur',
                 'attr' => ['class' => 'form-control'],
                 'class' => User::class,
                 'choice_label' => 'completeName',

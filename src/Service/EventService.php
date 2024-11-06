@@ -30,24 +30,37 @@ class EventService{
         if ($event->getPicture2File()) {
             $path = $this->mediaService->upload($event->getPicture2File());
 
-            if ($event->getPicture2File()) {
-                $this->mediaService->delete($event->getPicture2File());
+            if ($event->getPicture2()) {
+                $this->mediaService->delete($event->getPicture2());
             }
 
-            $event->setPicture2File($path);
+            $event->setPicture2($path);
         }
 
         if ($event->getPicture3File()) {
             $path = $this->mediaService->upload($event->getPicture3File());
 
-            if ($event->getPicture3File()) {
-                $this->mediaService->delete($event->getPicture3File());
+            if ($event->getPicture3()) {
+                $this->mediaService->delete($event->getPicture3());
             }
 
-            $event->setPicture3File($path);
+            $event->setPicture3($path);
+        }
+    }
+
+    public function deleteAllPictures(Event $event){
+
+        if ($event->getMainPicture()) {
+            $this->mediaService->delete($event->getMainPicture());
         }
 
+        if ($event->getPicture2()) {
+            $this->mediaService->delete($event->getPicture2());
+        }
 
+        if ($event->getPicture3()) {
+            $this->mediaService->delete($event->getPicture3());
+        }
 
     }
 

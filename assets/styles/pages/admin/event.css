@@ -1,5 +1,29 @@
+#pac-container{
+    min-width: 500px ;
+}
+.aside-form{
+    padding-left:25px;
+}
+#pac-card{
+    background-color:#1d2f8f;
+    color:white;
+}
+.gm-style .gm-style-iw-tc::after {
+    background: white!important;
+}
 .blog-details{
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.image-main-container-event-form {
+    margin-top: 9px;
+}
+
+.image-container-event-form{
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    border: 1px solid gray;
+    
 }

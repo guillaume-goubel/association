@@ -166,6 +166,13 @@ footer .elements-social ul li:last-child {
     background-color: inherit;
     text-decoration: none;
 }
+.flash-element{
+    z-index: 99999;
+    position: absolute;
+    top: 105px;
+    left: 50%;
+    transform: translateX(-50%);
+}
 /* map */
 .infowindow .mb-3 {
     font-weight: 500;

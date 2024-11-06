@@ -1,4 +1,8 @@
-
-{% for label, messages in app.flashes %}
-    <div>hello</div>
+{% for type, css_class in {'notice': 'alert-info', 'success': 'alert-success', 'error': 'alert-danger'} %}
+    {% for message in app.flashes(type) %}
+        <div class="flash-element alert {{ css_class }} alert-dismissable">
+            <a href="#" class="close float-end" data-bs-dismiss="alert" aria-label="close"><i class="feather icon-feather-x"></i></a>
+            {{ message }}
+        </div>
+    {% endfor %}
 {% endfor %}

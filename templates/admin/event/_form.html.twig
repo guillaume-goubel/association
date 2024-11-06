@@ -56,26 +56,151 @@
             {{ form_row(form.preparationInfos) }}
         </div>
 
-        <div class="col-12 mt-1">
+        <div class="col-12 mt-1 {{ (is_granted('ROLE_SUPER_ADMIN')) ? '' : 'd-none' }}">
             {{ form_row(form.user) }}
         </div>
+
     </div>
 
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5"><i class="fa-solid fa-image align-middle icon-large text-base-color me-1"></i>LES PHOTOS<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
     <div class="row d-flex aside-form">  
+        
         <div class="col-6 mt-1">
+
             {{ form_row(form.mainPictureFile) }}
+
+            {% if event != null %}
+                {% if event.mainPicture != null %}   
+                    
+                    <div class="image-main-container-event-form d-flex">
+                        <div class="image-container-event-form" style="background-image: url( {{ customAsset('data/uploads/photos/' ~ event.mainPicture ) }} );">
+                        </div>
+
+                        <div class="ps-4">
+                            <div class="fs-13">Voici votre image principale actuelle</div>
+                            <div>
+                                <a href="#" class="btn btn-very-small btn-red left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto" 
+                                    data-bs-toggle="modal" data-bs-target="#pictureFileMain-deleteModal-{{ event.id }}">
+                                    Effacer
+                                </a>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <!-- DELETE main picture MODALE -->
+                    <div class="modal fade" id="pictureFileMain-deleteModal-{{ event.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fs-14">Confirmer la suppression de l'image ?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark-gray" data-bs-dismiss="modal">Annuler</button>
+                                <a href="{{ path('admin_event_pictureFileMain_delete', {id: event.id}) }}"
+                                    class="btn btn-red">
+                                    Supprimer
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                {% endif %}
+            {% endif %}
+
         </div>
 
         <div class="col-6 mt-1">
             {{ form_row(form.picture2File) }}
+
+            {% if event != null %}
+                {% if event.picture2 != null %}   
+                    
+                    <div class="image-main-container-event-form d-flex">
+                        <div class="image-container-event-form" style="background-image: url( {{ customAsset('data/uploads/photos/' ~ event.picture2 ) }} );">
+                        </div>
+
+                        <div class="ps-4">
+                            <div class="fs-13">Voici votre image n°2 actuelle</div>
+                            <div>
+                                <a href="#" class="btn btn-very-small btn-red left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto" 
+                                    data-bs-toggle="modal" data-bs-target="#pictureFile2-deleteModal-{{ event.id }}">
+                                    Effacer
+                                </a>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <!-- DELETE main picture MODALE -->
+                    <div class="modal fade" id="pictureFile2-deleteModal-{{ event.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fs-14">Confirmer la suppression de l'image ?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark-gray" data-bs-dismiss="modal">Annuler</button>
+                                <a href="{{ path('admin_event_pictureFile2_delete', {id: event.id}) }}"
+                                    class="btn btn-red">
+                                    Supprimer
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                {% endif %}
+            {% endif %}
+
         </div>
 
-        <div class="col-6 mt-1">
+        <div class="col-6 mt-4">
             {{ form_row(form.picture3File) }}
+
+            {% if event != null %}
+                {% if event.picture3 != null %}   
+                    
+                    <div class="image-main-container-event-form d-flex">
+                        <div class="image-container-event-form" style="background-image: url( {{ customAsset('data/uploads/photos/' ~ event.picture3 ) }} );">
+                        </div>
+
+                        <div class="ps-4">
+                            <div class="fs-13">Voici votre image n°2 actuelle</div>
+                            <div>
+                                <a href="#" class="btn btn-very-small btn-red left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto" 
+                                    data-bs-toggle="modal" data-bs-target="#pictureFile3-deleteModal-{{ event.id }}">
+                                    Effacer
+                                </a>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <!-- DELETE picture3 MODALE -->
+                    <div class="modal fade" id="pictureFile3-deleteModal-{{ event.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title fs-14">Confirmer la suppression de l'image ?</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-dark-gray" data-bs-dismiss="modal">Annuler</button>
+                                <a href="{{ path('admin_event_pictureFile3_delete', {id: event.id}) }}"
+                                    class="btn btn-red">
+                                    Supprimer
+                                </a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                {% endif %}
+            {% endif %}
+
         </div>
     </div>
-
 
     {# AUTOCOMPLETION PART -- start #}
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5 mb-2"><i class="fa-solid fa-map-location-dot icon-large text-base-color me-1"></i>LE LIEU DE RENDEZ-VOUS<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
@@ -135,96 +260,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvTjdmHt6ljHHGave6JCeDyoBRjRzOlhs&libraries=places&v=weekly" crossorigin=""></script>
 <script>
     
-    {# // MAP AUTO COMPLETION
-    function initMap() {
-                    
-        const map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: 50.62925, lng: 3.057256 },
-                zoom: 13,
-                mapTypeControl: false,
-            });
-            const card = document.getElementById("pac-card");
-            const input = document.getElementById("pac-input");
-            const options = {
-                fields: ["formatted_address", "geometry", "name", "address_components"],
-                strictBounds: false,
-                types: ["address" ],
-                // componentRestrictions: { country: "fr" }
-            };
-
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(card);
-
-        const autocomplete = new google.maps.places.Autocomplete(input, options);
-        autocomplete.bindTo("bounds", map);
-
-        const infowindow = new google.maps.InfoWindow();
-        const infowindowContent = document.getElementById("infowindow-content");
-
-        infowindow.setContent(infowindowContent);
-
-        const marker = new google.maps.Marker({
-            map,
-            anchorPoint: new google.maps.Point(0, -29),
-        });
-
-        autocomplete.addListener("place_changed", () => {
-            
-            infowindow.close();
-            marker.setVisible(false);
-
-            const place = autocomplete.getPlace();
-
-            function autoCompletionForm(place) {
-                
-                console.log(place);
-
-                document.getElementById("event_rdvAddress").value = "";
-                document.getElementById("event_rdvCity").value = "";
-
-                if (!place.geometry || !place.geometry.location) {
-                    window.alert("No details available for input: '" + place.name + "'");
-                    return;
-                }
-
-                if (place.geometry.location) {
-                    document.getElementById("event_rdvLatitude").value = place.geometry.location.lat();
-                    document.getElementById("event_rdvLongitude").value = place.geometry.location.lng();
-                }
-
-                if (place.address_components) {
-
-                    let address_components = place.address_components;
-                    
-                    let steetVal = address_components[0].long_name;
-                    document.getElementById("event_rdvAddress").value = place.formatted_address;
-
-                    let cityName = address_components[2].long_name;
-                    document.getElementById("event_rdvCity").value = cityName;
-
-                }
-
-            }
-
-            if (place.geometry && place.geometry.location && place.address_components) {
-                autoCompletionForm(place);
-            }
-
-            // If the place has a geometry, then present it on a map.
-            if (place.geometry.viewport) {
-                map.fitBounds(place.geometry.viewport);
-            } else {
-                map.setCenter(place.geometry.location);
-                map.setZoom(17);
-            }
-
-            marker.setPosition(place.geometry.location);
-            marker.setVisible(true);
-            infowindowContent.children["place-name"].textContent = place.formatted_address;
-            place.formatted_address;
-            infowindow.open(map, marker);
-        });
-    } #}
-
     // MAP AUTO COMPLETION
     function initMap() {
 

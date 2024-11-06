@@ -1,4 +1,22 @@
-<form method="post" action="{{ path('admin_event_delete', {'id': event.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+<div class="d-flex justify-content-center">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
-    <button class="btn">Delete</button>
-</form>
+    <a href="#" data-bs-toggle="modal" data-bs-target="#event-deleteModal-{{ event.id }}" class="btn"><i class="fa-solid fa-trash-can text-red me-2"></i>Effacer</a>
+</div>
+
+<div class="modal fade" id="event-deleteModal-{{ event.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title fs-14">Confirmer la suppression de TOUT l'évènement ?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-dark-gray" data-bs-dismiss="modal">Annuler</button>
+            <a href="{{ path('admin_event_delete', {id: event.id}) }}"
+                class="btn btn-red">
+                Supprimer
+            </a>
+        </div>
+        </div>
+    </div>
+</div>
