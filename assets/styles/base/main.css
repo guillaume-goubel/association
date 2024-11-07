@@ -159,7 +159,7 @@ footer .elements-social ul li:last-child {
     margin-top: -2px;
 }
 .main-card-container{
-    height: 570px;
+    height: 520px;
 }
 .no-hover:hover {
     color: inherit;
@@ -172,6 +172,9 @@ footer .elements-social ul li:last-child {
     top: 105px;
     left: 50%;
     transform: translateX(-50%);
+}
+.pricing-footer{
+    padding-top: 20px;
 }
 /* map */
 .infowindow .mb-3 {

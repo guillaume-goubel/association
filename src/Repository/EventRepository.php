@@ -127,7 +127,7 @@ class EventRepository extends ServiceEntityRepository
             $stmt->setParameter('user', $creatorChoice);
         }
 
-        $stmt->addOrderBy('e.dateStartAt', 'DESC');
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
         return $stmt->getQuery()->getResult();
     }
 

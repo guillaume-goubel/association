@@ -97,6 +97,9 @@ class Event
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $rdvCity = null;
 
+    #[ORM\Column(length: 150)]
+    private ?string $cityPlace = null;
+
     public function __construct()
     {
         $this->animators = new ArrayCollection();
@@ -415,6 +418,18 @@ class Event
     public function setRdvCity(?string $rdvCity): static
     {
         $this->rdvCity = $rdvCity;
+
+        return $this;
+    }
+
+    public function getCityPlace(): ?string
+    {
+        return $this->cityPlace;
+    }
+
+    public function setCityPlace(string $cityPlace): static
+    {
+        $this->cityPlace = $cityPlace;
 
         return $this;
     }

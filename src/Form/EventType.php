@@ -42,6 +42,11 @@ class EventType extends AbstractType
                     'style' => 'resize: vertical;height: 200px;'
                 ],
             ])
+            ->add('cityPlace', TextType::class, [
+                'label' => "Le nom de la localité où se déroule l'événement",
+                'attr' => ['class' => 'form-control'],
+                'required' => true,
+            ])
             ->add('preparationInfos', TextareaType::class, [
                 'label' => "Les informations importantes pour préparer l'événement ",
                 'required' => false,

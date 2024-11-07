@@ -65,7 +65,7 @@
                 <div class="container overlap-section">
                     <div class="row justify-content-center overlap-section border-radius-6px overflow-hidden g-0 box-shadow-extra-large">
                         <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5">Bientôt !</strong><span class="fw-700 text-base-color">{{nextUpcomingEvent.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
-                            <span class="ps-5 pe-2">{{nextUpcomingEvent.activity.name|capitalize}} à {{nextUpcomingEvent.rdvCity|capitalize}}</span> 
+                            <span class="ps-5 pe-2">{{nextUpcomingEvent.activity.name|capitalize}} à {{nextUpcomingEvent.cityPlace|capitalize}}</span> 
                         </div>
                         <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index') }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-20 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
                     </div>
@@ -141,12 +141,12 @@
                             {% for activity in activities %}
                                 
                                 <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                    <div data-activity="activity"  class="activity-container feature-box h-100 {{ activity.classColor }} transition light-hover border-radius-6px p-18 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
+                                    <div data-activity="activity"  class="activity-container feature-box h-100 {{ activity.classColor }} transition light-hover border-radius-6px p-13 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
                                         <div class="feature-box-icon">
                                             {% if activity.pictureType == "image" %}
-                                                <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                                                <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
                                             {% else %}
-                                                <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
+                                                <i class="{{ activity.picture }} align-middle icon-large text-white my-3"></i>
                                             {% endif %}
                                         </div>
                                         <div class="feature-box-content">
@@ -266,47 +266,47 @@
                     
                     <div id="calendar"></div>
 
-                    <!-- start pricing item -->
-                    <div class="fw-600 py-3">Nos 3 prochains rendez-vous</div>
+                    <div class="fw-600">Vos 3 prochains rendez-vous</div>
                     
                     {% for event in events_regular %}
                         {% include 'main_partials/_event_regular_card.html.twig' %}
                     {% endfor %}
 
-                    <!-- start pricing item -->
-                    <div class="fw-600 pt-5 pb-1">Nos prochains séjours</div>
+                    
+                    {% if events_journey is not empty %}
+                        <div class="fw-600 pt-5 pb-1">Nos prochains séjours</div>
+                        {% for event in events_journey %}
+                            <div class="col-lg-4 col-md-8 md-mb-30px">
+                                <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
+                                    
+                                    <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
+                                        <span class="fs-14">du</span> 18 Décembre
+                                    </span> 
+                                    <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
+                                        <span class="fs-14">au</span> 22 Décembre
+                                    </span> 
 
-                    {% for event in events_journey %}
-                        <div class="col-lg-4 col-md-8 md-mb-30px">
-                            <div class="bg-white box-shadow-quadruple-large border border-radius-6px p-5 text-center"> 
-                                
-                                <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
-                                    <span class="fs-14">du</span> 18 Décembre
-                                </span> 
-                                <span class="fs-26 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
-                                    <span class="fs-14">au</span> 22 Décembre
-                                </span> 
-
-                                <span class="fs-18 mb-25px d-inline-block fw-600">2024</span>
-                                <div class="row align-items-center">
-                                    <div class="col-6 pe-sm-0">
-                                        <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-orange border-radius-3px p-2 ms-2">
-                                            <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color icon-extra-large text-white"></i>
+                                    <span class="fs-18 mb-25px d-inline-block fw-600">2024</span>
+                                    <div class="row align-items-center">
+                                        <div class="col-6 pe-sm-0">
+                                            <div style="height:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-orange border-radius-3px p-2 ms-2">
+                                                <i class="fa-solid fa-bus-simple align-middle icon-large text-base-color icon-extra-large text-white"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
-                                    <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Strasbourg</li>
-                                    <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex">Visite du marché de Noël</li>
-                                    <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At velit dolorum soluta provident dolore architecto ipsam animi, error quis dolores repellat consequuntur libero. Blanditiis explicabo consectetur enim corrupti veniam molestias.</li>
+                                    <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
+                                        <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>Strasbourg</li>
+                                        <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex">Visite du marché de Noël</li>
+                                        <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At velit dolorum soluta provident dolore architecto ipsam animi, error quis dolores repellat consequuntur libero. Blanditiis explicabo consectetur enim corrupti veniam molestias.</li>
 
-                                </ul>
-                                <div class="pricing-footer w-100">
-                                    <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                                    </ul>
+                                    <div class="pricing-footer w-100">
+                                        <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </div> 
-                    {% endfor %}
+                            </div> 
+                        {% endfor %}
+                    {% endif %}
 
                 </div>  
 

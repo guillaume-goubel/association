@@ -44,34 +44,45 @@
             </div>
         </div>
         <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
-            <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{event.name}}</li>
-            <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>{{event.rdvCity}}</li>
+            <li style="height:65px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{event.name}}</li>
+            <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</li>
             <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex">
             <i class="feather icon-feather-clock me-5px"></i>
-                
-                 <div style="width:95px;" class="me-5 d-flex">
+                <div style="width:95px;" class="me-5 d-flex">
                     <div class="fs-11 me-1">Début :</div>
                     <div>{{event.timeStartAt|date('H:i')}}</div>
-                 </div>
- 
-                 <div style="width:95px;" class="d-flex">
-                    <div class="fs-11 me-1">Fin :</div>
-                    <div>{{event.timeEndAt|date('H:i')}}</div>
                 </div>
 
+                {% if event.timeEndAt != null %}
+                    <div style="width:95px;" class="d-flex">
+                        <div class="fs-11 me-1">Fin :</div>
+                        <div>{{event.timeEndAt|date('H:i')}}</div>
+                    </div>
+                {% endif %}
             </li>
-            <li style="height:75px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
-                <div class="fs-12 mb-4">Rendez-vous</div>
-                <a style="color:#275997;text-decoration: underline;" href="#" class="link-to-map" data-rdv="{{event.rdvAddress}} {{event.rdvPlaceName}}" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">{{event.rdvAddress}} {{event.rdvPlaceName}}</div></a>
-            </li>
-            {# <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li> #}
 
+            <li style="height:75px;border-bottom:none!important;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
+                {% if event.rdvAddress != null %}
+                    <div class="fs-12 mb-4">Rendez-vous</div>
+                    
+                    {% if event.rdvLatitude != null and event.rdvLongitude != null %}
+                        <a style="color:#275997;text-decoration: underline;" href="#" class="link-to-map fs-13" data-rdv="{{event.rdvAddress}} {{event.rdvPlaceName}}" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">{{event.rdvAddress}} {{event.rdvPlaceName}}</div></a>
+                    {% else %}
+                        <span class="fs-13" data-rdv="{{event.rdvAddress}} {{event.rdvPlaceName}}"><div class="fw-500">{{event.rdvAddress}} {{event.rdvPlaceName}}</div></span>
+                    {% endif %}
+                {% endif %}
+            </li>
+            
+            {# <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li> #}
+            <li>
+                <div class="pricing-footer w-100" style="height:35px;">
+                    {# {% if event.description != null or event.preparationInfos != null %} #}
+                        <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                    {# {% endif %} #}
+                </div>
+            </li>
         </ul>
-        <div class="pricing-footer w-100" style="height:35px;">
-            {% if event.description != null or event.preparationInfos != null %}
-                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
-            {% endif %}
-        </div>
+
     </div>
 
 </div>
