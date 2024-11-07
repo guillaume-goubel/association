@@ -1,0 +1,76 @@
+<div style="position:relative;" class="col-lg-4 col-md-8 md-mb-30px mt-2">
+    
+    {# EDIT BUTTON #}
+    {% include "admin/partials/_event_actions.html.twig" %}
+
+    {# CONTENT #}
+    <div class="bg-white box-shadow-quadruple-large border border-radius-12px p-5 text-center main-card-container"> 
+        
+        <span class="fs-24 lh-30 ls-minus-05px text-dark-gray fw-600">
+            <span class="fs-10">du</span> {{event.dateStartAt|format_date('short',  locale= 'fr')}}
+        </span> 
+        <span class="fs-24 lh-30 ls-minus-05px text-dark-gray fw-600">
+            <span class="fs-10">au</span> {{event.dateEndAt|format_date('short',  locale= 'fr')}}
+        </span> 
+
+        <span class="fs-18 mb-25px d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
+        <div class="row align-items-center">
+            <div style="width:135px;" class="col-6 pe-sm-0 me-3">
+                <div style="height:60px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-3px p-2 ms-2">
+
+                    {% if event.activity.pictureType == "image" %}
+                        <img class="my-2" style="width: 35px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
+                    {% else %}
+                        <i class="{{ event.activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
+                    {% endif %}
+                    
+                    <div class="text-white px-1">
+                    
+                        {% if event.eventDistance != null %}
+                            {{event.eventDistance}} Km
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 text-center text-sm-start last-paragraph-no-margin fs-15 lh-24">
+                <div class="d-flex align-items-center justify-content-center flex-column">
+                    
+                    {% if event.animators is not empty %}
+                    
+                        <div class="avatar-stack">
+                            {% for animator in event.animators %}
+                                <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border: 1px solid;border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar">
+                            {% endfor %}
+                        </div>
+                        
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+        <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
+            <li style="height:65px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{event.name}}</li>
+            <li class="border-color-extra-medium-gray pt-20px pb-20px text-dark-gray fw-500 d-flex"><i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</li>
+            <li class="border-color-extra-medium-gray pt-20px pb-20px d-flex">
+            <i class="feather icon-feather-clock me-5px"></i>
+                <div style="width:120px;" class="me-5 d-flex">
+                    <div class="fs-11 me-1">Départ à :</div>
+                    <div>{{event.timeStartAt|date('H:i')}}</div>
+                </div>
+            </li>
+            <li style="height:75px;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
+                <div class="fs-12 mb-4">Départ au rendez-vous</div>
+                <a style="color:#275997;text-decoration: underline;" href="#" class="link-to-map" data-rdv="{{event.rdvAddress}} {{event.rdvPlaceName}}" data-bs-toggle="modal" data-bs-target="#mapModal"><div class="fw-500">{{event.rdvAddress}} {{event.rdvPlaceName}}</div></a>
+            </li>
+            {# <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li> #}
+
+        </ul>
+        <div class="pricing-footer w-100" style="height:35px;">
+            {% if event.description != null or event.preparationInfos != null %}
+                <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+            {% endif %}
+        </div>
+    </div>
+
+</div>

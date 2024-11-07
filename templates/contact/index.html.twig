@@ -7,6 +7,8 @@
 
 <body data-mobile-nav-style="classic">
 
+    {{ parent() }}
+
     <!-- start header -->
 	{% include 'blog/partials/_blog_header.html.twig' %}
 	<!-- end header -->
@@ -70,19 +72,6 @@
     <!-- start footer -->
     {% include 'main_partials/_footer_minimum.html.twig' %}
     <!-- end footer -->
-
-    <!-- start scroll progress -->
-    <div class="scroll-progress d-none d-xxl-block">
-        <a href="#" class="scroll-top" aria-label="scroll">
-            <span class="scroll-text">
-                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
-            </span>
-            <span class="scroll-line">
-                <span class="scroll-point"></span>
-            </span>
-        </a>
-    </div>
-    <!-- end scroll progress -->
 
 </body>
 <!-- end subscription popup -->

@@ -29,8 +29,8 @@ class EventRepository extends ServiceEntityRepository
             ->andWhere('e.isEnabled = :isEnabled')
             ->setParameter('type', 'regular')
             ->setParameter('isEnabled', true)
-            ->orderBy('e.id', 'ASC')  // Ajout d'un ordre pour limiter la requête de manière déterministe
-            ->setMaxResults(3)        // Limite les résultats à 3
+            ->orderBy('e.id', 'ASC')  
+            ->setMaxResults(4)       
             ->getQuery()
             ->getResult();
     }
@@ -43,8 +43,8 @@ class EventRepository extends ServiceEntityRepository
             ->andWhere('e.isEnabled = :isEnabled')
             ->setParameter('type', 'journey')
             ->setParameter('isEnabled', true)
-            ->orderBy('e.id', 'ASC')  // Ajout d'un ordre pour limiter la requête de manière déterministe
-            ->setMaxResults(3)        // Limite les résultats à 3
+            ->orderBy('e.id', 'ASC')  
+            ->setMaxResults(4)        
             ->getQuery()
             ->getResult();
     }

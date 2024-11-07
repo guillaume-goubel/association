@@ -156,7 +156,9 @@
 {% block body %}
 
 <body data-mobile-nav-style="classic">
-    
+
+    {{ parent() }}
+
     <!-- start header -->
 	{% include 'blog/partials/_blog_header.html.twig' %}
 	<!-- end header -->
@@ -183,19 +185,6 @@
     <!-- end footer -->
 
     {% include 'calendar/partials/_map_modal.html.twig' %}
-
-    <!-- start scroll progress -->
-    <div class="scroll-progress d-none d-xxl-block">
-        <a href="#" class="scroll-top" aria-label="scroll">
-            <span class="scroll-text">
-                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
-            </span>
-            <span class="scroll-line">
-                <span class="scroll-point"></span>
-            </span>
-        </a>
-    </div>
-    <!-- end scroll progress -->
 
     <div id="loader-container" class="bg-very-light-gray">
         <div class="loader-dots">

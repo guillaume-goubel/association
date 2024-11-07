@@ -100,7 +100,6 @@ h2 {
     position: fixed;
 }
 .return-container{
-
     position: fixed;
     top: 0;
     right: 0;
@@ -109,7 +108,7 @@ h2 {
     z-index: 999;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: end;
     padding: 8px;
 }
 
@@ -166,6 +165,7 @@ h2 {
 {% block body %}
 
 <body class="left-modern-menu">
+    {{ parent() }}
 
     <!-- start header -->
     <header class="left-modern-header" id="navbar-menu">
@@ -176,7 +176,7 @@ h2 {
 
     <!-- start return -->
     <div class="return-container">
-        <div class="header-button d-flex">
+        <div class="header-button d-flex me-3">
             <a id="backButton" href="#" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
                 <span>
                     <span class="btn-double-text" data-text="Retour">Retour</span>
@@ -372,19 +372,6 @@ h2 {
         </div>
     </section>
     <!-- end section -->
-
-    <!-- start scroll progress -->
-    <div class="scroll-progress d-none d-xxl-block">
-        <a href="#" class="scroll-top" aria-label="scroll">
-            <span class="scroll-text">
-                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
-            </span>
-            <span class="scroll-line">
-                <span class="scroll-point"></span>
-            </span>
-        </a>
-    </div>
-    <!-- end scroll progress -->
 
 </body>
 <!-- end subscription popup -->

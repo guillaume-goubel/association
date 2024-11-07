@@ -9,7 +9,8 @@
 {% block body %}
 
 <body data-mobile-nav-style="classic">
-
+    
+    {{ parent() }}
     <!-- start header -->
 	{% include 'admin/partials/_header.html.twig' %}
 	<!-- end header -->
