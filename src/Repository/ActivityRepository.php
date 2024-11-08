@@ -21,28 +21,32 @@ class ActivityRepository extends ServiceEntityRepository
         parent::__construct($registry, Activity::class);
     }
 
-//    /**
-//     * @return Activity[] Returns an array of Activity objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    // public function findByUser($userChoice): array
+    // {
+    //     return $this->createQueryBuilder('a')
+    //         ->innerJoin('a.users', 'u')
+    //         ->where('u.id = :userChoice')
+    //         ->setParameter('userChoice', $userChoice)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 
-//    public function findOneBySomeField($value): ?Activity
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function getActivitiesByUser(?string $userChoice = null): array
+    {
+        $stmt = $this->createQueryBuilder('a');
+        $stmt->where('a.isEnabled = :isEnabled');
+        $stmt->setParameter('isEnabled', true);
+
+        if ($userChoice && $userChoice != 'all') {
+            $stmt->innerJoin('a.users', 'u')
+                ->andWhere('u.id = :userId')
+                ->setParameter('userId', $userChoice);
+        }
+
+        // Vous pouvez également ajouter un tri si nécessaire
+        $stmt->orderBy('a.name', 'ASC');
+
+        return $stmt->getQuery()->getResult();
+    }
+
 }

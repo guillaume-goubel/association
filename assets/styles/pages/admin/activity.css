@@ -5,11 +5,12 @@
     justify-content: center;
     margin-top: 10px;
 }
-
 .preformatted{
     white-space: pre-line;
 }
-
 .card{
-    width: 370px;
+    width: 320px;
+}
+.card-title{
+    font-size:18px;
 }

@@ -31,8 +31,32 @@
                             </span>
                             <a href="{{ path('app_logout')}}">Déconnexion</a>
                         </div>
-                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-6">ACTIVITES</h5>
+                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">ACTIVITES</h5>
                     </div>
+
+                    <form action="" method="get">
+                        <div class="col-12 blog-standard mb-2">
+                            <div class="row gy-2">
+                                <!-- Filtre créateur -->
+                                <div class="col-12 col-md-6 col-lg-3">
+                                    <select name="userChoice" class="form-select form-select-sm" aria-label="Sélectionner un créateur">
+                                        <option {{ userChoice == 'all' ? 'selected' : '' }} value="all">Tout administrateur</option>
+                                        {% for user in userList %}
+                                            {# {% if user.id != app.user.id %} #}
+                                                <option {{ userChoice == user.id ? 'selected' : '' }} value="{{ user.id }}">{{ user.name }}</option>
+                                            {# {% endif %} #}
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <!-- Bouton de recherche -->
+                                <div class="col-12 col-md-6 col-lg-2 text-center text-md-start">
+                                    <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
+                                        <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
 
                     {% if not is_granted('ROLE_SUPER_ADMIN') %}
                         <div class="col-12">
@@ -44,25 +68,23 @@
                                     <div class="card col-12 col-md-4 m-1">
                                         <div class="feature-box-icon" style="background-color:{{activity.color}}">
                                             {% if activity.pictureType == "image" %}
-                                                <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                                                <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
                                             {% else %}
-                                                <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
+                                                <i class="{{ activity.picture }} align-middle icon-large icon-large text-white my-3"></i>
                                             {% endif %}
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">{{ activity.name|capitalize }}</h5>
-                                            <p class="card-text preformatted">
-                                            
+                                            {# <p class="card-text preformatted">
                                                 {% if activity.description|length > 100 %}
                                                     {{ activity.description|slice(0, 100)|raw ~ '...' }}
                                                 {% else %}
                                                     {{ activity.description|trim|raw }}
                                                 {% endif %}
-                                            
-                                            </p>
+                                            </p> #}
                                             <div class="d-flex align-items-center">
-                                                <a href="#" class="btn btn-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
-                                                <a href="#" class="btn btn-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
+                                                <a href="#" class="btn btn-very-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
+                                                <a href="#" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
                                             </div>
                                         </div>
                                         <div class="card-footer">
@@ -71,7 +93,7 @@
                                                 {% if activity.users is empty %}
                                                     <div class="col-6 fs-13 text-red fw-600">SANS</div>
                                                 {% else %}
-                                                     {% for user in activity.users %}
+                                                    {% for user in activity.users %}
                                                         <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
                                                     {% endfor %}
                                                 {% endif %}
@@ -87,14 +109,14 @@
 
                     <div class="col-12">
                         
-                        {% if not is_granted('ROLE_SUPER_ADMIN') %}
-                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les autres activités <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                        {% if not is_granted('ROLE_SUPER_ADMIN') and userChoice != app.user.id %}
+                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les activités des autres administrateurs <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
                         {% endif %}
 
                         <div class="row mb-50px sm-mb-30px">
                             
                             {% for activity in noUserActivityArray %}
-                                
+
                                 <div class="card col-12 col-md-4 m-1">
                                     <div class="feature-box-icon" style="background-color:{{activity.color}}">
                                         {% if activity.pictureType == "image" %}
@@ -105,7 +127,7 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ activity.name|capitalize }}</h5>
-                                        <p class="card-text preformatted">
+                                        {# <p class="card-text preformatted">
                                         
                                             {% if activity.description|length > 100 %}
                                                 {{ activity.description|slice(0, 100)|raw ~ '...' }}
@@ -113,10 +135,10 @@
                                                 {{ activity.description|trim|raw }}
                                             {% endif %}
                                         
-                                        </p>
-                                        <a href="#" class="btn btn-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
+                                        </p> #}
+                                        <a href="#" class="btn btn-very-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                            <a href="#" class="btn btn-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
+                                            <a href="#" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
                                         {% endif %}
                                     </div>
                                     <div class="card-footer">
