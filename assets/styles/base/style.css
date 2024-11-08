@@ -9914,6 +9914,10 @@ blockquote footer {
   -webkit-border-radius: 50px;
   border-radius: 50px;
 }
+.btn.btn-round-edge-large {
+  -webkit-border-radius: 100px;
+  border-radius: 100px;
+}
 .btn.btn-round-edge {
   -webkit-border-radius: 4px;
   border-radius: 4px;

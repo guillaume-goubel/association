@@ -7,11 +7,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
             e.preventDefault();
     
             // Récupère le lieu de rendez-vous depuis l'attribut data-rdv
-            var lieuRdv = link.getAttribute('data-rdv');
+            let rdv = link.getAttribute('data-rdv');
+            let lat = link.getAttribute('data-lat');
+            let long = link.getAttribute('data-long');
     
             // Sélectionne le titre de la modale et le met à jour avec le lieu de rendez-vous
             var modalTitle = document.getElementById('modalTitle');
-            modalTitle.textContent = lieuRdv;
+            modalTitle.textContent = rdv;
     
             // Ouvre la modale
             const modal = new bootstrap.Modal(document.getElementById('mapModal'));

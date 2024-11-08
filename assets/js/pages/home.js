@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         marker.bindPopup("<b>Lieu de rendez-vous</b><br>parking centre ville, rue d’Anchin, 59242 TEMPLEUVE EN PEVELE");
         map.setView([50.52716064453125, 3.1717026233673096], 13);
 
-        map.invalidateSize();  // Recalculer les dimensions de la carte
+        map.invalidateSize();
     });
 
 });

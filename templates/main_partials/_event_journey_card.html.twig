@@ -4,7 +4,7 @@
     {% include "admin/partials/_event_actions.html.twig" %}
 
     {# CONTENT #}
-    <div class="bg-white box-shadow-quadruple-large border border-radius-12px p-5 text-center main-card-container"> 
+    <div class="bg-white border border-radius-30px p-5 text-center main-card-container"> 
         <div class="d-flex">
             <div style="width:50px;" class="col-6 pe-sm-0 me-3">
                 <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
@@ -83,7 +83,7 @@
             <li class="d-flex justify-content-center">
                 <div class="pricing-footer w-70" style="height:35px;">
                     {# {% if event.description != null or event.preparationInfos != null %} #}
-                        <a href="{{ path('blog_index2') }}" class="btn btn-small btn-transparent-yellow btn-box-shadow btn-round-edge border-1 w-100">Plus d'informations</a>
+                        <a href="{{ path('blog_index2') }}" class="btn btn-very-small btn-transparent-yellow btn-round-edge-large border-1 w-100">Plus d'informations</a>
                     {# {% endif %} #}
                 </div>
             </li>
@@ -104,22 +104,22 @@
                     <div class="row row-cols-1 row-cols-lg-1"> 
                         {% for animator in event.animators %}       
                             <div class="col mb-35px md-ms-0">
-                                <div class="d-flex flex-column flex-sm-row align-items-center border-radius-6px ps-45px pe-45px pt-35px pb-35px xl-p-30px box-shadow-quadruple-large text-center text-sm-start last-paragraph-no-margin">
+                                <div class="d-flex flex-column flex-sm-row align-items-center border-radius-6px ps-25px pe-25px pt-15px pb-15px xl-p-30px text-center text-sm-start last-paragraph-no-margin">
                                     <div class="testimonials-author w-120px me-25px xs-me-0 xs-mb-20px flex-shrink-0">
                                         <img style="border:2px solid {{event.activity.color}}" class="rounded-circle me-15px xs-me-0" src="{{ customAsset('app/avatar-01.jpg')}}" alt="">
                                     </div>
                                     <div class="testimonials-content">
-                                        <p>Lorem ipsum dolor amet tempor incididunt labore dolore nostrud.</p>
                                         <span class="alt-font text-dark-gray fw-600 d-block mt-5px fs-19">{{animator.firstName|capitalize}} {{animator.lastName|capitalize}}</span>
+                                        <p class="fs-14">Lorem ipsum dolor amet tempor incididunt labore dolore nostrud.</p>
                                     </div>
                                 </div>
                             </div>
                         {% endfor %}
                     </div>
                 </div>
-                <div class="modal-footer">
+                {# <div class="modal-footer">
                     <button type="button" class="btn btn-dark-gray" data-bs-dismiss="modal">Fermer</button>
-                </div>
+                </div> #}
             </div>
         </div>
     </div>
