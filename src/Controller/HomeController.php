@@ -13,12 +13,12 @@ class HomeController extends AbstractController
     #[Route('/', name: 'home_index')]
     public function index(ActivityRepository $activityRepository, EventRepository $eventRepository): Response
     {
-        dump($eventRepository->findNextUpcomingEvent());
 
         return $this->render('home/index.html.twig', [
             "activities" => $activityRepository->findBy(["isEnabled"=>1], ['ordering' => 'ASC']),
-            'events_regular' => $eventRepository->findEventsByRegularActivity(),
-            'events_journey' => $eventRepository->findEventsByJourneyActivity(),
+            // 'events_regular' => $eventRepository->findEventsByRegularActivity(),
+            // 'events_journey' => $eventRepository->findEventsByJourneyActivity(),
+            'events' => $eventRepository->findEventsForHomePage(),
             'isEventActionsButtonVisible' => false,
             'nextUpcomingEvent' => $eventRepository->findNextUpcomingEvent(),
             'lastPastEvent' => $eventRepository->findLastPastEvent()

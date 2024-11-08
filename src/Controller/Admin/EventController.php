@@ -18,25 +18,30 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventController extends AbstractController
 {
     #[Route('/index', name: 'index', methods: ['GET'])]
-    public function index(Request $request, EventRepository $eventRepository): Response
+    public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository): Response
     {
         $yearChoice = $request->query->get('yearChoice') ?? date("Y");
         $monthChoice = $request->query->get('monthChoice') ?? date("m");
         $creatorChoice = $request->query->get('creatorChoice') ?? $this->getUser()->getId();
+        $activityChoice = $request->query->get('activityChoice') ?? "all";
 
         // Distinct month / year createdAt for select
         $yearsList = $eventRepository->getDistincYearCreatedAt();
         $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
         $creatorsList = $eventRepository->getDistinctCreator();
 
+        $activityList = $activityRepository->findAll();
+
         return $this->render('admin/event/index.html.twig', [
-            'events' => $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice),
+            'events' => $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice),
             'yearsList' => $yearsList,
             'monthsList' => $monthsList,
             'creatorsList' => $creatorsList,
+            'activityList' => $activityList,
             'yearChoice' => $yearChoice,
             'monthChoice' => $monthChoice,
             'creatorChoice' => $creatorChoice,
+            'activityChoice' => $activityChoice,
             'isEventActionsButtonVisible' => true,
         ]);
     }

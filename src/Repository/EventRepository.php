@@ -21,6 +21,18 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
+    public function findEventsForHomePage()
+    {
+        return $this->createQueryBuilder('e')
+            ->join('e.activity', 'a')
+            ->andWhere('e.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true)
+            ->orderBy('e.id', 'ASC')  
+            ->setMaxResults(4)       
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findEventsByRegularActivity()
     {
         return $this->createQueryBuilder('e')
@@ -108,7 +120,7 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice)
+    public function getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice)
     {
         $stmt = $this->createQueryBuilder('e');
 
@@ -125,6 +137,11 @@ class EventRepository extends ServiceEntityRepository
         if ($creatorChoice) {
             $stmt->andwhere('e.user = :user');
             $stmt->setParameter('user', $creatorChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('e.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $monthChoice);
         }
 
         $stmt->addOrderBy('e.dateStartAt', 'ASC');
@@ -161,6 +178,30 @@ class EventRepository extends ServiceEntityRepository
             ->setMaxResults(1)                         
             ->getQuery()
             ->getOneOrNullResult();                    
+    }
+
+    public function getEventListforAgenda($yearChoice, $monthChoice, $activityChoice)
+    {
+        $stmt = $this->createQueryBuilder('e');
+        $stmt->join('e.activity', 'a');
+
+        if ($yearChoice) {
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
+        if ($monthChoice) {
+            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
+            $stmt->setParameter('month', $monthChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('e.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $monthChoice);
+        }
+
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        return $stmt->getQuery()->getResult();
     }
 
 }

@@ -9416,7 +9416,7 @@ button:focus {
   cursor: pointer;
   padding-right: 25px;
 }
-.accordion .accordion-item .accordion-header .accordion-title i {
+.accordion .accordion-item .accordion-header .accordion-title i.accordion-actions {
   position: absolute;
   top: 50%;
   right: 0;
@@ -9598,7 +9598,7 @@ button:focus {
   margin-bottom: 0;
   padding: 15px 0;
 }
-.accordion-style-07 .accordion-item .accordion-header .accordion-title i {
+.accordion-style-07 .accordion-item .accordion-header .accordion-title i.accordion-actions {
   right: 0;
 }
 .accordion-style-07 .accordion-item.active-accordion .accordion-header {

@@ -71,7 +71,7 @@
                 {% if event.rdvAddress != null %}
                     <div class="fs-12 mb-4">Rendez-vous pour le départ :
                         {% if event.rdvLatitude != null and event.rdvLongitude != null %}
-                            <a style="color:#275997;" href="#" class="link-to-map fs-13" data-rdv="{{event.rdvAddress}} {{event.rdvPlaceName}}" data-bs-toggle="modal" data-bs-target="#mapModal"><span class="fw-500">{{event.rdvAddress}} {{event.rdvPlaceName}}</span></a>
+                            <a style="color:#275997;" href="#" class="link-to-map fs-13" data-rdv="{{event.rdvAddress}} {{event.rdvPlaceName}}" data-lat="{{ event.rdvLatitude }}" data-long="{{ event.rdvLongitude }}" data-bs-toggle="modal" data-bs-target="#mapModal"><span class="fw-500">{{event.rdvAddress}} {{event.rdvPlaceName}}</span></a>
                         {% else %}
                             <span class="fs-13" data-rdv="{{event.rdvAddress}} {{event.rdvPlaceName}}"><span class="fw-500">{{event.rdvAddress}} {{event.rdvPlaceName}}</span></span>
                         {% endif %}

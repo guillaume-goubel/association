@@ -21,7 +21,6 @@
     <section class="main-section right-side-bar">
         <div class="container">
             <div class="row">
-                
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details d-flex align-items-center"> 
                         <div class="col-10">
@@ -33,38 +32,55 @@
                                 <a href="{{ path('app_logout')}}">Déconnexion</a>
                             </div>
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS - Liste</h5>
-                            <small>Voici la liste des événements créés par date de commencement et par créateur</small>
+                            {# <small>Voici la liste des événements créés par date de commencement et par créateur</small> #}
                         </div>
-                        <div class="col-2">
-                            <a href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-medium text-base-color me-2"></i>Ajouter</a>
+                        <div class="col-2 d-flex justify-content-end">
+                            <a href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <form action="" method="get">
                     <div class="col-12 blog-standard mb-2">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="input-group">
-                                    <!-- Élément select -->
-                                    <select name="monthChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
-                                        {% for item in monthsList %}
-                                            <option {{ monthChoice == item.month_number ? 'selected' : '' }} value="{{item.month_number}}">{{item.month_name}}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <select name="yearChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
-                                        {% for item in yearsList %}
-                                            <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{item.year}}">{{item.year}}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <select name="creatorChoice" class="form-select form-select-sm me-2" aria-label="Sélectionner une option">
-                                        {% for item in creatorsList %}
-                                            <option {{ creatorChoice == item.user_id ? 'selected' : '' }} value="{{item.user_id}}">{{item.creator}}</option>
-                                        {% endfor %}
-                                    </select>
-                                    <!-- Bouton de recherche -->
-                                    <button style="border-radius:8px;" class="btn btn-medium btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto" type="submit"><i style="font-size:15px;margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i></button>
-                                </div>
+                        <div class="row gy-2"> <!-- gy-2 ajoute un espacement vertical entre les colonnes sur mobile -->
+                            <!-- Filtre mois -->
+                            <div class="col-12 col-md-6 col-lg-2">
+                                <select name="monthChoice" class="form-select form-select-sm" aria-label="Sélectionner un mois">
+                                    {% for item in monthsList %}
+                                        <option {{ monthChoice == item.month_number ? 'selected' : '' }} value="{{ item.month_number }}">{{ item.month_name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <!-- Filtre année -->
+                            <div class="col-12 col-md-6 col-lg-2">
+                                <select name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
+                                    {% for item in yearsList %}
+                                        <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <!-- Filtre créateur -->
+                            <div class="col-12 col-md-6 col-lg-2">
+                                <select name="creatorChoice" class="form-select form-select-sm" aria-label="Sélectionner un créateur">
+                                    {% for item in creatorsList %}
+                                        <option {{ creatorChoice == item.user_id ? 'selected' : '' }} value="{{ item.user_id }}">{{ item.creator }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <!-- Filtre activité -->
+                            <div class="col-12 col-md-6 col-lg-2">
+                                <select name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                    <option {{ activityChoice == 'all' ? 'selected' : '' }} value="all">Toutes activités</option>
+                                    {% for item in activityList %}
+                                        <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <!-- Bouton de recherche -->
+                            <div class="col-12 col-md-6 col-lg-2 text-center text-md-start">
+                                <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
+                                    <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -72,13 +88,17 @@
 
                 <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5">
 
-                    {% for event in events %}
-                        {% if event.activity.type == 'regular' %}
-                            {% include 'main_partials/_event_regular_card.html.twig' %}
-                        {% else %}
-                            {% include 'main_partials/_event_journey_card.html.twig' %}    
-                        {% endif %}
-                    {% endfor %}
+                    {% if events is not empty %}
+                        {% for event in events %}
+                            {% if event.activity.type == 'regular' %}
+                                {% include 'main_partials/_event_regular_card.html.twig' %}
+                            {% else %}
+                                {% include 'main_partials/_event_journey_card.html.twig' %}    
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div>Pas de résultats pour cette recherche</div>
+                    {% endif %}
                     
                 </div>
 
@@ -99,7 +119,7 @@
 {% block baseJavascripts %}
     
     {% block importmap %}
-        {{ importmap(['app', 'base', 'admin-event']) }}
+        {{ importmap(['app', 'base', 'mapModale', 'admin-event']) }}
     {% endblock %}
 
 {% endblock %}

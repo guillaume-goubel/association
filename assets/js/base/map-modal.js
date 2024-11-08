@@ -1,23 +1,36 @@
 document.addEventListener("DOMContentLoaded", (event) => {
 
+    let markers = [];
+    
+    // MAP MODALE PART ----------------------------------------------------------------
+    var map = L.map('map', {
+        scrollWheelZoom: true, 
+    });
+    
     // OPEN MODAL
     document.querySelectorAll('.link-to-map').forEach(function(link) {
         link.addEventListener('click', function(e) {
-            // Empêche le comportement par défaut
             e.preventDefault();
     
-            // Récupère le lieu de rendez-vous depuis l'attribut data-rdv
-            let rdv = link.getAttribute('data-rdv');
-            let lat = link.getAttribute('data-lat');
-            let long = link.getAttribute('data-long');
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = []; 
     
-            // Sélectionne le titre de la modale et le met à jour avec le lieu de rendez-vous
+            let rdv = link.getAttribute('data-rdv');
+            let lat = parseFloat(link.getAttribute('data-lat')); 
+            let long = parseFloat(link.getAttribute('data-long')); 
+
             var modalTitle = document.getElementById('modalTitle');
             modalTitle.textContent = rdv;
     
-            // Ouvre la modale
+            var marker = L.marker([lat, long]).addTo(map);
+            markers.push(marker); // Ajouter le marqueur au tableau
+    
+            map.setView([lat, long], 17);
+            marker.bindPopup(`<b>Lieu du rendez-vous</b><br>${rdv}`);
+    
             const modal = new bootstrap.Modal(document.getElementById('mapModal'));
             modal.show();
+            
         });
     });
 
@@ -34,6 +47,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // Réinitialiser le style overflow et padding-right
         document.body.style.overflow = '';
         document.body.style.paddingRight = '';
+    });
+
+    // Charge et affiche les tuiles OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Ajoute le contrôle plein écran en haut à droite
+    L.control.fullscreen({
+        position: 'topright' // Change la position du bouton plein écran
+    }).addTo(map);
+
+    // Appeler invalidateSize lorsque la modale est ouverte
+    $('#mapModal').on('shown.bs.modal', function () {
+        map.invalidateSize();
     });
 
 });

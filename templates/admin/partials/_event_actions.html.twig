@@ -3,17 +3,17 @@
 
     <div class="d-flex flex-column">
         
-        {% if is_granted('ROLE_SUPER_ADMIN') or ( is_granted('ROLE_ADMIN') and event.user.id == app.user.id ) %}
-            <div style="position: absolute;right: 0;top: -20px;display: flex;align-items: center;justify-content: center;">
-                <a style="width: 50px;height: 50px;border-radius: 50%;padding: 10px 11px!important;background-color: green;color: white;" href="" class="btn  btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
-                    <i style="padding-top: 3px;margin-left:0!important;font-size:21px;" class="fa-solid fa-eye"></i>
+        {# {% if is_granted('ROLE_SUPER_ADMIN') or ( is_granted('ROLE_ADMIN') and event.user.id == app.user.id ) %}
+            <div class="event-action-container disabled">
+                <a href="#" class="btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                    <i class="fa-solid fa-eye"></i>
                 </a>
             </div>
-        {% endif %}
+        {% endif %} #}
 
-        <div style="position: absolute;right: 0;top: 40px;display: flex;align-items: center;justify-content: center;">
-            <a style="width: 50px;height: 50px;border-radius: 50%;padding: 10px 13px!important;background-color: blue;color: white;" href="{{ path('admin_event_edit', { 'id': event.id }) }}" class="btn  btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
-                <i style="padding-top: 3px;margin-left:0!important;font-size:21px;" class="fa-regular fa-folder-open"></i>
+        <div class="event-action-container edit">
+            <a style="#" href="{{ path('admin_event_edit', { 'id': event.id }) }}" class="btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                <i class="fa-regular fa-folder-open"></i>
             </a>
         </div>
 

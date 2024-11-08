@@ -876,11 +876,11 @@
         $('.collapse', this).on('show.bs.collapse', function () {
             var id = $(this).attr('id');
             $('a[data-bs-target="#' + id + '"]').closest('.accordion-header').parent('.accordion-item').addClass('active-accordion');
-            $('a[data-bs-target="#' + id + '"] i').addClass(activeIconClass).removeClass(inactiveIconClass);
+            $('a[data-bs-target="#' + id + '"] i.accordion-actions').addClass(activeIconClass).removeClass(inactiveIconClass);
         }).on('hide.bs.collapse', function () {
             var id = $(this).attr('id');
             $('a[data-bs-target="#' + id + '"]').closest('.accordion-header').parent('.accordion-item').removeClass('active-accordion');
-            $('a[data-bs-target="#' + id + '"] i').addClass(inactiveIconClass).removeClass(activeIconClass);
+            $('a[data-bs-target="#' + id + '"] i.accordion-actions').addClass(inactiveIconClass).removeClass(activeIconClass);
         });
     });
 

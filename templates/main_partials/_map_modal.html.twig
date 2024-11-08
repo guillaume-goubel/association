@@ -2,17 +2,24 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <div>
-                    <h4 class="modal-title"><span class="fs-12">Lieux de rendez-vous : </span><span id="modalTitle" class="fs-18"></span><a href="https://www.google.com/maps?q=50.650000,3.200000" target="_blank"><img width="70px" src="{{ asset('app/google_maps_logo.png')}}" alt=""></a></h4>
+                <div class="w-100">
+                    <div class="modal-title">
+                        <span>
+                            <a class="btn btn-extra-small fw-600 btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto" href="https://www.google.com/maps?q=50.650000,3.200000" target="_blank">
+                            <img width="36px" src="{{ asset('app/google_maps_logo.png')}}" alt=""></a>
+                        </span>
+                        <span id="modalTitle" class="fs-13 ms-2"></span>
+                    </div>
+                    
                 </div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div id="map"></div>
             </div>
-            <div class="modal-footer">
+            {# <div class="modal-footer">
                 <button type="button" class="btn btn-red" data-bs-dismiss="modal">Fermer</button>
-            </div>
+            </div> #}
         </div>
     </div>
 </div>
