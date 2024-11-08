@@ -11,14 +11,13 @@
                     {% if event.activity.pictureType == "image" %}
                         <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
                     {% else %}
-                        <i style="margin-left:6px;" class="{{ event.activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
+                        <i class="{{ event.activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
                     {% endif %}
-                    
-                    <div class="text-white px-1">
-                        {% if event.eventDistance != null %}
-                            {{event.eventDistance}} Km
-                        {% endif %}
-                    </div>
+                </div>
+                <div class="event-distance px-1">
+                    {% if event.eventDistance != null %}
+                        {{event.eventDistance}} Km
+                    {% endif %}
                 </div>
             </div>
             <div style="height:85px;" class="w-100">
