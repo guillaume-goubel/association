@@ -32,7 +32,11 @@
     }
 }
 .d-block img{
-    height:240px;
+    height:194px;
+}
+.blog-grid .card .blog-image img {
+    -webkit-border-radius: 30px 30px 0 0;
+    border-radius: 30px 30px 0 0;
 }
 header .navbar-brand .default-logo {
     opacity: 0!important;

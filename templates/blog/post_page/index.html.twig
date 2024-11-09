@@ -40,6 +40,19 @@
         .trainer-box{
             padding-left:11px;
         }
+        {# TEST #}
+        /* Initialement caché */
+        .gallery-container {
+            opacity: 0;
+            transform: translateY(20px); /* Décalage vers le bas */
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        /* Classe visible avec animation */
+        .gallery-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 {% endblock %}
 
@@ -47,6 +60,12 @@
 
 <body data-mobile-nav-style="classic">
 
+    {# ! PARAM**************************************************************************** #}
+    <div id="rdvAddressElmt" data-param="{{ event.rdvAddress }} -- {{ event.rdvPlaceName }}"></div>    
+    <div id="latElmt" data-param="{{ event.rdvLatitude }}"></div>    
+    <div id="longElmt" data-param="{{ event.rdvLongitude }}"></div>    
+    {# ! PARAM**************************************************************************** #}   
+    
     {{ parent() }}
     
     <!-- start header -->
@@ -86,45 +105,36 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="event-time fw-500 mt-2">
-                                        <i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}
-                                        {% if is_passed == false %}
-                                            <div class="me-5 d-flex align-items-baseline">
-                                                <div class="fs-13 me-1"><i class="feather icon-feather-clock me-5px"></i>Début :</div>
-                                                <div>{{event.timeStartAt|date('H:i')}}</div>
-                                            </div>
-
+                                    <div><i class="feather icon-feather-map-pin me-5px mt-6"></i><span class="fs-18">{{event.cityPlace}}</span></div>
+                                    {% if is_passed == false %}
+                                        <div class="me-5">
+                                            <span class="me-3"><i class="feather icon-feather-clock me-5px"></i>Début : <span class="fs-18">{{event.timeStartAt|date('H:i')}}</span></span>
                                             {% if event.timeEndAt != null %}
-                                                <div class="d-flex align-items-baseline">
-                                                    <div class="fs-13 me-1">Fin :</div>
-                                                    <div>{{event.timeEndAt|date('H:i')}}</div>
-                                                </div>
+                                                <span class="me-1">Fin : <span class="fs-18">{{event.timeEndAt|date('H:i')}}</span></span>
                                             {% endif %}
-                                        {% endif %}
-                                    </div>                                                 
+                                        </div>
+                                    {% endif %}                                             
                                 </div>
-                                <div class="col-12 col-md-7 d-flex flex-column">
+                                <div class="col-12 col-md-7 d-flex flex-column mt-2">
                                     <div class="trainer-box col-auto position-relative">
-                                        
                                         {% if event.animators is not empty %}
-                                                    <ul class="p-0 m-0 list-style-02" data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                                                        {% for animator in event.animators %}
-                                                            <li class="d-flex align-items-center my-1"><img style="width:40px;height:40px;border: 2px solid {{event.activity.color}};border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar"><span class="ms-2">{{animator.firstName}}  {{animator.lastName}}</span></li>
-                                                        {% endfor %}
-                                                    </ul>
-                                          
+                                            <ul class="p-0 m-0 list-style-02" data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                                                {% for animator in event.animators %}
+                                                    <li class="d-flex align-items-center my-1"><img style="width:40px;height:40px;border: 2px solid {{event.activity.color}};border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar"><span class="ms-2">{{animator.firstName}}  {{animator.lastName}}</span></li>
+                                                {% endfor %}
+                                            </ul>
                                         {% endif %}
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5 fs-22">{{event.name}}</h5>
-                        
-                        {% if is_passed == false %}
-                            <div class="text-medium-gray my-5 d-flex" style="background-color: white;padding: 2rem;">
+
+                        {# MAP #} 
+                        {% if is_passed == false and (event.rdvLatitude != null and event.rdvLatitude != null) %}
+                            <div class="text-medium-gray mb-2 mt-1 d-flex p-2" style="background-color: white;">
                                 <div class="col-12">
+                                    <div class="fs-13">Lieu du rendez-vous : <span class="fw-600">{{ event.rdvAddress }} {{ event.rdvPlaceName }}</span></div>
                                     <div id="map" style="z-index: 9;position: relative;">
                                         <div id="mapOverlay">
                                             <div id="zoomNotification">Appuyez sur <strong>Ctrl</strong> et utilisez la molette pour zoomer OU passez en plein écran</div>
@@ -135,73 +145,76 @@
                         {% endif %}
 
                         {# IMAGE GALLERY #} 
-                        <div class="container-fluid p-0">
-                            <ul class="image-gallery-style-01 mb-2 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-small">
-                                <li class="grid-sizer"></li> 
-                                
-                                {% if event.mainPicture != null %}
-                                    <li class="grid-item transition-inner-all">
-                                        <div class="gallery-box">
-                                            <a href="{{ customAsset('data/uploads/photos/' ~ event.mainPicture) }}" data-group="lightbox-gallery" title="">
-                                                <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                    <img src="{{ customAsset('data/uploads/photos/' ~ event.mainPicture) }}" alt="" />
-                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                            <i class="feather icon-feather-search text-white icon-small"></i>
+                        {% if event.mainPicture == null and event.picture2 == null and event.picture2 == null %}
+                            <div class="container-fluid p-0 gallery-container">
+                                <ul class="image-gallery-style-01 mb-2 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-small">
+                                    <li class="grid-sizer"></li> 
+                                    
+                                    {% if event.mainPicture != null %}
+                                        <li class="grid-item transition-inner-all">
+                                            <div class="gallery-box">
+                                                <a href="{{ customAsset('data/uploads/photos/' ~ event.mainPicture) }}" data-group="lightbox-gallery" title="">
+                                                    <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                        <img src="{{ customAsset('data/uploads/photos/' ~ event.mainPicture) }}" alt="" />
+                                                        <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                            <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                                <i class="feather icon-feather-search text-white icon-small"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                {% endif %}
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
 
-                                {% if event.picture2 != null %}
-                                    <li class="grid-item transition-inner-all">
-                                        <div class="gallery-box">
-                                            <a href="{{ customAsset('data/uploads/photos/' ~ event.picture2) }}" data-group="lightbox-gallery" title="">
-                                                <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                    <img src="{{ customAsset('data/uploads/photos/' ~ event.picture2) }}" alt="" />
-                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                            <i class="feather icon-feather-search text-white icon-small"></i>
+                                    {% if event.picture2 != null %}
+                                        <li class="grid-item transition-inner-all">
+                                            <div class="gallery-box">
+                                                <a href="{{ customAsset('data/uploads/photos/' ~ event.picture2) }}" data-group="lightbox-gallery" title="">
+                                                    <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                        <img src="{{ customAsset('data/uploads/photos/' ~ event.picture2) }}" alt="" />
+                                                        <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                            <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                                <i class="feather icon-feather-search text-white icon-small"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                {% endif %}
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
 
-                                {% if event.picture3 != null %}
-                                    <li class="grid-item transition-inner-all">
-                                        <div class="gallery-box">
-                                            <a href="{{ customAsset('data/uploads/photos/' ~ event.picture3) }}" data-group="lightbox-gallery" title="">
-                                                <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                    <img src="{{ customAsset('data/uploads/photos/' ~ event.picture3) }}" alt="" />
-                                                    <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
-                                                        <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
-                                                            <i class="feather icon-feather-search text-white icon-small"></i>
+                                    {% if event.picture3 != null %}
+                                        <li class="grid-item transition-inner-all">
+                                            <div class="gallery-box">
+                                                <a href="{{ customAsset('data/uploads/photos/' ~ event.picture3) }}" data-group="lightbox-gallery" title="">
+                                                    <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                        <img src="{{ customAsset('data/uploads/photos/' ~ event.picture3) }}" alt="" />
+                                                        <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                            <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                                <i class="feather icon-feather-search text-white icon-small"></i>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                {% endif %}
-                                
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        
+                        {% if event.name != null %}
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 fs-22 mb-1 mt-3">{{event.name}}</h5>
+                        {% endif %}
 
-                            </ul>
-                        </div>
-                      
                         {# TEXT PRESENTATION #}
-                        <div class="row pt-4">
-                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
-                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
-                            {% if is_passed == false %}
+                        <div class="row">
+                            <p class="card-text preformatted">{{event.description|raw}}</p>
+                            {% if is_passed == false and event.preparationInfos != null %}   
                                 <blockquote class="alt-font border-4 border-start border-color-base-color text-dark-gray fw-500 ps-40px mt-4 mb-4 ms-60px lg-ms-30px sm-ms-0 lg-ps-30px">
                                     <footer class="fs-14 fw-600 text-base-color d-inline-block text-uppercase">Informations importantes pour la préparation de l'événement</footer>
-                                    <p>Tomorrow is the most important thing in life. Comes into us at midnight very clean. It's perfect when it arrives and it puts itself in our hands. It hopes we've learned something from yesterday.</p>
+                                    <p class="card-text preformatted">{{event.preparationInfos|raw}}</p>
                                 </blockquote>
                             {% endif %}
                         </div>

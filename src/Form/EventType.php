@@ -161,10 +161,10 @@ class EventType extends AbstractType
                         'mimeTypes' => 'image/*',
                         'maxSize' => '2M',
                     ]),
-                    new Image([
-                        'maxHeight' => 1100,
-                        'maxWidth' => 2000,
-                    ])
+                    // new Image([
+                    //     'maxHeight' => 1100,
+                    //     'maxWidth' => 2000,
+                    // ])
                 ]
             ])
             ->add('picture2File', FileType::class, [
@@ -179,10 +179,10 @@ class EventType extends AbstractType
                         'mimeTypes' => 'image/*',
                         'maxSize' => '2M',
                     ]),
-                    new Image([
-                        'maxHeight' => 1100,
-                        'maxWidth' => 2000,
-                    ])
+                    // new Image([
+                    //     'maxHeight' => 1100,
+                    //     'maxWidth' => 2000,
+                    // ])
                 ]
             ])
             ->add('picture3File', FileType::class, [
@@ -197,10 +197,10 @@ class EventType extends AbstractType
                         'mimeTypes' => 'image/*',
                         'maxSize' => '2M',
                     ]),
-                    new Image([
-                        'maxHeight' => 1100,
-                        'maxWidth' => 2000,
-                    ])
+                    // new Image([
+                    //     'maxHeight' => 1100,
+                    //     'maxWidth' => 2000,
+                    // ])
                 ]
             ])
         ;

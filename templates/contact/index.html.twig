@@ -4,96 +4,7 @@
 {% endblock %}
 
 {% block stylesheets %}
-<style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #F8F9FA;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .card {
-            background-color: #FFFFFF;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 300px;
-            text-align: center;
-            color: #343A40;
-        }
-        .header {
-            background: linear-gradient(135deg, #4C9F70, #3A78D4);
-            padding: 10px;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            margin-bottom: 15px;
-        }
-        .date {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .activity {
-            color: #343A40;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        .description {
-            color: #5A7D7C;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-        .location {
-            display: flex;
-            align-items: center;
-            color: #3C6E71;
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-        .location-icon {
-            margin-right: 5px;
-        }
-        .time {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #6C757D;
-            font-size: 14px;
-            margin-bottom: 15px;
-        }
-        .time span {
-            margin: 0 5px;
-        }
-        .address {
-            color: #2D5D5B;
-            font-size: 13px;
-            margin-bottom: 20px;
-        }
-        .button {
-            background: linear-gradient(135deg, #56CCF2, #2F80ED);
-            color: #FFFFFF;
-            padding: 10px 15px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 14px;
-            display: inline-block;
-        }
-        .button:hover {
-            opacity: 0.9;
-        }
-    </style>
 {% endblock %}
-
-
-
 
 {% block body %}
 
@@ -165,27 +76,6 @@
     {% include 'main_partials/_footer_minimum.html.twig' %}
     <!-- end footer -->
 
-    <div class="card">
-    <div class="header">🏃</div>
-    <div class="date">7 nov. 2024</div>
-    <div class="activity">Gymnastique</div>
-    <div class="description">Balade automnale au coeur de la forêt</div>
-    
-    <div class="location">
-        <span class="location-icon">📍</span>
-        <span>Lille</span>
-    </div>
-    
-    <div class="time">
-        <span>Début : 10:00</span>
-        <span>Fin : 11:20</span>
-    </div>
-    
-    <div class="address">
-        Rendez-vous : 41 Rue des Sarrazins, 59000 Lille, France<br>Devant la mairie de quartier
-    </div>
-    
-    <a href="#" class="button">Plus d'informations</a>
 </div>
 
 </body>

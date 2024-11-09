@@ -33,37 +33,8 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findEventsByRegularActivity()
-    {
-        return $this->createQueryBuilder('e')
-            ->join('e.activity', 'a')
-            ->andWhere('a.type = :type')
-            ->andWhere('e.isEnabled = :isEnabled')
-            ->setParameter('type', 'regular')
-            ->setParameter('isEnabled', true)
-            ->orderBy('e.id', 'ASC')  
-            ->setMaxResults(4)       
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findEventsByJourneyActivity()
-    {
-        return $this->createQueryBuilder('e')
-            ->join('e.activity', 'a')
-            ->andWhere('a.type = :type')
-            ->andWhere('e.isEnabled = :isEnabled')
-            ->setParameter('type', 'journey')
-            ->setParameter('isEnabled', true)
-            ->orderBy('e.id', 'ASC')  
-            ->setMaxResults(4)        
-            ->getQuery()
-            ->getResult();
-    }
-
     public function getDistincYearCreatedAt()
     {
-
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = "    SELECT DISTINCT(YEAR(date_start_at)) as year
@@ -164,7 +135,23 @@ class EventRepository extends ServiceEntityRepository
             ->getOneOrNullResult();                     
     }
 
-    public function findLastPastEvent()
+    // public function findLastPastEvent()
+    // {
+    //     $today = new \DateTime();
+    //     $today->setTime(0, 0);
+
+    //     return $this->createQueryBuilder('e')
+    //         ->andWhere('e.dateStartAt < :today')        
+    //         ->andWhere('e.isEnabled = :isEnabled')     
+    //         ->setParameter('today', $today)
+    //         ->setParameter('isEnabled', true)
+    //         ->orderBy('e.dateStartAt', 'DESC')          
+    //         ->setMaxResults(1)                         
+    //         ->getQuery()
+    //         ->getOneOrNullResult();                    
+    // }
+
+    public function findLastPastEventsList()
     {
         $today = new \DateTime();
         $today->setTime(0, 0);
@@ -175,9 +162,9 @@ class EventRepository extends ServiceEntityRepository
             ->setParameter('today', $today)
             ->setParameter('isEnabled', true)
             ->orderBy('e.dateStartAt', 'DESC')          
-            ->setMaxResults(1)                         
+            ->setMaxResults(4)                         
             ->getQuery()
-            ->getOneOrNullResult();                    
+            ->getResult();                  
     }
 
     public function getEventListforAgenda($yearChoice, $monthChoice, $activityChoice)

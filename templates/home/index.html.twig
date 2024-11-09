@@ -50,28 +50,32 @@
                         {% endif %}
                     </div>
                     <div class="col-lg-5 offset-lg-1 last-paragraph-no-margin" data-anime='{ "el": "childs", "opacity": [0, 1], "rotateY": [-90, 0], "rotateZ": [-10, 0], "translateY": [80, 0], "translateZ": [50, 0], "staggervalue": 200, "duration": 900, "delay": 300, "easing": "easeOutCirc" }'>
-                        <span class="text-base-color fw-600 mb-15px d-block">Notre dernier événement</span>
+                        <span class="text-dark-gray fw-600 mb-15px d-block">Notre dernier événement</span>
                         <span class="text-base-color fw-600 mb-15px text-uppercase d-block">{{lastPastEvent.activity.name|capitalize}}</span>
                         
-                        <ul class="p-0 mb-25px mt-15px list-style-01 w-90 lg-w-100">
+                        <ul class="p-0 mb-20px mt-15px list-style-01 w-90 lg-w-100">
                             <li class="border-color-extra-medium-gray fw-600 text-dark-gray d-flex align-items-center pt-15px pb-15px">
                                 {# <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div> #}
-                                <span class="pe-4"><i class="fa-regular fa-calendar align-middle icon-medium"></i></span>
+                                <span class="pe-4"><i class="fa-regular fa-calendar align-middle icon-small"></i></span>
                                 C'était le {{lastPastEvent.dateStartAt|format_date('medium',  locale= 'fr')}}
                             </li>
                             <li class="border-color-extra-medium-gray fw-600 text-dark-gray d-flex align-items-center pt-15px pb-15px">
                                 {# <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div> #}
-                                <span class="pe-3"><i class="feather icon-feather-map-pin align-middle icon-medium"></i></span>
+                                <span class="pe-3"><i class="feather icon-feather-map-pin align-middle icon-small"></i></span>
                                 à {{lastPastEvent.rdvCity|capitalize}}
                             </li>
                         </ul>
                         
-                        <h3 class="fw-600 text-dark-gray w-90 lg-w-100 text-dark-gray fw-700 ls-minus-2px">Vive les JO !!</h3>
-                        <p class="w-90 sm-w-100">
-                            La flamme olympique est venue rendre visite à l'ARSMéLI...Merci à tous pour votre investissement !!
+                        <div class="fs-20 fw-600 text-dark-gray w-90 lg-w-100">{{lastPastEvent.name}}</div>
+                        <p class="w-90 sm-w-100 fs-16">
+                            {% if lastPastEvent.description|length > 150 %}
+                                {{ lastPastEvent.description|slice(0, 150) ~ '...' }}
+                            {% else %}
+                                {{ lastPastEvent.description }}
+                            {% endif %}
                         </p>
 
-                        <a href="{{ path('blog_index', { 'id': lastPastEvent.id }) }}" class="btn btn-large btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
+                        <a href="{{ path('blog_index', { 'id': lastPastEvent.id, 'is_passed': true }) }}" class="btn btn-large btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
                             <span>
                                 <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
                                 <span><i class="feather icon-feather-arrow-right"></i></span>
@@ -319,18 +323,17 @@
             
             <div class="row">
                 <div class="col-12 p-md-0">
-                    <ul class="blog-grid blog-wrapper grid-loading grid grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    <ul class="blog-grid blog-wrapper grid-loading grid grid-4col xl-grid-4col lg-grid-4col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
                         <li class="grid-sizer"></li>
 
-                        {% for i in 1..1 %}
-
+                        {% for event in lastPastEventList %}
                             <li class="grid-item">
-                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
+                                <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': true }) }}" class="card border-0 border-radius-30px main-card-container-last-event activity-card">
                                     <div class="blog-image">
-                                        <a href="" class="d-block"><img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" /></a>
+                                        <img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" />
                                     </div>
                                     <div class="card-body p-13 md-p-11">
-                                        <div  class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Build up healthy habits and strong peaceful life</div>
+                                        {# <div  class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Build up healthy habits and strong peaceful life</div>
                                         <p>Lorem ipsum has been industry standard dummy text ever...</p>
                                         <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
                                             <div class="me-auto">
@@ -341,54 +344,34 @@
                                                     <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
                                                 </div>
                                             </div>  
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-        
-                            <li class="grid-item">
-                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
-                                    <div class="blog-image">
-                                        <a href="" class="d-block"><img src="{{ customAsset('app/home/banner/last_event.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="card-body p-13 md-p-11">
-                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">How to bring the season into your great work</div>
-                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
-                                            <div class="me-auto">
-                                                <span class="d-inline-block">28 Août 2024</span>
-                                            </div>
-                                            <div class="like-count fs-15 fw-600">
-                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
-                                                    <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white"></i>
+                                        </div> #}
+                                        <div class="d-flex">
+                                            <div style="width:50px;" class="col-6 pe-sm-0 me-3">
+                                                <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
+                                                    {% if event.activity.pictureType == "image" %}
+                                                        <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
+                                                    {% else %}
+                                                        <i class="{{ event.activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
+                                                    {% endif %}
                                                 </div>
-                                            </div>  
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="grid-item">
-                                <div class="card border-0 border-radius-4px box-shadow-quadruple-large">
-                                    <div class="blog-image">
-                                        <a href="" class="d-block"><img src="{{ customAsset('app/home/banner/exemple_event.jpg') }}" alt="" /></a>
-                                    </div>
-                                    <div class="card-body p-13 md-p-11">
-                                        <div class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Be the strong willed one the public relationship</div>
-                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
-                                            <div class="me-auto">
-                                                <span class="d-inline-block">13 Août 2024</span>
-                                            </div>
-                                            <div class="like-count fs-15 fw-600">
-                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
-                                                    <i class="fa-solid fa-person-hiking align-middle icon-large icon-extra-large text-white"></i>
+                                                <div class="event-distance px-1">
+                                                    {% if event.eventDistance != null %}
+                                                        {{event.eventDistance}} Km
+                                                    {% endif %}
                                                 </div>
-                                            </div>  
+                                            </div>
+                                            
+                                            <div class="w-100">
+                                                <span class="fs-18 lh-30 ls-minus-05px d-block text-dark-gray fw-600">{{event.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
+                                                <span class="fs-16 mb-25px d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
+                                            </div>
+                                        </div>
+                                        <div class="fs-15 w-100 d-flex align-items-center ">
+                                            <i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             </li>
-
                         {% endfor %}
 
                     </ul>
