@@ -38,13 +38,6 @@ header .navbar-brand img {
     max-height: 80px;
     border-radius: 50%;
 }
-.sticky .header-transparent .header-button .btn {
-    background-color: var(--dark-gray);
-    color: var(--white);
-}
-.sticky .header-transparent .header-button .btn:hover {
-    border-color: var(--dark-gray);
-}
 .navbar .navbar-nav .nav-link {
     font-size: 17px;
 }

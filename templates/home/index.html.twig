@@ -6,6 +6,13 @@
 {% block stylesheets %}
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+    <style>
+        .btn-gradient-emerald-blue-emerald-green {
+            background-image: linear-gradient(to right, #1C2D7F,#2f45a8,#1C2D7F);
+            background-size: 200% auto;
+            color: var(--white);
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -76,7 +83,7 @@
                             {% endif %}
                         </p>
 
-                        <a href="{{ path('blog_index', { 'id': lastPastEvent.id, 'is_passed': true }) }}" class="btn btn-large btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
+                        <a href="{{ path('blog_index', { 'id': lastPastEvent.id, 'is_passed': true }) }}" class="btn btn-medium btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
                             <span>
                                 <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
                                 <span><i class="feather icon-feather-arrow-right"></i></span>
@@ -310,7 +317,7 @@
                     <a href="https://www.ffrs-retraite-sportive.org/" target="_blank"><img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/ffrs.png') }}"></a>
                     
                     <div class="overflow-hidden pt-55px">
-                        <a href="{{ path('about_index') }}" class="btn btn-extra-large btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                        <a href="{{ path('about_index') }}" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
                             <span>
                                 <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
                                 <span><i class="feather icon-feather-arrow-right"></i></span>

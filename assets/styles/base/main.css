@@ -32,9 +32,7 @@ header .btn.btn-switch-text.btn-small > span {
     padding: 11px 25px 9px;
 }
 .sticky .header-transparent .header-button .btn { 
-    background-color: var(--dark-gray);
-    border-color: rgba(23, 23, 23, 0.20);
-    color: var(--white);
+    background-color: var(--yellow);
 }
 .sticky .header-transparent .header-button .btn:hover {
     background-color: var(--dark-gray);

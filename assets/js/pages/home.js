@@ -64,14 +64,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
             })
             .then(response => response.json())
             .then(data => {
-                
-                console.log(data.content);
-                
-                // Vide le contenu de l'élément avec l'ID 'main_right_panel_renderView_contents'
+                                
                 const contentContainer = document.getElementById('activityModalcontent');
                 contentContainer.innerHTML = '';
                 
-                // Insère la nouvelle donnée (contenu reçu du serveur)
                 contentContainer.insertAdjacentHTML('beforeend', data.content);
     
                 const modal = new bootstrap.Modal(document.getElementById('activityModal'));

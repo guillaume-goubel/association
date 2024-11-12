@@ -82,7 +82,7 @@ class EventRepository extends ServiceEntityRepository
     {
         $sql_yearChoice = "";
         if ($yearChoice != null) {
-            $sql_yearChoice = " WHERE YEAR(A.date_start_at) = :yearChoice ";
+            $sql_yearChoice = " AND YEAR(A.date_start_at) = :yearChoice ";
         }
 
         $conn = $this->getEntityManager()->getConnection();
@@ -92,8 +92,8 @@ class EventRepository extends ServiceEntityRepository
                         'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
                         'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre') AS month_name
                 FROM `event` A
-                " . $sql_yearChoice . "
                 WHERE DATE(date_start_at) >= DATE(NOW())
+                " . $sql_yearChoice . "
 
                 ORDER BY month_number";
 
