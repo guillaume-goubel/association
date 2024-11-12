@@ -40,10 +40,10 @@
 
 	<!-- start header -->
     <header>
-        <nav class="navbar navbar-expand-lg header-light bg-yellow header-reverse header-demo border-bottom border-color-extra-medium-gray" data-header-hover="light">
+        <nav style="background-color:#1B2982;" class="navbar navbar-expand-lg header-light header-reverse header-demo border-bottom border-color-extra-medium-gray" data-header-hover="light">
             <div class="container-fluid"> 
                 <div class="col-auto col-lg-1 me-lg-0 me-auto">
-                    <a class="navbar-brand" href="index.html">
+                    <a class="navbar-brand" href="{{ path('home_index') }}">
                         <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="default-logo">
                         <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="alt-logo">
                         <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="mobile-logo"> 
@@ -52,7 +52,7 @@
                 <div class="col-auto col-lg-11 menu-order position-static d-flex justify-content-end ">
                     <div class="header-icon">  
                         <div class="header-button">
-                            <a href="{{ path('home_index') }}#agenda-section" class="btn btn-base-color btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
+                            <a href="{{ path('home_index') }}#agenda-section" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
                                 <span>
                                     <span class="btn-double-text" data-text="Retour">Retour</span>
                                 </span> 
@@ -74,18 +74,11 @@
                     <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
                         Programme<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
                     </h3>
-                    {# <div>
-                        <select class="form-select" aria-label="year choice">
-                            <option>2025</option>
-                            <option selected>2024</option>
-                            <option value="1">2023</option>
-                        </select>
-                    </div> #}
                 </div>
             </div>
 
             <form action="" method="get">
-                <small>Voici la liste des événements par mois de commencement et par activités</small>
+                <small>Voici la liste des futurs événements par mois de commencement et par activités</small>
                 <div class="col-12 blog-standard mb-2">
                     <div class="row gy-2">
                         <!-- Filtre mois -->
@@ -123,13 +116,13 @@
                 </div>
             </form>
 
-            <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
+            <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5 event-list-container" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
                 {% if events is not empty %}
                     {% for event in events %}
                         {% include 'main_partials/_event_regular_card.html.twig' %}
                     {% endfor %}
                 {% else %}
-                    <div>Pas de résultats pour cette recherche</div>
+                    <div class="no-matching-search-message">Pas de résultats pour cette recherche</div>
                 {% endif %}
             </div>
 

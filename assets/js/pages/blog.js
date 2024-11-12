@@ -1,3 +1,5 @@
+import '../../styles/pages/blog.css';
+
 document.addEventListener("DOMContentLoaded", (event) => {
 
     // Fonction pour détecter si l'utilisateur est sur mobile
@@ -95,7 +97,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // GALERY PHOTO PART ----------------------------------------------------------------
     setTimeout(function () {
-        console.log('yo')
         const galleryContainer = document.querySelector('.gallery-container');
         if (galleryContainer) {
             galleryContainer.classList.add('show');

@@ -21,8 +21,8 @@ class AgendaController extends AbstractController
         $activityChoice = $request->query->get('activityChoice') ?? "all";
 
         // Distinct month / year createdAt for select
-        $yearsList = $eventRepository->getDistincYearCreatedAt();
-        $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
+        $yearsList = $eventRepository->getDistincYearCreatedAtForArchiveView();
+        $monthsList = $eventRepository->getDistinctMonthCreatedAtForAgendaView($yearChoice);
         $activityList = $activityRepository->findAll();
 
         return $this->render('agenda/index.html.twig', [

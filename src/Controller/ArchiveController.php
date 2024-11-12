@@ -2,17 +2,36 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\EventRepository;
+use App\Repository\ActivityRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/archive', name: 'archive_')]
 class ArchiveController extends AbstractController
 {
     #[Route('/index', name: 'index')]
-    public function index(): Response
+    public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository): Response
     {
+        $yearChoice = $request->query->get('yearChoice') ?? date("Y");
+        $monthChoice = $request->query->get('monthChoice') ?? date("m");
+        $activityChoice = $request->query->get('activityChoice') ?? "all";
+
+        // Distinct month / year createdAt for select
+        $yearsList = $eventRepository->getDistincYearCreatedAtForArchiveView();
+        $monthsList = $eventRepository->getDistinctMonthCreatedAtForArchiveView($yearChoice);
+        $activityList = $activityRepository->findAll();
+        
         return $this->render('archive/index.html.twig', [
+            'events' => $eventRepository->getEventListforArchive($yearChoice, $monthChoice, $activityChoice),
+            'yearsList' => $yearsList,
+            'monthsList' => $monthsList,
+            'activityList' => $activityList,
+            'yearChoice' => $yearChoice,
+            'monthChoice' => $monthChoice,
+            'activityChoice' => $activityChoice
         ]);
     }
 }

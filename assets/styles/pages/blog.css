@@ -1,0 +1,59 @@
+/* Style pour l'overlay complet */
+#mapOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Assure que l'overlay est au-dessus de la carte */
+    display: none; /* Masquée par défaut */
+}
+/* Style pour le message d'information */
+#zoomNotification {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+#map{
+    height: 200px!important;
+}
+.event-distance{
+    font-size:16px!important;
+}
+.trainer-box{
+    padding-left:11px;
+}
+/* Initialement caché */
+.gallery-container {
+    opacity: 0;
+    transform: translateY(20px); /* Décalage vers le bas */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+/* Classe visible avec animation */
+.gallery-container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.animator-item{
+    min-width: 150px;
+    display: flex;
+    justify-content: end;
+}
+.animator-item-name{
+    width: 250px;
+}
+.month{
+    font-size: 1.2rem;
+}
+@media only screen and (max-width: 600px) {
+    .animator-item {
+      justify-content: start;
+    }
+  }

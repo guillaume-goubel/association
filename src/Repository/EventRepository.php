@@ -39,6 +39,37 @@ class EventRepository extends ServiceEntityRepository
 
         $sql = "    SELECT DISTINCT(YEAR(date_start_at)) as year
                     FROM `event`
+                    WHERE DATE(date_start_at) >= DATE(NOW())
+                    ORDER BY year DESC
+               ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
+    public function getDistincYearCreatedAtForAgendaView()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "    SELECT DISTINCT(YEAR(date_start_at)) as year
+                    FROM `event`
+                    WHERE DATE(date_start_at) >= DATE(NOW())
+                    ORDER BY year DESC
+               ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
+    public function getDistincYearCreatedAtForArchiveView()
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "    SELECT DISTINCT(YEAR(date_start_at)) as year
+                    FROM `event`
+                    WHERE DATE(date_start_at) < DATE(NOW())
                     ORDER BY year DESC
                ";
 
@@ -62,6 +93,63 @@ class EventRepository extends ServiceEntityRepository
                         'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre') AS month_name
                 FROM `event` A
                 " . $sql_yearChoice . "
+                WHERE DATE(date_start_at) >= DATE(NOW())
+
+                ORDER BY month_number";
+
+        $stmt = $conn->prepare($sql);
+        if ($yearChoice != null) {
+            $stmt->bindValue(':yearChoice', $yearChoice);
+        }
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
+    public function getDistinctMonthCreatedAtForAgendaView($yearChoice)
+    {
+        $sql_yearChoice = "";
+        if ($yearChoice != null) {
+            $sql_yearChoice = " AND YEAR(A.date_start_at) = :yearChoice ";
+        }
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT DISTINCT(MONTH(A.date_start_at)) AS month_number,
+                    ELT(MONTH(A.date_start_at),
+                        'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                        'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre') AS month_name
+                FROM `event` A
+                WHERE DATE(date_start_at) >= DATE(NOW())
+                " . $sql_yearChoice . "
+                
+
+                ORDER BY month_number";
+
+        $stmt = $conn->prepare($sql);
+        if ($yearChoice != null) {
+            $stmt->bindValue(':yearChoice', $yearChoice);
+        }
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
+    public function getDistinctMonthCreatedAtForArchiveView($yearChoice)
+    {
+        $sql_yearChoice = "";
+        if ($yearChoice != null) {
+            $sql_yearChoice = " AND YEAR(A.date_start_at) = :yearChoice ";
+        }
+
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "SELECT DISTINCT(MONTH(A.date_start_at)) AS month_number,
+                    ELT(MONTH(A.date_start_at),
+                        'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
+                        'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre') AS month_name
+                FROM `event` A
+                WHERE DATE(date_start_at) < DATE(NOW())
+                " . $sql_yearChoice . "
+                
 
                 ORDER BY month_number";
 
@@ -135,21 +223,21 @@ class EventRepository extends ServiceEntityRepository
             ->getOneOrNullResult();                     
     }
 
-    // public function findLastPastEvent()
-    // {
-    //     $today = new \DateTime();
-    //     $today->setTime(0, 0);
+    public function findNextUpcomingList()
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
 
-    //     return $this->createQueryBuilder('e')
-    //         ->andWhere('e.dateStartAt < :today')        
-    //         ->andWhere('e.isEnabled = :isEnabled')     
-    //         ->setParameter('today', $today)
-    //         ->setParameter('isEnabled', true)
-    //         ->orderBy('e.dateStartAt', 'DESC')          
-    //         ->setMaxResults(1)                         
-    //         ->getQuery()
-    //         ->getOneOrNullResult();                    
-    // }
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.dateStartAt > :today')        
+            ->andWhere('e.isEnabled = :isEnabled')     
+            ->setParameter('today', $today)
+            ->setParameter('isEnabled', true)
+            ->orderBy('e.dateStartAt', 'ASC')          
+            ->setMaxResults(4)                         
+            ->getQuery()
+            ->getResult();                  
+    }
 
     public function findLastPastEventsList()
     {
@@ -161,7 +249,7 @@ class EventRepository extends ServiceEntityRepository
             ->andWhere('e.isEnabled = :isEnabled')     
             ->setParameter('today', $today)
             ->setParameter('isEnabled', true)
-            ->orderBy('e.dateStartAt', 'DESC')          
+            ->orderBy('e.dateStartAt', 'ASC')          
             ->setMaxResults(4)                         
             ->getQuery()
             ->getResult();                  
@@ -169,8 +257,42 @@ class EventRepository extends ServiceEntityRepository
 
     public function getEventListforAgenda($yearChoice, $monthChoice, $activityChoice)
     {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
+        $stmt->andWhere('e.dateStartAt >= :today');   
+        $stmt->setParameter('today', $today);
+
+        if ($yearChoice) {
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
+        if ($monthChoice) {
+            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
+            $stmt->setParameter('month', $monthChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('e.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $monthChoice);
+        }
+
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        return $stmt->getQuery()->getResult();
+    }
+
+    public function getEventListforArchive($yearChoice, $monthChoice, $activityChoice)
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+
+        $stmt = $this->createQueryBuilder('e');
+        $stmt->join('e.activity', 'a');
+        $stmt->andWhere('e.dateStartAt < :today');   
+        $stmt->setParameter('today', $today);
 
         if ($yearChoice) {
             $stmt->andwhere('YEAR(e.dateStartAt) = :year');

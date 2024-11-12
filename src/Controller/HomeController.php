@@ -26,9 +26,9 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             "activities" => $activityRepository->findBy(["isEnabled"=>1], ['ordering' => 'ASC']),
-            'events' => $eventRepository->findEventsForHomePage(),
             'isEventActionsButtonVisible' => false,
             'nextUpcomingEvent' => $eventRepository->findNextUpcomingEvent(),
+            'nextUpcomingList' => $eventRepository->findNextUpcomingList(),
             'lastPastEvent' => $lastPastEvent,
             'lastPastEventList' => $lastPastEventList
         ]);

@@ -182,7 +182,7 @@
                             <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                 <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-01" aria-expanded="false" data-bs-parent="#accordion-style-07">
                                     <div class="accordion-title mb-0 position-relative text-dark-gray">
-                                        <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Encadrement par des animateurs agréés</span>
+                                        <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Des animateurs agréés</span>
                                     </div>
                                 </a>
                             </div>
@@ -233,9 +233,9 @@
                 
                 <div id="calendar"></div>
 
-                <div class="fw-600 pb-2">Vos {{events|length}} prochains rendez-vous</div>
+                <div class="fw-600 pb-2">Vos {{nextUpcomingList|length}} prochains rendez-vous</div>
                 
-                {% for event in events %}
+                {% for event in nextUpcomingList %}
                     {% if event.activity.type == 'regular' %}
                         {% include 'main_partials/_event_regular_card.html.twig' %}
                     {% else %}
@@ -263,7 +263,7 @@
                     <div class="col-lg-5 md-mb-50px sm-mb-30px">
                         <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Au coeur de notre territoire</h3>
                         <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Venez découvrir ou redécouvrir notre patrimoine naturel ou culturel grâce au sport</p> 
-                        <a href="{{ path('archive_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Tous nos évènements</a>
+                        <a href="{{ path('archive_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Toutes nos archives</a>
                     </div>
                     <div class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
                         <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="icon-feather-minus" data-inactive-icon="icon-feather-plus">
@@ -321,57 +321,16 @@
 
             </div>
             
-            <div class="row">
+            <div class="row pt-3">
                 <div class="col-12 p-md-0">
+                    
+                    <div class="fw-600 ps-2 pb-1">Nos {{lastPastEventList|length}} derniers événements</div>
+
                     <ul class="blog-grid blog-wrapper grid-loading grid grid-4col xl-grid-4col lg-grid-4col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
                         <li class="grid-sizer"></li>
 
                         {% for event in lastPastEventList %}
-                            <li class="grid-item">
-                                <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': true }) }}" class="card border-0 border-radius-30px main-card-container-last-event activity-card">
-                                    <div class="blog-image">
-                                        <img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" />
-                                    </div>
-                                    <div class="card-body p-13 md-p-11">
-                                        {# <div  class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Build up healthy habits and strong peaceful life</div>
-                                        <p>Lorem ipsum has been industry standard dummy text ever...</p>
-                                        <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
-                                            <div class="me-auto">
-                                                <span class="d-inline-block">30 Septembre 2024</span>
-                                            </div>
-                                            <div class="like-count fs-15 fw-600">
-                                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2 ms-2">
-                                                    <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
-                                                </div>
-                                            </div>  
-                                        </div> #}
-                                        <div class="d-flex">
-                                            <div style="width:50px;" class="col-6 pe-sm-0 me-3">
-                                                <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
-                                                    {% if event.activity.pictureType == "image" %}
-                                                        <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
-                                                    {% else %}
-                                                        <i class="{{ event.activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
-                                                    {% endif %}
-                                                </div>
-                                                <div class="event-distance px-1">
-                                                    {% if event.eventDistance != null %}
-                                                        {{event.eventDistance}} Km
-                                                    {% endif %}
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="w-100">
-                                                <span class="fs-18 lh-30 ls-minus-05px d-block text-dark-gray fw-600">{{event.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
-                                                <span class="fs-16 mb-25px d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
-                                            </div>
-                                        </div>
-                                        <div class="fs-15 w-100 d-flex align-items-center ">
-                                            <i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+                            {% include 'main_partials/_event_passed.html.twig' %}
                         {% endfor %}
 
                     </ul>
