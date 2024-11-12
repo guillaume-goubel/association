@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block body %}
+<div id="activityInfosPATH" data-path="{{ path('home_activity_infos')}}"></div>
 
 <body data-mobile-nav-trigger-alignment="right" data-mobile-nav-style="modern" data-mobile-nav-bg-color="#383632"> 
     
@@ -90,64 +91,7 @@
 
     <!-- start section -->
     <section id="activity-section" class="background-position-left-top background-no-repeat position-relative pt-0 pb-0 overflow-hidden">
-        <div class="container-fluid px-0">
-            <div class="row g-0">
-                
-                <div class="col-md-8 p-3 cover-background"  data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 600, "delay":150, "staggervalue": 150, "easing": "easeOutQuad" }' style="background-image: url('{{ asset('app/demo-hosting-home-bg.jpg') }}')">
-                    <div class="row justify-content-center my-5 pt-5">
-                        <div class="col-lg-8 text-center" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 900, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                            <span class="text-white opacity-5 mb-5px text-uppercase d-block"></span>
-                            <h3 class="text-white fw-700 ls-minus-1px highlight-separator" data-shadow-animation="true" data-animation-delay="1500">
-                                Nos activités<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
-                            </h3>
-                        </div>
-                    </div>
-
-                    <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 row-cols-sm-2 justify-content-start ps-8 pe-8 lg-px-0" data-anime='{ "el": "childs", "translateY": [30, 0], "scale":[0.8,1], "opacity": [0,1], "duration": 500, "delay": 0, "staggervalue": 200, "easing": "easeOutQuad" }'>
-                        
-                        {% for activity in activities %}
-                            
-                            <a href="#" class="col icon-with-text-style-04 transition-inner-all mb-30px">
-                                <div data-activity="activity"  class="activity-container feature-box h-100 {{ activity.classColor }} transition light-hover border-radius-6px p-13 xs-p-12 last-paragraph-no-margin overflow-hidden border border-1 box-shadow-quadruple-large-hover border-color-transparent-white-light border-color-transparent-on-hover">
-                                    <div class="feature-box-icon">
-                                        {% if activity.pictureType == "image" %}
-                                            <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
-                                        {% else %}
-                                            <i class="{{ activity.picture }} align-middle icon-large text-white my-3"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-white fw-500 lh-24">{{ activity.name|capitalize }}</span> 
-                                    </div>
-                                    <div class="feature-box-overlay {{ activity.classColorHover }}"></div>
-                                </div>  
-                            </a>
-                            
-                        {% endfor %}
-
-                    </div>
-                </div>
-
-                <div class="col-md-4 position-relative" data-anime='{ "translateX": [50, 0], "opacity": [0,1], "duration": 600, "delay":150, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                    
-                    <div style="z-index:9;background-color: #16233f;" class="opacity-extra-medium bg-blue-whale"></div>
-
-                    <div class="swiper position-relative h-100" data-slider-options='{ "slidesPerView": 1, "loop": true, "allowTouchMove": true, "autoplay": { "delay": 8000, "disableOnInteraction": false }, "navigation": { "nextEl": ".slider-one-slide-next-1", "prevEl": ".slider-one-slide-prev-1" }, "effect": "fade" }'>
-                        <div class="swiper-wrapper">
-                            <!-- start text slider item -->
-                            <div class="swiper-slide cover-background h-100 text-center" style="background-image: url({{ customAsset('app/sport1.webp') }})">
-                            </div>
-                            <div class="swiper-slide cover-background h-100 text-center" style="background-image: url({{ customAsset('app/sport2.jpg') }})">
-                            </div>
-                            <div class="swiper-slide cover-background h-100 text-center" style="background-image: url({{ customAsset('app/sport5.jpg') }})">
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-
-            </div>
-        </div>
+        {% include 'home/partials/_activity.html.twig' %}
     </section>
     <!-- end section -->
 
@@ -520,32 +464,6 @@
     <!-- Modal -->
     {% include 'main_partials/_map_modal.html.twig' %}
     {% include 'main_partials/_activity_modal.html.twig' %}
-
-    <!-- start popup -->
-    <div id="activity-popup" class="mfp-hide subscribe-popup">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-9 col-md-10 bg-white">
-                    <div class="row position-relative box-shadow-quadruple-large">
-                        <div class="col-lg-12 newsletter-popup p-8 pt-10 pb-10 lg-p-5 md-p-6 xs-p-8 position-relative">
-                            
-                            <div class="d-flex align-items-center">
-                                <div style="height:70px;width:70px;" class="d-flex align-items-center justify-content-center feature-box-icon bg-base-color border-radius-3px p-2">
-                                    <img style="width: 40px;" src="{{ customAsset('app/randonnee.png')}}" alt="">
-                                </div>
-                                <h4 class="d-inline-block alt-font text-dark-gray ps-2 mb-0">Randonnée</h4>
-                            </div>
-
-                            <div class="d-inline-block w-100 newsletter-style-05 position-relative mt-5 mb-20px">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Est excepturi suscipit dolores nobis possimus sed voluptatum corrupti cupiditate magni. Nam ad ratione labore eius eos sed hic exercitationem consectetur eum?</p>
-                            </div>
-                        </div>
-                        <button title="Fermer (echap)" type="button" class="mfp-close text-dark-gray"></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </body>
 

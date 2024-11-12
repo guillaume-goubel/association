@@ -4,13 +4,17 @@ namespace App\Controller;
 
 use App\Repository\EventRepository;
 use App\Repository\ActivityRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+#[Route('', name: 'home_')]
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'home_index')]
+    #[Route('/', name: 'index')]
     public function index(ActivityRepository $activityRepository, EventRepository $eventRepository): Response
     {   
         // $eventRepository->findLastPastEvent()
@@ -31,6 +35,22 @@ class HomeController extends AbstractController
             'nextUpcomingList' => $eventRepository->findNextUpcomingList(),
             'lastPastEvent' => $lastPastEvent,
             'lastPastEventList' => $lastPastEventList
+        ]);
+    }
+
+    #[Route('/activity/infos', name: 'activity_infos', methods: ['POST'])]
+
+    public function activityInfos(Request $request, ActivityRepository $activityRepository):JsonResponse
+    {
+        $activityId = $request->request->get('activityId');
+        $activity = $activityRepository->findOneBy(['id' => $activityId]);
+
+        // dd('Activity')
+
+        return new JsonResponse([
+            'content' => $this->renderView('home/components/_activity_infos.html.twig', [
+                'activity' => $activity,
+            ])
         ]);
     }
 
