@@ -35,7 +35,6 @@ class AgendaController extends AbstractController
             'monthChoice' => $monthChoice,
             'activityChoice' => $activityChoice,
             'isEventActionsButtonVisible' => false
-            
         ]);
     }
 }

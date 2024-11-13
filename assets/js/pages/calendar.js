@@ -21,10 +21,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     //     position: 'topright' // Change la position du bouton plein écran
     // }).addTo(map);
     
-
     //  CALENDAR PART ----------------------------------------------------------------
-
-    var blogIndexUrl = 'blog/2/index';
     var calendarEl = document.getElementById('calendar');
 
     var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -38,7 +35,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         views: {
             multiMonthYear: {  // Vue multiple mois (personnalisée)
                 type: 'multiMonth',
-                duration: { years: 1 },  // Durée sur 1 an
+                duration: { months: 12 }, // Durée sur 1 an
                 eventLimit: true, // Permet de limiter l'affichage des événements
                 dayMaxEventRows: true,  // Limiter le nombre d'événements par jour
     
@@ -67,13 +64,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 // Vous pouvez personnaliser ici si besoin
             }
         },
-    
         headerToolbar: {  // Boutons pour basculer entre les vues
             left: '',
             center: '',
             right: ''
         },
-    
         moreLinkText: function(n) {
             return n;  // Texte pour plus d'événements
         },
@@ -86,43 +81,56 @@ document.addEventListener("DOMContentLoaded", (event) => {
             day: "Jour",
             list: "Liste"
         },
-    
+        
         dateClick: function(info) {
+
             var selectedDateEvents = calendar.getEvents().filter(function(event) {
                 return FullCalendar.formatDate(event.start, { year: 'numeric', month: '2-digit', day: '2-digit' }) === 
                     FullCalendar.formatDate(info.date, { year: 'numeric', month: '2-digit', day: '2-digit' });
             });
-    
+        
             if (selectedDateEvents.length > 0) {
                 var eventDetails = selectedDateEvents.map(function(event) {
                     
                     // Convertir les dates en objets Date pour comparaison
-                    let eventStartDate = new Date(event.extendedProps.datestartAt);  // Assurez-vous que `datestartAt` est dans un format ISO valide
+                    let eventStartDate = new Date(event.start);  // Assurez-vous que `event.start` est une date valide
                     let currentDate = new Date();
                     
                     // Vérifiez si l'événement est passé
                     let isPassed = eventStartDate < currentDate; 
-
+                    console.log("Event Start Date:", eventStartDate);
+                    console.log("Current Date:", currentDate);
+                    console.log("Is Passed:", isPassed);
+        
                     // Dynamiser le path en fonction de l'état de l'événement
                     let pathComplete = isPassed ? `/blog/${event.extendedProps.id}/index?is_passed=true` : `/blog/${event.extendedProps.id}/index?is_passed=false`;
                     
+                    // Construction du contenu HTML des détails de l'événement
                     return `
-                        <div class="col-12 col-md-7 mb-4">
+                        <div class="col-12 col-md-10 mb-4">
                             <div>
-                                <strong class="me-1">${event.extendedProps.genre}</strong>${event.extendedProps.title}<br>
-                                ${event.extendedProps.rdv ? `<span class="fs-14">Rendez-vous </span>${event.extendedProps.rdv}<br>` : ''}
-                                ${event.extendedProps.rdvDate ? `<span>Le ${event.extendedProps.rdvDate}</span>` : ''}
-                                ${event.extendedProps.rdvTime ? `<span>à ${event.extendedProps.rdvTime}</span>` : ''}
+                                <div>
+                                    ${!isPassed && event.extendedProps.rdvDate ? `<span>Le ${event.extendedProps.rdvDate}</span>` : ''}
+                                    ${!isPassed && event.extendedProps.rdvTime ? `<span>à ${event.extendedProps.rdvTime}</span>` : ''}
+                                </div>
+
+                                <strong class="me-1">${event.extendedProps.genre}</strong>
+                                <div>${event.extendedProps.title ? event.extendedProps.title : ''}</div>
+                
+                                ${!isPassed && event.extendedProps.rdv ? `<span class="fs-12">Rendez-vous </span><span class="fs-14">${event.extendedProps.rdv}</span><br>` : ''}
+                
                             </div>
-                            ${event.extendedProps.infosDisplay ? `<a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-200px">Plus d'informations</a>` : ''}
+                            ${event.extendedProps.infosDisplay ? `<a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-150px">Plus d'informations</a>` : ''}
                         </div>
                     `;
                 }).join('');
-    
+        
+                // Affichage des détails dans le modal
                 document.getElementById('eventDetails').innerHTML = eventDetails;
                 openModal();
             }
         }
+
     });
     
     calendar.render();

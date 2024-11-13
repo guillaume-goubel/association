@@ -26,21 +26,6 @@
         max-width: 200px;
     }
 
-    {# .modal-content {
-        background-color: white;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    } #}
-
     .close:hover, .close:focus {
         color: black;
         text-decoration: none;
@@ -63,7 +48,6 @@
         align-items: center;
         justify-content: center;
     }
-    
     .loader-dots {
         display: flex;
         justify-content: space-around;
@@ -151,14 +135,15 @@
     .fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event,
     .fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event{
         border: 1px solid;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
+        border-radius: 7px;
+        width: 100%;
+        height: 17px;
         font-size: 13px;
         font-weight: 600;
         background-color: var(--base-color);
         color: white;
-        padding-left: 4px!important;
+        padding-left: 4px !important;
+        cursor: default;
     }
     .fc-daygrid-more-link.fc-more-link:hover,
     .fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event:hover,
@@ -181,6 +166,13 @@
     .fc-daygrid-day:hover{
         background-color: #c9c3c3;
     }
+    .fc-daygrid-day-bottom{
+        cursor: default;
+        pointer-events: none;
+    }
+    .fc .fc-daygrid-day.fc-day-today {
+        background-color: #b2d4ff;
+    }
 
     @media (max-width: 991px) {
         .fc-daygrid-day-bottom{
@@ -197,8 +189,31 @@
 
     {{ parent() }}
 
-    <!-- start header -->
-	{% include 'blog/partials/_blog_header.html.twig' %}
+	<!-- start header -->
+    <header>
+        <nav style="background-color:#1B2982;" class="navbar navbar-expand-lg header-light header-reverse header-demo border-bottom border-color-extra-medium-gray" data-header-hover="light">
+            <div class="container-fluid"> 
+                <div class="col-auto col-lg-1 me-lg-0 me-auto">
+                    <a class="navbar-brand" href="{{ path('home_index') }}">
+                        <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="default-logo">
+                        <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="alt-logo">
+                        <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="mobile-logo"> 
+                    </a>
+                </div>
+                <div class="col-auto col-lg-11 menu-order position-static d-flex justify-content-end ">
+                    <div class="header-icon">  
+                        <div class="header-button">
+                            <a href="{{ path('home_index') }}#agenda-section" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
+                                <span>
+                                    <span class="btn-double-text" data-text="Retour">Retour</span>
+                                </span> 
+                            </a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
 	<!-- end header -->
 
     <!-- start section -->
@@ -212,6 +227,37 @@
                     </h3>
                 </div>
             </div>
+
+            <form action="" method="get">
+                <small>Voici la liste des futurs événements sur 1 an et par activités</small>
+                <div class="col-12 blog-standard mb-2">
+                    <div class="row gy-2">
+                        <!-- Filtre année -->
+                        {# <div class="col-12 col-md-3">
+                            <select name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
+                                {% for item in yearsList %}
+                                    <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
+                                {% endfor %}
+                            </select>
+                        </div> #}
+                        <!-- Filtre activité -->
+                        <div class="col-12 col-md-3">
+                            <select name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                <option {{ activityChoice == 'all' ? 'selected' : '' }} value="all">Toutes activités</option>
+                                {% for item in activityList %}
+                                    <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <!-- Bouton de recherche -->
+                        <div class="col-12 col-md-3 text-center text-md-start">
+                            <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
+                                <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
 
             <div id="calendar"></div>
         </div>
@@ -239,162 +285,11 @@
 
 {% block baseJavascripts %}
     
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    {# <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script> #}
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <script>
-        const events = [
-            {
-                start: '2024-10-17T14:00:00', // Date/Heure avec l'heure au format ISO
-                end: '2024-10-17T16:00:00',   // Date de fin avec l'heure
-                backgroundColor: '#4581cc',
-                extendedProps: {
-                    id: '2',
-                    title: 'Randonnée à Bouvines',
-                    genre: 'Randonnée',
-                    rdv: 'Parking de la mairie, chaussée, Brunehaut',
-                    rdvDate: '17/10/2024',
-                    rdvTime: '14h:00',
-                    type: 'activity',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-10-24T14:00:00',
-                end: '2024-10-24T16:00:00',
-                backgroundColor: '#4581cc',
-                extendedProps: {
-                    id: '3',
-                    title: 'Randonnée à Templeuve-en-Pévèle',
-                    genre: 'Randonnée',
-                    rdv: 'Parking centre ville, rue d’Anchin',
-                    rdvDate: '24/10/2024',
-                    rdvTime: '14h:00',
-                    type: 'activity',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-10-26T10:00:00',
-                end: '2024-10-26T12:00:00',
-                backgroundColor: '#4581cc',
-                extendedProps: {
-                    id: '2',
-                    title: 'Gymnastique à Lambersart',
-                    genre: 'Gymnastique',
-                    rdv: 'Salle des sports Norbert Segard',
-                    rdvDate: '26/10/2024',
-                    rdvTime: '10h:00',
-                    type: 'activity',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-12-18T14:00:00',
-                end: '2024-12-18T16:00:00',
-                backgroundColor: '#4581cc',
-                extendedProps: {
-                    id: '2',
-                    title: 'Randonnée à Zillebeck (Belgique)',
-                    genre: 'Randonnée',
-                    rdv: 'Seelbachdreef - parking OC in “t riet”',
-                    rdvDate: '31/10/2024',
-                    rdvTime: '14h:00',
-                    type: 'activity',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-12-19T14:00:00',
-                end: '2024-12-19T16:00:00',
-                backgroundColor: '#4581cc',
-                extendedProps: {
-                    id: '2',
-                    title: 'Randonnée à Zillebeck (Belgique)',
-                    genre: 'Randonnée',
-                    rdv: 'Seelbachdreef - parking OC in “t riet”',
-                    rdvDate: '31/10/2024',
-                    rdvTime: '14h:00',
-                    type: 'activity',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-12-18T05:30:00',
-                end: '2024-12-18T06:30:00',
-                backgroundColor: '#EF991F',
-                extendedProps: {
-                    id: '2',
-                    title: 'Séjour au marché de Noël Strasbourg',
-                    genre: 'Séjour culture',
-                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
-                    rdvDate: '18/12/2024',
-                    rdvTime: '5h:30',
-                    type: 'journey',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-12-19T05:30:00',
-                end: '2024-12-19T06:30:00',
-                backgroundColor: '#EF991F',
-                extendedProps: {
-                    id: '2',
-                    title: 'Séjour au marché de Noël Strasbourg',
-                    genre: 'Séjour culture',
-                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
-                    rdvDate: '19/12/2024',
-                    rdvTime: '5h:30',
-                    type: 'journey',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-12-20T05:30:00',
-                end: '2024-12-20T06:30:00',
-                backgroundColor: '#EF991F',
-                extendedProps: {
-                    id: '2',
-                    title: 'Séjour au marché de Noël Strasbourg',
-                    genre: 'Séjour culture',
-                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
-                    rdvDate: '20/12/2024',
-                    rdvTime: '5h:30',
-                    type: 'journey',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-12-21T05:30:00',
-                end: '2024-12-21T06:30:00',
-                backgroundColor: '#EF991F',
-                extendedProps: {
-                    id: '2',
-                    title: 'Séjour au marché de Noël Strasbourg',
-                    genre: 'Séjour culture',
-                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
-                    rdvDate: '21/12/2024',
-                    rdvTime: '5h:30',
-                    type: 'journey',
-                    infosDisplay: true
-                }
-            },
-            {
-                start: '2024-12-22T05:30:00',
-                end: '2024-12-22T06:30:00',
-                backgroundColor: '#EF991F',
-                extendedProps: {
-                    id: '2',
-                    title: 'Séjour au marché de Noël Strasbourg',
-                    genre: 'Séjour culture',
-                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
-                    rdvDate: '22/12/2024',
-                    rdvTime: '5h:30',
-                    type: 'journey',
-                    infosDisplay: true
-                }
-            }
-        ];
+        const events = {{ eventDateJson|raw }};
     </script>
 
     {% block importmap %}

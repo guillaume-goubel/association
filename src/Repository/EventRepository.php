@@ -36,6 +36,7 @@ class EventRepository extends ServiceEntityRepository
     public function getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice)
     {
         $stmt = $this->createQueryBuilder('e');
+        $stmt->join('e.activity', 'a');
 
         if ($yearChoice) {
             $stmt->andwhere('YEAR(e.dateStartAt) = :year');
@@ -119,26 +120,54 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function getEventListforCalendar($yearChoice, $creatorChoice, $activityChoice)
+    public function getEventListforCalendar($yearChoice, $activityChoice)
     {
         $stmt = $this->createQueryBuilder('e');
+        $stmt->join('e.activity', 'a');
 
         if ($yearChoice) {
             $stmt->andwhere('YEAR(e.dateStartAt) = :year');
             $stmt->setParameter('year', $yearChoice);
         }
-
-        if ($creatorChoice) {
-            $stmt->andwhere('e.user = :user');
-            $stmt->setParameter('user', $creatorChoice);
-        }
-
+        
         if ($activityChoice && $activityChoice != 'all') {
             $stmt->andwhere('a.id = :activityChoice');
             $stmt->setParameter('activityChoice', $activityChoice);
         }
 
         $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        return $stmt->getQuery()->getResult();
+    }
+
+    public function getEventListforCalendarFor12Months($activityChoice = null)
+    {
+        // Si yearChoice ou monthChoice ne sont pas fournis, on les définit sur l'année et le mois actuels
+        $yearChoice = (new \DateTime())->format('Y');
+        $monthChoice = (new \DateTime())->format('m');
+        
+        // Création d'un objet QueryBuilder
+        $stmt = $this->createQueryBuilder('e');
+        $stmt->join('e.activity', 'a');
+        
+        // Calcul de la date de début et de fin pour la période de 12 mois
+        $startDate = new \DateTime("{$yearChoice}-{$monthChoice}-01");
+        $endDate = (clone $startDate)->modify('+12 months')->modify('-1 day'); // Dernier jour de la période de 12 mois
+        
+        // Filtrage par la plage de dates
+        $stmt->andWhere('e.dateStartAt BETWEEN :startDate AND :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate);
+        
+        // Filtrage par l'activité si spécifiée
+        if ($activityChoice && $activityChoice !== 'all') {
+            $stmt->andWhere('a.id = :activityChoice')
+                ->setParameter('activityChoice', $activityChoice);
+        }
+        
+        // Tri des résultats par la date de début des événements
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        
+        // Retourne les résultats
         return $stmt->getQuery()->getResult();
     }
 

@@ -96,6 +96,13 @@ class EventController extends AbstractController
     public function edit(Request $request, Event $event, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
     {   
         $user = $this->getUser();
+        
+        // Vérification si l'ID de l'utilisateur connecté correspond à l'ID de l'utilisateur de l'événement
+        if ($user->getId() !== $event->getUser()->getId() && !in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+            // Redirige vers la liste des événements si les IDs ne correspondent pas
+            return $this->redirectToRoute('admin_event_index');
+        }
+        
         $userActivityArray = [];
 
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
