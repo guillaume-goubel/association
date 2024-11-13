@@ -13,9 +13,9 @@
         height: 300px!important;
     }
 
-    .fc-more-popover{
+    {# .fc-more-popover{
         display: none!important;
-    }
+    } #}
 
     /* Styles pour la modale */
     .modal {
@@ -49,21 +49,6 @@
 
     .fade:not(.show) {
         opacity: inherit!important;
-    }
-
-    .event-number {
-        color: white;
-        padding: 1px; 
-        font-weight: bold; 
-        position: absolute; 
-        bottom: 4px; 
-        left: 7px; 
-        font-size: 13px;
-    }
-
-    .fc-day-disabled .event-number{
-        display: none;
-        pointer-events: none;
     }
 
     /* Loader Dots */
@@ -112,9 +97,8 @@
         }
     }
 
-
-    {# TEST #}
-    .fc .fc-daygrid-event-harness-abs {
+    {# JS CALENDAR #}
+    {# .fc .fc-daygrid-event-harness-abs {
         visibility: visible!important;
         top: -1px!important;
         left: 0px!important;
@@ -122,9 +106,7 @@
     }
     .fc-daygrid-day-bottom{
         margin-top: -1px!important;
-        width:19px!important;
     }
-
     .fc-daygrid-more-link.fc-more-link{
         background-color: transparent;
         color: white;
@@ -132,22 +114,78 @@
         pointer-events: none;
         border: 1px solid transparent!important;
     }
-
     .fc-event-title-container{
         max-height: 16px;
     }
-
     .fc-daygrid-day{
         cursor: pointer;
     }
-
     .fc-daygrid-day:hover{
         background-color: #c9c3c3;
         color:white;
     }
-
     .fc-h-event{
-        border: 1px solid transparent!important;;
+        border: 1px solid transparent!important;
+    }
+    .event-number {
+        color: white;
+        padding: 1px; 
+        font-weight: bold; 
+        position: absolute; 
+        bottom: 4px; 
+        left: 7px; 
+        font-size: 13px;
+    }
+    .fc-day-disabled .event-number{
+        display: none;
+        pointer-events: none;
+    } #}
+
+    {# .fc-daygrid-day-bottom{
+        margin-top: -6px;
+        border: 1px solid;
+        border-radius: 7px;
+    } #}
+
+    .fc-daygrid-more-link.fc-more-link,
+    .fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event,
+    .fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event{
+        border: 1px solid;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        background-color: var(--base-color);
+        color: white;
+        padding-left: 4px!important;
+    }
+    .fc-daygrid-more-link.fc-more-link:hover,
+    .fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event:hover,
+    .fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event:hover{
+        border: 1px solid var(--base-color);
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        background-color: var(--base-color);
+        color: white;
+        padding-left: 4px!important;
+        cursor: none;
+        pointer-events: none;
+    }
+    .fc-daygrid-day{
+        cursor: pointer;
+    }
+    .fc-daygrid-day:hover{
+        background-color: #c9c3c3;
+    }
+
+    @media (max-width: 991px) {
+        .fc-daygrid-day-bottom{
+            margin-top: -9px!important;
+        }
     }
 
 </style>
@@ -204,6 +242,160 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script>
+        const events = [
+            {
+                start: '2024-10-17T14:00:00', // Date/Heure avec l'heure au format ISO
+                end: '2024-10-17T16:00:00',   // Date de fin avec l'heure
+                backgroundColor: '#4581cc',
+                extendedProps: {
+                    id: '2',
+                    title: 'Randonnée à Bouvines',
+                    genre: 'Randonnée',
+                    rdv: 'Parking de la mairie, chaussée, Brunehaut',
+                    rdvDate: '17/10/2024',
+                    rdvTime: '14h:00',
+                    type: 'activity',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-10-24T14:00:00',
+                end: '2024-10-24T16:00:00',
+                backgroundColor: '#4581cc',
+                extendedProps: {
+                    id: '3',
+                    title: 'Randonnée à Templeuve-en-Pévèle',
+                    genre: 'Randonnée',
+                    rdv: 'Parking centre ville, rue d’Anchin',
+                    rdvDate: '24/10/2024',
+                    rdvTime: '14h:00',
+                    type: 'activity',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-10-26T10:00:00',
+                end: '2024-10-26T12:00:00',
+                backgroundColor: '#4581cc',
+                extendedProps: {
+                    id: '2',
+                    title: 'Gymnastique à Lambersart',
+                    genre: 'Gymnastique',
+                    rdv: 'Salle des sports Norbert Segard',
+                    rdvDate: '26/10/2024',
+                    rdvTime: '10h:00',
+                    type: 'activity',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-12-18T14:00:00',
+                end: '2024-12-18T16:00:00',
+                backgroundColor: '#4581cc',
+                extendedProps: {
+                    id: '2',
+                    title: 'Randonnée à Zillebeck (Belgique)',
+                    genre: 'Randonnée',
+                    rdv: 'Seelbachdreef - parking OC in “t riet”',
+                    rdvDate: '31/10/2024',
+                    rdvTime: '14h:00',
+                    type: 'activity',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-12-19T14:00:00',
+                end: '2024-12-19T16:00:00',
+                backgroundColor: '#4581cc',
+                extendedProps: {
+                    id: '2',
+                    title: 'Randonnée à Zillebeck (Belgique)',
+                    genre: 'Randonnée',
+                    rdv: 'Seelbachdreef - parking OC in “t riet”',
+                    rdvDate: '31/10/2024',
+                    rdvTime: '14h:00',
+                    type: 'activity',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-12-18T05:30:00',
+                end: '2024-12-18T06:30:00',
+                backgroundColor: '#EF991F',
+                extendedProps: {
+                    id: '2',
+                    title: 'Séjour au marché de Noël Strasbourg',
+                    genre: 'Séjour culture',
+                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
+                    rdvDate: '18/12/2024',
+                    rdvTime: '5h:30',
+                    type: 'journey',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-12-19T05:30:00',
+                end: '2024-12-19T06:30:00',
+                backgroundColor: '#EF991F',
+                extendedProps: {
+                    id: '2',
+                    title: 'Séjour au marché de Noël Strasbourg',
+                    genre: 'Séjour culture',
+                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
+                    rdvDate: '19/12/2024',
+                    rdvTime: '5h:30',
+                    type: 'journey',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-12-20T05:30:00',
+                end: '2024-12-20T06:30:00',
+                backgroundColor: '#EF991F',
+                extendedProps: {
+                    id: '2',
+                    title: 'Séjour au marché de Noël Strasbourg',
+                    genre: 'Séjour culture',
+                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
+                    rdvDate: '20/12/2024',
+                    rdvTime: '5h:30',
+                    type: 'journey',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-12-21T05:30:00',
+                end: '2024-12-21T06:30:00',
+                backgroundColor: '#EF991F',
+                extendedProps: {
+                    id: '2',
+                    title: 'Séjour au marché de Noël Strasbourg',
+                    genre: 'Séjour culture',
+                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
+                    rdvDate: '21/12/2024',
+                    rdvTime: '5h:30',
+                    type: 'journey',
+                    infosDisplay: true
+                }
+            },
+            {
+                start: '2024-12-22T05:30:00',
+                end: '2024-12-22T06:30:00',
+                backgroundColor: '#EF991F',
+                extendedProps: {
+                    id: '2',
+                    title: 'Séjour au marché de Noël Strasbourg',
+                    genre: 'Séjour culture',
+                    rdv: 'DEPART : 20 rue des arbres, 59130 Lambersart',
+                    rdvDate: '22/12/2024',
+                    rdvTime: '5h:30',
+                    type: 'journey',
+                    infosDisplay: true
+                }
+            }
+        ];
+    </script>
 
     {% block importmap %}
         {{ importmap(['app', 'base', 'calendar']) }}

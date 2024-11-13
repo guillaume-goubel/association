@@ -52,6 +52,9 @@
 .month{
     font-size: 1.2rem;
 }
+.blog-standard{
+    min-height: 50vh;
+}
 @media only screen and (max-width: 600px) {
     .animator-item {
       justify-content: start;

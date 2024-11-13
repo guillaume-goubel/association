@@ -21,16 +21,125 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function findEventsForHomePage()
+    // public function findEventsForHomePage()
+    // {
+    //     return $this->createQueryBuilder('e')
+    //         ->join('e.activity', 'a')
+    //         ->andWhere('e.isEnabled = :isEnabled')
+    //         ->setParameter('isEnabled', true)
+    //         ->orderBy('e.id', 'ASC')  
+    //         ->setMaxResults(4)       
+    //         ->getQuery()
+    //         ->getResult();
+    // }
+
+    public function getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice)
     {
-        return $this->createQueryBuilder('e')
-            ->join('e.activity', 'a')
-            ->andWhere('e.isEnabled = :isEnabled')
-            ->setParameter('isEnabled', true)
-            ->orderBy('e.id', 'ASC')  
-            ->setMaxResults(4)       
-            ->getQuery()
-            ->getResult();
+        $stmt = $this->createQueryBuilder('e');
+
+        if ($yearChoice) {
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
+        if ($monthChoice) {
+            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
+            $stmt->setParameter('month', $monthChoice);
+        }
+
+        if ($creatorChoice) {
+            $stmt->andwhere('e.user = :user');
+            $stmt->setParameter('user', $creatorChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('a.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $activityChoice);
+        }
+
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        return $stmt->getQuery()->getResult();
+    }
+
+    public function getEventListforAgenda($yearChoice, $monthChoice, $activityChoice)
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+
+        $stmt = $this->createQueryBuilder('e');
+        $stmt->join('e.activity', 'a');
+        $stmt->andWhere('e.dateStartAt >= :today');   
+        $stmt->setParameter('today', $today);
+
+        if ($yearChoice) {
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
+        if ($monthChoice) {
+            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
+            $stmt->setParameter('month', $monthChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('a.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $activityChoice);
+        }
+
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        return $stmt->getQuery()->getResult();
+    }
+
+    public function getEventListforArchive($yearChoice, $monthChoice, $activityChoice)
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+
+        $stmt = $this->createQueryBuilder('e');
+        $stmt->join('e.activity', 'a');
+        $stmt->andWhere('e.dateStartAt < :today');   
+        $stmt->setParameter('today', $today);
+
+        if ($yearChoice) {
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
+        if ($monthChoice) {
+            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
+            $stmt->setParameter('month', $monthChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('a.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $activityChoice);
+        }
+
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        return $stmt->getQuery()->getResult();
+    }
+
+    public function getEventListforCalendar($yearChoice, $creatorChoice, $activityChoice)
+    {
+        $stmt = $this->createQueryBuilder('e');
+
+        if ($yearChoice) {
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
+        if ($creatorChoice) {
+            $stmt->andwhere('e.user = :user');
+            $stmt->setParameter('user', $creatorChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('a.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $activityChoice);
+        }
+
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        return $stmt->getQuery()->getResult();
     }
 
     public function getDistincYearCreatedAt()
@@ -179,34 +288,6 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice)
-    {
-        $stmt = $this->createQueryBuilder('e');
-
-        if ($yearChoice) {
-            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
-            $stmt->setParameter('year', $yearChoice);
-        }
-
-        if ($monthChoice) {
-            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
-            $stmt->setParameter('month', $monthChoice);
-        }
-
-        if ($creatorChoice) {
-            $stmt->andwhere('e.user = :user');
-            $stmt->setParameter('user', $creatorChoice);
-        }
-
-        if ($activityChoice && $activityChoice != 'all') {
-            $stmt->andwhere('e.id = :activityChoice');
-            $stmt->setParameter('activityChoice', $monthChoice);
-        }
-
-        $stmt->addOrderBy('e.dateStartAt', 'ASC');
-        return $stmt->getQuery()->getResult();
-    }
-
     public function findNextUpcomingEvent()
     {
         $today = new \DateTime();
@@ -253,64 +334,6 @@ class EventRepository extends ServiceEntityRepository
             ->setMaxResults(4)                         
             ->getQuery()
             ->getResult();                  
-    }
-
-    public function getEventListforAgenda($yearChoice, $monthChoice, $activityChoice)
-    {
-        $today = new \DateTime();
-        $today->setTime(0, 0);
-
-        $stmt = $this->createQueryBuilder('e');
-        $stmt->join('e.activity', 'a');
-        $stmt->andWhere('e.dateStartAt >= :today');   
-        $stmt->setParameter('today', $today);
-
-        if ($yearChoice) {
-            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
-            $stmt->setParameter('year', $yearChoice);
-        }
-
-        if ($monthChoice) {
-            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
-            $stmt->setParameter('month', $monthChoice);
-        }
-
-        if ($activityChoice && $activityChoice != 'all') {
-            $stmt->andwhere('e.id = :activityChoice');
-            $stmt->setParameter('activityChoice', $monthChoice);
-        }
-
-        $stmt->addOrderBy('e.dateStartAt', 'ASC');
-        return $stmt->getQuery()->getResult();
-    }
-
-    public function getEventListforArchive($yearChoice, $monthChoice, $activityChoice)
-    {
-        $today = new \DateTime();
-        $today->setTime(0, 0);
-
-        $stmt = $this->createQueryBuilder('e');
-        $stmt->join('e.activity', 'a');
-        $stmt->andWhere('e.dateStartAt < :today');   
-        $stmt->setParameter('today', $today);
-
-        if ($yearChoice) {
-            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
-            $stmt->setParameter('year', $yearChoice);
-        }
-
-        if ($monthChoice) {
-            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
-            $stmt->setParameter('month', $monthChoice);
-        }
-
-        if ($activityChoice && $activityChoice != 'all') {
-            $stmt->andwhere('e.id = :activityChoice');
-            $stmt->setParameter('activityChoice', $monthChoice);
-        }
-
-        $stmt->addOrderBy('e.dateStartAt', 'ASC');
-        return $stmt->getQuery()->getResult();
     }
 
 }

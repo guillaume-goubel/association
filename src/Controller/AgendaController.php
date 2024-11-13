@@ -21,7 +21,7 @@ class AgendaController extends AbstractController
         $activityChoice = $request->query->get('activityChoice') ?? "all";
 
         // Distinct month / year createdAt for select
-        $yearsList = $eventRepository->getDistincYearCreatedAtForArchiveView();
+        $yearsList = $eventRepository->getDistincYearCreatedAtForAgendaView();
         $monthsList = $eventRepository->getDistinctMonthCreatedAtForAgendaView($yearChoice);
         $activityList = $activityRepository->findAll();
 
