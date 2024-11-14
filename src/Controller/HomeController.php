@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\EventRepository;
 use App\Repository\ActivityRepository;
+use App\Repository\AnimatorRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -39,19 +40,31 @@ class HomeController extends AbstractController
     }
 
     #[Route('/activity/infos', name: 'activity_infos', methods: ['POST'])]
-
     public function activityInfos(Request $request, ActivityRepository $activityRepository):JsonResponse
     {
         $activityId = $request->request->get('activityId');
         $activity = $activityRepository->findOneBy(['id' => $activityId]);
 
-        // dd('Activity')
-
         return new JsonResponse([
-            'content' => $this->renderView('home/components/_activity_infos.html.twig', [
+            'content' => $this->renderView('main_partials/components/_activity_infos.html.twig', [
                 'activity' => $activity,
             ])
         ]);
     }
+
+    #[Route('/animators/infos', name: 'animators_infos', methods: ['POST'])]
+    public function animatorsInfos(Request $request, EventRepository $eventRepository):JsonResponse
+    {
+        $eventId = $request->request->get('eventId');
+        $event = $eventRepository->findOneBy(['id' => $eventId]);
+        $animators = $event->getAnimators();
+        
+        return new JsonResponse([
+            'content' => $this->renderView('main_partials/components/_animators_infos.html.twig', [
+                'animators' => $animators,
+            ])
+        ]);
+    }
+
 
 }

@@ -1,5 +1,8 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        preferencesParameters:
+            GMkey: '%env(resolve:GMKEY)%'
 
 when@test:
     twig:

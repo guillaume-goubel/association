@@ -105,7 +105,7 @@
 
                         {% if events is not empty %}
                             {% for event in events %}
-                                {% include 'main_partials/_event_passed.html.twig' %}
+                                {% include 'main_partials/components/_event_passed.html.twig' %}
                             {% endfor %}
                         {% else %}
                             <div class="no-matching-search-message">Pas de résultats pour cette recherche</div>
@@ -119,7 +119,7 @@
     <!-- end section -->
 
     <!-- start footer -->
-    {% include 'main_partials/_footer_minimum.html.twig' %}
+    {% include 'main_partials/parts/_footer_minimum.html.twig' %}
     <!-- end footer -->
 
 </body>
