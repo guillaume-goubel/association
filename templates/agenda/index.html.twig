@@ -52,11 +52,12 @@
                 <div class="col-auto col-lg-11 menu-order position-static d-flex justify-content-end ">
                     <div class="header-icon">  
                         <div class="header-button">
-                            <a href="{{ path('home_index') }}#agenda-section" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
+                            {% set section = app.request.get('from') == 'activity-grid' ? 'activity-section' : 'agenda-section' %}
+                            <a href="{{ path('home_index') }}#{{ section }}" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
                                 <span>
                                     <span class="btn-double-text" data-text="Retour">Retour</span>
                                 </span> 
-                            </a> 
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -84,6 +85,7 @@
                         <!-- Filtre mois -->
                         <div class="col-12 col-md-3">
                             <select name="monthChoice" class="form-select form-select-sm" aria-label="Sélectionner un mois">
+                                <option {{ monthChoice == 'all' ? 'selected' : '' }} value="all">Tous mois</option>
                                 {% for item in monthsList %}
                                     <option {{ monthChoice == item.month_number ? 'selected' : '' }} value="{{ item.month_number }}">{{ item.month_name }}</option>
                                 {% endfor %}

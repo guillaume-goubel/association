@@ -21,18 +21,6 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    // public function findEventsForHomePage()
-    // {
-    //     return $this->createQueryBuilder('e')
-    //         ->join('e.activity', 'a')
-    //         ->andWhere('e.isEnabled = :isEnabled')
-    //         ->setParameter('isEnabled', true)
-    //         ->orderBy('e.id', 'ASC')  
-    //         ->setMaxResults(4)       
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-
     public function getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice)
     {
         $stmt = $this->createQueryBuilder('e');
@@ -43,7 +31,7 @@ class EventRepository extends ServiceEntityRepository
             $stmt->setParameter('year', $yearChoice);
         }
 
-        if ($monthChoice) {
+        if ($monthChoice && $monthChoice != 'all') {
             $stmt->andwhere('MONTH(e.dateStartAt) = :month');
             $stmt->setParameter('month', $monthChoice);
         }
@@ -77,7 +65,7 @@ class EventRepository extends ServiceEntityRepository
             $stmt->setParameter('year', $yearChoice);
         }
 
-        if ($monthChoice) {
+        if ($monthChoice && $monthChoice != 'all') {
             $stmt->andwhere('MONTH(e.dateStartAt) = :month');
             $stmt->setParameter('month', $monthChoice);
         }

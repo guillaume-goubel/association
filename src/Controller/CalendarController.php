@@ -20,7 +20,7 @@ class CalendarController extends AbstractController
         $activityChoice = $request->query->get('activityChoice') ?? "all";
 
         // $yearsList = $eventRepository->getDistincYearCreatedAtForAgendaView();
-        $activityList = $activityRepository->findAll();
+        $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
 
         $events = $eventRepository->getEventListforCalendarFor12Months($activityChoice);
         $eventDateJson = $eventService->getEventListForCalendarEvents($events);

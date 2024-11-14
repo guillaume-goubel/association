@@ -130,7 +130,8 @@ class EventType extends AbstractType
                         ->where('a.id IN (:ids)')
                         ->setParameter('ids', $activityIds)
                         ->andwhere('a.isEnabled = :enabled')
-                        ->setParameter('enabled', true);
+                        ->setParameter('enabled', true)
+                        ->orderBy('a.name', 'ASC');
                 },
             ])
             ->add('animators', EntityType::class, [

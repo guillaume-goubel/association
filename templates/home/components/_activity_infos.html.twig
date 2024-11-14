@@ -14,9 +14,9 @@
             <h3 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-800">{{ activity.name }}<span style="background-color:{{ activity.color }};" class="h-8px bottom-10px opacity-6 separator-animation"></span></span></h3>
         </div>
         <p class="mb-35px sm-mb-25px preformatted">{{activity.description|raw}}</p> 
-        <a data-bs-dismiss="modal" class="btn btn-large btn-gradient-emerald-blue-emerald-green btn-hover-animation-switch btn-round-edge btn-box-shadow">
+        <a href="{{ path('agenda_index') }}?monthChoice=all&yearChoice={{'now'|date('Y')}}&activityChoice={{ activity.id }}&from=activity-grid" class="btn btn-large btn-gradient-emerald-blue-emerald-green btn-hover-animation-switch btn-round-edge btn-box-shadow">
             <span> 
-                <span class="btn-text text-white">Fermer</span>
+                <span class="btn-text text-white">Programme {{'now'|date('Y')}}</span>
                 <span class="btn-icon text-white mt-8"><i class="feather icon-feather-arrow-right"></i></span>
                 <span class="btn-icon text-white mt-8"><i class="feather icon-feather-arrow-right"></i></span>
             </span>

@@ -22,7 +22,7 @@ class ArchiveController extends AbstractController
         // Distinct month / year createdAt for select
         $yearsList = $eventRepository->getDistincYearCreatedAtForArchiveView();
         $monthsList = $eventRepository->getDistinctMonthCreatedAtForArchiveView($yearChoice);
-        $activityList = $activityRepository->findAll();
+        $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
         
         return $this->render('archive/index.html.twig', [
             'events' => $eventRepository->getEventListforArchive($yearChoice, $monthChoice, $activityChoice),

@@ -30,7 +30,7 @@ class EventController extends AbstractController
         $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
         $creatorsList = $eventRepository->getDistinctCreator();
 
-        $activityList = $activityRepository->findAll();
+        $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
 
         return $this->render('admin/event/index.html.twig', [
             'events' => $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice),

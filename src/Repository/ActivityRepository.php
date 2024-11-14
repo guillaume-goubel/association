@@ -21,16 +21,6 @@ class ActivityRepository extends ServiceEntityRepository
         parent::__construct($registry, Activity::class);
     }
 
-    // public function findByUser($userChoice): array
-    // {
-    //     return $this->createQueryBuilder('a')
-    //         ->innerJoin('a.users', 'u')
-    //         ->where('u.id = :userChoice')
-    //         ->setParameter('userChoice', $userChoice)
-    //         ->getQuery()
-    //         ->getResult();
-    // }
-
     public function getActivitiesByUser(?string $userChoice = null): array
     {
         $stmt = $this->createQueryBuilder('a');

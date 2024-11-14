@@ -35,7 +35,7 @@
     height:194px;
 }
 header .navbar-brand .default-logo {
-    opacity: 0!important;
+    opacity: 0;
 }
 @media (max-width: 991px) {
     header .navbar-brand {
