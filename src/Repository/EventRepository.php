@@ -21,7 +21,7 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice)
+    public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, string $activityChoice, string $dateChoice)
     {
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
@@ -46,7 +46,13 @@ class EventRepository extends ServiceEntityRepository
             $stmt->setParameter('activityChoice', $activityChoice);
         }
 
-        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+
+        if ($dateChoice == 'dateStartAt') {
+            $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        }else{
+            $stmt->addOrderBy('e.createdAt', 'ASC');
+        }
+
         return $stmt->getQuery()->getResult();
     }
 

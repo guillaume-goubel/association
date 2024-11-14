@@ -25,6 +25,7 @@ class EventController extends AbstractController
         $yearChoice = $request->query->get('yearChoice') ?? date("Y");
         $monthChoice = $request->query->get('monthChoice') ?? date("m");
         $creatorChoice = $request->query->get('creatorChoice') ?? $this->getUser()->getId();
+        $dateChoice = $request->query->get('creatorChoice') ?? 'dateStartAt';
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
             $creatorChoice = 'all';
         }
@@ -38,7 +39,7 @@ class EventController extends AbstractController
         $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
 
         return $this->render('admin/event/index.html.twig', [
-            'events' => $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice),
+            'events' => $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice, $dateChoice),
             'yearsList' => $yearsList,
             'monthsList' => $monthsList,
             'creatorsList' => $creatorsList,
@@ -47,6 +48,7 @@ class EventController extends AbstractController
             'monthChoice' => $monthChoice,
             'creatorChoice' => $creatorChoice,
             'activityChoice' => $activityChoice,
+            'dateChoice' => $dateChoice,
             'isEventActionsButtonVisible' => true,
         ]);
     }
