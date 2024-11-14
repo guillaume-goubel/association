@@ -18,4 +18,36 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    // GET animators INFOS
+    document.querySelectorAll('.animators-infos-link').forEach(function(element) {
+        element.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const url = document.getElementById('animatorInfosPATH').getAttribute('data-path');
+
+            let data = new FormData();
+            data.append('eventId', this.getAttribute('data-id'));
+        
+            fetch(url, {
+                method: 'POST',
+                body: data,
+            })
+            .then(response => response.json())
+            .then(data => {
+                                
+                const contentContainer = document.getElementById('animatorsModalcontent');
+                contentContainer.innerHTML = '';
+                
+                contentContainer.insertAdjacentHTML('beforeend', data.content);
+    
+                const modal = new bootstrap.Modal(document.getElementById('animatorsModal'));
+                modal.show();
+    
+            })
+            .catch(error => {
+                console.error('Erreur lors de la requête AJAX :', error);
+            });
+        });
+    });
+
 });

@@ -70,7 +70,7 @@
                                 <div class="col-12 col-md-7 d-flex flex-column mt-2">
                                     <div class="trainer-box col-auto position-relative">
                                         {% if event.animators is not empty %}
-                                            <ul class="p-0 m-0 list-style-02" data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                                            <ul class="p-0 m-0 list-style-02 animators-infos-link" data-id='{{ event.id }}' data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
                                                 {% for animator in event.animators %}
                                                     <li class="animator-item my-1"><img style="width:40px;height:40px;border: 2px solid {{event.activity.color}};border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar"><span class="ms-2 animator-item-name">{{animator.firstName}}  {{animator.lastName}}</span></li>
                                                 {% endfor %}

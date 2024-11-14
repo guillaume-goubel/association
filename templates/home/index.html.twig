@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil assocation arsméli
+{% block title %}Accueil association arsméli
 {% endblock %}
 
 {% block stylesheets %}
@@ -16,215 +16,123 @@
 {% endblock %}
 
 {% block body %}
-<div id="activityInfosPATH" data-path="{{ path('home_activity_infos')}}"></div>
-<div id="animatorInfosPATH" data-path="{{ path('home_activity_infos')}}"></div>
 
-<body data-mobile-nav-trigger-alignment="right" data-mobile-nav-style="modern" data-mobile-nav-bg-color="#383632"> 
-    
-    {{ parent() }}
+    <body data-mobile-nav-trigger-alignment="right" data-mobile-nav-style="modern" data-mobile-nav-bg-color="#383632"> 
+        
+        {{ parent() }}
 
-    <!-- start header -->
-	{% include 'home/partials/_header.html.twig' %}
-	<!-- end header -->
+        <!-- start header -->
+        {% include 'home/partials/_header.html.twig' %}
+        <!-- end header -->
 
-    <!-- start banner -->
-    {% include 'home/partials/_banner.html.twig' %}
-    <!-- end banner -->
+        <!-- start banner -->
+        {% include 'home/partials/_banner.html.twig' %}
+        <!-- end banner -->
 
-    <!-- start section -->
-    {% if nextUpcomingEvent != null %}
-        <section class="bg-very-light-gray pt-20px pb-20px sm-pt-40px" data-anime='{ "opacity": [0, 1], "translateY": [0, 0], "easing": "easeOutQuad", "duration": 1000,"staggervalue": 300, "delay": 600 }'>
-            <div class="container overlap-section">
-                <div class="row justify-content-center overlap-section border-radius-6px overflow-hidden g-0 box-shadow-extra-large">
-                    <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5 fs-15 text-dark-gray">Bientôt !</strong><span class="fw-700 text-base-color">{{nextUpcomingEvent.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
-                        <span class="ps-5 pe-2">{{nextUpcomingEvent.activity.name|capitalize}} à {{nextUpcomingEvent.cityPlace|capitalize}}</span> 
+        <!-- start section -->
+        {% if nextUpcomingEvent != null %}
+            <section class="bg-very-light-gray pt-20px pb-20px sm-pt-40px" data-anime='{ "opacity": [0, 1], "translateY": [0, 0], "easing": "easeOutQuad", "duration": 1000,"staggervalue": 300, "delay": 600 }'>
+                <div class="container overlap-section">
+                    <div class="row justify-content-center overlap-section border-radius-6px overflow-hidden g-0 box-shadow-extra-large">
+                        <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5 fs-15 text-dark-gray">Bientôt !</strong><span class="fw-700 text-base-color">{{nextUpcomingEvent.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
+                            <span class="ps-5 pe-2">{{nextUpcomingEvent.activity.name|capitalize}} à {{nextUpcomingEvent.cityPlace|capitalize}}</span> 
+                        </div>
+                        <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index', { 'id': nextUpcomingEvent.id, 'is_passed': false }) }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-20 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
                     </div>
-                    <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index', { 'id': nextUpcomingEvent.id, 'is_passed': false }) }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-20 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
                 </div>
-            </div>
-        </section>
-    {% endif %}
-    <!-- end section -->
+            </section>
+        {% endif %}
+        <!-- end section -->
 
-    <!-- start section --> 
-    {% if lastPastEvent != null %}
-        <section class="overflow-hidden border-bottom border-color-extra-medium-gray">
-            <div class="container">
-                <div class="row align-items-center justify-content-center mb-6 sm-mb-50px position-relative">
-                    <div class="col-lg-6 col-md-10 position-relative md-mb-30px" data-anime='{ "effect": "slide", "color": "#ffffff", "direction":"lr", "easing": "easeOutQuad", "delay":50}'> 
-                        {% if lastPastEvent.mainPicture != null %}
-                            <img style="opacity:1!important" class="w-100" src="{{ customAsset('data/uploads/photos/' ~ lastPastEvent.mainPicture )}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
-                        {% else %}
-                            <img style="opacity:1!important" class="w-100" src="{{ customAsset('app/default_image.jpg')}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
-                        {% endif %}
-                    </div>
-                    <div class="col-lg-5 offset-lg-1 last-paragraph-no-margin" data-anime='{ "el": "childs", "opacity": [0, 1], "rotateY": [-90, 0], "rotateZ": [-10, 0], "translateY": [80, 0], "translateZ": [50, 0], "staggervalue": 200, "duration": 900, "delay": 300, "easing": "easeOutCirc" }'>
-                        <span class="text-dark-gray fw-600 mb-15px d-block">Notre dernier événement</span>
-                        <span class="text-base-color fw-600 mb-15px text-uppercase d-block">{{lastPastEvent.activity.name|capitalize}}</span>
-                        
-                        <ul class="p-0 mb-20px mt-15px list-style-01 w-90 lg-w-100">
-                            <li class="border-color-extra-medium-gray fw-600 text-dark-gray d-flex align-items-center pt-15px pb-15px">
-                                {# <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div> #}
-                                <span class="pe-4"><i class="fa-regular fa-calendar align-middle icon-small"></i></span>
-                                C'était le {{lastPastEvent.dateStartAt|format_date('medium',  locale= 'fr')}}
-                            </li>
-                            <li class="border-color-extra-medium-gray fw-600 text-dark-gray d-flex align-items-center pt-15px pb-15px">
-                                {# <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div> #}
-                                <span class="pe-3"><i class="feather icon-feather-map-pin align-middle icon-small"></i></span>
-                                à {{lastPastEvent.rdvCity|capitalize}}
-                            </li>
-                        </ul>
-                        
-                        <div class="fs-20 fw-600 text-dark-gray w-90 lg-w-100">{{lastPastEvent.name}}</div>
-                        <p class="w-90 sm-w-100 fs-16">
-                            {% if lastPastEvent.description|length > 150 %}
-                                {{ lastPastEvent.description|slice(0, 150) ~ '...' }}
+        <!-- start section --> 
+        {% if lastPastEvent != null %}
+            <section class="overflow-hidden border-bottom border-color-extra-medium-gray">
+                <div class="container">
+                    <div class="row align-items-center justify-content-center mb-6 sm-mb-50px position-relative">
+                        <div class="col-lg-6 col-md-10 position-relative md-mb-30px" data-anime='{ "effect": "slide", "color": "#ffffff", "direction":"lr", "easing": "easeOutQuad", "delay":50}'> 
+                            {% if lastPastEvent.mainPicture != null %}
+                                <img style="opacity:1!important" class="w-100" src="{{ customAsset('data/uploads/photos/' ~ lastPastEvent.mainPicture )}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
                             {% else %}
-                                {{ lastPastEvent.description }}
+                                <img style="opacity:1!important" class="w-100" src="{{ customAsset('app/default_image.jpg')}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
                             {% endif %}
-                        </p>
+                        </div>
+                        <div class="col-lg-5 offset-lg-1 last-paragraph-no-margin" data-anime='{ "el": "childs", "opacity": [0, 1], "rotateY": [-90, 0], "rotateZ": [-10, 0], "translateY": [80, 0], "translateZ": [50, 0], "staggervalue": 200, "duration": 900, "delay": 300, "easing": "easeOutCirc" }'>
+                            <span class="text-dark-gray fw-600 mb-15px d-block">Notre dernier événement</span>
+                            <span class="text-base-color fw-600 mb-15px text-uppercase d-block">{{lastPastEvent.activity.name|capitalize}}</span>
+                            
+                            <ul class="p-0 mb-20px mt-15px list-style-01 w-90 lg-w-100">
+                                <li class="border-color-extra-medium-gray fw-600 text-dark-gray d-flex align-items-center pt-15px pb-15px">
+                                    {# <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div> #}
+                                    <span class="pe-4"><i class="fa-regular fa-calendar align-middle icon-small"></i></span>
+                                    C'était le {{lastPastEvent.dateStartAt|format_date('medium',  locale= 'fr')}}
+                                </li>
+                                <li class="border-color-extra-medium-gray fw-600 text-dark-gray d-flex align-items-center pt-15px pb-15px">
+                                    {# <div class="feature-box-icon feature-box-icon-rounded w-35px h-35px rounded-circle bg-solitude-blue me-10px text-center d-flex align-items-center justify-content-center flex-shrink-0"></div> #}
+                                    <span class="pe-3"><i class="feather icon-feather-map-pin align-middle icon-small"></i></span>
+                                    à {{lastPastEvent.rdvCity|capitalize}}
+                                </li>
+                            </ul>
+                            
+                            <div class="fs-20 fw-600 text-dark-gray w-90 lg-w-100">{{lastPastEvent.name}}</div>
+                            <p class="w-90 sm-w-100 fs-16">
+                                {% if lastPastEvent.description|length > 150 %}
+                                    {{ lastPastEvent.description|slice(0, 150) ~ '...' }}
+                                {% else %}
+                                    {{ lastPastEvent.description }}
+                                {% endif %}
+                            </p>
 
-                        <a href="{{ path('blog_index', { 'id': lastPastEvent.id, 'is_passed': true }) }}" class="btn btn-medium btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
-                            <span>
-                                <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
-                                <span><i class="feather icon-feather-arrow-right"></i></span>
-                            </span>
-                        </a>
-                    </div> 
+                            <a href="{{ path('blog_index', { 'id': lastPastEvent.id, 'is_passed': true }) }}" class="btn btn-medium btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
+                                <span>
+                                    <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
+                                    <span><i class="feather icon-feather-arrow-right"></i></span>
+                                </span>
+                            </a>
+                        </div> 
+                    </div>
                 </div>
-            </div>
+            </section>
+        {% endif %}
+        <!-- end section -->
+
+        <!-- start section -->
+        <section id="activity-section" class="background-position-left-top background-no-repeat position-relative pt-0 pb-0 overflow-hidden">
+            {% include 'home/partials/_activity.html.twig' %}
         </section>
-    {% endif %}
-    <!-- end section -->
+        <!-- end section -->
 
-    <!-- start section -->
-    <section id="activity-section" class="background-position-left-top background-no-repeat position-relative pt-0 pb-0 overflow-hidden">
-        {% include 'home/partials/_activity.html.twig' %}
-    </section>
-    <!-- end section -->
-
-    <!-- start page title -->
-    <section id="agenda-section" class="pb-0 bg-very-light-gray">
-        <div class="container">
-            
-            <div class="row align-items-center mb-1 p-2">
-                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
-                    <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
-                        Notre agenda<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
-                    </h3>
-                </div>
-            </div>
-
-            <div class="row pb-5">
-                <div class="col-lg-5 md-mb-50px sm-mb-30px">
-                    <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Un programme riche en activités et en rencontres</h3>
-                    <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Participez à vos sports favoris ou venez découvrir avec nous de nouvelles pratiques sportives et culturelles.</p> 
-                    <div>
-                        <a href="{{ path('agenda_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Tout le programme</a>
-                        <a href="{{ path('calendar_index') }}" href="#" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Calendrier</a>
-                        <div class="mb-1 mt-2">
-                            <a href="{{ asset('app/pdf/walk_agenda.pdf') }}" class="btn btn-small btn-transparent-dark-gray d-table d-lg-inline-block lg-mb-15px">Les randonnées 2024 en PDF<i class="fa-solid fa-file-pdf"></i></a>
-                        </div>
-                    </div>                       
-                </div>
-                <div style="position:relative;" class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
-                    <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="icon-feather-minus" data-inactive-icon="icon-feather-plus">
-                        <!-- start accordion item -->
-                        <div class="accordion-item">
-                            <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-01" aria-expanded="false" data-bs-parent="#accordion-style-07">
-                                    <div class="accordion-title mb-0 position-relative text-dark-gray">
-                                        <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Des animateurs agréés</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div id="accordion-style-07-01" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
-                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end accordion item -->
-                        <!-- start accordion item -->
-                        <div class="accordion-item">
-                            <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-02" aria-expanded="false" data-bs-parent="#accordion-style-07">
-                                    <div class="accordion-title mb-0 position-relative text-dark-gray">
-                                        <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Des séjours thématiques</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div id="accordion-style-07-02" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
-                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end accordion item -->
-                        <!-- start accordion item -->
-                        <div class="accordion-item">
-                            <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-03" aria-expanded="false" data-bs-parent="#accordion-style-07">
-                                    <div class="accordion-title mb-0 position-relative text-dark-gray">
-                                        <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Pour débutants et confirmés</span>
-                                    </div>
-                                </a>
-                            </div>
-                            <div id="accordion-style-07-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
-                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-transparent">
-                                    <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end accordion item -->
+        <!-- start page title -->
+        <section id="agenda-section" class="pb-0 bg-very-light-gray">
+            <div class="container">
+                
+                <div class="row align-items-center mb-1 p-2">
+                    <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                        <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                            Notre agenda<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
+                        </h3>
                     </div>
                 </div>
-            </div>
 
-            <div class="row align-items-center justify-content-start pricing-table-style-06 pb-3" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                
-                <div id="calendar"></div>
-
-                <div class="fw-600 pb-2">Vos {{nextUpcomingList|length}} prochains rendez-vous</div>
-                
-                {% for event in nextUpcomingList %}
-                    {% if event.activity.type == 'regular' %}
-                        {% include 'main_partials/components/_event_regular_card.html.twig' %}
-                    {% else %}
-                        {% include 'main_partials/components/_event_journey_card.html.twig' %}
-                    {% endif %}
-                {% endfor %}
-
-            </div>  
-
-        </div>
-    </section>
-    <!-- end page title -->
-
-    <section id="retro-section" class="border-top border-color-extra-medium-gray bg-very-light-gray"> 
-        <div class="container">
-            
-            <div class="row align-items-center mb-1 p-2">
-                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
-                    <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
-                        Retrospective<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
-                    </h3>
-                </div>
-
-                <div class="row">
+                <div class="row pb-5">
                     <div class="col-lg-5 md-mb-50px sm-mb-30px">
-                        <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Au coeur de notre territoire</h3>
-                        <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Venez découvrir ou redécouvrir notre patrimoine naturel ou culturel grâce au sport</p> 
-                        <a href="{{ path('archive_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Toutes nos archives</a>
+                        <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Un programme riche en activités et en rencontres</h3>
+                        <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Participez à vos sports favoris ou venez découvrir avec nous de nouvelles pratiques sportives et culturelles.</p> 
+                        <div>
+                            <a href="{{ path('agenda_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Tout le programme</a>
+                            <a href="{{ path('calendar_index') }}" href="#" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Calendrier</a>
+                            <div class="mb-1 mt-2">
+                                <a href="{{ asset('app/pdf/walk_agenda.pdf') }}" class="btn btn-small btn-transparent-dark-gray d-table d-lg-inline-block lg-mb-15px">Les randonnées 2024 en PDF<i class="fa-solid fa-file-pdf"></i></a>
+                            </div>
+                        </div>                       
                     </div>
-                    <div class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                    <div style="position:relative;" class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
                         <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="icon-feather-minus" data-inactive-icon="icon-feather-plus">
                             <!-- start accordion item -->
                             <div class="accordion-item">
                                 <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-01" aria-expanded="false" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray">
-                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En métropole Lilloise</span>
+                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Des animateurs agréés</span>
                                         </div>
                                     </a>
                                 </div>
@@ -240,7 +148,7 @@
                                 <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-02" aria-expanded="false" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray">
-                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En Belgique</span>
+                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Des séjours thématiques</span>
                                         </div>
                                     </a>
                                 </div>
@@ -253,10 +161,10 @@
                             <!-- end accordion item -->
                             <!-- start accordion item -->
                             <div class="accordion-item">
-                                <div class="accordion-header border-bottom border-color-transparent">
+                                <div class="accordion-header border-bottom border-color-extra-medium-gray">
                                     <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-03" aria-expanded="false" data-bs-parent="#accordion-style-07">
                                         <div class="accordion-title mb-0 position-relative text-dark-gray">
-                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En territoire rural & urbain</span>
+                                            <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">Pour débutants et confirmés</span>
                                         </div>
                                     </a>
                                 </div>
@@ -271,209 +179,299 @@
                     </div>
                 </div>
 
-            </div>
-            
-            <div class="row pt-3">
-                <div class="col-12 p-md-0">
+                <div class="row align-items-center justify-content-start pricing-table-style-06 pb-3" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
                     
-                    <div class="fw-600 ps-2 pb-1">Nos {{lastPastEventList|length}} derniers événements</div>
+                    <div id="calendar"></div>
 
-                    <ul class="blog-grid blog-wrapper grid-loading grid grid-4col xl-grid-4col lg-grid-4col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <li class="grid-sizer"></li>
-
-                        {% for event in lastPastEventList %}
-                            {% include 'main_partials/components/_event_passed.html.twig' %}
-                        {% endfor %}
-
-                    </ul>
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <!-- end section -->
-
-    <!-- start section -->
-    <section id="whoare-section" class="background-position-left-top cover-background position-relative extra-big-section" style="background-image: url('{{ asset('app/demo-hosting-home-bg.jpg') }}')">
-        <div class="container">
-            <div class="row justify-content-center">                    
-                <div class="col-lg-5 col-md-10 position-relative md-mb-40px sm-mb-25px" data-anime='{ "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                    <div class="icon-with-text-style-08 mb-20px">
-                        <div class="feature-box feature-box-left-icon-middle">
-                            <div class="feature-box-content last-paragraph-no-margin">
-                                <img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
-                                <div class="ms-2 d-inline-block alt-font fs-19 fw-500 ls-minus-05px text-white">Qui sommes-nous ?</div>
-                            </div>
-                        </div>
-                    </div>
-                    <h2 class="alt-font text-yellow fw-600 ls-minus-3px mx-auto">
-                        Un esprit serein dans un corps en mouvement
-                    </h2>
+                    <div class="fw-600 pb-2">Vos {{nextUpcomingList|length}} prochains rendez-vous</div>
                     
-                    <div class="alt-font text-white mx-auto">
-                        Association Loi 1901, nous favorisons la convivialité dans chacun de nos sports, la sécurité et le maintien de votre forme.</br></br>
-                        L'ARSMéLI est membre de la <strong>F</strong>édération <strong>F</strong>rancaise de <strong>R</strong>etraite <strong>S</strong>portive, fédération nationale multisports adaptée aux plus de 50 ans. 
+                    {% for event in nextUpcomingList %}
+                        {% if event.activity.type == 'regular' %}
+                            {% include 'main_partials/components/_event_regular_card.html.twig' %}
+                        {% else %}
+                            {% include 'main_partials/components/_event_journey_card.html.twig' %}
+                        {% endif %}
+                    {% endfor %}
+
+                </div>  
+
+            </div>
+        </section>
+        <!-- end page title -->
+
+        <section id="retro-section" class="border-top border-color-extra-medium-gray bg-very-light-gray"> 
+            <div class="container">
+                
+                <div class="row align-items-center mb-1 p-2">
+                    <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                        <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                            Retrospective<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
+                        </h3>
                     </div>
 
-                    <a href="https://www.ffrs-retraite-sportive.org/" target="_blank"><img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/ffrs.png') }}"></a>
-                    
-                    <div class="overflow-hidden pt-55px">
-                        <a href="{{ path('about_index') }}" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
-                            <span>
-                                <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
-                                <span><i class="feather icon-feather-arrow-right"></i></span>
-                            </span>
-                        </a>
+                    <div class="row">
+                        <div class="col-lg-5 md-mb-50px sm-mb-30px">
+                            <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Au coeur de notre territoire</h3>
+                            <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Venez découvrir ou redécouvrir notre patrimoine naturel ou culturel grâce au sport</p> 
+                            <a href="{{ path('archive_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Toutes nos archives</a>
+                        </div>
+                        <div class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
+                            <div class="accordion accordion-style-07" id="accordion-style-07" data-active-icon="icon-feather-minus" data-inactive-icon="icon-feather-plus">
+                                <!-- start accordion item -->
+                                <div class="accordion-item">
+                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-01" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                            <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                                <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En métropole Lilloise</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="accordion-style-07-01" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end accordion item -->
+                                <!-- start accordion item -->
+                                <div class="accordion-item">
+                                    <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-02" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                            <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                                <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En Belgique</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="accordion-style-07-02" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end accordion item -->
+                                <!-- start accordion item -->
+                                <div class="accordion-item">
+                                    <div class="accordion-header border-bottom border-color-transparent">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-07-03" aria-expanded="false" data-bs-parent="#accordion-style-07">
+                                            <div class="accordion-title mb-0 position-relative text-dark-gray">
+                                                <i class="feather icon-feather-plus"></i><span class="fw-600 fs-20">En territoire rural & urbain</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div id="accordion-style-07-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-07">
+                                        <div class="accordion-body last-paragraph-no-margin border-bottom border-color-transparent">
+                                            <p>Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end accordion item -->
+                            </div>
+                        </div>
                     </div>
 
                 </div>
-                <div class="col-xl-6 col-lg-7 col-md-10 offset-xl-1 position-relative mt-minus-1">
-                    <div class="row row-cols-auto row-cols-sm-2" data-anime='{ "el": "childs", "translateX": [30, 0], "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <!-- start features box item -->
-                        <div class="col align-self-start">
-                            <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
-                                <div class="feature-box-icon position-absolute left-0px top-0px">
-                                    <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">01</h2>
-                                </div>
-                                <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
-                                    <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Sport</span>
-                                    <p>eLearning allows learners to quickly and more easily complete their training.</p>
-                                    <span class="w-60px h-3px bg-yellow d-inline-block"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end features box item -->
-                        <!-- start features box item -->
-                        <div class="col align-self-end mt-25 xs-mt-30px">
-                            <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
-                                <div class="feature-box-icon position-absolute left-0px top-0px">
-                                    <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">02</h2>
-                                </div>
-                                <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
-                                    <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Bien-être</span>
-                                    <p>eLearning allows learners to quickly and more easily complete their training.</p>
-                                    <span class="w-60px h-3px bg-yellow d-inline-block"></span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- end features box item -->
-                        <!-- start features box item -->
-                        <div class="col align-self-start mt-minus-12 xs-mt-30px">
-                            <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
-                                <div class="feature-box-icon position-absolute left-0px top-0px">
-                                    <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">03</h2>
-                                </div>
-                                <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
-                                    <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Rencontres</span>
-                                    <p>eLearning allows learners to quickly and more easily complete their training.</p>
-                                    <span class="w-60px h-3px bg-yellow d-inline-block"></span>
+                
+                <div class="row pt-3">
+                    <div class="col-12 p-md-0">
+                        
+                        <div class="fw-600 ps-2 pb-1">Nos {{lastPastEventList|length}} derniers événements</div>
+
+                        <ul class="blog-grid blog-wrapper grid-loading grid grid-4col xl-grid-4col lg-grid-4col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                            <li class="grid-sizer"></li>
+
+                            {% for event in lastPastEventList %}
+                                {% include 'main_partials/components/_event_passed.html.twig' %}
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- end section -->
+
+        <!-- start section -->
+        <section id="whoare-section" class="background-position-left-top cover-background position-relative extra-big-section" style="background-image: url('{{ asset('app/demo-hosting-home-bg.jpg') }}')">
+            <div class="container">
+                <div class="row justify-content-center">                    
+                    <div class="col-lg-5 col-md-10 position-relative md-mb-40px sm-mb-25px" data-anime='{ "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                        <div class="icon-with-text-style-08 mb-20px">
+                            <div class="feature-box feature-box-left-icon-middle">
+                                <div class="feature-box-content last-paragraph-no-margin">
+                                    <img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
+                                    <div class="ms-2 d-inline-block alt-font fs-19 fw-500 ls-minus-05px text-white">Qui sommes-nous ?</div>
                                 </div>
                             </div>
                         </div>
-                        <!-- end features box item -->
+                        <h2 class="alt-font text-yellow fw-600 ls-minus-3px mx-auto">
+                            Un esprit serein dans un corps en mouvement
+                        </h2>
+                        
+                        <div class="alt-font text-white mx-auto">
+                            Association Loi 1901, nous favorisons la convivialité dans chacun de nos sports, la sécurité et le maintien de votre forme.</br></br>
+                            L'ARSMéLI est membre de la <strong>F</strong>édération <strong>F</strong>rancaise de <strong>R</strong>etraite <strong>S</strong>portive, fédération nationale multisports adaptée aux plus de 50 ans. 
+                        </div>
+
+                        <a href="https://www.ffrs-retraite-sportive.org/" target="_blank"><img style="width:8rem;border-radius:50%;" src="{{ customAsset('app/ffrs.png') }}"></a>
+                        
+                        <div class="overflow-hidden pt-55px">
+                            <a href="{{ path('about_index') }}" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
+                                <span>
+                                    <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
+                                    <span><i class="feather icon-feather-arrow-right"></i></span>
+                                </span>
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="col-xl-6 col-lg-7 col-md-10 offset-xl-1 position-relative mt-minus-1">
+                        <div class="row row-cols-auto row-cols-sm-2" data-anime='{ "el": "childs", "translateX": [30, 0], "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay":100, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                            <!-- start features box item -->
+                            <div class="col align-self-start">
+                                <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
+                                    <div class="feature-box-icon position-absolute left-0px top-0px">
+                                        <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">01</h2>
+                                    </div>
+                                    <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
+                                        <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Sport</span>
+                                        <p>eLearning allows learners to quickly and more easily complete their training.</p>
+                                        <span class="w-60px h-3px bg-yellow d-inline-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end features box item -->
+                            <!-- start features box item -->
+                            <div class="col align-self-end mt-25 xs-mt-30px">
+                                <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
+                                    <div class="feature-box-icon position-absolute left-0px top-0px">
+                                        <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">02</h2>
+                                    </div>
+                                    <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
+                                        <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Bien-être</span>
+                                        <p>eLearning allows learners to quickly and more easily complete their training.</p>
+                                        <span class="w-60px h-3px bg-yellow d-inline-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end features box item -->
+                            <!-- start features box item -->
+                            <div class="col align-self-start mt-minus-12 xs-mt-30px">
+                                <div class="feature-box text-start ps-30px pe-30px xl-pe-5px sm-pe-0">
+                                    <div class="feature-box-icon position-absolute left-0px top-0px">
+                                        <h2 class="alt-font fs-100 fw-700 ls-minus-1px opacity-1 mb-0">03</h2>
+                                    </div>
+                                    <div class="feature-box-content last-paragraph-no-margin pt-30 md-pt-21 sm-pt-40px">
+                                        <span class="text-white fs-20 d-inline-block fw-600 mb-5px">Rencontres</span>
+                                        <p>eLearning allows learners to quickly and more easily complete their training.</p>
+                                        <span class="w-60px h-3px bg-yellow d-inline-block"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end features box item -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- end section -->
+        </section>
+        <!-- end section -->
 
-    <!-- start section -->
-    <section id="faq-section" class="extra-big-section">
-        <div class="container"> 
-            <div class="row justify-content-center align-items-center mb-3">
-                <div class="col-lg-7 col-md-8 sm-mb-15px d-flex align-items-center">
-                    <h2 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
-                        Foire aux questions<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
-                    </h2>
-                    <img style="width:7rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
+        <!-- start section -->
+        <section id="faq-section" class="extra-big-section">
+            <div class="container"> 
+                <div class="row justify-content-center align-items-center mb-3">
+                    <div class="col-lg-7 col-md-8 sm-mb-15px d-flex align-items-center">
+                        <h2 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                            Foire aux questions<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
+                        </h2>
+                        <img style="width:7rem;border-radius:50%;" src="{{ customAsset('app/main-logo.png') }}">
+                    </div>
+                    <div class="col-lg-3 col-md-4 text-start text-md-end" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    </div>
                 </div>
-                <div class="col-lg-3 col-md-4 text-start text-md-end" data-anime='{ "translateX": [-50, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                </div>
-            </div>
-            <div class="row justify-content-center"> 
-                <div class="col-lg-10"> 
-                    <div class="accordion accordion-style-02" id="accordion-style-02" data-active-icon="icon-feather-chevron-up" data-inactive-icon="icon-feather-chevron-down" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                        <!-- start accordion item -->
-                        <div class="accordion-item active-accordion">
-                            <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-01" aria-expanded="true" data-bs-parent="#accordion-style-02">
-                                    <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                        <i class="feather icon-feather-chevron-up icon-extra-medium"></i><span class="fw-600 fs-18">Faut-il habiter obligatoirement en Métropole Lilloise pour adhérer ?</span>
+                <div class="row justify-content-center"> 
+                    <div class="col-lg-10"> 
+                        <div class="accordion accordion-style-02" id="accordion-style-02" data-active-icon="icon-feather-chevron-up" data-inactive-icon="icon-feather-chevron-down" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                            <!-- start accordion item -->
+                            <div class="accordion-item active-accordion">
+                                <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                    <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-01" aria-expanded="true" data-bs-parent="#accordion-style-02">
+                                        <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
+                                            <i class="feather icon-feather-chevron-up icon-extra-medium"></i><span class="fw-600 fs-18">Faut-il habiter obligatoirement en Métropole Lilloise pour adhérer ?</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="accordion-style-02-01" class="accordion-collapse collapse show" data-bs-parent="#accordion-style-02">
+                                    <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                        <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                     </div>
-                                </a>
-                            </div>
-                            <div id="accordion-style-02-01" class="accordion-collapse collapse show" data-bs-parent="#accordion-style-02">
-                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
-                                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                 </div>
                             </div>
-                        </div>
-                        <!-- end accordion item -->
-                        <!-- start accordion item -->
-                        <div class="accordion-item">
-                            <div class="accordion-header border-bottom border-color-extra-medium-gray">
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-02" aria-expanded="false" data-bs-parent="#accordion-style-02">
-                                    <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                        <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Existe-t-il une cotisation ?</span>
+                            <!-- end accordion item -->
+                            <!-- start accordion item -->
+                            <div class="accordion-item">
+                                <div class="accordion-header border-bottom border-color-extra-medium-gray">
+                                    <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-02" aria-expanded="false" data-bs-parent="#accordion-style-02">
+                                        <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Existe-t-il une cotisation ?</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="accordion-style-02-02" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
+                                    <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                        <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                     </div>
-                                </a>
-                            </div>
-                            <div id="accordion-style-02-02" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
-                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
-                                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                 </div>
                             </div>
-                        </div>
-                        <!-- end accordion item -->
-                        <!-- start accordion item -->
-                        <div class="accordion-item">
-                            <div class="accordion-header border-bottom border-color-light-medium-gray">
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-03" aria-expanded="false" data-bs-parent="#accordion-style-02">
-                                    <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                        <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Faut-il être à la retraite pour adhérer ?</span>
+                            <!-- end accordion item -->
+                            <!-- start accordion item -->
+                            <div class="accordion-item">
+                                <div class="accordion-header border-bottom border-color-light-medium-gray">
+                                    <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-03" aria-expanded="false" data-bs-parent="#accordion-style-02">
+                                        <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Faut-il être à la retraite pour adhérer ?</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="accordion-style-02-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
+                                    <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
+                                        <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                     </div>
-                                </a>
-                            </div>
-                            <div id="accordion-style-02-03" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
-                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-light-medium-gray">
-                                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                 </div>
                             </div>
-                        </div>
-                        <!-- end accordion item -->
-                        <!-- start accordion item -->
-                        <div class="accordion-item">
-                            <div class="accordion-header border-bottom border-color-transparent">
-                                <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-04" aria-expanded="false" data-bs-parent="#accordion-style-02">
-                                    <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
-                                        <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Comment devenir animateur au sein de l'association ?</span>
+                            <!-- end accordion item -->
+                            <!-- start accordion item -->
+                            <div class="accordion-item">
+                                <div class="accordion-header border-bottom border-color-transparent">
+                                    <a href="#" data-bs-toggle="collapse" data-bs-target="#accordion-style-02-04" aria-expanded="false" data-bs-parent="#accordion-style-02">
+                                        <div class="accordion-title mb-0 position-relative text-dark-gray pe-30px">
+                                            <i class="feather icon-feather-chevron-down icon-extra-medium"></i><span class="fw-600 fs-18">Comment devenir animateur au sein de l'association ?</span>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div id="accordion-style-02-04" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
+                                    <div class="accordion-body last-paragraph-no-margin border-bottom border-color-transparent">
+                                        <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                     </div>
-                                </a>
-                            </div>
-                            <div id="accordion-style-02-04" class="accordion-collapse collapse" data-bs-parent="#accordion-style-02">
-                                <div class="accordion-body last-paragraph-no-margin border-bottom border-color-transparent">
-                                    <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                                 </div>
                             </div>
+                            <!-- end accordion item -->
                         </div>
-                        <!-- end accordion item -->
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!-- end section -->
+        </section>
+        <!-- end section -->
 
-    <!-- start footer -->
-    {% include 'main_partials/parts/_footer.html.twig' %}
-    <!-- end footer -->
+        <!-- start footer -->
+        {% include 'main_partials/parts/_footer.html.twig' %}
+        <!-- end footer -->
 
-    <!-- Modal -->
-    {% include 'main_partials/modals/_map_modal.html.twig' %}
-    {% include 'main_partials/modals/_activity_modal.html.twig' %}
+        <!-- Modal -->
+        {% include 'main_partials/modals/_map_modal.html.twig' %}
+        {% include 'main_partials/modals/_activity_modal.html.twig' %}
 
-</body>
+    </body>
 
 {% endblock %}
 

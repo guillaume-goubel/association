@@ -57,14 +57,12 @@ class HomeController extends AbstractController
     {
         $eventId = $request->request->get('eventId');
         $event = $eventRepository->findOneBy(['id' => $eventId]);
-        $animators = $event->getAnimators();
         
         return new JsonResponse([
             'content' => $this->renderView('main_partials/components/_animators_infos.html.twig', [
-                'animators' => $animators,
+                'event' => $event,
             ])
         ]);
     }
-
 
 }

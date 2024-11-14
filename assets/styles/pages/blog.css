@@ -55,6 +55,13 @@
 .blog-standard{
     min-height: 50vh;
 }
+.animators-infos-link{
+    cursor:pointer;
+    transition: transform 0.3s ease;
+}
+.animators-infos-link:hover{
+    transform: translateY(-5px);
+}
 @media only screen and (max-width: 600px) {
     .animator-item {
       justify-content: start;

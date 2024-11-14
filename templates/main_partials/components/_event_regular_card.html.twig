@@ -31,7 +31,7 @@
             <div class="col-6 text-center text-sm-start last-paragraph-no-margin fs-15 lh-24">
                 <div class="d-flex align-items-center">
                     {% if event.animators is not empty %}
-                        <div class="avatar-stack" data-bs-toggle="modal" data-bs-target="#animator-infos-{{ event.id }}">
+                        <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
                             {% for animator in event.animators %}
                                 <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border: 2px solid {{event.activity.color}};border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar">
                             {% endfor %}
@@ -81,40 +81,6 @@
                 </div>
             </li>
         </ul>
-
     </div>
-
+    
 </div>
-
-{% if event.animators is not empty %}
-    <div class="modal fade" id="animator-infos-{{ event.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title fs-14"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row row-cols-1 row-cols-lg-1"> 
-                        {% for animator in event.animators %}       
-                            <div class="col mb-35px md-ms-0">
-                                <div class="d-flex flex-column flex-sm-row align-items-center border-radius-6px ps-25px pe-25px pt-15px pb-15px xl-p-30px text-center text-sm-start last-paragraph-no-margin">
-                                    <div class="testimonials-author w-120px me-25px xs-me-0 xs-mb-20px flex-shrink-0">
-                                        <img style="border:2px solid {{event.activity.color}}" class="rounded-circle me-15px xs-me-0" src="{{ customAsset('app/avatar-01.jpg')}}" alt="">
-                                    </div>
-                                    <div class="testimonials-content">
-                                        <span class="alt-font text-dark-gray fw-600 d-block mt-5px fs-19">{{ animator.completeNameByfirstName }}</span>
-                                        <p class="fs-14">Lorem ipsum dolor amet tempor incididunt labore dolore nostrud.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                </div>
-                {# <div class="modal-footer">
-                    <button type="button" class="btn btn-dark-gray" data-bs-dismiss="modal">Fermer</button>
-                </div> #}
-            </div>
-        </div>
-    </div>
-{% endif %}

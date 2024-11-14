@@ -1,0 +1,15 @@
+<div class="row row-cols-1 row-cols-lg-1"> 
+    {% for animator in event.animators %}       
+        <div class="col mb-35px md-ms-0">
+            <div class="d-flex flex-column flex-sm-row align-items-center border-radius-6px ps-25px pe-25px pt-15px pb-15px xl-p-30px text-center text-sm-start last-paragraph-no-margin">
+                <div class="testimonials-author w-120px me-25px xs-me-0 xs-mb-20px flex-shrink-0">
+                    <img style="border:2px solid {{event.activity.color}}" class="rounded-circle me-15px xs-me-0" src="{{ customAsset('app/avatar-01.jpg')}}" alt="">
+                </div>
+                <div class="testimonials-content">
+                    <span class="alt-font text-dark-gray fw-600 d-block mt-5px fs-19">{{ animator.completeNameByfirstName }}</span>
+                    <p class="fs-14">Lorem ipsum dolor amet tempor incididunt labore dolore nostrud.</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
