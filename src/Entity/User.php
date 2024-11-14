@@ -157,6 +157,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return new ArrayCollection($sortedActivities);
     }
 
+    public function getActivitiesByName(): Collection
+    {
+        // Convertit la collection en tableau, trie le tableau par la propriété ordering
+        $sortedActivities = $this->activities->toArray();
+        usort($sortedActivities, function (Activity $a, Activity $b) {
+            return $a->getName() <=> $b->getName();
+        });
+
+        return new ArrayCollection($sortedActivities);
+    }
+
     public function addActivity(Activity $activity): static
     {
         if (!$this->activities->contains($activity)) {
@@ -197,9 +208,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCompleteName(): ?string
+    public function getCompleteNameByfirstName(): ?string
     {
-        return $this->firstName.' '.$this->lastName ;
+        return ucfirst($this->firstName).' '.strtoupper($this->lastName) ;
+    }
+
+    public function getCompleteNameByLastName(): ?string
+    {
+        return strtoupper($this->lastName).' '.ucfirst($this->firstName) ;
     }
 
     public function getAnimator(): ?Animator

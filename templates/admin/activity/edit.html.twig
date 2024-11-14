@@ -9,8 +9,8 @@
 {% block body %}
 
 <body data-mobile-nav-style="classic">
-    
     {{ parent() }}
+    
     <!-- start header -->
 	{% include 'admin/partials/_header.html.twig' %}
 	<!-- end header -->
@@ -30,25 +30,23 @@
                                 </span>
                                 <a href="{{ path('app_logout')}}">Déconnexion</a>
                             </div>
-                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS - Nouveau</h5>
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">ACTIVITE - Description</h5>
                         </div>
-                        <div class="col-2 d-flex justify-content-end">
-                            {% set redirect = app.request.get('from') ?: 'admin_event_index' %}
-                            <a href="{{ path(redirect) }}">
-                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
-                            </a>
+                        <div class="col-2">
+                            <a href="{{ path('admin_activity_index') }}"><i class="fa-solid fa-circle-left align-middle icon-medium text-base-color me-2"></i>Retour</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-10">
                     <div class="row mb-50px sm-mb-30px">     
-                        {{ include('admin/event/_form.html.twig') }}
+                        {{ include('admin/activity/_form.html.twig') }}
                     </div>
                 </div>
 
             </div>
         </div>
+        
     </section>
     <!-- end section -->
 
@@ -56,29 +54,13 @@
     {% include 'main_partials/_footer_minimum.html.twig' %}
     <!-- end footer -->
 
-    <!-- start scroll progress -->
-    <div class="scroll-progress d-none d-xxl-block">
-        <a href="#" class="scroll-top" aria-label="scroll">
-            <span class="scroll-text">
-                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
-            </span>
-            <span class="scroll-line">
-                <span class="scroll-point"></span>
-            </span>
-        </a>
-    </div>
-    <!-- end scroll progress -->
-    
-    {% include 'main_partials/notifications/_notyFlashMessage.html.twig' %}
-
 </body>
-
 {% endblock %}
 
 {% block baseJavascripts %}   
     
     {% block importmap %}
-        {{ importmap(['app', 'base', 'admin-event']) }}
+        {{ importmap(['app', 'base', 'admin-activity']) }}
     {% endblock %}
 
 {% endblock %}

@@ -1,0 +1,29 @@
+{{ form_start(form)}}
+    
+    <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mb-2">
+        <div class="feature-box-icon me-1" style="background-color:{{activity.color}}">
+            {% if activity.pictureType == "image" %}
+                <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+            {% else %}
+                <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
+            {% endif %}
+        </div>
+        <div class="ms-1">{{activity.name}}</div>
+    </div>
+    
+    <div class="row d-flex aside-form">
+        <div class="col-12 mt-1">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+
+    {% if is_granted('ROLE_SUPER_ADMIN') or isUserActivityOwner == true %}
+        <div class="row d-flex aside-form justify-content-center mt-5">
+            <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto">{{ button_label|default('Modifier') }}</button>
+        </div>
+    {% endif %}
+
+{{ form_end(form) }}
+
+
+

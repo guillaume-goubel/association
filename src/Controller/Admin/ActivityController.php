@@ -2,27 +2,27 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Activity;
+use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/admin', name: 'admin_')]
+#[Route('/admin', name: 'admin_activity_')]
 
 class ActivityController extends AbstractController
 {
-    #[Route('/activity', name: 'activity')]
+    #[Route('/activity', name: 'index')]
     public function index(ActivityRepository $activityRepository, Request $request): Response
     {   
         $user = $this->getUser();
         $userChoice = $request->query->get('userChoice') ?? $user->getId();
-
-        // if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
-        //     $activities = $activityRepository->findAll();
-        // }else{
-        //     $activities = $activityRepository->getActivitiesByUser($userChoice);
-        // }
+        if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+            $userChoice = 'all';
+        }
 
         $activities = $activityRepository->getActivitiesByUser($userChoice);
 
@@ -65,4 +65,67 @@ class ActivityController extends AbstractController
         ]);
 
     }
+
+    #[Route('/activity/new', name: 'new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $activity = new Activity();
+        $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($activity);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Opération effectuée');
+            return $this->redirectToRoute('admin_activity_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/activity/new.html.twig', [
+            'activity' => $activity,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/activity/{id}', name: 'show', methods: ['GET'])]
+    public function show(Activity $activity): Response
+    {
+        return $this->render('admin/activity/show.html.twig', [
+            'activity' => $activity,
+        ]);
+    }
+
+    #[Route('/activity/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Activity $activity, EntityManagerInterface $entityManager): Response
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(ActivityType::class, $activity);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Opération effectuée');
+            return $this->redirectToRoute('admin_activity_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('admin/activity/edit.html.twig', [
+            'activity' => $activity,
+            'form' => $form,
+            'isUserActivityOwner' => $activity->isActivityInUserControl($user)
+        ]);
+    }
+
+    #[Route('/activity/{id}', name: 'delete', methods: ['POST'])]
+    public function delete(Request $request, Activity $activity, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$activity->getId(), $request->getPayload()->get('_token'))) {
+            $entityManager->remove($activity);
+            $entityManager->flush();
+        }
+        $this->addFlash('success', 'Opération effectuée');
+        return $this->redirectToRoute('admin_activity_index', [], Response::HTTP_SEE_OTHER);
+    }
+    
 }

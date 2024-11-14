@@ -1,0 +1,15 @@
+.feature-box-icon {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    width: 70px;
+    border-radius: 50%;
+}
+
+.popular-post-sidebar li .media-body {
+    line-height: normal;
+    padding-left: 5px;
+    position: relative;
+}

@@ -83,42 +83,36 @@
                     <div class="mb-15 md-mb-50px xs-mb-35px">
                         <div class="fw-600 fs-19 lh-22 ls-minus-05px text-dark-gray border-bottom border-color-dark-gray border-2 d-block mb-30px pb-15px position-relative">Derniers événements crées</div>
                         <ul class="popular-post-sidebar position-relative">
-                            <li class="d-flex align-items-center">
-                                <figure>
-                                    <a href="demo-elearning-blog-single-simple.html"><img src="https://via.placeholder.com/600x600" alt=""></a>
-                                </figure>
-                                <div class="col media-body">
-                                    <a href="demo-elearning-blog-single-simple.html" class="fw-600 fs-17 text-dark-gray d-inline-block mb-10px">Trendy is the last stage before tacky.</a>
-                                    <div><a href="blog-grid.html" class="d-inline-block fs-15">20 February 2023</a></div>
-                                </div>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <figure>
-                                    <a href="demo-elearning-blog-single-simple.html"><img src="https://via.placeholder.com/600x600" alt=""></a>
-                                </figure>
-                                <div class="col media-body">
-                                    <a href="demo-elearning-blog-single-simple.html" class="fw-600 fs-17 text-dark-gray d-inline-block mb-10px">Believe you can and you're halfway there.</a>
-                                    <div><a href="blog-grid.html" class="d-inline-block fs-15">18 February 2023</a></div>
-                                </div>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <figure>
-                                    <a href="demo-elearning-blog-single-simple.html"><img src="https://via.placeholder.com/600x600" alt=""></a>
-                                </figure>
-                                <div class="col media-body">
-                                    <a href="demo-elearning-blog-single-simple.html" class="fw-600 fs-17 text-dark-gray d-inline-block mb-10px">In a gentle way, you can shake the world.</a>
-                                    <div><a href="blog-grid.html" class="d-inline-block fs-15">16 February 2023</a></div>
-                                </div>
-                            </li>
+                            {% for event in lastEventCreated %}
+                                <li class="d-flex align-items-center mb-0">
+                                    <a class="d-flex align-items-center" href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed(), 'from': 'admin_index' }) }}">
+                                        <figure>
+                                            <div class="feature-box-icon" style="background-color:{{ event.activity.color }}">
+                                                {% if event.activity.pictureType == "image" %}
+                                                    <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
+                                                {% else %}
+                                                    <i class="{{ event.activity.picture }} align-middle icon-large icon-large text-white my-3"></i>
+                                                {% endif %}
+                                            </div>
+                                        </figure>
+                                        
+                                        <div class="col media-body">
+                                            <div class="fw-600 fs-17 text-dark-gray d-inline-block mb-10px">{{event.activity.name|capitalize}}</div>
+                                            <div class="fs-14">{{event.createdAt|date('d/m/Y')}}</div>
+                                            <div class="fs-14">{{event.user.completeNameByFirstName}}</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <div class="mb-15 md-mb-50px xs-mb-35px">
-                        <div class="fw-600 fs-19 lh-22 ls-minus-05px text-dark-gray border-bottom border-color-dark-gray border-2 d-block mb-30px pb-15px position-relative">Mes activités</div>
+                        <div class="fw-600 fs-19 lh-22 ls-minus-05px text-dark-gray border-bottom border-color-dark-gray border-2 d-block mb-30px pb-15px position-relative">Créer un évènement parmi mes activités</div>
                         <ul class="category-list-sidebar position-relative">
                             
                             {% for activity in activitiesForThisUser %}
                                 <li class="d-flex align-items-center h-80px ps-35px pe-35px" style="background-color:{{activity.color}}">
-                                    <a href="#" class="d-flex align-items-center position-relative w-100 h-100">
+                                    <a href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_index' }) }}" class="d-flex align-items-center position-relative w-100 h-100">
                                         <span class="text-white mb-0 fs-20 fw-500 fancy-text-style-4">{{activity.name}}</span>
                                         <span class="btn text-white position-absolute"><i class="bi bi-arrow-right ms-0 fs-24"></i></span>
                                     </a>
@@ -226,7 +220,7 @@
 {% block baseJavascripts %}
     
     {% block importmap %}
-        {{ importmap(['app', 'base']) }}
+        {{ importmap(['app', 'base', 'admin-index']) }}
     {% endblock %}
 
 {% endblock %}

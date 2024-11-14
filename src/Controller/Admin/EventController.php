@@ -20,9 +20,14 @@ class EventController extends AbstractController
     #[Route('/index', name: 'index', methods: ['GET'])]
     public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository): Response
     {
+        $user = $this->getUser();
+
         $yearChoice = $request->query->get('yearChoice') ?? date("Y");
         $monthChoice = $request->query->get('monthChoice') ?? date("m");
         $creatorChoice = $request->query->get('creatorChoice') ?? $this->getUser()->getId();
+        if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+            $creatorChoice = 'all';
+        }
         $activityChoice = $request->query->get('activityChoice') ?? "all";
 
         // Distinct month / year createdAt for select
@@ -52,6 +57,11 @@ class EventController extends AbstractController
         $event = new Event();
         $user = $this->getUser();
         $userActivityArray = [];
+        $activityChoice = null;
+        $activityId = $request->query->get('activityId') ?? null;
+        if ($activityId){
+            $activityChoice = $activityRepository->findOneBy(['id' => $activityId]);
+        }
 
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
             foreach ($activityRepository->findAll() as $activity) {
@@ -66,7 +76,8 @@ class EventController extends AbstractController
         }
 
         $form = $this->createForm(EventType::class, $event, [
-            'activity_ids' => $userActivityArray, // Passe les IDs ici
+            'activity_ids' => $userActivityArray,
+            'selected_activity' => $activityChoice, // Passe les IDs ici
         ]);
         
         $form->handleRequest($request);

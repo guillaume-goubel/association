@@ -82,7 +82,7 @@
             <li class="d-flex justify-content-center">
                 <div class="pricing-footer w-70" style="height:35px;">
                     {# {% if event.description != null or event.preparationInfos != null %} #}
-                        <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': false }) }}" class="btn btn-very-small btn-transparent-yellow btn-round-edge-large border-1 w-100">Plus d'informations</a>
+                        <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed() }) }}" class="btn btn-very-small btn-transparent-yellow btn-round-edge-large border-1 w-100">Plus d'informations</a>
                     {# {% endif %} #}
                 </div>
             </li>
@@ -108,7 +108,7 @@
                                         <img style="border:2px solid {{event.activity.color}}" class="rounded-circle me-15px xs-me-0" src="{{ customAsset('app/avatar-01.jpg')}}" alt="">
                                     </div>
                                     <div class="testimonials-content">
-                                        <span class="alt-font text-dark-gray fw-600 d-block mt-5px fs-19">{{animator.firstName|capitalize}} {{animator.lastName|capitalize}}</span>
+                                        <span class="alt-font text-dark-gray fw-600 d-block mt-5px fs-19">{{ animator.completeNameByfirstName }}</span>
                                         <p class="fs-14">Lorem ipsum dolor amet tempor incididunt labore dolore nostrud.</p>
                                     </div>
                                 </div>

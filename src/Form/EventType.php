@@ -25,6 +25,7 @@ class EventType extends AbstractType
     {
         
         $activityIds = $options['activity_ids'];
+        $selectedActivity = $options['selected_activity'];
 
         $builder
             ->add('name', TextType::class, [
@@ -58,7 +59,7 @@ class EventType extends AbstractType
                 ],
             ])
             ->add('eventDistance', NumberType::class, [
-                 'label' => "L'évènement comporte-t-il un parcours (en km) ",
+                'label' => "L'évènement comporte-t-il un parcours (en km) ",
                 'help' => 'ex: comme pour une randonnée de 13 (km)',
                 'attr' => ['class' => 'form-control'],
                 'data' => null,
@@ -125,6 +126,7 @@ class EventType extends AbstractType
                 'choice_label' => 'name',
                 'attr' => ['class' => 'form-control'],
                 'required' => true,
+                 // Définit la valeur par défaut
                 'query_builder' => function (EntityRepository $er) use ($activityIds) {
                     return $er->createQueryBuilder('a')
                         ->where('a.id IN (:ids)')
@@ -133,13 +135,16 @@ class EventType extends AbstractType
                         ->setParameter('enabled', true)
                         ->orderBy('a.name', 'ASC');
                 },
+                'data' => $selectedActivity ? $selectedActivity : null,
             ])
             ->add('animators', EntityType::class, [
                 'label' => 'Rattacher à un/des animateurs',
                 'help' => 'Appuyer sur la touche "CONTROL" en cliquant pour faire des sélections multiples',
                 'attr' => ['class' => 'form-control'],
                 'class' => Animator::class,
-                'choice_label' => 'completeName',
+                'choice_label' => function (Animator $user) {
+                    return $user->getCompleteNameByLastName(); // Appel de la méthode pour obtenir le nom complet
+                },
                 'multiple' => true,
                 'required' => false,
             ])
@@ -147,9 +152,17 @@ class EventType extends AbstractType
                 'label' => 'Rattacher à un administrateur',
                 'attr' => ['class' => 'form-control'],
                 'class' => User::class,
-                'choice_label' => 'completeName',
+                'choice_label' => function (User $user) {
+                    return $user->getCompleteNameByLastName(); // Appel de la méthode pour obtenir le nom complet
+                },
                 'required' => true,
-            ])
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.roles LIKE :role')  // Cherche les utilisateurs avec ROLE_ADMIN dans le tableau des rôles
+                        ->setParameter('role', '%ROLE_ADMIN%')  // Recherche la chaîne 'ROLE_ADMIN' dans la colonne roles
+                        ->orderBy('u.lastName', 'ASC'); // Vous pouvez aussi trier par firstName ou lastName
+                },
+            ])            
             ->add('mainPictureFile', FileType::class, [
                 'label' => 'Image principale',
                 'label_attr' => [
@@ -212,6 +225,7 @@ class EventType extends AbstractType
         $resolver->setDefaults([
             'data_class' => Event::class,
             'activity_ids' => [],
+            'selected_activity' => null,
         ]);
     }
 }

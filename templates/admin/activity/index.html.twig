@@ -83,8 +83,8 @@
                                                 {% endif %}
                                             </p> #}
                                             <div class="d-flex align-items-center">
-                                                <a href="#" class="btn btn-very-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
-                                                <a href="#" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
+                                                <a href="{{ path('admin_activity_edit', { 'id': activity.id }) }}" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow ">Description</a>
+                                                <a style="width:130px;" href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_activity_index' }) }}" class="btn btn-very-small btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto ms-3">Evénement<span class="bg-base-color text-white"><i class="fa-solid fa-circle-plus"></i></span></a>
                                             </div>
                                         </div>
                                         <div class="card-footer">
@@ -120,7 +120,7 @@
                                 <div class="card col-12 col-md-4 m-1">
                                     <div class="feature-box-icon" style="background-color:{{activity.color}}">
                                         {% if activity.pictureType == "image" %}
-                                            <img class="my-2" style="width: 60px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                                            <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
                                         {% else %}
                                             <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
                                         {% endif %}
@@ -136,9 +136,10 @@
                                             {% endif %}
                                         
                                         </p> #}
-                                        <a href="#" class="btn btn-very-small btn-rounded btn-transparent-base-color d-table d-lg-inline-block lg-mb-15px md-mx-auto">Infos</a>
+
+                                        <a href="{{ path('admin_activity_edit', { 'id': activity.id }) }}" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow">Description</a>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                            <a href="#" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow ms-3">Modifier</a>
+                                            <a style="width:130px;" href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_activity_index' }) }}" class="btn btn-very-small btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto ms-3">Evénement<span class="bg-base-color text-white"><i class="fa-solid fa-circle-plus"></i></span></a>
                                         {% endif %}
                                     </div>
                                     <div class="card-footer">

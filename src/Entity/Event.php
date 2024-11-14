@@ -434,4 +434,13 @@ class Event
         return $this;
     }
 
+    public function isPassed(): bool
+    {
+        // Vérifie si la date de début est avant la date actuelle
+        if ($this->dateStartAt instanceof \DateTimeInterface) {
+            return $this->dateStartAt < new \DateTime(); // Compare à la date actuelle
+        }
+        return false; // Si la date de début n'est pas définie, renvoie false
+    }
+
 }

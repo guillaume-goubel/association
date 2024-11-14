@@ -73,9 +73,14 @@ class Animator
         return $this;
     }
 
-    public function getCompleteName(): ?string
+    public function getCompleteNameByfirstName(): ?string
     {
-        return $this->firstName.' '.$this->lastName ;
+        return ucfirst($this->firstName).' '.strtoupper($this->lastName) ;
+    }
+
+    public function getCompleteNameByLastName(): ?string
+    {
+        return strtoupper($this->lastName).' '.ucfirst($this->firstName) ;
     }
 
     public function getUser(): ?User

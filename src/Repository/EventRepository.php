@@ -36,7 +36,7 @@ class EventRepository extends ServiceEntityRepository
             $stmt->setParameter('month', $monthChoice);
         }
 
-        if ($creatorChoice) {
+        if ($creatorChoice && $creatorChoice != 'all') {
             $stmt->andwhere('e.user = :user');
             $stmt->setParameter('user', $creatorChoice);
         }
@@ -48,6 +48,15 @@ class EventRepository extends ServiceEntityRepository
 
         $stmt->addOrderBy('e.dateStartAt', 'ASC');
         return $stmt->getQuery()->getResult();
+    }
+
+    public function findLastEventsforAdmin(int $limit): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.createdAt', 'ASC') 
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 
     public function getEventListforAgenda($yearChoice, $monthChoice, $activityChoice)

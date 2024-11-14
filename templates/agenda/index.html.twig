@@ -52,12 +52,14 @@
                 <div class="col-auto col-lg-11 menu-order position-static d-flex justify-content-end ">
                     <div class="header-icon">  
                         <div class="header-button">
-                            {% set section = app.request.get('from') == 'activity-grid' ? 'activity-section' : 'agenda-section' %}
+                            
+                            {% set section = app.request.get('from') ?: 'agenda-section' %}
                             <a href="{{ path('home_index') }}#{{ section }}" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
                                 <span>
                                     <span class="btn-double-text" data-text="Retour">Retour</span>
                                 </span> 
                             </a>
+
                         </div>
                     </div>
                 </div>
