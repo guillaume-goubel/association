@@ -3,13 +3,13 @@
 
     <div class="d-flex flex-column">
         
-        {# {% if is_granted('ROLE_SUPER_ADMIN') or ( is_granted('ROLE_ADMIN') and event.user.id == app.user.id ) %}
+        {% if is_granted('ROLE_SUPER_ADMIN') or (is_granted('ROLE_ADMIN') and event.user.id == app.user.id ) %}
             <div class="event-action-container disabled">
                 <a href="#" class="btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
                     <i class="fa-solid fa-eye"></i>
                 </a>
             </div>
-        {% endif %} #}
+        {% endif %}
 
         {% if event.user.id == app.user.id or is_granted('ROLE_SUPER_ADMIN') %}
             <div class="event-action-container edit">

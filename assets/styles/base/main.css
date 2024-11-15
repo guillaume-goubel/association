@@ -257,6 +257,10 @@ footer .elements-social ul li:last-child {
     color: var(--green);
     border: 1px solid var(--green);
 }
+.event-action-container.disabled a:hover{
+    color: white;
+    background-color: var(--green);
+}
 .event-action-container.disabled a i{
     padding-top: 3px;
     margin-left:0!important;

@@ -77,6 +77,11 @@
                         <!-- Filtre année -->
                         <div class="col-12 col-md-3">
                             <select id="yearChoice" name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
+                                
+                                {% if yearsList|length > 1 %}
+                                    <option {{ yearChoice == 'all' ? 'selected' : '' }} value="all">Toute année</option>
+                                {% endif %}
+                                
                                 {% for item in yearsList %}
                                     <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
                                 {% endfor %}

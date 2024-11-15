@@ -96,6 +96,10 @@
                                     {% endfor %}
                                 </select>
                             </div>
+
+                            {# From page #}
+                            <input name="from" type="hidden" value="{{ app.request.get('from') }}">
+
                             <!-- Bouton de recherche -->
                             <div class="col-12 col-md-3 text-center text-md-start">
                                 <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">

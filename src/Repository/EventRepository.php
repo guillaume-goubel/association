@@ -124,7 +124,7 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery();
     }
 
-    public function getEventListforCalendar(string $yearChoice, string $activityChoice)
+    public function getEventListforCalendar(string $yearChoice, string $activityChoice): array
     {
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
@@ -143,28 +143,13 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function getEventListforCalendarFor12Months($activityChoice = null, string $userChoice, string $yearChoice)
+    public function getEventListforCalendarFor12Months(string $activityChoice, string $userChoice, string $yearChoice): array
     {
 
         // Création d'un objet QueryBuilder
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
         
-        if ($yearChoice == 'yearDepth') {
-            $yearDefault = (new \DateTime())->format('Y');
-            $monthDefault = (new \DateTime())->format('m');
-            $startDate = new \DateTime("{$yearDefault}-{$monthDefault}-01");
-            $endDate = (clone $startDate)->modify('+12 months')->modify('-1 day'); // Dernier jour de la période de 12 mois
-            
-            // Filtrage par la plage de dates
-            $stmt->andWhere('e.dateStartAt BETWEEN :startDate AND :endDate')
-                ->setParameter('startDate', $startDate)
-                ->setParameter('endDate', $endDate);
-        }else{
-            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
-            $stmt->setParameter('year', $yearChoice);
-        }
-
         if ($activityChoice && $activityChoice !== 'all') {
             $stmt->andWhere('a.id = :activityChoice')
                 ->setParameter('activityChoice', $activityChoice);
@@ -174,6 +159,25 @@ class EventRepository extends ServiceEntityRepository
             $stmt->andWhere('e.user = :userChoice')
                 ->setParameter('userChoice', $userChoice);
         }
+
+        switch ($yearChoice) {
+            case 'yearDepth':
+                $yearDefault = (new \DateTime())->format('Y');
+                $monthDefault = (new \DateTime())->format('m');
+                $startDate = new \DateTime("{$yearDefault}-{$monthDefault}-01");
+                $endDate = (clone $startDate)->modify('+12 months')->modify('-1 day'); // Dernier jour de la période de 12 mois
+        
+                // Filtrage par la plage de dates
+                $stmt->andWhere('e.dateStartAt BETWEEN :startDate AND :endDate')
+                    ->setParameter('startDate', $startDate)
+                    ->setParameter('endDate', $endDate);
+                break;
+        
+            default:
+                $stmt->andWhere('YEAR(e.dateStartAt) = :year')
+                    ->setParameter('year', $yearChoice);
+                break;
+        }
         
         // Tri des résultats par la date de début des événements
         $stmt->addOrderBy('e.dateStartAt', 'ASC');
@@ -182,7 +186,7 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function getDistincYearCreatedAt()
+    public function getDistincYearCreatedAt(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -197,7 +201,7 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getDistincYearCreatedAtForAgendaView()
+    public function getDistincYearCreatedAtForAgendaView(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -212,7 +216,7 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getDistincYearCreatedAtForArchiveView()
+    public function getDistincYearCreatedAtForArchiveView(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -227,7 +231,7 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getDistinctMonthCreatedAt($yearChoice)
+    public function getDistinctMonthCreatedAt($yearChoice): array
     {
         $sql_yearChoice = "";
         if ($yearChoice != null) {
@@ -254,7 +258,7 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getDistinctMonthCreatedAtForAgendaView($yearChoice)
+    public function getDistinctMonthCreatedAtForAgendaView($yearChoice): array
     {
         $sql_yearChoice = "";
         if ($yearChoice != null && $yearChoice != 'all') {
@@ -282,7 +286,7 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getDistinctMonthCreatedAtForArchiveView($yearChoice)
+    public function getDistinctMonthCreatedAtForArchiveView($yearChoice): array
     {
         $sql_yearChoice = "";
         if ($yearChoice != null) {
@@ -310,7 +314,7 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function getDistinctCreator()
+    public function getDistinctCreator(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -328,7 +332,7 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function findNextUpcomingEvent()
+    public function findNextUpcomingEvent():mixed
     {
         $today = new \DateTime();
         $today->setTime(0, 0); // On enlève l'heure pour exclure toute date du jour
@@ -344,7 +348,7 @@ class EventRepository extends ServiceEntityRepository
             ->getOneOrNullResult();                     
     }
 
-    public function findNextUpcomingList()
+    public function findNextUpcomingList():mixed
     {
         $today = new \DateTime();
         $today->setTime(0, 0);
@@ -360,7 +364,7 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();                  
     }
 
-    public function findLastPastEventsList()
+    public function findLastPastEventsList():mixed
     {
         $today = new \DateTime();
         $today->setTime(0, 0);
