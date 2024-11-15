@@ -1,0 +1,27 @@
+<div class="modal fade" id="disabledModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                
+                <div>
+                    <div id="currentStatusVerbatim"></div>
+                    <h5 id="currentStatusQuestion" class="modal-title fs-14"></h5>
+                </div>
+                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <div id="eventChangeStatusConfirmation" class="d-none">
+                    <span class="fw-600 fs-14 text-green">Opération effectuéee</span>
+                </div>
+                <div id="eventChangeStatusBtn" >
+                    <button type="button" class="btn btn-transparent-light-gray" data-bs-dismiss="modal">Annuler</button>
+                    <a id="disabledEventLink" data-current-status="" data-id="" data-path="{{ path('admin_event_change_status')}}"
+                        class="btn btn-base-color">
+                        Confirmer
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

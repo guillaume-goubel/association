@@ -4,16 +4,17 @@ namespace App\Controller\Admin;
 
 use App\Entity\Event;
 use App\Form\EventType;
-use App\Repository\EventRepository;
-use App\Repository\ActivityRepository;
 use App\Service\EventService;
 use App\Service\MediaService;
+use App\Repository\EventRepository;
+use App\Repository\ActivityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/admin/event', name: 'admin_event_')]
 class EventController extends AbstractController
@@ -233,4 +234,29 @@ class EventController extends AbstractController
         return $this->redirectToRoute('admin_event_edit', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
 
     }
+
+    #[Route('/change/status', name: 'change_status', methods: ['POST'])]
+    public function changeStatus(Request $request, EventRepository $eventRepository, EntityManagerInterface $em): JsonResponse
+    {
+        
+        $event = $eventRepository->findOneBy(['id' => $request->request->get('eventId')]);
+
+        if (!$event) {
+            return new JsonResponse(['error' => 'Event not found'], 404);
+        }
+
+        $newStatus = !$event->isEnabled();
+        $event->setEnabled($newStatus);
+        $em->persist($event);
+        $em->flush();
+
+        $eventData = [
+            'id' => $event->getId(),
+            'isEnabled' => $event->isEnabled()
+        ];
+
+        // Retourne la réponse JSON avec la liste des activités
+        return new JsonResponse(['event' => $eventData]);
+    }
+
 }

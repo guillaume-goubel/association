@@ -86,7 +86,7 @@
                                                 <a style="width:130px;" href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_activity_index' }) }}" class="btn btn-very-small btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto ms-3">Evénement<span class="bg-base-color text-white"><i class="fa-solid fa-circle-plus"></i></span></a>
                                             </div>
                                         </div>
-                                        <div class="card-footer">
+                                        <div class="card-footer mb-3">
                                             <div class="fs-10">Responsable(s) de l'activité</div>
                                             <div class="row">
                                                 {% if activity.users is empty %}
@@ -141,7 +141,7 @@
                                             <a style="width:130px;" href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_activity_index' }) }}" class="btn btn-very-small btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto ms-3">Evénement<span class="bg-base-color text-white"><i class="fa-solid fa-circle-plus"></i></span></a>
                                         {% endif %}
                                     </div>
-                                    <div class="card-footer">
+                                    <div class="card-footer mb-3">
                                         <div class="fs-10">Responsable(s) de l'activité</div>
                                         <div class="row">
                                             {% if activity.users is empty %}

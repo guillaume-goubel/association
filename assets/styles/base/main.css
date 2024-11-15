@@ -214,6 +214,9 @@ footer .elements-social ul li:last-child {
     padding-top: 10px;
 }
 /* EVENT BUTTON ACTIONS */
+.event-action-container{
+    z-index: 99!important;
+}
 .event-action-container.edit{
     position: absolute;
     right: 0;
@@ -240,6 +243,7 @@ footer .elements-social ul li:last-child {
     margin-left:0!important;
     font-size:21px;
 }
+/* ----------------------------------------- */
 .event-action-container.disabled{
     position: absolute;
     right: 0;
@@ -254,18 +258,46 @@ footer .elements-social ul li:last-child {
     border-radius: 50%;
     padding: 10px 13px!important;
     background-color: white;
-    color: var(--green);
-    border: 1px solid var(--green);
+    color: var(--red);
+    border: 1px solid var(--red);
 }
 .event-action-container.disabled a:hover{
     color: white;
-    background-color: var(--green);
+    background-color: var(--red);
 }
 .event-action-container.disabled a i{
     padding-top: 3px;
     margin-left:0!important;
     font-size:21px;
 }
+/* ----------------------------------------- */
+.event-action-container.enabled{
+    position: absolute;
+    right: 0;
+    bottom: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.event-action-container.enabled a{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 10px 13px!important;
+    background-color: white;
+    color: var(--green);
+    border: 1px solid var(--green);
+}
+.event-action-container.enabled a:hover{
+    color: white;
+    background-color: var(--green);
+}
+.event-action-container.enabled a i{
+    padding-top: 3px;
+    margin-left:0!important;
+    font-size:21px;
+}
+/* ----------------------------------------- */
 .form-select-sm{
     padding: 6px 25px;
     font-size: 14px;

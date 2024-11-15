@@ -12,7 +12,7 @@
     {{ parent() }}
     
     <!-- start header -->
-	{% include 'admin/partials/_header.html.twig' %}
+	{% include 'admin/partials/parts/_header.html.twig' %}
 	<!-- end header -->
 
     <!-- start section -->
@@ -33,7 +33,15 @@
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS - Modifier</h5>
                         </div>
                         <div class="col-2 d-flex justify-content-end">
-                            <a href="{{ path('admin_event_index') }}"><i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i></a>
+                            {% if app.request.get('from') == 'blog_index' %}
+                                <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed(), 'from': 'admin_event_edit' }) }}">
+                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('admin_event_index') }}">
+                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

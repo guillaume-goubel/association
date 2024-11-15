@@ -56,3 +56,6 @@ header .navbar-brand .default-logo {
 button.mfp-close:before, button.mfp-close:active:before {
     font-size: 35px!important;
 }
+.hover-box.light-hover:hover span{
+    color: var(--base-color) !important;
+}

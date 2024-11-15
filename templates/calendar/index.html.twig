@@ -17,7 +17,7 @@
     {{ parent() }}
 
 	{% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index'  %}
-        {% include 'admin/partials/_header.html.twig' %}
+        {% include 'admin/partials/parts/_header.html.twig' %}
     {% else %}
         {% include 'calendar/partials/_calendar_header.html.twig' %}
     {% endif %}
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                 </form>
-                <div class="fs-13">( {{eventsCount}} résultat{{eventsCount > 1 ? 's' : ''}} )</div>
+                <div class="fs-13">{{eventsCount}} résultat{{eventsCount > 1 ? 's' : ''}}</div>
             </div>
 
             <div id="calendar"></div>

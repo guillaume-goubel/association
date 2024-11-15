@@ -27,6 +27,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
             map.setView([lat, long], 17);
             marker.bindPopup(`<b>Lieu du rendez-vous</b><br>${rdv}`);
+
+            // Renseigner l'URL Google Maps avec les bonnes coordonnées
+            const googleMapsLink = document.getElementById('gmLink');
+            if (googleMapsLink) {
+                googleMapsLink.href = `https://www.google.com/maps?q=${lat},${long}`;
+            }
     
             const modal = new bootstrap.Modal(document.getElementById('mapModal'));
             modal.show();

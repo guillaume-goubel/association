@@ -30,10 +30,15 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8 blog-standard md-mb-50px sm-mb-40px">
 
+
                     <div class="col-12 blog-details mb-12"> 
- 
+
                         <div class="entry-meta mb-20px fs-15">
-                            <div class="row d-flex">
+                            <div style="position:relative;" class="row d-flex mb-3">
+                                
+                                {# EDIT BUTTON #}
+                                {% include "admin/partials/components/_event_actions.html.twig" with {'isEventActionsButtonVisible': true} %}
+                                
                                 <div class="col-12 col-md-5">
                                     <div class="fs-20 fw-600 text-base-color mb-2">
                                         {{event.activity.name}}
@@ -67,6 +72,7 @@
                                         </div>
                                     {% endif %}                                             
                                 </div>
+                                
                                 <div class="col-12 col-md-7 d-flex flex-column mt-2">
                                     <div class="trainer-box col-auto position-relative">
                                         {% if event.animators is not empty %}
@@ -79,14 +85,21 @@
 
                                     </div>
                                 </div>
-                            </div>
+                            </divstyle=class=>
                         </div>
 
                         {# MAP #} 
-                        {% if is_passed == false and (event.rdvLatitude != null and event.rdvLatitude != null) %}
+                        {% if (is_passed == 'false' or is_passed == '0') and (event.rdvLatitude != null and event.rdvLongitude != null) %}
                             <div class="text-medium-gray mb-2 mt-1 d-flex p-2" style="background-color: white;">
                                 <div class="col-12">
-                                    <div class="fs-13">Lieu du rendez-vous : <span class="fw-600">{{ event.rdvAddress }} {{ event.rdvPlaceName }}</span></div>
+                                    <div class="fs-13 mb-2">
+                                        <span>
+                                            <a class="btn btn-extra-small fw-600 btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto" href="https://www.google.com/maps?q={{event.rdvLatitude}},{{event.rdvLongitude}}" target="_blank">
+                                            <img width="36px" src="{{ asset('app/google_maps_logo.png')}}" alt=""></a>
+                                        </span>
+                                        Lieu du rendez-vous : 
+                                        <span class="fw-600">{{ event.rdvAddress }} {{ event.rdvPlaceName }}</span>
+                                    </div>
                                     <div id="map" style="z-index: 9;position: relative;">
                                         <div id="mapOverlay">
                                             <div id="zoomNotification">Appuyez sur <strong>Ctrl</strong> et utilisez la molette pour zoomer OU passez en plein écran</div>
@@ -152,7 +165,7 @@
                                             </div>
                                         </li>
                                     {% endif %}
-
+                                    
                                 </ul>
                             </div>
                         {% endif %}
