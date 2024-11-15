@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Event;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Event>
@@ -21,7 +22,7 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, string $activityChoice, string $dateChoice)
+    public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, string $activityChoice, string $dateChoice): Query
     {
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
@@ -65,7 +66,7 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getEventListforAgenda(string $yearChoice, string $monthChoice, string $activityChoice)
+    public function getEventListforAgenda(string $yearChoice, string $monthChoice, string $activityChoice):Query
     {
         $today = new \DateTime();
         $today->setTime(0, 0);
@@ -73,6 +74,35 @@ class EventRepository extends ServiceEntityRepository
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
         $stmt->andWhere('e.dateStartAt >= :today');   
+        $stmt->setParameter('today', $today);
+
+        if ($yearChoice && $yearChoice != 'all') {
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
+        if ($monthChoice && $monthChoice != 'all') {
+            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
+            $stmt->setParameter('month', $monthChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('a.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $activityChoice);
+        }
+
+        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        return $stmt->getQuery();
+    }
+
+    public function getEventListforArchive(string $yearChoice, string $monthChoice, string $activityChoice): Query
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+
+        $stmt = $this->createQueryBuilder('e');
+        $stmt->join('e.activity', 'a');
+        $stmt->andWhere('e.dateStartAt < :today');   
         $stmt->setParameter('today', $today);
 
         if ($yearChoice) {
@@ -91,36 +121,7 @@ class EventRepository extends ServiceEntityRepository
         }
 
         $stmt->addOrderBy('e.dateStartAt', 'ASC');
-        return $stmt->getQuery()->getResult();
-    }
-
-    public function getEventListforArchive(string $yearChoice, string $monthChoice, string $activityChoice)
-    {
-        $today = new \DateTime();
-        $today->setTime(0, 0);
-
-        $stmt = $this->createQueryBuilder('e');
-        $stmt->join('e.activity', 'a');
-        $stmt->andWhere('e.dateStartAt < :today');   
-        $stmt->setParameter('today', $today);
-
-        if ($yearChoice) {
-            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
-            $stmt->setParameter('year', $yearChoice);
-        }
-
-        if ($monthChoice) {
-            $stmt->andwhere('MONTH(e.dateStartAt) = :month');
-            $stmt->setParameter('month', $monthChoice);
-        }
-
-        if ($activityChoice && $activityChoice != 'all') {
-            $stmt->andwhere('a.id = :activityChoice');
-            $stmt->setParameter('activityChoice', $activityChoice);
-        }
-
-        $stmt->addOrderBy('e.dateStartAt', 'ASC');
-        return $stmt->getQuery()->getResult();
+        return $stmt->getQuery();
     }
 
     public function getEventListforCalendar(string $yearChoice, string $activityChoice)
@@ -189,7 +190,7 @@ class EventRepository extends ServiceEntityRepository
                     FROM `event`
                     WHERE DATE(date_start_at) >= DATE(NOW())
                     ORDER BY year ASC
-               ";
+            ";
 
         $stmt = $conn->prepare($sql);
         $result = $stmt->executeQuery()->fetchAllAssociative();
@@ -256,7 +257,7 @@ class EventRepository extends ServiceEntityRepository
     public function getDistinctMonthCreatedAtForAgendaView($yearChoice)
     {
         $sql_yearChoice = "";
-        if ($yearChoice != null) {
+        if ($yearChoice != null && $yearChoice != 'all') {
             $sql_yearChoice = " AND YEAR(A.date_start_at) = :yearChoice ";
         }
 
@@ -274,7 +275,7 @@ class EventRepository extends ServiceEntityRepository
                 ORDER BY month_number";
 
         $stmt = $conn->prepare($sql);
-        if ($yearChoice != null) {
+        if ($yearChoice != null && $yearChoice != 'all') {
             $stmt->bindValue(':yearChoice', $yearChoice);
         }
         $result = $stmt->executeQuery()->fetchAllAssociative();

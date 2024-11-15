@@ -21,10 +21,13 @@
     </div>
     <div class="row d-flex aside-form">
         <div class="col-6 mt-1">
-            {{ form_row(form.dateStartAt) }}
-            <div class="form-errors">
-                {{ form_errors(form.dateStartAt) }}
-            </div>
+            {{ form_label(form.dateStartAt) }}  <!-- Affiche le label -->
+            {{ form_widget(form.dateStartAt) }} <!-- Affiche le champ sans le label -->
+            {% if form.dateStartAt.vars.errors|length > 0 %}
+                <div class="form-errors text-red fs-14">
+                    {{ form_errors(form.dateStartAt) }} <!-- Affiche les erreurs -->
+                </div>
+            {% endif %}
         </div>
 
         <div class="col-6 mt-1">

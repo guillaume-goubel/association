@@ -50,4 +50,52 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     });
 
+    // GET activity by filters
+    const monthChoice = document.getElementById('monthChoice');
+    const yearChoice = document.getElementById('yearChoice');
+    const activityChoice = document.getElementById('activityChoice');
+
+    function updateActivities() {
+        const month = monthChoice.value;
+        const year = yearChoice.value;
+        const url = document.getElementById('activitydynamicPATH').getAttribute('data-path');
+
+        let data = new FormData();
+        data.append('month', month);
+        data.append('year', year);
+
+        // Effectue une requête GET avec les paramètres month et year
+        fetch(url, {
+            method: 'POST',
+            body: data,
+        })
+        .then(response => response.json())
+        .then(data => {
+
+            // Vider le select de `activityChoice`
+            activityChoice.innerHTML = '';
+
+            // Ajouter l'option "Toutes activités" par défaut
+            const defaultOption = document.createElement('option');
+            defaultOption.value = 'all';
+            defaultOption.textContent = 'Toutes activités';
+            activityChoice.appendChild(defaultOption);
+
+            // Ajouter les nouvelles options d'activités
+            data.activities.forEach(activity => {
+                const option = document.createElement('option');
+                option.value = activity.id;
+                option.textContent = activity.name;
+                activityChoice.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Erreur lors de la requête AJAX :', error);
+        });
+    }
+
+    // Ajoute les événements de changement aux sélecteurs `monthChoice` et `yearChoice`
+    monthChoice.addEventListener('change', updateActivities);
+    yearChoice.addEventListener('change', updateActivities);
+
 });

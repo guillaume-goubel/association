@@ -35,9 +35,12 @@ header .btn.btn-switch-text.btn-small > span {
     background-color: var(--yellow);
 }
 .sticky .header-transparent .header-button .btn:hover {
-    background-color: var(--dark-gray);
+    background-color: var(--base-color);
     color: var(--white);
-    border-color:  var(--dark-gray);
+    border-color:  var(--base-color);
+}
+.form-errors ul{
+    padding-left: 0px;
 }
 /* heading */
 h1, .h1 {

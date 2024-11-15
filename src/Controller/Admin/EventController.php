@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
 use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/admin/event', name: 'admin_event_')]
@@ -52,7 +51,7 @@ class EventController extends AbstractController
         $pagination = $paginator->paginate(
             $eventsQuery, // la requête ou liste d'objets
             $page,        // page actuelle
-            8       // nombre d'événements par page (vous pouvez ajuster ce chiffre)
+            8      // nombre d'événements par page (vous pouvez ajuster ce chiffre)
         );
     
         return $this->render('admin/event/index.html.twig', [

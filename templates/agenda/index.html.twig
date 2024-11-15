@@ -36,6 +36,8 @@
 
 <body data-mobile-nav-style="classic">
 
+    <div class="d-none" id="activitydynamicPATH" data-path="{{ path('activity_dynamic_agenda')}}"></div>
+
     {{ parent() }}
 
 	<!-- start header -->
@@ -86,7 +88,7 @@
                     <div class="row gy-2">
                         <!-- Filtre mois -->
                         <div class="col-12 col-md-3">
-                            <select name="monthChoice" class="form-select form-select-sm" aria-label="Sélectionner un mois">
+                            <select id="monthChoice" name="monthChoice" class="form-select form-select-sm" aria-label="Sélectionner un mois">
                                 <option {{ monthChoice == 'all' ? 'selected' : '' }} value="all">Tout mois</option>
                                 {% for item in monthsList %}
                                     <option {{ monthChoice == item.month_number ? 'selected' : '' }} value="{{ item.month_number }}">{{ item.month_name }}</option>
@@ -95,7 +97,8 @@
                         </div>
                         <!-- Filtre année -->
                         <div class="col-12 col-md-3">
-                            <select name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
+                            <select id="yearChoice" name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
+                                <option {{ yearChoice == 'all' ? 'selected' : '' }} value="all">Toute année</option>
                                 {% for item in yearsList %}
                                     <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
                                 {% endfor %}
@@ -103,7 +106,7 @@
                         </div>
                         <!-- Filtre activité -->
                         <div class="col-12 col-md-3">
-                            <select name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                            <select id="activityChoice" name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
                                 <option {{ activityChoice == 'all' ? 'selected' : '' }} value="all">Toutes activités</option>
                                 {% for item in activityList %}
                                     <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
@@ -120,13 +123,18 @@
                 </div>
             </form>
 
+            <!-- Pagination -->
+            <div class="pagination-container d-flex justify-content-center">
+                {{knp_pagination_render(events, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
+            </div>
+            
             <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
                 {% if events is not empty %}
                     {% for event in events %}
                         {% include 'main_partials/components/_event_regular_card.html.twig' %}
                     {% endfor %}
                 {% else %}
-                    <div class="no-matching-search-message">Pas de résultats pour cette recherche</div>
+                    <div class="no-matching-search-message">Pas de résultats pour cette recherche - cliquer sur le bouton <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i> </div>
                 {% endif %}
             </div>
 

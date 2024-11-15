@@ -31,9 +31,9 @@
 
 	{% block body %}
 
-		<div id="activityInfosPATH" data-path="{{ path('home_activity_infos')}}"></div>
-		<div id="animatorInfosPATH" data-path="{{ path('home_animators_infos')}}"></div>
-		<div id="isAdminIsLogged" data-param="{{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) ? true : false }}"></div>
+		<div class="d-none" id="activityInfosPATH" data-path="{{ path('home_activity_infos')}}"></div>
+		<div class="d-none" id="animatorInfosPATH" data-path="{{ path('home_animators_infos')}}"></div>
+		<div class="d-none" id="isAdminIsLogged" data-param="{{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) ? true : false }}"></div>
 
 		{% include 'main_partials/parts/_scroll_progress.html.twig' %}
 		{% include 'main_partials/notifications/_notyFlashMessage.html.twig' %}

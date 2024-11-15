@@ -20,15 +20,14 @@ class CalendarController extends AbstractController
         $userChoice = $request->query->get('userChoice') ?? "all";
         $activityChoice = $request->query->get('activityChoice') ?? "all";
         
-        $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
+        $activityList = $activityRepository->findByMonthAndYearForCalendar($yearChoice);
         $userList = $eventRepository->getDistinctCreator();
 
         $events = $eventRepository->getEventListforCalendarFor12Months($activityChoice, $userChoice, $yearChoice);
         $eventDateJson = $eventService->getEventListForCalendarEvents($events);
-        dump($eventDateJson);
 
         return $this->render('calendar/index.html.twig', [
-            'events' => $events,
+            'eventsCount' => count($events),
             'eventDateJson' => $eventDateJson,
             'activityList' => $activityList,
             'activityChoice' => $activityChoice,

@@ -59,8 +59,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
             data.append('activityId', this.getAttribute('data-id'));
         
             fetch(url, {
-              method: 'POST',
-              body: data,
+                method: 'POST',
+                body: data,
             })
             .then(response => response.json())
             .then(data => {

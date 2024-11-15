@@ -63,7 +63,7 @@
             <div class="row d-flex align-items-center justify-content-between">
                 <form class="col-12 col-md-10" action="" method="get">
                     <small>Voici la liste des futurs événements sur 1 an et par activités</small>
-                    <div class="col-12 blog-standard mb-2">
+                    <div class="col-12 blog-standard">
                         <div class="row gy-2">
                             
                             {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index' %}
@@ -104,8 +104,8 @@
                             </div>
                         </div>
                     </div>
-
                 </form>
+                <div class="fs-13">( {{eventsCount}} résultat{{eventsCount > 1 ? 's' : ''}} )</div>
             </div>
 
             <div id="calendar"></div>
