@@ -1,0 +1,22 @@
+<div class="modal fade" id="eventModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div id="eventModalTitle" class="modal-title"></div>
+                <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center" id="eventDetails"></div>
+            </div>
+
+            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index' %}
+                <div id="calendarModalFooter" class="calendar modal-footer">
+                    <div class="w-60 d-flex justify-content-center" style="height:35px;">
+                        <a id="eventCreatedAt" href="{{ path('admin_event_new') }}" style="padding: 7px 26px!important;" class="btn btn-base-color btn-small btn-rounded btn-box-shadow btn-switch-text fw-600">Créer un événement</a>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>

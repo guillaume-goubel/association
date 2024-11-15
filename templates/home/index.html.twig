@@ -119,7 +119,7 @@
                         <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Participez à vos sports favoris ou venez découvrir avec nous de nouvelles pratiques sportives et culturelles.</p> 
                         <div>
                             <a href="{{ path('agenda_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Tout le programme</a>
-                            <a href="{{ path('calendar_index') }}" href="#" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Calendrier</a>
+                            <a href="{{ path('calendar_index', { 'from': 'home_index' }) }}" href="#" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Calendrier</a>
                             <div class="mb-1 mt-2">
                                 <a href="{{ asset('app/pdf/walk_agenda.pdf') }}" class="btn btn-small btn-transparent-dark-gray d-table d-lg-inline-block lg-mb-15px">Les randonnées 2024 en PDF<i class="fa-solid fa-file-pdf"></i></a>
                             </div>

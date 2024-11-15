@@ -70,7 +70,7 @@
 
     <!-- start section -->
     <section class="main-section bg-very-light-gray">
-        <div class="container">
+        <div class="container event-list-container">
             
             <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
                 <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center flex-column">
@@ -87,7 +87,7 @@
                         <!-- Filtre mois -->
                         <div class="col-12 col-md-3">
                             <select name="monthChoice" class="form-select form-select-sm" aria-label="Sélectionner un mois">
-                                <option {{ monthChoice == 'all' ? 'selected' : '' }} value="all">Tous mois</option>
+                                <option {{ monthChoice == 'all' ? 'selected' : '' }} value="all">Tout mois</option>
                                 {% for item in monthsList %}
                                     <option {{ monthChoice == item.month_number ? 'selected' : '' }} value="{{ item.month_number }}">{{ item.month_name }}</option>
                                 {% endfor %}
@@ -120,10 +120,10 @@
                 </div>
             </form>
 
-            <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5 event-list-container" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
+            <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
                 {% if events is not empty %}
                     {% for event in events %}
-                        {% include 'main_partials/_event_regular_card.html.twig' %}
+                        {% include 'main_partials/components/_event_regular_card.html.twig' %}
                     {% endfor %}
                 {% else %}
                     <div class="no-matching-search-message">Pas de résultats pour cette recherche</div>

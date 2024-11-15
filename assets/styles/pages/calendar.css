@@ -1,0 +1,119 @@
+/* Styles pour la modale */
+.modal {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 80px;
+    padding-bottom: 0px;
+}
+.calendar.modal-footer{
+    display: flex;
+    justify-content: center;
+    border-top: none!important;
+}
+.btn.btn-small{
+    max-width: 200px;
+}
+.close:hover, .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.fade:not(.show) {
+    opacity: inherit!important;
+}
+
+/* Loader Dots */
+#loader-container{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99999;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loader-dots {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 60px;
+    margin: 0 auto;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--base-color);
+    border-radius: 50%;
+    animation: bounce 1.5s infinite;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* JS CALENDAR */
+.fc-daygrid-more-link.fc-more-link,
+.fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event,
+.fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event{
+    border: 1px solid;
+    border-radius: 7px;
+    width: 100%;
+    height: 17px;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: var(--base-color);
+    color: white;
+    padding-left: 4px !important;
+    cursor: default;
+}
+.fc-daygrid-more-link.fc-more-link:hover,
+.fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event:hover,
+.fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event:hover{
+    border: 1px solid var(--base-color);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background-color: var(--base-color);
+    color: white;
+    padding-left: 4px!important;
+    cursor: none;
+    pointer-events: none;
+}
+.fc-daygrid-day{
+    cursor: pointer;
+}
+.fc-daygrid-day:hover{
+    background-color: #c9c3c3;
+}
+.fc-daygrid-day-bottom{
+    cursor: default;
+    pointer-events: none;
+}
+.fc .fc-daygrid-day.fc-day-today {
+    background-color: #b2d4ff;
+}
+.fc-day-past{
+    background-color: var(--fc-neutral-bg-color);
+}
+@media (max-width: 991px) {
+    .fc-daygrid-day-bottom{
+        margin-top: -9px!important;
+    }
+}

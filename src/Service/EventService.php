@@ -65,60 +65,55 @@ class EventService{
         }
     }
 
-    public function getEventListForCalendarEvents(array $events): string    
+    public function getEventListForCalendarEvents(array $events): string
     {
         $eventDatesArray = [];
-
+    
         foreach ($events as $event) {
             $startDate = $event->getDateStartAt();
-            $endDate = $event->getDateEndAt() ?? $startDate; // Utilise la date de début si la fin est null
-            $timeStart = $event->getTimeStartAt()->format('H:i:s');
-            $timeEnd = $event->getTimeEndAt() ? $event->getTimeEndAt()->format('H:i:s') : $timeStart;
-
-            // Vérifie si l'événement s'étend sur plusieurs jours (date de fin > date de début)
+            $endDate = $event->getDateEndAt() ?? $startDate; // If no end date, use start date as end date
+            $timeStart = $event->getTimeStartAt()->format('H:i');
+            $timeEnd = $event->getTimeEndAt() ? $event->getTimeEndAt()->format('H:i') : null;
+    
+            // Check if event spans multiple days (end date > start date)
             if ($endDate > $startDate) {
-                // Boucler pour chaque jour entre startDate et endDate
+                // Loop through each day between startDate and endDate
                 $currentDate = clone $startDate;
                 while ($currentDate <= $endDate) {
-                    $eventDatesArray[] = [
-                        'start' => $currentDate->format('Y-m-d') . 'T' . $timeStart,
-                        'end' => $currentDate->format('Y-m-d') . 'T' . $timeEnd,
-                        'backgroundColor' => '#4581cc',
-                        'extendedProps' => [
-                            'id' => $event->getId(),
-                            'title' => $event->getName(),
-                            'genre' => $event->getActivity()->getName(),
-                            'rdv' => trim($event->getRdvAddress() . ' ' . ($event->getRdvPlaceName() ?? '')),
-                            'rdvDate' => $currentDate->format('d/m/Y'),
-                            'rdvTime' => $timeStart,
-                            'type' => 'activity',
-                            'infosDisplay' => true,
-                        ]
-                    ];
-                    // Passe au jour suivant
+                    $eventDatesArray[] = $this->formatEventData($event, $currentDate, $timeStart, $timeEnd);
                     $currentDate->modify('+1 day');
                 }
             } else {
-                // Sinon, ajouter un seul événement pour ce jour unique
-                $eventDatesArray[] = [
-                    'start' => $startDate->format('Y-m-d') . 'T' . $timeStart,
-                    'end' => $endDate->format('Y-m-d') . 'T' . $timeEnd,
-                    'backgroundColor' => '#4581cc',
-                    'extendedProps' => [
-                        'id' => $event->getId(),
-                        'title' => $event->getName(),
-                        'genre' => $event->getActivity()->getName(),
-                        'rdv' => trim($event->getRdvAddress() . ' ' . ($event->getRdvPlaceName() ?? '')),
-                        'rdvDate' => $startDate->format('d/m/Y'),
-                        'rdvTime' => $timeStart,
-                        'type' => 'activity',
-                        'infosDisplay' => true,
-                    ]
-                ];
+                // Single day event
+                $eventDatesArray[] = $this->formatEventData($event, $startDate, $timeStart, $timeEnd);
             }
         }
-
+    
         return json_encode($eventDatesArray);
     }
+    
+    /**
+     * Helper function to format event data for calendar.
+     */
+    private function formatEventData($event, $date, $timeStart, $timeEnd): array
+    {
+        return [
+            'start' => $date->format('Y-m-d') . 'T' . $timeStart,
+            'end' => $date->format('Y-m-d') . 'T' . $timeEnd,
+            'backgroundColor' => '#4581cc',
+            'extendedProps' => [
+                'id' => $event->getId(),
+                'title' => $event->getName(),
+                'genre' => $event->getActivity()->getName(),
+                'rdv' => trim($event->getRdvAddress() . ' ' . ($event->getRdvPlaceName() ?? '')),
+                'rdvDate' => $date->format('d/m/Y'),
+                'rdvTime' => $timeStart,
+                'rdvTimeEnd' => $timeEnd,
+                'type' => 'activity',
+                'infosDisplay' => true,
+            ]
+        ];
+    }
+    
 
 }

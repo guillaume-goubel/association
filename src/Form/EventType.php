@@ -8,6 +8,7 @@ use App\Entity\Activity;
 use App\Entity\Animator;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
@@ -26,6 +27,7 @@ class EventType extends AbstractType
         
         $activityIds = $options['activity_ids'];
         $selectedActivity = $options['selected_activity'];
+        $creationDate = $options['creation_date'];
 
         $builder
             ->add('name', TextType::class, [
@@ -113,6 +115,13 @@ class EventType extends AbstractType
                 'attr' => ['class' => 'form-control'],
                 'widget' => 'single_text',
                 'required' => true,
+                'data' => $creationDate instanceof \DateTime ? $creationDate : ($creationDate ? new \DateTime($creationDate) : null),
+                'constraints' => [
+                    new GreaterThan([
+                        'value' => new \DateTime(),  // La date actuelle
+                        'message' => 'La date de début ne peut pas être dans le passé.',
+                    ]),
+                ],
             ])
             ->add('dateEndAt', null, [
                 'label' => 'Termine le ... ',
@@ -226,6 +235,7 @@ class EventType extends AbstractType
             'data_class' => Event::class,
             'activity_ids' => [],
             'selected_activity' => null,
+            'creation_date' => null,
         ]);
     }
 }

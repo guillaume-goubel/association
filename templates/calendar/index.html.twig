@@ -4,264 +4,109 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
-
-<style>
-
-    header .navbar-brand .default-logo {
-        opacity: 1 !important;
-    }
-
-    #map {
-        height: 300px!important;
-    }
-
-    {# .fc-more-popover{
-        display: none!important;
-    } #}
-
-    /* Styles pour la modale */
-    .modal {
-        background-color: rgba(0, 0, 0, 0.5);
-    }
-
-    .btn.btn-small{
-        max-width: 200px;
-    }
-
-    .close:hover, .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-
-    .fade:not(.show) {
-        opacity: inherit!important;
-    }
-
-    /* Loader Dots */
-    #loader-container{
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 99999;
-        left: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .loader-dots {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 60px;
-        margin: 0 auto;
-    }
-
-    .dot {
-        width: 10px;
-        height: 10px;
-        background-color: var(--base-color);
-        border-radius: 50%;
-        animation: bounce 1.5s infinite;
-    }
-
-    .dot:nth-child(2) {
-        animation-delay: 0.3s;
-    }
-
-    .dot:nth-child(3) {
-        animation-delay: 0.6s;
-    }
-
-    @keyframes bounce {
-        0%, 100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-15px);
-        }
-    }
-
-    {# JS CALENDAR #}
-    {# .fc .fc-daygrid-event-harness-abs {
-        visibility: visible!important;
-        top: -1px!important;
-        left: 0px!important;
-        right: 0px;
-    }
-    .fc-daygrid-day-bottom{
-        margin-top: -1px!important;
-    }
-    .fc-daygrid-more-link.fc-more-link{
-        background-color: transparent;
-        color: white;
-        z-index: 9;
-        pointer-events: none;
-        border: 1px solid transparent!important;
-    }
-    .fc-event-title-container{
-        max-height: 16px;
-    }
-    .fc-daygrid-day{
-        cursor: pointer;
-    }
-    .fc-daygrid-day:hover{
-        background-color: #c9c3c3;
-        color:white;
-    }
-    .fc-h-event{
-        border: 1px solid transparent!important;
-    }
-    .event-number {
-        color: white;
-        padding: 1px; 
-        font-weight: bold; 
-        position: absolute; 
-        bottom: 4px; 
-        left: 7px; 
-        font-size: 13px;
-    }
-    .fc-day-disabled .event-number{
-        display: none;
-        pointer-events: none;
-    } #}
-
-    {# .fc-daygrid-day-bottom{
-        margin-top: -6px;
-        border: 1px solid;
-        border-radius: 7px;
-    } #}
-
-    .fc-daygrid-more-link.fc-more-link,
-    .fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event,
-    .fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event{
-        border: 1px solid;
-        border-radius: 7px;
-        width: 100%;
-        height: 17px;
-        font-size: 13px;
-        font-weight: 600;
-        background-color: var(--base-color);
-        color: white;
-        padding-left: 4px !important;
-        cursor: default;
-    }
-    .fc-daygrid-more-link.fc-more-link:hover,
-    .fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event:hover,
-    .fc-event.fc-event-start.fc-event-end.fc-event-future.fc-daygrid-event.fc-daygrid-dot-event:hover{
-        border: 1px solid var(--base-color);
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 13px;
-        font-weight: 600;
-        background-color: var(--base-color);
-        color: white;
-        padding-left: 4px!important;
-        cursor: none;
-        pointer-events: none;
-    }
-    .fc-daygrid-day{
-        cursor: pointer;
-    }
-    .fc-daygrid-day:hover{
-        background-color: #c9c3c3;
-    }
-    .fc-daygrid-day-bottom{
-        cursor: default;
-        pointer-events: none;
-    }
-    .fc .fc-daygrid-day.fc-day-today {
-        background-color: #b2d4ff;
-    }
-
-    @media (max-width: 991px) {
-        .fc-daygrid-day-bottom{
-            margin-top: -9px!important;
-        }
-    }
-
-</style>
 {% endblock %}
 
 {% block body %}
 
 <body data-mobile-nav-style="classic">
 
+    {# ! PARAM ------------------------------- #}
+    <div id="yearChoiceElmt" data-param="{{ yearChoice }}"></div>
+    {# ! PARAM ------------------------------- #}
+
     {{ parent() }}
 
-	<!-- start header -->
-    <header>
-        <nav style="background-color:#1B2982;" class="navbar navbar-expand-lg header-light header-reverse header-demo border-bottom border-color-extra-medium-gray" data-header-hover="light">
-            <div class="container-fluid"> 
-                <div class="col-auto col-lg-1 me-lg-0 me-auto">
-                    <a class="navbar-brand" href="{{ path('home_index') }}">
-                        <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="default-logo">
-                        <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="alt-logo">
-                        <img src="{{ customAsset('app/main-logo.png') }}" data-at2x="{{ customAsset('app/main-logo.png') }}" alt="" class="mobile-logo"> 
-                    </a>
-                </div>
-                <div class="col-auto col-lg-11 menu-order position-static d-flex justify-content-end ">
-                    <div class="header-icon">  
-                        <div class="header-button">
-                            <a href="{{ path('home_index') }}#agenda-section" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
-                                <span>
-                                    <span class="btn-double-text" data-text="Retour">Retour</span>
-                                </span> 
-                            </a> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </header>
-	<!-- end header -->
+	{% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index'  %}
+        {% include 'admin/partials/_header.html.twig' %}
+    {% else %}
+        {% include 'calendar/partials/_calendar_header.html.twig' %}
+    {% endif %}
 
     <!-- start section -->
-    <section class="top-space-margin bg-very-light-gray">
+    <section class="main-section bg-very-light-gray">
         <div class="container">
             
-            <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
-                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
-                    <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
-                        Calendrier<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
-                    </h3>
-                </div>
-            </div>
+            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index' %}
+                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                    <div class="row blog-details d-flex align-items-center"> 
+                        
+                        <div class="col-12 col-md-10">
+                            <div class="entry-meta fs-15">
+                                <span>
+                                <i class="text-dark-gray feather icon-feather-user"></i>
+                                {{ app.user.firstName }} {{ app.user.lastName }}
+                                </span>
+                                <a href="{{ path('app_logout')}}">Déconnexion</a>
+                            </div>
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">CALENDRIER</h5>
+                        </div>
 
-            <form action="" method="get">
-                <small>Voici la liste des futurs événements sur 1 an et par activités</small>
-                <div class="col-12 blog-standard mb-2">
-                    <div class="row gy-2">
-                        <!-- Filtre année -->
-                        {# <div class="col-12 col-md-3">
-                            <select name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
-                                {% for item in yearsList %}
-                                    <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
-                                {% endfor %}
-                            </select>
-                        </div> #}
-                        <!-- Filtre activité -->
-                        <div class="col-12 col-md-3">
-                            <select name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                <option {{ activityChoice == 'all' ? 'selected' : '' }} value="all">Toutes activités</option>
-                                {% for item in activityList %}
-                                    <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
-                                {% endfor %}
-                            </select>
+                        <div class="col-12 col-md-2 d-flex align-items-center justify-content-end">
+                            {% set redirect = app.request.get('from') == 'admin_event_new' ? 'admin_event_index' : app.request.get('from') ?: 'admin_event_index' %}
+                            <a href="{{ path(redirect) }}">
+                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                            </a>
                         </div>
-                        <!-- Bouton de recherche -->
-                        <div class="col-12 col-md-3 text-center text-md-start">
-                            <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
-                                <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
-            </form>
+            {% else %}
+                <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
+                    <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                        <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                            Calendrier<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
+                        </h3>
+                    </div>
+                </div>
+            {% endif %}
+
+            <div class="row d-flex align-items-center justify-content-between">
+                <form class="col-12 col-md-10" action="" method="get">
+                    <small>Voici la liste des futurs événements sur 1 an et par activités</small>
+                    <div class="col-12 blog-standard mb-2">
+                        <div class="row gy-2">
+                            
+                            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index' %}
+                                <!-- Filtre year -->
+                                <div class="col-12 col-md-3">
+                                    <select name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                        <option {{ yearChoice == 'yearDepth' ? 'selected' : '' }} value="yearDepth">Aujourd'hui + 1 an</option>
+                                        {% for item in yearsList %}
+                                            <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <!-- Filtre user -->
+                                <div class="col-12 col-md-3">
+                                    <select name="userChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                        <option {{ userChoice == 'all' ? 'selected' : '' }} value="all">Tout administrateur</option>
+                                        {% for item in userList %}
+                                            <option {{ userChoice == item.user_id ? 'selected' : '' }} value="{{ item.user_id }}">{{ item.creator }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                            {% endif %}
+
+                            <!-- Filtre activité -->
+                            <div class="col-12 col-md-3">
+                                <select name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                    <option {{ activityChoice == 'all' ? 'selected' : '' }} value="all">Toutes activités</option>
+                                    {% for item in activityList %}
+                                        <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <!-- Bouton de recherche -->
+                            <div class="col-12 col-md-3 text-center text-md-start">
+                                <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
+                                    <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
 
             <div id="calendar"></div>
         </div>
@@ -272,7 +117,7 @@
     {% include 'main_partials/parts/_footer_minimum.html.twig' %}
     <!-- end footer -->
 
-    {% include 'calendar/partials/modals/_map_modal.html.twig' %}
+    {% include 'calendar/partials/_event_modal.html.twig' %}
 
     <div id="loader-container" class="bg-very-light-gray">
         <div class="loader-dots">

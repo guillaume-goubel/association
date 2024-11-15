@@ -16,22 +16,26 @@ class CalendarController extends AbstractController
     #[Route('/index', name: 'index')]
     public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository, EventService $eventService): Response
     {   
-        // $yearChoice = $request->query->get('yearChoice') ?? date("Y");
+        $yearChoice = $request->query->get('yearChoice') ?? "yearDepth";
+        $userChoice = $request->query->get('userChoice') ?? "all";
         $activityChoice = $request->query->get('activityChoice') ?? "all";
-
-        // $yearsList = $eventRepository->getDistincYearCreatedAtForAgendaView();
+        
         $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
+        $userList = $eventRepository->getDistinctCreator();
 
-        $events = $eventRepository->getEventListforCalendarFor12Months($activityChoice);
+        $events = $eventRepository->getEventListforCalendarFor12Months($activityChoice, $userChoice, $yearChoice);
         $eventDateJson = $eventService->getEventListForCalendarEvents($events);
+        dump($eventDateJson);
 
         return $this->render('calendar/index.html.twig', [
             'events' => $events,
             'eventDateJson' => $eventDateJson,
-            // 'yearsList' => $yearsList,
             'activityList' => $activityList,
-            // 'yearChoice' => $yearChoice,
             'activityChoice' => $activityChoice,
+            'yearChoice' => $yearChoice,
+            'yearsList' => $eventRepository->getDistincYearCreatedAt(),
+            'userList' => $userList,
+            'userChoice' => $userChoice
         ]);
     }
 }

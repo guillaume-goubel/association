@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details d-flex align-items-center"> 
-                        <div class="col-10">
+                        <div class="col-8">
                             <div class="entry-meta fs-15">
                                 <span>
                                 <i class="text-dark-gray feather icon-feather-user"></i>
@@ -34,9 +34,12 @@
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">EVENEMENTS - Liste</h5>
                             {# <small>Voici la liste des événements créés par date de commencement et par créateur</small> #}
                         </div>
+
                         <div class="col-2 d-flex justify-content-end">
-                            <a href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                            <a class="me-4" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
+                            <a class="ms-4" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>
+                        
                     </div>
                 </div>
 
@@ -46,7 +49,7 @@
                             <!-- Filtre mois -->
                             <div class="col-12 col-md-6 col-lg-2">
                                 <select name="monthChoice" class="form-select form-select-sm" aria-label="Sélectionner un mois">
-                                    <option {{ monthChoice == 'all' ? 'selected' : '' }} value="all">Tous mois</option>
+                                    <option {{ monthChoice == 'all' ? 'selected' : '' }} value="all">Tout mois</option>
                                     {% for item in monthsList %}
                                         <option {{ monthChoice == item.month_number ? 'selected' : '' }} value="{{ item.month_number }}">{{ item.month_name }}</option>
                                     {% endfor %}
@@ -63,9 +66,9 @@
                             <!-- Filtre créateur -->
                             <div class="col-12 col-md-6 col-lg-3">
                                 <select name="creatorChoice" class="form-select form-select-sm" aria-label="Sélectionner un créateur">
-                                    {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                        <option selected value="all">Tous administrateurs</option>
-                                    {% endif %}
+                                    {# {% if is_granted('ROLE_SUPER_ADMIN') %} #}
+                                        <option selected value="all">Tout administrateur</option>
+                                    {# {% endif %} #}
                                     {% for item in creatorsList %}
                                         <option {{ creatorChoice == item.user_id ? 'selected' : '' }} value="{{ item.user_id }}">{{ item.creator }}</option>
                                     {% endfor %}
@@ -99,6 +102,11 @@
 
                 <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5">
 
+                    <!-- Pagination -->
+                    <div class="pagination-container d-flex">
+                        {{knp_pagination_render(events, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
+                    </div>
+                    
                     {% if events is not empty %}
                         {% for event in events %}
                             {% if event.activity.type == 'regular' %}
@@ -110,6 +118,11 @@
                     {% else %}
                         <div class="no-matching-search-message">Pas de résultats pour cette recherche</div>
                     {% endif %}
+
+                    <!-- Pagination -->
+                    {# <div class="pagination-container d-flex justify-content-center">
+                        {{knp_pagination_render(events, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
+                    </div> #}
                     
                 </div>
 

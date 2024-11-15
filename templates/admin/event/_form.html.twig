@@ -22,6 +22,9 @@
     <div class="row d-flex aside-form">
         <div class="col-6 mt-1">
             {{ form_row(form.dateStartAt) }}
+            <div class="form-errors">
+                {{ form_errors(form.dateStartAt) }}
+            </div>
         </div>
 
         <div class="col-6 mt-1">

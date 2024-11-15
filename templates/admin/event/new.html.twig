@@ -34,7 +34,7 @@
                         </div>
                         <div class="col-2 d-flex justify-content-end">
                             {% set redirect = app.request.get('from') ?: 'admin_event_index' %}
-                            <a href="{{ path(redirect) }}">
+                            <a href="{{ path(redirect) }}?from=admin_event_new">
                                 <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
                             </a>
                         </div>

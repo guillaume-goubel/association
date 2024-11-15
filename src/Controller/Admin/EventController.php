@@ -13,33 +13,50 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
+use Knp\Component\Pager\PaginatorInterface;
 
 #[Route('/admin/event', name: 'admin_event_')]
 class EventController extends AbstractController
 {
     #[Route('/index', name: 'index', methods: ['GET'])]
-    public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository): Response
+    public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository, PaginatorInterface $paginator): Response
     {
         $user = $this->getUser();
-
+    
         $yearChoice = $request->query->get('yearChoice') ?? date("Y");
         $monthChoice = $request->query->get('monthChoice') ?? date("m");
         $creatorChoice = $request->query->get('creatorChoice') ?? $this->getUser()->getId();
-        $dateChoice = $request->query->get('creatorChoice') ?? 'dateStartAt';
+        $dateChoice = $request->query->get('dateChoice') ?? 'dateStartAt';
+        
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
-            $creatorChoice = 'all';
+            $creatorChoice = $monthChoice = 'all';
         }
+        
         $activityChoice = $request->query->get('activityChoice') ?? "all";
-
+    
         // Distinct month / year createdAt for select
         $yearsList = $eventRepository->getDistincYearCreatedAt();
         $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
         $creatorsList = $eventRepository->getDistinctCreator();
-
+    
         $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
-
+    
+        // Pagination
+        $eventsQuery = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice, $dateChoice);
+        
+        // Définir la page actuelle (par défaut, la page 1)
+        $page = $request->query->getInt('page', 1); 
+    
+        // Paginer les résultats
+        $pagination = $paginator->paginate(
+            $eventsQuery, // la requête ou liste d'objets
+            $page,        // page actuelle
+            8       // nombre d'événements par page (vous pouvez ajuster ce chiffre)
+        );
+    
         return $this->render('admin/event/index.html.twig', [
-            'events' => $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice, $dateChoice),
+            'events' => $pagination,  // utilisez la pagination ici
             'yearsList' => $yearsList,
             'monthsList' => $monthsList,
             'creatorsList' => $creatorsList,
@@ -64,6 +81,7 @@ class EventController extends AbstractController
         if ($activityId){
             $activityChoice = $activityRepository->findOneBy(['id' => $activityId]);
         }
+        $creationDate = $request->query->get('creationDate') ?? null;
 
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
             foreach ($activityRepository->findAll() as $activity) {
@@ -79,7 +97,8 @@ class EventController extends AbstractController
 
         $form = $this->createForm(EventType::class, $event, [
             'activity_ids' => $userActivityArray,
-            'selected_activity' => $activityChoice, // Passe les IDs ici
+            'selected_activity' => $activityChoice,
+            'creation_date' => $creationDate,
         ]);
         
         $form->handleRequest($request);

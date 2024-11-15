@@ -1,43 +1,42 @@
-import '../../styles/pages/home.css';
+import '../../styles/pages/calendar.css';
 
 document.addEventListener("DOMContentLoaded", (event) => {
     
-    // MAP ----------------------------------------------------------------
-    // Initialisation de la carte avec différents paramètres selon si on est sur mobile ou non
-    // var map = L.map('map', {
-    //     scrollWheelZoom: true, 
-    // });
-
-    // // Charge et affiche les tuiles OpenStreetMap
-    // L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    //     maxZoom: 19,
-    //     attribution: '© OpenStreetMap contributors'
-    // }).addTo(map);
-
-    // map.setView([50.52716064453125, 3.1717026233673096], 13);
-
-    // // Ajoute le contrôle plein écran en haut à droite
-    // L.control.fullscreen({
-    //     position: 'topright' // Change la position du bouton plein écran
-    // }).addTo(map);
+    var eventLinkDefault = null;
+    const eventLinkDefaultElmt = document.getElementById('eventCreatedAt');
+    if (eventLinkDefaultElmt) {
+        eventLinkDefault = eventLinkDefaultElmt.href;
+    }
     
+    var isAdminIsLogged = document.getElementById('isAdminIsLogged').getAttribute('data-param');
+    var yearChoice = document.getElementById('yearChoiceElmt').getAttribute('data-param');
+   
     //  CALENDAR PART ----------------------------------------------------------------
     var calendarEl = document.getElementById('calendar');
+    var calendarDuration = (yearChoice === 'yearDepth') ? { months: 12 } : { year: 1 };
 
+    // Déclaration de `calendarInitialDate` en dehors des conditions
+    let calendarInitialDate;
+    
+    // Vérifier la valeur de `yearChoice` et définir `calendarInitialDate` en conséquence
+    if (yearChoice !== 'yearDepth') {
+        calendarInitialDate = yearChoice + '-01-01'; // Par exemple, "2025-01-01"
+    }
+    // Initialiser le calendrier
     var calendar = new FullCalendar.Calendar(calendarEl, {
         timeZone: 'UTC',
         initialView: 'multiMonthYear',  // Vue annuelle
+        initialDate: calendarInitialDate, // Utilisation de la date calculée
         locale: 'fr',  // Langue française
         firstDay: 1,   // Commencer la semaine le lundi
         contentHeight: 'auto',  // Hauteur automatique
         events: events,  // Vos événements ici
-    
         views: {
             multiMonthYear: {  // Vue multiple mois (personnalisée)
                 type: 'multiMonth',
-                duration: { months: 12 }, // Durée sur 1 an
-                eventLimit: true, // Permet de limiter l'affichage des événements
-                dayMaxEventRows: true,  // Limiter le nombre d'événements par jour
+                duration: calendarDuration, 
+                eventLimit: true, 
+                dayMaxEventRows: true,  
     
                 // Personnalisation de l'affichage des événements
                 eventContent: function(arg) {
@@ -66,13 +65,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
         },
         headerToolbar: {  // Boutons pour basculer entre les vues
             left: '',
-            center: '',
+            center: 'title',
             right: ''
         },
         moreLinkText: function(n) {
             return n;  // Texte pour plus d'événements
         },
-    
         buttonText: {
             today: "Aujourd'hui",
             year: "Année",
@@ -81,57 +79,88 @@ document.addEventListener("DOMContentLoaded", (event) => {
             day: "Jour",
             list: "Liste"
         },
-        
         dateClick: function(info) {
-
-            var selectedDateEvents = calendar.getEvents().filter(function(event) {
-                return FullCalendar.formatDate(event.start, { year: 'numeric', month: '2-digit', day: '2-digit' }) === 
-                    FullCalendar.formatDate(info.date, { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const modalFooter = document.getElementById('calendarModalFooter');
+            let clickedDate = new Date(info.date);
+            let currentDate = new Date();  // Date actuelle
+        
+            // Réinitialiser l'heure de la date actuelle et de la clickedDate à 00:00 pour comparer uniquement les dates
+            currentDate.setHours(0, 0, 0, 0); 
+            clickedDate.setHours(0, 0, 0, 0);
+        
+            // Filtrer les événements pour la date sélectionnée
+            let selectedDateEvents = calendar.getEvents().filter(event => {
+                let eventDate = new Date(event.start);
+                let eventFormattedDate = `${String(eventDate.getDate()).padStart(2, '0')}/${String(eventDate.getMonth() + 1).padStart(2, '0')}/${eventDate.getFullYear()}`;
+                let formattedDate = `${String(clickedDate.getDate()).padStart(2, '0')}/${String(clickedDate.getMonth() + 1).padStart(2, '0')}/${clickedDate.getFullYear()}`;
+                return eventFormattedDate === formattedDate;
             });
         
-            if (selectedDateEvents.length > 0) {
-                var eventDetails = selectedDateEvents.map(function(event) {
-                    
-                    // Convertir les dates en objets Date pour comparaison
-                    let eventStartDate = new Date(event.start);  // Assurez-vous que `event.start` est une date valide
-                    let currentDate = new Date();
-                    
-                    // Vérifiez si l'événement est passé
-                    let isPassed = eventStartDate < currentDate; 
-                    console.log("Event Start Date:", eventStartDate);
-                    console.log("Current Date:", currentDate);
-                    console.log("Is Passed:", isPassed);
+            // Si aucun événement n'est trouvé pour la date cliquée et que la date est dans le passé, on ne fait rien
+            if (selectedDateEvents.length === 0 && clickedDate < currentDate) {
+                return;  // Ne rien faire (empêcher l'interaction)
+            }
         
-                    // Dynamiser le path en fonction de l'état de l'événement
-                    let pathComplete = isPassed ? `/blog/${event.extendedProps.id}/index?is_passed=true` : `/blog/${event.extendedProps.id}/index?is_passed=false`;
+            // Comparer clickedDate avec currentDate
+            if (eventLinkDefault != null) {
+                
+                if (clickedDate >= currentDate) {
+                    // Si la date cliquée est aujourd'hui ou dans le futur
+                    let eventLink = document.getElementById('eventCreatedAt');
+                    let day = String(clickedDate.getDate()).padStart(2, '0');
+                    let month = String(clickedDate.getMonth() + 1).padStart(2, '0');
+                    let year = clickedDate.getFullYear();
+                    let clickedDateFormat = `${month}/${day}/${year}`;
                     
-                    // Construction du contenu HTML des détails de l'événement
+                    // Mettre à jour le lien
+                    eventLink.href = `${eventLinkDefault}?creationDate=${encodeURIComponent(clickedDateFormat)}&from=calendar_index`;
+                    
+                    // Afficher le footer du modal (on peut créer un événement pour aujourd'hui ou dans le futur)
+                    modalFooter.classList.remove('d-none');
+                } else {
+                    // Si la date cliquée est dans le passé
+                    modalFooter.classList.add('d-none');
+                }
+
+            }
+
+            // Formatage de la date pour affichage dans le titre
+            let formattedDate = `${String(clickedDate.getDate()).padStart(2, '0')}/${String(clickedDate.getMonth() + 1).padStart(2, '0')}/${clickedDate.getFullYear()}`;
+            document.getElementById('eventModalTitle').innerHTML = `${formattedDate}`;
+        
+            // Si des événements existent ou si l'admin est connecté
+            if (selectedDateEvents.length > 0 || isAdminIsLogged) {
+                // Générer les détails des événements
+                let eventDetails = selectedDateEvents.map(event => {
+                    let eventStartDate = new Date(event.start);
+                    let isPassed = eventStartDate < currentDate;
+                    let pathComplete = isPassed ? `/blog/${event.extendedProps.id}/index?is_passed=true` : `/blog/${event.extendedProps.id}/index?is_passed=false`;
+        
                     return `
                         <div class="col-12 col-md-10 mb-4">
                             <div>
-                                <div>
-                                    ${!isPassed && event.extendedProps.rdvDate ? `<span>Le ${event.extendedProps.rdvDate}</span>` : ''}
-                                    ${!isPassed && event.extendedProps.rdvTime ? `<span>à ${event.extendedProps.rdvTime}</span>` : ''}
-                                </div>
-
                                 <strong class="me-1">${event.extendedProps.genre}</strong>
-                                <div>${event.extendedProps.title ? event.extendedProps.title : ''}</div>
-                
-                                ${!isPassed && event.extendedProps.rdv ? `<span class="fs-12">Rendez-vous </span><span class="fs-14">${event.extendedProps.rdv}</span><br>` : ''}
-                
+                                <div>
+                                    ${event.extendedProps.title ? event.extendedProps.title : ''}
+                                </div>
+                                <div>
+                                    ${!isPassed && event.extendedProps.rdvTime ? `<span><span class="fs-12">Time:</span> ${event.extendedProps.rdvTime}</span>` : ''}
+                                    ${!isPassed && event.extendedProps.rdvTimeEnd ? `<span><span class="fs-12"> to:</span> ${event.extendedProps.rdvTimeEnd}</span>` : ''}
+                                </div>
+                                ${!isPassed && event.extendedProps.rdv ? `<span class="fs-12">Appointment: </span><span class="fs-14">${event.extendedProps.rdv}</span><br>` : ''}
                             </div>
-                            ${event.extendedProps.infosDisplay ? `<a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-150px">Plus d'informations</a>` : ''}
+                            ${event.extendedProps.infosDisplay ? `<a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-150px">More information</a>` : ''}
                         </div>
                     `;
                 }).join('');
         
-                // Affichage des détails dans le modal
+                // Afficher les détails des événements dans la modal
                 document.getElementById('eventDetails').innerHTML = eventDetails;
                 openModal();
             }
         }
-
     });
+    
     
     calendar.render();
     calendar.updateSize();
@@ -139,14 +168,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // Fonctions pour gérer l'affichage de la modale
     function openModal() {
-        
         var modal = document.getElementById('eventModal');
         modal.style.display = 'block';
-
-        // var marker = L.marker([50.52716064453125, 3.1717026233673096]).addTo(map);
-        // marker.bindPopup("<b>Lieu de rendez-vous</b><br>parking centre ville, rue d’Anchin, 59242 TEMPLEUVE EN PEVELE");
-        // map.setView([50.52716064453125, 3.1717026233673096], 13);
-        // map.invalidateSize();
     }
 
     function closeModal() {

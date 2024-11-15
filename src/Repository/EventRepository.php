@@ -53,7 +53,7 @@ class EventRepository extends ServiceEntityRepository
             $stmt->addOrderBy('e.createdAt', 'ASC');
         }
 
-        return $stmt->getQuery()->getResult();
+        return $stmt->getQuery();
     }
 
     public function findLastEventsforAdmin(int $limit): array
@@ -65,7 +65,7 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getEventListforAgenda($yearChoice, $monthChoice, $activityChoice)
+    public function getEventListforAgenda(string $yearChoice, string $monthChoice, string $activityChoice)
     {
         $today = new \DateTime();
         $today->setTime(0, 0);
@@ -94,7 +94,7 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function getEventListforArchive($yearChoice, $monthChoice, $activityChoice)
+    public function getEventListforArchive(string $yearChoice, string $monthChoice, string $activityChoice)
     {
         $today = new \DateTime();
         $today->setTime(0, 0);
@@ -123,7 +123,7 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function getEventListforCalendar($yearChoice, $activityChoice)
+    public function getEventListforCalendar(string $yearChoice, string $activityChoice)
     {
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
@@ -142,29 +142,36 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function getEventListforCalendarFor12Months($activityChoice = null)
+    public function getEventListforCalendarFor12Months($activityChoice = null, string $userChoice, string $yearChoice)
     {
-        // Si yearChoice ou monthChoice ne sont pas fournis, on les définit sur l'année et le mois actuels
-        $yearChoice = (new \DateTime())->format('Y');
-        $monthChoice = (new \DateTime())->format('m');
-        
+
         // Création d'un objet QueryBuilder
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
         
-        // Calcul de la date de début et de fin pour la période de 12 mois
-        $startDate = new \DateTime("{$yearChoice}-{$monthChoice}-01");
-        $endDate = (clone $startDate)->modify('+12 months')->modify('-1 day'); // Dernier jour de la période de 12 mois
-        
-        // Filtrage par la plage de dates
-        $stmt->andWhere('e.dateStartAt BETWEEN :startDate AND :endDate')
-            ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate);
-        
-        // Filtrage par l'activité si spécifiée
+        if ($yearChoice == 'yearDepth') {
+            $yearDefault = (new \DateTime())->format('Y');
+            $monthDefault = (new \DateTime())->format('m');
+            $startDate = new \DateTime("{$yearDefault}-{$monthDefault}-01");
+            $endDate = (clone $startDate)->modify('+12 months')->modify('-1 day'); // Dernier jour de la période de 12 mois
+            
+            // Filtrage par la plage de dates
+            $stmt->andWhere('e.dateStartAt BETWEEN :startDate AND :endDate')
+                ->setParameter('startDate', $startDate)
+                ->setParameter('endDate', $endDate);
+        }else{
+            $stmt->andwhere('YEAR(e.dateStartAt) = :year');
+            $stmt->setParameter('year', $yearChoice);
+        }
+
         if ($activityChoice && $activityChoice !== 'all') {
             $stmt->andWhere('a.id = :activityChoice')
                 ->setParameter('activityChoice', $activityChoice);
+        }
+
+        if ($userChoice && $userChoice !== 'all') {
+            $stmt->andWhere('e.user = :userChoice')
+                ->setParameter('userChoice', $userChoice);
         }
         
         // Tri des résultats par la date de début des événements
@@ -181,7 +188,7 @@ class EventRepository extends ServiceEntityRepository
         $sql = "    SELECT DISTINCT(YEAR(date_start_at)) as year
                     FROM `event`
                     WHERE DATE(date_start_at) >= DATE(NOW())
-                    ORDER BY year DESC
+                    ORDER BY year ASC
                ";
 
         $stmt = $conn->prepare($sql);
@@ -306,7 +313,7 @@ class EventRepository extends ServiceEntityRepository
     {
         $conn = $this->getEntityManager()->getConnection();
 
-        $sql = "    SELECT U.id AS user_id, CONCAT(U.last_name, ' ', U.first_name) AS creator
+        $sql = "    SELECT U.id AS user_id, CONCAT(UPPER(U.last_name), ' ', U.first_name) AS creator
                     FROM `event` E 
                     LEFT JOIN user U 
                     ON U.id = E.user_id

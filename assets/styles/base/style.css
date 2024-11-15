@@ -17568,6 +17568,9 @@ canvas {
 .pagination-style-01 .page-item .page-link:focus {
   box-shadow: none;
 }
+.page-link:focus {
+  box-shadow: none!important;
+}
 .pagination-style-01 .page-item.active .page-link {
   background: var(--base-color);
   color: var(--white);
