@@ -15,7 +15,7 @@
     {# ! PARAM**************************************************************************** #}
     <div id="rdvAddressElmt" data-param="{{ event.rdvAddress }} -- {{ event.rdvPlaceName }}"></div>    
     <div id="latElmt" data-param="{{ event.rdvLatitude }}"></div>    
-    <div id="longElmt" data-param="{{ event.rdvLongitude }}"></div>    
+    <div id="longElmt" data-param="{{ event.rdvLongitude }}"></div>
     {# ! PARAM**************************************************************************** #}   
     
     {{ parent() }}
@@ -30,12 +30,10 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8 blog-standard md-mb-50px sm-mb-40px">
 
-
                     <div class="col-12 blog-details mb-12"> 
 
                         <div class="entry-meta mb-20px fs-15">
                             <div style="position:relative;" class="row d-flex mb-3">
-                                
                                 {# EDIT BUTTON #}
                                 {% include "admin/partials/components/_event_actions.html.twig" with {'isEventActionsButtonVisible': true} %}
                                 
@@ -85,7 +83,7 @@
 
                                     </div>
                                 </div>
-                            </divstyle=class=>
+                            </div>
                         </div>
 
                         {# MAP #} 

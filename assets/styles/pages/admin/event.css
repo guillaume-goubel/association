@@ -19,11 +19,14 @@
 .image-main-container-event-form {
     margin-top: 9px;
 }
-
 .image-container-event-form{
     width: 100px;
     height: 100px;
     background-size: cover;
     border: 1px solid gray;
     
+}
+label{
+    font-size: 14px;
+    font-weight: 600;
 }

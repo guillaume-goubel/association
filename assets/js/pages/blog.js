@@ -8,11 +8,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
 
     // MAP PART ----------------------------------------------------------------
-    let rdv = document.getElementById('rdvAddressElmt').getAttribute('data-param');
-    let lat = parseFloat(document.getElementById('latElmt').getAttribute('data-param')); 
-    let long = parseFloat(document.getElementById('longElmt').getAttribute('data-param')); 
+    const rdv = document.getElementById('rdvAddressElmt').getAttribute('data-param');
+    const lat = parseFloat(document.getElementById('latElmt').getAttribute('data-param')); 
+    const long = parseFloat(document.getElementById('longElmt').getAttribute('data-param')); 
+    const mapContainer = document.getElementById('map');
 
-    if (lat != null && long != null && !isNaN(lat) && !isNaN(long) ) {
+    if (lat != null && long != null && !isNaN(lat) && !isNaN(long) && mapContainer) {
         
         // Initialisation de la carte avec différents paramètres selon si on est sur mobile ou non
         var map = L.map('map', {

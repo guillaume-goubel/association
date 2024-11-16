@@ -68,34 +68,40 @@ class EventService{
     public function getEventListForCalendarEvents(array $events): string
     {
         $eventDatesArray = [];
-    
+
         foreach ($events as $event) {
             $startDate = $event->getDateStartAt();
-            $endDate = $event->getDateEndAt() ?? $startDate; // If no end date, use start date as end date
+            $endDate = $event->getDateEndAt() ?? $startDate; // Si pas de date de fin, on utilise la date de début comme date de fin
             $timeStart = $event->getTimeStartAt()->format('H:i');
             $timeEnd = $event->getTimeEndAt() ? $event->getTimeEndAt()->format('H:i') : null;
-    
-            // Check if event spans multiple days (end date > start date)
+
+            // Déterminer si l'événement est de type "long" ou "short"
+            $eventType = ($endDate > $startDate) ? 'long' : 'short';
+
+            // Si l'événement dure plusieurs jours (date de fin > date de début)
             if ($endDate > $startDate) {
-                // Loop through each day between startDate and endDate
+                // Calculer le nombre total de jours de l'événement
+                $totalDays = $startDate->diff($endDate)->days + 1; // +1 car on inclut aussi le jour de début
+
                 $currentDate = clone $startDate;
+                $dayCounter = 1; // Compteur pour le numéro du jour
+
+                // On boucle sur chaque jour entre la date de début et la date de fin
                 while ($currentDate <= $endDate) {
-                    $eventDatesArray[] = $this->formatEventData($event, $currentDate, $timeStart, $timeEnd);
+                    $eventDatesArray[] = $this->formatEventData($event, $currentDate, $timeStart, $timeEnd, $eventType, $dayCounter, $totalDays, $startDate, $endDate);
                     $currentDate->modify('+1 day');
+                    $dayCounter++;
                 }
             } else {
-                // Single day event
-                $eventDatesArray[] = $this->formatEventData($event, $startDate, $timeStart, $timeEnd);
+                // Événement d'une seule journée
+                $eventDatesArray[] = $this->formatEventData($event, $startDate, $timeStart, $timeEnd, $eventType, 1, 1, null, null);
             }
         }
-    
+
         return json_encode($eventDatesArray);
     }
-    
-    /**
-     * Helper function to format event data for calendar.
-     */
-    private function formatEventData($event, $date, $timeStart, $timeEnd): array
+
+    private function formatEventData($event, $date, $timeStart, $timeEnd, $eventType, $dayNumber, $totalDays, $longEventDateStartAt, $longEventEndStartAt ): array
     {
         return [
             'start' => $date->format('Y-m-d') . 'T' . $timeStart,
@@ -109,11 +115,13 @@ class EventService{
                 'rdvDate' => $date->format('d/m/Y'),
                 'rdvTime' => $timeStart,
                 'rdvTimeEnd' => $timeEnd,
-                'type' => 'activity',
-                'infosDisplay' => true,
+                'duration' => $eventType,
+                'durationTotal' => ($eventType === 'long') ? $totalDays : 1, 
+                'durationDayNumber' => ($eventType === 'long') ? "$dayNumber/$totalDays" : null,
+                'longEventDateStartAt' => $longEventDateStartAt,
+                'longEventEndStartAt' => $longEventEndStartAt
             ]
         ];
     }
-    
 
 }

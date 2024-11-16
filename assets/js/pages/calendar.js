@@ -132,10 +132,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
             if (selectedDateEvents.length > 0 || isAdminIsLogged) {
                 // Générer les détails des événements
                 let eventDetails = selectedDateEvents.map(event => {
+                    
                     let eventStartDate = new Date(event.start);
                     let isPassed = eventStartDate < currentDate;
                     let pathComplete = isPassed ? `/blog/${event.extendedProps.id}/index?is_passed=true` : `/blog/${event.extendedProps.id}/index?is_passed=false`;
-        
+                    
                     return `
                         <div class="col-12 col-md-10 mb-4">
                             <div>
@@ -144,14 +145,15 @@ document.addEventListener("DOMContentLoaded", (event) => {
                                     ${event.extendedProps.title ? event.extendedProps.title : ''}
                                 </div>
                                 <div>
-                                    ${!isPassed && event.extendedProps.rdvTime ? `<span><span class="fs-12">Horaire:</span> ${event.extendedProps.rdvTime}</span>` : ''}
-                                    ${!isPassed && event.extendedProps.rdvTimeEnd ? `<span><span class="fs-12"> Fin:</span> ${event.extendedProps.rdvTimeEnd}</span>` : ''}
+                                    ${!isPassed && event.extendedProps.rdvTime ? `<span><span class="fs-12">Début:</span>${event.extendedProps.rdvTime}</span>` : ''}
+                                    ${!isPassed && event.extendedProps.rdvTimeEnd ? `<span><span class="fs-12"> Fin:</span>${event.extendedProps.rdvTimeEnd}</span>` : ''}
                                 </div>
                                 ${!isPassed && event.extendedProps.rdv ? `<span class="fs-12">Rendez-vous: </span><span class="fs-14">${event.extendedProps.rdv}</span><br>` : ''}
                             </div>
                             ${event.extendedProps.infosDisplay ? `<a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-150px">Plus d'informations</a>` : ''}
                         </div>
                     `;
+
                 }).join('');
         
                 // Afficher les détails des événements dans la modal

@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 use App\Repository\EventRepository;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as AppAssert;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ORM\HasLifecycleCallbacks]
@@ -48,9 +50,15 @@ class Event
     private ?\DateTimeInterface $timeEndAt = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\NotBlank(null,"La date de début est obligatoire.")]
+    #[Assert\GreaterThanOrEqual(
+        value: 'today',
+        message: "La date de début est obligatoire toto"
+    )]
     private ?\DateTimeInterface $dateStartAt = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[AppAssert\DateRange()]
     private ?\DateTimeInterface $dateEndAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]

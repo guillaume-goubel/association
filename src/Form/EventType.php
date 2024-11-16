@@ -8,17 +8,20 @@ use App\Entity\Activity;
 use App\Entity\Animator;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Validator\Constraints\GreaterThan;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
-use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
+use App\Validator\DateRange;
 
 class EventType extends AbstractType
 {
@@ -31,9 +34,15 @@ class EventType extends AbstractType
 
         $builder
             ->add('name', TextType::class, [
-                'label' => "Le nom de l'événement ou une courte description",
-                'attr' => ['class' => 'form-control'],
+                'label' => "Un titre ou une très courte description (150 caractères max)",
+                'attr' => ['class' => 'form-control', 'maxlength' => 150],
                 'required' => false,
+                'constraints' => [
+                    new Length([
+                        'max' => 150,
+                        'maxMessage' => "Le nom ou la description ne peut pas dépasser {{ limit }} caractères."
+                    ])
+                ]
             ])
             ->add('description', TextareaType::class, [
                 'label' => "La description de l'événement",
@@ -46,7 +55,7 @@ class EventType extends AbstractType
                 ],
             ])
             ->add('cityPlace', TextType::class, [
-                'label' => "Le nom de la localité où se déroule l'événement",
+                'label' => "Le nom de la localité où se déroule l'événement *",
                 'attr' => ['class' => 'form-control'],
                 'required' => true,
             ])
@@ -62,11 +71,20 @@ class EventType extends AbstractType
             ])
             ->add('eventDistance', NumberType::class, [
                 'label' => "L'évènement comporte-t-il un parcours (en km) ",
-                'help' => 'ex: comme pour une randonnée de 13 (km)',
-                'attr' => ['class' => 'form-control'],
+                'help' => 'La distance doit être un nombre entier supérieur à zéro',
+                'attr' => ['class' => 'form-control', 'min' => 1, 'step' => 1],
                 'data' => null,
                 'html5' => true,
                 'required' => false,
+                'constraints' => [
+                    new Assert\Positive([
+                        'message' => "La distance de l'événement doit être un nombre strictement positif.",
+                    ]),
+                    new Type([
+                        'type' => 'integer',
+                        'message' => "La distance doit être un nombre entier.",
+                    ])
+                ],
             ])
             ->add('rdvPlaceName', TextType::class, [
                 'label' => "Complément du lieu de rendez-vous",
@@ -99,7 +117,7 @@ class EventType extends AbstractType
                 'required' => false,
             ])
             ->add('timeStartAt', TimeType::class, [
-                'label' => 'Commence à  ... ',
+                'label' => 'Commence à  ... *',
                 'attr' => ['class' => 'form-control'],
                 'widget' => 'single_text',
                 'required' => true,
@@ -111,27 +129,33 @@ class EventType extends AbstractType
                 'required' => false,
             ])
             ->add('dateStartAt', null, [
-                'label' => 'Commence le ... ',
-                'attr' => ['class' => 'form-control'],
+                'label' => 'Commence le ... *',
+                'attr' => ['class' => 'form-control', 'min' => (new \DateTime())->format('Y-m-d')],
                 'widget' => 'single_text',
                 'required' => true,
-                'data' => $creationDate instanceof \DateTime ? $creationDate : ($creationDate ? new \DateTime($creationDate) : null),
-                'constraints' => [
-                    new GreaterThan([
-                        'value' => new \DateTime(),  // La date actuelle
-                        'message' => 'La date de début ne peut pas être dans le passé.',
-                    ]),
-                ],
+                // 'data' => $creationDate instanceof \DateTime ? $creationDate : ($creationDate ? new \DateTime($creationDate) : null),
+                'data' => $creationDate instanceof \DateTime 
+                    ? $creationDate 
+                    : ($creationDate ? new \DateTime($creationDate) : ($options['data']->getDateStartAt() ?? null)),
+                // 'constraints' => [
+                //     new GreaterThanOrEqual([
+                //         'value' => new \DateTime(), // Vérifie que la date est égale ou postérieure à "maintenant"
+                //         'message' => 'La date de début ne peut pas être dans le passé.',
+                //     ]),
+                // ],
             ])
             ->add('dateEndAt', null, [
                 'label' => 'Termine le ... ',
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['class' => 'form-control', 'min' => (new \DateTime())->format('Y-m-d')],
                 'widget' => 'single_text',
                 'required' => false,
+                'constraints' => [
+                    new DateRange(),
+                ],
             ])
             ->add('activity', EntityType::class, [
                 'class' => Activity::class,
-                'label' => "Rattacher à un type d'activité",
+                'label' => "Rattacher à un type d'activité *",
                 'choice_label' => 'name',
                 'attr' => ['class' => 'form-control'],
                 'required' => true,
