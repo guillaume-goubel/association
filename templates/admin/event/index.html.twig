@@ -109,10 +109,10 @@
                     
                     {% if events is not empty %}
                         {% for event in events %}
-                            {% if event.activity.type == 'regular' %}
-                                {% include 'main_partials/components/_event_regular_card.html.twig' %}
+                            {% if event.isMultiDay %}
+                                {% include 'main_partials/components/_event_journey_card.html.twig' %}
                             {% else %}
-                                {% include 'main_partials/components/_event_journey_card.html.twig' %}    
+                                {% include 'main_partials/components/_event_regular_card.html.twig' %}
                             {% endif %}
                         {% endfor %}
                     {% else %}

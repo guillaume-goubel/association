@@ -173,10 +173,6 @@ footer .elements-social ul li:last-child {
         padding-right: 50px;
         padding-left: 50px;
     }
-    .activity-card{
-        padding-right: 50px;
-        padding-left: 50px; 
-    }
 }
 /* margin */
 .mt-minus-2px {
@@ -186,7 +182,7 @@ footer .elements-social ul li:last-child {
     height: 470px;
 }
 .main-card-container-last-event{
-    height: 365px;
+    height: 350px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .main-card-container-last-event:hover{
@@ -197,6 +193,15 @@ footer .elements-social ul li:last-child {
 .main-card-container-last-event:active {
     transform: scale(0.98); /* Légère réduction de la taille lors du clic */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Ombre réduite pour un effet de clic */
+}
+.activity-card:hover .main-card-container {
+    transform: translateY(-10px); /* Effet de translation vers le haut */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
+}
+.main-card-container {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide pour l'état normal */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Ombre légère par défaut */
 }
 .no-hover:hover {
     color: inherit;

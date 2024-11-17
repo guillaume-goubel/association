@@ -62,6 +62,10 @@
 .animators-infos-link:hover{
     transform: translateY(-5px);
 }
+.entry-meta{
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
 @media only screen and (max-width: 600px) {
     .animator-item {
       justify-content: start;

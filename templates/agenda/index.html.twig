@@ -98,7 +98,6 @@
                         <!-- Filtre année -->
                         <div class="col-12 col-md-3">
                             <select id="yearChoice" name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
-                                
                                 {% if yearsList|length > 1 %}
                                     <option {{ yearChoice == 'all' ? 'selected' : '' }} value="all">Toute année</option>
                                 {% endif %}
@@ -135,7 +134,11 @@
             <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
                 {% if events is not empty %}
                     {% for event in events %}
-                        {% include 'main_partials/components/_event_regular_card.html.twig' %}
+                        {% if event.isMultiDay %}
+                            {% include 'main_partials/components/_event_journey_card.html.twig' %}
+                        {% else %}
+                            {% include 'main_partials/components/_event_regular_card.html.twig' %}
+                        {% endif %}
                     {% endfor %}
                 {% else %}
                     <div class="no-matching-search-message">Pas de résultats pour cette recherche - cliquer sur le bouton <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i> </div>

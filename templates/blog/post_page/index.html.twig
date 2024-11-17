@@ -25,10 +25,10 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="top-space-margin bg-very-light-gray">
+    <section class="main-section bg-very-light-gray">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-8 blog-standard md-mb-50px sm-mb-40px">
+                <div class="col-12 col-lg-8 blog-standard md-mb-50px sm-mb-40px px-5">
 
                     <div class="col-12 blog-details mb-12"> 
 
@@ -38,19 +38,17 @@
                                 {% include "admin/partials/components/_event_actions.html.twig" with {'isEventActionsButtonVisible': true} %}
                                 
                                 <div class="col-12 col-md-5">
-                                    <div class="fs-20 fw-600 text-base-color mb-2">
-                                        {{event.activity.name}}
-                                    </div>
-                                    <div class="d-flex">
-                                        <time class="text-center post-date border-radius-3px bg-medium-gray text-white text-uppercase fw-500 d-flex align-items-center p-2">
-                                            <span class="month d-block lh-24">{{event.dateStartAt|format_date('full',  locale= 'fr')}}</span>
-                                        </time>
+                                    
+                                    <div class="fs-20 fw-600 text-base-color d-flex align-items-center mb-2 ">
+                                        
+                                        <div>{{event.activity.name}}</div>
+                                        {# LOGO #}
                                         <div style="width:50px;" class="col-6 pe-sm-0 mx-3">
                                             <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
                                                 {% if event.activity.pictureType == "image" %}
                                                     <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
                                                 {% else %}
-                                                    <i class="{{ event.activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
+                                                    <i class="{{ event.activity.picture }} align-middle icon-medium text-white my-3"></i>
                                                 {% endif %}
                                             </div>
                                             <div class="fs-18 event-distance px-1">
@@ -59,8 +57,33 @@
                                                 {% endif %}
                                             </div>
                                         </div>
+
                                     </div>
+                                    
+                                    {% if event.isMultiDay %}
+                                        <div class="fs-14 mb-2">
+                                            Evénenement sur plusieurs jours
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="d-flex">
+
+                                        {# DATE #}
+                                        <div class="d-flex flex-column">
+                                            <time class="text-center post-date border-radius-3px bg-medium-gray text-white fw-500 d-flex align-items-center p-2">
+                                                <span class="w-50px me-0 {{ (event.isMultiDay) ? '' : ' d-none ' }}">Du </span><span class="month d-block lh-24 text-uppercase w-170px">{{event.dateStartAt|format_date( (event.isMultiDay) ? 'medium' : 'full' ,  locale= 'fr')}}</span>
+                                            </time>
+                                            {% if event.isMultiDay %}
+                                                <time class="text-center post-date border-radius-3px bg-medium-gray text-white fw-500 d-flex align-items-center p-2 mt-2">
+                                                    <span class="w-50px me-0">Au </span><span class="month d-block lh-24 text-uppercase w-170px">{{event.dateEndAt|format_date('medium',  locale= 'fr')}}</span>
+                                                </time>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+
                                     <div><i class="feather icon-feather-map-pin me-5px mt-6"></i><span class="fs-18">{{event.cityPlace}}</span></div>
+                                    
                                     {% if is_passed == false %}
                                         <div class="me-5">
                                             <span class="me-3"><i class="feather icon-feather-clock me-5px"></i>Début : <span class="fs-18">{{event.timeStartAt|date('H:i')}}</span></span>
@@ -68,15 +91,21 @@
                                                 <span class="me-1">Fin : <span class="fs-18">{{event.timeEndAt|date('H:i')}}</span></span>
                                             {% endif %}
                                         </div>
-                                    {% endif %}                                             
+                                    {% endif %}  
+
                                 </div>
                                 
-                                <div class="col-12 col-md-7 d-flex flex-column mt-2">
+                                <div class="col-12 col-md-7 d-flex flex-column align-items-start mt-3">
                                     <div class="trainer-box col-auto position-relative">
                                         {% if event.animators is not empty %}
                                             <ul class="p-0 m-0 list-style-02 animators-infos-link" data-id='{{ event.id }}' data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
                                                 {% for animator in event.animators %}
-                                                    <li class="animator-item my-1"><img style="width:40px;height:40px;border: 2px solid {{event.activity.color}};border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar"><span class="ms-2 animator-item-name">{{animator.firstName}}  {{animator.lastName}}</span></li>
+                                                    <li class="animator-item my-1 d-flex align-items-center">
+                                                        <img style="width:60px;height:60px;border: 2px solid {{event.activity.color}};border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar">
+                                                        <div>
+                                                            <div class="ms-2 animator-item-name">{{animator.firstName|capitalize}} {{animator.lastName|upper}}</div>
+                                                        </div>
+                                                    </li>
                                                 {% endfor %}
                                             </ul>
                                         {% endif %}
@@ -174,13 +203,17 @@
 
                         {# TEXT PRESENTATION #}
                         <div class="row">
-                            <p class="card-text preformatted">{{event.description|raw}}</p>
+                            {% if event.description != null %}
+                                <p class="card-text preformatted fs-14">{{event.description|raw}}</p>
+                            {% endif %}
+
                             {% if is_passed == false and event.preparationInfos != null %}   
                                 <blockquote class="alt-font border-4 border-start border-color-base-color text-dark-gray fw-500 ps-40px mt-4 mb-4 ms-60px lg-ms-30px sm-ms-0 lg-ps-30px">
                                     <footer class="fs-14 fw-600 text-base-color d-inline-block text-uppercase">Informations importantes pour la préparation de l'événement</footer>
                                     <p class="card-text preformatted">{{event.preparationInfos|raw}}</p>
                                 </blockquote>
                             {% endif %}
+
                         </div>
 
                     </div>

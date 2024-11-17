@@ -3,7 +3,7 @@
         <div class="blog-image">
             <img src="{{ customAsset('app/home/banner/banner.jpg') }}" alt="" />
         </div>
-        <div class="card-body p-13 md-p-11">
+        <div class="card-body p-7">
             {# <div  class="card-title mb-15px alt-font fw-600 fs-20 text-dark-gray d-inline-block">Build up healthy habits and strong peaceful life</div>
             <p>Lorem ipsum has been industry standard dummy text ever...</p>
             <div class="author d-flex justify-content-center align-items-center position-relative overflow-hidden fs-16">
@@ -33,11 +33,11 @@
                 </div>
                 
                 <div class="w-100">
-                    <span class="fs-18 lh-30 ls-minus-05px d-block text-dark-gray fw-600">{{event.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
-                    <span class="fs-16 mb-25px d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
+                    <span class="fs-16 lh-30 ls-minus-05px d-block text-dark-gray fw-600">{{event.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
+                    <span class="fs-14 mb-15px d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
                 </div>
             </div>
-            <div class="fs-15 w-100 d-flex align-items-center ">
+            <div class="fs-14 w-100 d-flex align-items-center ">
                 <i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}
             </div>
         </div>

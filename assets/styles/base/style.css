@@ -2976,7 +2976,7 @@ input:focus, select:focus, textarea:focus, .form-control:focus {
   color: var(--white);
   font-size: 11px;
   text-transform: uppercase;
-  background-color: antiquewhite;
+  /* background-color: antiquewhite; */
   padding: 5px;
   border-radius: 50%;
 }
@@ -6784,7 +6784,7 @@ header .navbar {
   top: 0;
   right: 0;
   left: 0;
-  z-index: 99;
+  z-index: 999;
 }
 header .navbar [class*=col-] {
   padding: 0 15px;

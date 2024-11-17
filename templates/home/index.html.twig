@@ -12,6 +12,14 @@
             background-size: 200% auto;
             color: var(--white);
         }
+
+        {# TEST #}
+        {# #agenda-section {
+            background: linear-gradient(180deg, #f9f9f9, #eaeaea);
+        } #}
+        {# #agenda-section {
+            background: url('https://www.toptal.com/designers/subtlepatterns/uploads/dot-grid.png') repeat;
+        } #}
     </style>
 {% endblock %}
 
@@ -113,16 +121,16 @@
                     </div>
                 </div>
 
-                <div class="row pb-5">
+                <div class="row pb-3">
                     <div class="col-lg-5 md-mb-50px sm-mb-30px">
                         <h3 class="alt-font fw-600 text-base-color ls-minus-2px">Un programme riche en activités et en rencontres</h3>
                         <p class="w-80 lg-w-100 mb-30px sm-mb-25px">Participez à vos sports favoris ou venez découvrir avec nous de nouvelles pratiques sportives et culturelles.</p> 
                         <div>
                             <a href="{{ path('agenda_index') }}" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Tout le programme</a>
                             <a href="{{ path('calendar_index', { 'from': 'home_index' }) }}" href="#" class="btn btn-small btn-yellow btn-box-shadow btn-round-edge">Calendrier</a>
-                            <div class="mb-1 mt-2">
+                            {# <div class="mb-1 mt-2">
                                 <a href="{{ asset('app/pdf/walk_agenda.pdf') }}" class="btn btn-small btn-transparent-dark-gray d-table d-lg-inline-block lg-mb-15px">Les randonnées 2024 en PDF<i class="fa-solid fa-file-pdf"></i></a>
-                            </div>
+                            </div> #}
                         </div>                       
                     </div>
                     <div style="position:relative;" class="col-xl-5 col-lg-6 offset-xl-2 offset-lg-1" data-anime='{"opacity": [0,1], "duration": 600, "delay":200, "staggervalue": 200, "easing": "easeOutQuad" }'>
@@ -183,13 +191,13 @@
                     
                     <div id="calendar"></div>
 
-                    <div class="fw-600 pb-2">Vos {{nextUpcomingList|length}} prochains rendez-vous</div>
-                    
+                    <div class="fs-14 text-base-color ls-1px fw-600 pb-2">Vos {{nextUpcomingList|length}} prochains rendez-vous<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+
                     {% for event in nextUpcomingList %}
-                        {% if event.activity.type == 'regular' %}
-                            {% include 'main_partials/components/_event_regular_card.html.twig' %}
-                        {% else %}
+                        {% if event.isMultiDay %}
                             {% include 'main_partials/components/_event_journey_card.html.twig' %}
+                        {% else %}
+                            {% include 'main_partials/components/_event_regular_card.html.twig' %}
                         {% endif %}
                     {% endfor %}
 
@@ -199,10 +207,17 @@
         </section>
         <!-- end page title -->
 
-        <section id="retro-section" class="border-top border-color-extra-medium-gray bg-very-light-gray"> 
+        <section id="retro-section" class="border-top border-color-extra-medium-gray bg-very-light-gray position-relative overflow-hidden z-index-0"> 
+            <div class="position-absolute left-minus-50px mt-15 d-none d-xl-inline-block" data-parallax-liquid="true" data-parallax-transition="2" data-parallax-position="top">
+                <img style="width:300px;height:300px;border-radius:50%;opacity:0.2;" src="{{ customAsset('app/lille.jpg') }}" alt="" data-bottom-top="transform: rotate(-30deg)" data-top-bottom="transform:rotate(10deg)">
+            </div>
+            <div class="position-absolute z-index-minus-1 right-minus-50px xxl-right-minus-100px xl-right-minus-50px xl-w-220px d-none d-xl-inline-block" data-parallax-liquid="true" data-parallax-transition="2" data-parallax-position="bottom">
+                <img style="width:280px;height:260px;border-radius:50%;opacity:0.2;" src="{{ customAsset('app/main-logo.png') }}" alt="" data-bottom-top="transform: rotate(-30deg)" data-top-bottom="transform:rotate(10deg)">
+            </div>
+            
             <div class="container">
                 
-                <div class="row align-items-center mb-1 p-2">
+                <div class="row align-items-center p-2">
                     <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
                         <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
                             Retrospective<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
@@ -271,11 +286,9 @@
 
                 </div>
                 
-                <div class="row pt-3">
+                <div class="row px-4">
                     <div class="col-12 p-md-0">
                         
-                        <div class="fw-600 ps-2 pb-1">Nos {{lastPastEventList|length}} derniers événements</div>
-
                         <ul class="blog-grid blog-wrapper grid-loading grid grid-4col xl-grid-4col lg-grid-4col md-grid-2col sm-grid-2col xs-grid-1col gutter-extra-large" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 300, "delay":80, "staggervalue": 200, "easing": "easeOutQuad" }'>
                             <li class="grid-sizer"></li>
 

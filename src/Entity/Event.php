@@ -58,6 +58,7 @@ class Event
     private ?\DateTimeInterface $dateStartAt = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Assert\NotBlank(null,"La date de fin est obligatoire.")]
     #[AppAssert\DateRange()]
     private ?\DateTimeInterface $dateEndAt = null;
 
@@ -159,7 +160,7 @@ class Event
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -449,6 +450,19 @@ class Event
             return $this->dateStartAt < new \DateTime(); // Compare à la date actuelle
         }
         return false; // Si la date de début n'est pas définie, renvoie false
+    }
+
+    /**
+     * Vérifie si l'événement s'étend sur plusieurs jours.
+     * 
+     * @return bool
+     */
+    public function isMultiDay(): bool
+    {
+        if ($this->dateStartAt instanceof \DateTimeInterface && $this->dateEndAt instanceof \DateTimeInterface) {
+            return $this->dateStartAt->format('Y-m-d') !== $this->dateEndAt->format('Y-m-d');
+        }
+        return false; // Si l'une des deux dates n'est pas définie, on considère que ce n'est pas multi-jour
     }
 
 }

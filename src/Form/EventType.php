@@ -34,12 +34,12 @@ class EventType extends AbstractType
 
         $builder
             ->add('name', TextType::class, [
-                'label' => "Un titre ou une très courte description (150 caractères max)",
-                'attr' => ['class' => 'form-control', 'maxlength' => 150],
+                'label' => "Un titre ou une très courte description (75 caractères max)",
+                'attr' => ['class' => 'form-control', 'maxlength' => 75],
                 'required' => false,
                 'constraints' => [
                     new Length([
-                        'max' => 150,
+                        'max' => 75,
                         'maxMessage' => "Le nom ou la description ne peut pas dépasser {{ limit }} caractères."
                     ])
                 ]
@@ -137,18 +137,12 @@ class EventType extends AbstractType
                 'data' => $creationDate instanceof \DateTime 
                     ? $creationDate 
                     : ($creationDate ? new \DateTime($creationDate) : ($options['data']->getDateStartAt() ?? null)),
-                // 'constraints' => [
-                //     new GreaterThanOrEqual([
-                //         'value' => new \DateTime(), // Vérifie que la date est égale ou postérieure à "maintenant"
-                //         'message' => 'La date de début ne peut pas être dans le passé.',
-                //     ]),
-                // ],
             ])
             ->add('dateEndAt', null, [
-                'label' => 'Termine le ... ',
+                'label' => 'Termine le ... *',
                 'attr' => ['class' => 'form-control', 'min' => (new \DateTime())->format('Y-m-d')],
                 'widget' => 'single_text',
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new DateRange(),
                 ],
