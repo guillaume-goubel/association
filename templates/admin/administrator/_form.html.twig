@@ -1,0 +1,43 @@
+
+{{ form_start(form)}}
+    
+    <div class="fs-14 text-base-color text-uppercase ls-1px fw-600"><i class="fa-solid fa-circle-info align-middle icon-large text-base-color me-1"></i>LES INFORMATIONS DE BASES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.firstName) }}
+        </div>
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.lastName) }}
+        </div>
+    </div>
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.email) }}
+        </div>
+    </div>
+    <div class="row d-flex">
+        <div class="col-12 col-md-6 mt-1">
+            <div class="d-flex align-items-center justify-content-between">
+                {{ form_row(form.plainPassword) }}
+                <div class="display-password-btn"><i class="fa-regular fa-eye icone-medium"></i></div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mt-1">
+            <div class="d-flex align-items-center justify-content-between">
+                {{ form_row(form.plainPasswordRepeat) }}
+                <div class="display-password-btn"><i class="fa-regular fa-eye icone-medium"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex">
+        <div class="col-12 col-md-6 mt-3">
+            {{ form_row(form.activities) }}
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+
+{{ form_end(form) }}
+

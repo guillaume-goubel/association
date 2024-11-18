@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Nouvel administrateur
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+    
+    {{ parent() }}
+    <!-- start header -->
+	{% include 'admin/partials/parts/_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section -->
+    <section class="main-section right-side-bar">
+        <div class="container">
+            <div class="row justify-content-center">
+                
+                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                    <div class="row blog-details mb-3 d-flex align-items-center"> 
+                        <div class="col-10">
+                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">Administrateur - Nouveau</h5>
+                        </div>
+                        <div class="admin-action col-2 d-flex justify-content-end">
+                            <a href="{{ path('admin_administrator_index') }}">
+                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-10">
+                    <div class="row mb-50px sm-mb-30px">     
+                        {{ include('admin/administrator/_form.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/parts/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+    <!-- start scroll progress -->
+    <div class="scroll-progress d-none d-xxl-block">
+        <a href="#" class="scroll-top" aria-label="scroll">
+            <span class="scroll-text">
+                <i class="fa-solid fa-arrow-down-long align-middle icon-large text-base-color"></i>
+            </span>
+            <span class="scroll-line">
+                <span class="scroll-point"></span>
+            </span>
+        </a>
+    </div>
+    <!-- end scroll progress -->
+    
+    {% include 'main_partials/notifications/_notyFlashMessage.html.twig' %}
+
+</body>
+
+{% endblock %}
+
+{% block baseJavascripts %}   
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base', 'admin-administrator']) }}
+    {% endblock %}
+
+{% endblock %}
+

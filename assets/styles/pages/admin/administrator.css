@@ -1,0 +1,18 @@
+#administrator_activities{
+    min-height: 350px;
+}
+#administrator_plainPassword,
+#administrator_plainPasswordRepeat{
+    width: 400px;
+}
+.display-password-btn{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b7aaaa;
+    background-color: #efe6e6;
+    cursor: pointer;
+    border-radius: 5px;
+}

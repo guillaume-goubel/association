@@ -20,15 +20,19 @@
     <section class="main-section">
         
         <div class="container">
-            <div class="row justify-content-center">
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
-                    <div class="col-12 blog-details mb-3"> 
-                        {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+                    <div class="row blog-details d-flex align-items-center justify-content-between"> 
+                        <div class="col-8">
+                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">Administrateurs - Liste</h5>
+                        </div>
 
-                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">ADMINISTRATEURS</h5>
+                        <div class="admin-action col-2 d-flex justify-content-end">
+                            <a class="ms-4" href="{{ path('admin_administrator_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                        </div>
+                        
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -123,7 +127,7 @@
 {% block baseJavascripts %}
     
     {% block importmap %}
-        {{ importmap(['app', 'base']) }}
+        {{ importmap(['app', 'base', 'admin-administrator']) }}
     {% endblock %}
 
 {% endblock %}
