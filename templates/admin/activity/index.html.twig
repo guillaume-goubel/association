@@ -23,13 +23,8 @@
                 
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="col-12 blog-details mb-3"> 
-                        <div class="entry-meta fs-15">
-                            <span>
-                            <i class="text-dark-gray feather icon-feather-user"></i>
-                            {{ app.user.firstName }} {{ app.user.lastName }}
-                            </span>
-                            <a href="{{ path('app_logout')}}">Déconnexion</a>
-                        </div>
+                        {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+
                         <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">ACTIVITES</h5>
                     </div>
 

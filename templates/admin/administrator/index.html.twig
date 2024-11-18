@@ -17,33 +17,98 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="main-section right-side-bar">
+    <section class="main-section">
+        
         <div class="container">
             <div class="row justify-content-center">
-                
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
-                    <!-- start blog details  -->
                     <div class="col-12 blog-details mb-3"> 
-                        <div class="entry-meta fs-15">
-                            <span>
-                            <i class="text-dark-gray feather icon-feather-user"></i>
-                            {{ app.user.firstName }} {{ app.user.lastName }}
-                            </span>
-                            <a href="{{ path('app_logout')}}">Déconnexion</a>
-                        </div>
+                        {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+
                         <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">ADMINISTRATEURS</h5>
                     </div>
-                    
-                    {% if not is_granted('ROLE_SUPER_ADMIN') %}
-                        <div class="col-12">
-                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les événements que j'ai créés ou modifiés<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
-                        </div>
-                    {% endif %}
-                    <!-- end blog details -->
                 </div>
 
             </div>
         </div>
+
+        <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10" data-anime='{ "el": "childs", "translateY": [15, 0], "opacity": [0,1], "duration": 800, "delay": 200, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                        <div class="row border-bottom border-2 border-color-dark-gray pb-50px mb-50px sm-pb-35px sm-mb-35px align-items-center">
+                            <div class="col-md-1 text-center text-md-end md-mb-15px">
+                                <div class="fs-16 fw-600 text-dark-gray">01</div>
+                            </div>
+                            <div class="col-md-7 offset-lg-1 icon-with-text-style-01 md-mb-25px">
+                                <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
+                                    <div class="feature-box-icon me-50px md-me-35px">
+                                        <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/> 
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-dark-gray mb-5px fs-20 ls-minus-05px">Pixel perfect <span class="fw-700">web design</span></span>
+                                        <p class="w-90 md-w-100">Lorem ipsum is simply dummy text of the printing typesetting industry been text.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 text-center text-md-end">
+                                <a href="#" class="btn btn-dark-gray btn-box-shadow btn-medium btn-switch-text btn-rounded">
+                                    <span>
+                                        <span class="btn-double-text" data-text="Get started now">Get started now</span> 
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row border-bottom border-2 border-color-dark-gray pb-50px mb-50px sm-pb-35px sm-mb-35px align-items-center">
+                            <div class="col-md-1 text-center text-md-end md-mb-15px">
+                                <div class="fs-16 fw-600 text-dark-gray">02</div>
+                            </div>
+                            <div class="col-md-7 offset-lg-1 icon-with-text-style-01 md-mb-25px">
+                                <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
+                                    <div class="feature-box-icon me-50px md-me-35px">
+                                        <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/> 
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-dark-gray mb-5px fs-20 ls-minus-05px">Creative <span class="fw-700">web development</span></span>
+                                        <p class="w-90 md-w-100">Lorem ipsum is simply dummy text of the printing typesetting industry been text.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 text-center text-md-end">
+                                <a href="#" class="btn btn-dark-gray btn-box-shadow btn-medium btn-switch-text btn-rounded">
+                                    <span>
+                                        <span class="btn-double-text" data-text="Get started now">Get started now</span> 
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row align-items-center">
+                            <div class="col-md-1 text-center text-md-end md-mb-15px">
+                                <div class="fs-16 fw-600 text-dark-gray">03</div>
+                            </div>
+                            <div class="col-md-7 offset-lg-1 icon-with-text-style-01 md-mb-25px">
+                                <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
+                                    <div class="feature-box-icon me-50px md-me-35px">
+                                        <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/> 
+                                    </div>
+                                    <div class="feature-box-content">
+                                        <span class="d-inline-block text-dark-gray mb-5px fs-20 ls-minus-05px">Best <span class="fw-700">eCommerce solution</span></span>
+                                        <p class="w-90 md-w-100">Lorem ipsum is simply dummy text of the printing typesetting industry been text.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-4 text-center text-md-end">
+                                <a href="#" class="btn btn-dark-gray btn-box-shadow btn-medium btn-switch-text btn-rounded">
+                                    <span>
+                                        <span class="btn-double-text" data-text="Get started now">Get started now</span> 
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
     </section>
     <!-- end section -->
 

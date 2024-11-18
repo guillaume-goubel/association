@@ -24,18 +24,13 @@
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details d-flex align-items-center"> 
                         <div class="col-8">
-                            <div class="entry-meta fs-15">
-                                <span>
-                                <i class="text-dark-gray feather icon-feather-user"></i>
-                                {{ app.user.firstName }} {{ app.user.lastName }}
-                                </span>
-                                <a href="{{ path('app_logout')}}">Déconnexion</a>
-                            </div>
+                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">EVENEMENTS - Liste</h5>
                             {# <small>Voici la liste des événements créés par date de commencement et par créateur</small> #}
                         </div>
 
-                        <div class="col-2 d-flex justify-content-end">
+                        <div class="admin-action col-2 d-flex justify-content-end">
                             <a class="me-4" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
                             <a class="ms-4" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>

@@ -11,9 +11,9 @@
                     {% endif %}
                 </div>
             </div>
-            <h3 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-800">{{ activity.name }}<span style="background-color:{{ activity.color }};" class="h-8px bottom-10px opacity-6 separator-animation"></span></span></h3>
+            <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-800">{{ activity.name }}<span style="background-color:{{ activity.color }};" class="h-8px bottom-10px opacity-6 separator-animation"></span></span></h4>
         </div>
-        <p class="mb-35px sm-mb-25px preformatted">{{activity.description|raw}}</p> 
+        <p class="fs-14 mb-35px sm-mb-25px preformatted">{{activity.description|raw}}</p> 
         
         {% if isEvents %}
             <a href="{{ path('agenda_index') }}?monthChoice=all&yearChoice=all&activityChoice={{ activity.id }}&from=activity-section" class="btn btn-small btn-gradient-emerald-blue-emerald-green btn-hover-animation-switch btn-round-edge btn-box-shadow">

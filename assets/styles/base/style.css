@@ -1270,8 +1270,8 @@ b, strong {
   transition: all 350ms cubic-bezier(0.37, 0, 0.63, 1);
 }
 .box-shadow-hover:hover, .box-shadow-large-hover:hover, .box-shadow-extra-large-hover:hover, .box-shadow-medium-hover:hover, .box-shadow-small-hover:hover, .box-shadow-double-large-hover:hover, .box-shadow-quadruple-large-hover:hover {
-  -webkit-transform: translate3d(0, -3px, 0);
-  transform: translate3d(0, -3px, 0);
+  -webkit-transform: translate3d(0, -7px, 0);
+  transform: translate3d(0, -7px, 0);
 }
 .box-shadow-bottom {
   -webkit-box-shadow: 0px 10px 15px 0px rgba(0, 0, 0, 0.05);

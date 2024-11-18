@@ -4,14 +4,14 @@
 
         <div class="row align-items-center justify-content-center h-100">
             
-            {% if app.user %}
+            {# {% if app.user %}
                 <div style="z-index:9999;" class="d-flex justify-content-center">
                     <div class="text-white fs-14">
                         Connecté en tant que {{ app.user.firstName }} {{ app.user.lastName }}
                         <a href="{{ path('app_logout')}}">Déconnexion</a>
                     </div>
                 </div>
-            {% endif %}
+            {% endif %} #}
             
             <div class="col-xl-7 col-lg-8 col-md-10 text-white position-relative text-center text-lg-start">  
                 <div class="fs-90 sm-fs-80 xs-fs-70 fw-600 mb-20px ls-minus-4px overflow-hidden">
@@ -28,7 +28,7 @@
                 <div class="fs-19 fw-300 mb-30px w-80 sm-w-100 opacity-8 d-block mx-auto mx-lg-0 overflow-hidden">
                     <span class="d-inline-block lh-32" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 300 }'>Vivez des moments actifs et enrichissants, alliant sport, culture et convivialité, pour tous les niveaux et toutes les envies</span>
                 </div>
-                <div class="overflow-hidden pt-5px">
+                <div class="overflow-hidden pt-5px mb-40px">
                     <a href="{{ path('contact_index') }}" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
                         <span>
                             <span class="btn-double-text" data-text="Nous rejoindre ?">Nous rejoindre ?</span>

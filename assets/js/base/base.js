@@ -1,13 +1,42 @@
 document.addEventListener("DOMContentLoaded", (event) => {
     
+    // Fonction pour détecter si l'utilisateur est sur mobile
+    function isMobile() {
+        return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+    }
+    
     // HEADER LINKS
     $(document).on('click', '.header-link', function (e) {
         e.preventDefault();
-        let data = $(this).data('anchor');
-        if (data) {
-            document.getElementById(data).scrollIntoView({ behavior: 'smooth' });;
+        let anchor = $(this).data('anchor');
+        let menuBtn = document.querySelector('.navbar-toggler.float-start');
+    
+        if (anchor) {
+            const targetElement = document.getElementById(anchor);
+            if (targetElement) {
+                if (isMobile()) {
+                    // Calculer la position avec un ajustement de 50px
+                    const offset = targetElement.getBoundingClientRect().top + window.scrollY - 130;
+    
+                    // Effectuer le défilement manuel
+                    window.scrollTo({ top: offset, behavior: 'auto' });
+    
+                    // Fermer le menu après un délai si nécessaire
+                    if (menuBtn) {
+                        setTimeout(() => {
+                            menuBtn.click();
+                        }, 500);
+                    }
+                } else {
+                    // Défilement fluide sans ajustement
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                console.error(`Ancre introuvable : ${anchor}`);
+            }
         }
     });
+    
 
     // BACK HISTORIC LINK
     const backButton = document.getElementById('backButton');

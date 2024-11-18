@@ -81,14 +81,14 @@
                                 </li>
                             </ul>
                             
-                            <div class="fs-20 fw-600 text-dark-gray w-90 lg-w-100">{{lastPastEvent.name}}</div>
+                            {# <div class="fs-20 fw-600 text-dark-gray w-90 lg-w-100">{{lastPastEvent.name}}</div>
                             <p class="w-90 sm-w-100 fs-16">
                                 {% if lastPastEvent.description|length > 150 %}
                                     {{ lastPastEvent.description|slice(0, 150) ~ '...' }}
                                 {% else %}
                                     {{ lastPastEvent.description }}
                                 {% endif %}
-                            </p>
+                            </p> #}
 
                             <a href="{{ path('blog_index', { 'id': lastPastEvent.id, 'is_passed': true }) }}" class="btn btn-medium btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
                                 <span>

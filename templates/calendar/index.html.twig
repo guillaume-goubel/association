@@ -31,17 +31,12 @@
                     <div class="row blog-details d-flex align-items-center"> 
                         
                         <div class="col-12 col-md-10">
-                            <div class="entry-meta fs-15">
-                                <span>
-                                <i class="text-dark-gray feather icon-feather-user"></i>
-                                {{ app.user.firstName }} {{ app.user.lastName }}
-                                </span>
-                                <a href="{{ path('app_logout')}}">Déconnexion</a>
-                            </div>
+                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">CALENDRIER</h5>
                         </div>
 
-                        <div class="col-12 col-md-2 d-flex align-items-center justify-content-end">
+                        <div class="admin-action col-12 col-md-2 d-flex align-items-center justify-content-end">
                             {% set redirect = app.request.get('from') == 'admin_event_new' ? 'admin_event_index' : app.request.get('from') ?: 'admin_event_index' %}
                             <a href="{{ path(redirect) }}">
                                 <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
@@ -141,7 +136,6 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <script>
         const events = {{ eventDateJson|raw }};
-        console.log(events);
     </script>
 
     {% block importmap %}
