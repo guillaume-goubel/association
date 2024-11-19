@@ -25,7 +25,7 @@
                     <div class="row blog-details d-flex align-items-center justify-content-between"> 
                         <div class="col-8">
                             {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
-                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">Administrateurs - Liste</h5>
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">ADMINISTRATEURS</h5>
                         </div>
 
                         <div class="admin-action col-2 d-flex justify-content-end">
@@ -99,7 +99,7 @@
                                             {% endif %}
 
                                             <div class="feature-box-content">
-                                                <div class="d-inline-block text-dark-gray fs-20 ls-minus-05px"><span class="fw-700">{{ admin.lastName|capitalize }}</span> {{ admin.firstName|capitalize }} </div><br/>
+                                                <div class="d-inline-block text-dark-gray fs-20 ls-minus-05px"><span class="fw-700">{{ admin.lastName|upper }}</span> {{ admin.firstName|capitalize }} </div><br/>
                                                 <div class="d-inline-block text-base-color fs-15 ls-minus-05px">{{ admin.email }}</div><br/>
                                                 <div class="d-inline-block text-base-color mb-20px fs-13 ls-minus-05px">
                                                     {% if admin.getIsEnabled == true %}

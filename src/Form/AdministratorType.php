@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use App\Entity\Activity;
+use App\Entity\Animator;
 use App\Validator\PasswordMatch;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;

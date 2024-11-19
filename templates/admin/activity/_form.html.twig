@@ -19,7 +19,7 @@
 
     {% if is_granted('ROLE_SUPER_ADMIN') or isUserActivityOwner == true %}
         <div class="row d-flex aside-form justify-content-center mt-5">
-            <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto">{{ button_label|default('Modifier') }}</button>
+            <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto border-radius-30px">{{ button_label|default('Modifier') }}</button>
         </div>
     {% endif %}
 

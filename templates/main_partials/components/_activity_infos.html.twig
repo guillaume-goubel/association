@@ -16,7 +16,7 @@
         <p class="fs-14 mb-35px sm-mb-25px preformatted">{{activity.description|raw}}</p> 
         
         {% if isEvents %}
-            <a href="{{ path('agenda_index') }}?monthChoice=all&yearChoice=all&activityChoice={{ activity.id }}&from=activity-section" class="btn btn-small btn-gradient-emerald-blue-emerald-green btn-hover-animation-switch btn-round-edge btn-box-shadow">
+            <a href="{{ path('agenda_index') }}?monthChoice=all&yearChoice=all&activityChoice={{ activity.id }}&from=activity-section" style="padding: 3px 18px;" class="btn btn-small btn-gradient-emerald-blue-emerald-green btn-hover-animation-switch btn-round-edge btn-box-shadow">
                 <span class="pt-4"> 
                     <span class="btn-text fs-14 text-white">Programme</span>
                     <span class="btn-icon text-white mt-8"><i class="feather icon-feather-arrow-right"></i></span>

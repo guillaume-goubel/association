@@ -64,3 +64,9 @@
     background-color: red;
     border-color: none;
 }
+#changePassWordBtn:hover{
+    border:1px solid var(--base-color) !important;
+    background-color: transparent !important;
+    color: var(--base-color);
+    cursor: pointer;
+}

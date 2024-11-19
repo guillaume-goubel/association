@@ -19,5 +19,25 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         });
     });
+
+    // open and change password field
+    const changePassWordBtn = document.getElementById("changePassWordBtn");
+    const passWordContainer = document.getElementById("passWordContainer");
+    const plainPasswordInput = document.getElementById("administrator_plainPassword");
+    const plainPasswordRepeatInput = document.getElementById("administrator_plainPasswordRepeat");
+
+    if (changePassWordBtn) {
+        changePassWordBtn.addEventListener("click", function () {
+            // Toggle between 'd-none' and 'd-flex' classes
+            passWordContainer.classList.toggle("d-none");
+            passWordContainer.classList.toggle("d-flex");
+
+            // If container is hidden, clear the input values
+            if (passWordContainer.classList.contains("d-none")) {
+                if (plainPasswordInput) plainPasswordInput.value = "";
+                if (plainPasswordRepeatInput) plainPasswordRepeatInput.value = "";
+            }
+        });
+    }
     
 });
