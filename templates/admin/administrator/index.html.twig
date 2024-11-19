@@ -89,7 +89,7 @@
                                             {% if admin.animator != null %}
                                                 <div class="feature-box-icon me-50px md-me-35px">
                                                     <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/>
-                                                    <div class="fs-13 fw-600 text-success">Animateur</div> 
+                                                    <div class="fs-13 fw-600 text-gray">Animateur</div> 
                                                 </div>
                                             {% else %}
                                                 <div class="feature-box-icon me-50px md-me-35px">
@@ -100,7 +100,15 @@
 
                                             <div class="feature-box-content">
                                                 <div class="d-inline-block text-dark-gray fs-20 ls-minus-05px"><span class="fw-700">{{ admin.lastName|capitalize }}</span> {{ admin.firstName|capitalize }} </div><br/>
-                                                <div class="d-inline-block text-base-color mb-20px fs-15 ls-minus-05px">{{ admin.email }}</div>
+                                                <div class="d-inline-block text-base-color fs-15 ls-minus-05px">{{ admin.email }}</div><br/>
+                                                <div class="d-inline-block text-base-color mb-20px fs-13 ls-minus-05px">
+                                                    {% if admin.getIsEnabled == true %}
+                                                        <span class="admin-activity-pills bg-success">Activé</span>
+                                                    {% else %}
+                                                        <span class="admin-activity-pills bg-alert">Désactivé</span>
+                                                    {% endif %}
+                                                </div>
+                                                
                                                 <div class="administrator-activies-list w-100 fs-14">
                                                     {% for activity in admin.activitiesByName %}
                                                         <span class="admin-activity-pills" style="background-color:{{ activity.color }}">{{ activity.name }}</span>

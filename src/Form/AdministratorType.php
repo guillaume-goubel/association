@@ -12,21 +12,26 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 
 class AdministratorType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        
-        
-        
+
         $builder
+            ->add('isEnabled', CheckboxType::class, [
+                'label' => "Compte activé",
+                'attr' => ['class' => 'form-check-input'], // Classe Bootstrap pour les switches
+                'required' => false,
+                'help' => 'Cochez pour activer ou désactiver le compte.',
+            ])
             ->add('email', EmailType::class, [
                 'label' => "Email de connexion *",
                 'attr' => ['class' => 'form-control', 'maxlength' => 75],
                 'required' => true
-            ])
+            ])   
             ->add('lastName', TextType::class, [
                 'label' => "NOM *",
                 'attr' => ['class' => 'form-control'],

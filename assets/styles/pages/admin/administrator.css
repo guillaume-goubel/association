@@ -52,3 +52,15 @@
     overflow-wrap: break-word; /* Support plus moderne, remplace word-wrap */
     white-space: normal; /* Permet un retour à la ligne naturel */
 }
+#administrator_isEnabled{
+    /* background-color: red; */
+    border: none;
+}
+.form-check-input:checked {
+    background-color: green;
+    border-color: none;
+}
+.form-check-input {
+    background-color: red;
+    border-color: none;
+}

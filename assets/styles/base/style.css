@@ -3189,6 +3189,9 @@ input:focus, select:focus, textarea:focus, .form-control:focus {
 .bg-base-color {
   background-color: var(--base-color);
 }
+.bg-alert {
+  background-color: #DC3545;
+}
 .bg-dark-gray,
 .bg-dark-gray:focus {
   background-color: var(--dark-gray);

@@ -305,12 +305,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function isEnabled(): ?bool
+    public function getIsEnabled(): bool
     {
         return $this->isEnabled;
     }
 
-    public function setEnabled(?bool $isEnabled): static
+    public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
 

@@ -1,6 +1,16 @@
 
 {{ form_start(form)}}
     
+    <div class="fs-14 text-base-color text-uppercase ls-1px fw-600"><i class="fa-solid fa-circle-info align-middle icon-large text-base-color me-1"></i>ACTIVATION<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1 mb-5">
+            <div class="form-check form-switch">
+                {{ form_widget(form.isEnabled, { attr: { class: 'form-check-input me-2' } }) }}
+                {{ form_label(form.isEnabled, 'activer / désactiver', { label_attr: { class: 'form-check-label' } }) }}
+            </div>
+        </div>
+    </div>
+    
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600"><i class="fa-solid fa-circle-info align-middle icon-large text-base-color me-1"></i>LES INFORMATIONS DE BASES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
     <div class="row d-flex ">
         <div class="col-12 col-md-6 mt-1">
