@@ -18,6 +18,9 @@ class AdministratorType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        
+        
+        
         $builder
             ->add('email', EmailType::class, [
                 'label' => "Email de connexion *",
@@ -34,25 +37,25 @@ class AdministratorType extends AbstractType
                 'attr' => ['class' => 'form-control', 'maxlength' => 75],
                 'required' => true
             ])
-            ->add('plainPassword', TextType::class, array(
+            ->add('plainPassword', PasswordType::class, array(
                 'label' => "Mot de passe *",
                 'attr' => [
                     'placeholder' => '...',
                     'maxlength' => 32,
                     'class' => 'form-control'
                 ],
-                'required' => true,
+                'required' => $options['is_new_user'],
                 'help' => "8 caractères min / 32 caractères max, 1 majuscule + 1 chiffre",
             ))
-            ->add('plainPasswordRepeat', TextType::class, array(
+            ->add('plainPasswordRepeat', PasswordType::class, array(
                 'label' => "Répéter le mot de passe *",
                 'attr' => [
                     'placeholder' => '...',
                     'maxlength' => 32,
                     'class' => 'form-control'
                 ],
-                'required' => true,
-                'help' => "Doit être égal au mot de passe",
+                'required' => $options['is_new_user'],
+                'help' => "Doit être identique au mot de passe",
                 'constraints' => [
                     new PasswordMatch(),
                 ],
@@ -82,6 +85,7 @@ class AdministratorType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'is_new_user' => true
         ]);
     }
     

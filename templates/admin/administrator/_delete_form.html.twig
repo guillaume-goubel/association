@@ -1,4 +1,28 @@
-<form method="post" action="{{ path('admin_administrator_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+{# <form method="post" action="{{ path('admin_administrator_delete', {'id': user.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
     <button class="btn">Delete</button>
-</form>
+</form> #}
+
+<div class="d-flex justify-content-center">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ admin.id) }}">
+    <a href="#" data-bs-toggle="modal" data-bs-target="#administrator-deleteModal-{{ admin.id }}" class="btn"><i class="fa-solid fa-trash-can text-red me-2"></i>Effacer</a>
+</div>
+
+<div class="modal fade" id="administrator-deleteModal-{{ admin.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title fs-14">Confirmer la suppression de cet administrateur ?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer ">
+            <button type="button" class="btn btn-small" data-bs-dismiss="modal">Annuler</button>
+            <a href="{{ path('admin_administrator_delete', {'id': admin.id}) }}"
+                class="btn btn-small btn-red btn-round-edge-large border-1 w-30">
+                Supprimer
+            </a>
+        </div>
+        </div>
+    </div>
+</div>
+

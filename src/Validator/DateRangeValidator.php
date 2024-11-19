@@ -14,9 +14,8 @@ class DateRangeValidator extends ConstraintValidator
         if (!$value) {
             return;
         }
-
-        // Récupère l'objet "Event" complet (entité)
-        $entity = $this->context->getObject();  // Ceci donne l'objet "Event"
+        
+        $entity = $this->context->getObject();  
 
         if (!$entity instanceof \App\Entity\Event) {
             return;

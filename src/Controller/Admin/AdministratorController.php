@@ -4,8 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\AdministratorType;
+use App\Repository\ActivityRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -16,10 +18,33 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdministratorController extends AbstractController
 {
     #[Route('/index', name: 'index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
-    {
+    public function index(UserRepository $userRepository, ActivityRepository $activityRepository, Request $request, PaginatorInterface $paginator): Response
+    {   
+        $activityChoice = $request->query->get('activityChoice') ?? "all";
+        $adminChoice = $request->query->get('adminChoice') ?? "all";
+
+        $eventsQuery = $userRepository->findAdmins($activityChoice, $adminChoice);
+        
+        // Définir la page actuelle (par défaut, la page 1)
+        $page = $request->query->getInt('page', 1); 
+
+        // Paginer les résultats
+        $pagination = $paginator->paginate(
+            $eventsQuery, // la requête ou liste d'objets
+            $page,        // page actuelle
+            8      // nombre d'événements par page (vous pouvez ajuster ce chiffre)
+        );
+        
+        $adminsList = $userRepository->adminsList();
+        
         return $this->render('admin/administrator/index.html.twig', [
+            'admins' => $pagination,
+            'adminsList' => $adminsList,
+            'adminChoice' => $adminChoice,
+            'activityList' => $activityRepository->findActivitiesWithUsers(),
+            'activityChoice' => $activityChoice,
         ]);
+
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
@@ -33,12 +58,14 @@ class AdministratorController extends AbstractController
             
             $plaintextPassword = $form->get('plainPassword')->getData();
             
-            // hash the password (based on the security.yaml config for the $user class)
             $hashedPassword = $passwordHasher->hashPassword(
                 $user,
                 $plaintextPassword
             );
             $user->setPassword($hashedPassword);
+
+            // set Role
+            $user->setRoles(['ROLE_ADMIN']);
             
             $entityManager->persist($user);
             $entityManager->flush();
@@ -61,31 +88,41 @@ class AdministratorController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $form = $this->createForm(AdministratorType::class, $user);
+        $isNewUser = !$user->getId();
+        
+        $form = $this->createForm(AdministratorType::class, $user, [
+            'is_new_user' => $isNewUser
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            // Si le mot de passe est rempli, on le met à jour
+            if ($user->getPlainPassword()) {
+                $hashedPassword = $passwordHasher->hashPassword($user, $user->getPlainPassword());
+                $user->setPassword($hashedPassword);
+            }
+            
             $entityManager->flush();
 
             return $this->redirectToRoute('admin_administrator_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/administrator/edit.html.twig', [
-            'user' => $user,
+            'admin' => $user,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'delete', methods: ['GET'])]
     public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('app_admin_administrator_index', [], Response::HTTP_SEE_OTHER);
+        $entityManager->remove($user);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('admin_administrator_index', [], Response::HTTP_SEE_OTHER);
     }
 }

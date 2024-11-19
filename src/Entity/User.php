@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as AppAssert;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -34,10 +35,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[Assert\Regex("/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,32})/")]
-    private string $plainPassword;
+    private ?string $plainPassword = null;
 
     #[Assert\Regex("/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,32})/")]
-    private string $plainPasswordRepeat;
+    #[AppAssert\PasswordMatch()]
+    private ?string $plainPasswordRepeat = null;
 
     /**
      * @var Collection<int, Activity>
@@ -59,6 +61,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'user')]
     private Collection $events;
+
+    #[ORM\Column(nullable: true)]
+    private ?bool $isEnabled = true;
 
     public function __construct()
     {
@@ -296,6 +301,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $event->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function isEnabled(): ?bool
+    {
+        return $this->isEnabled;
+    }
+
+    public function setEnabled(?bool $isEnabled): static
+    {
+        $this->isEnabled = $isEnabled;
 
         return $this;
     }

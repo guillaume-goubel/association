@@ -16,3 +16,39 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.display-password-btn:hover{
+    color: white;
+    background-color: #b7aaaa;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.admin-activity-pills{
+    padding: 5px 17px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+}
+.edit-administrator-btn{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 10px 11px !important;
+    background-color: white;
+    color: var(--base-color);
+    border: 1px solid var(--base-color);
+}
+.edit-administrator-btn:hover {
+    color: white;
+    background-color: var(--base-color);
+}
+.edit-administrator-btn i{
+    padding-top: 3px;
+    margin-left: 0 !important;
+    font-size: 21px;
+}
+.administrator-activies-list{
+    word-wrap: break-word; /* Permet de couper une longue chaîne si nécessaire */
+    overflow-wrap: break-word; /* Support plus moderne, remplace word-wrap */
+    white-space: normal; /* Permet un retour à la ligne naturel */
+}

@@ -26,28 +26,11 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
         $this->router = $router;
     }
 
-    // public function authenticate(Request $request): Passport
-    // {
-        
-    //     $email = $request->request->get('email', '');
-
-    //     $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
-
-    //     return new Passport(
-    //         new UserBadge($email),
-    //         new PasswordCredentials($request->request->get('password', '')),
-    //         [
-    //             new CsrfTokenBadge('authenticate', $request->request->get('_csrf_token')),
-    //             new RememberMeBadge()
-    //         ]
-    //     );
-    // }
-
     public function onAuthenticationSuccess(Request $request, TokenInterface $token): RedirectResponse
     {
         $user = $token->getUser();
 
-        if (in_array('ROLE_ADMIN', $user->getRoles()) || in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+        if ($user->isEnabled() && (in_array('ROLE_ADMIN', $user->getRoles()) || in_array('ROLE_SUPER_ADMIN', $user->getRoles()))) {
             return new RedirectResponse($this->router->generate('admin_index'));
         }
 
@@ -58,4 +41,5 @@ class LoginSuccessHandler implements AuthenticationSuccessHandlerInterface
     {
         return $request->isMethod('POST') && $request->getPathInfo() === '/login';
     }
+
 }

@@ -18,8 +18,9 @@
 
     <!-- start section -->
     <section class="main-section">
-        
         <div class="container">
+            <div class="row">
+                
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details d-flex align-items-center justify-content-between"> 
                         <div class="col-8">
@@ -33,92 +34,102 @@
                         
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-xl-10" data-anime='{ "el": "childs", "translateY": [15, 0], "opacity": [0,1], "duration": 800, "delay": 200, "staggervalue": 300, "easing": "easeOutQuad" }'>
-                        <div class="row border-bottom border-2 border-color-dark-gray pb-50px mb-50px sm-pb-35px sm-mb-35px align-items-center">
-                            <div class="col-md-1 text-center text-md-end md-mb-15px">
-                                <div class="fs-16 fw-600 text-dark-gray">01</div>
+                <form action="" method="get">
+                    <div class="col-12 blog-standard mb-2">
+                        <div class="row gy-2">
+                            <!-- Filtre activité -->
+                            <div class="col-12 col-md-6 col-lg-2">
+                                <select name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                    <option {{ activityChoice == 'all' ? 'selected' : '' }} value="all">Toutes activités</option>
+                                    {% for item in activityList %}
+                                        <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div class="col-md-7 offset-lg-1 icon-with-text-style-01 md-mb-25px">
-                                <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
-                                    <div class="feature-box-icon me-50px md-me-35px">
-                                        <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/> 
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-dark-gray mb-5px fs-20 ls-minus-05px">Pixel perfect <span class="fw-700">web design</span></span>
-                                        <p class="w-90 md-w-100">Lorem ipsum is simply dummy text of the printing typesetting industry been text.</p>
-                                    </div>
-                                </div>
+                            <!-- Filtre créateur -->
+                            <div class="col-12 col-md-6 col-lg-3">
+                                <select name="adminChoice" class="form-select form-select-sm" aria-label="Sélectionner un créateur">
+                                    {# {% if is_granted('ROLE_SUPER_ADMIN') %} #}
+                                        <option selected value="all">Tout administrateur</option>
+                                    {# {% endif %} #}
+                                    {% for admin in adminsList %}
+                                        <option {{ adminChoice == admin.id ? 'selected' : '' }} value="{{ admin.id }}">{{ admin.completeNameByLastName }}</option>
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <div class="col-lg-3 col-md-4 text-center text-md-end">
-                                <a href="#" class="btn btn-dark-gray btn-box-shadow btn-medium btn-switch-text btn-rounded">
-                                    <span>
-                                        <span class="btn-double-text" data-text="Get started now">Get started now</span> 
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row border-bottom border-2 border-color-dark-gray pb-50px mb-50px sm-pb-35px sm-mb-35px align-items-center">
-                            <div class="col-md-1 text-center text-md-end md-mb-15px">
-                                <div class="fs-16 fw-600 text-dark-gray">02</div>
-                            </div>
-                            <div class="col-md-7 offset-lg-1 icon-with-text-style-01 md-mb-25px">
-                                <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
-                                    <div class="feature-box-icon me-50px md-me-35px">
-                                        <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/> 
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-dark-gray mb-5px fs-20 ls-minus-05px">Creative <span class="fw-700">web development</span></span>
-                                        <p class="w-90 md-w-100">Lorem ipsum is simply dummy text of the printing typesetting industry been text.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 text-center text-md-end">
-                                <a href="#" class="btn btn-dark-gray btn-box-shadow btn-medium btn-switch-text btn-rounded">
-                                    <span>
-                                        <span class="btn-double-text" data-text="Get started now">Get started now</span> 
-                                    </span>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="row align-items-center">
-                            <div class="col-md-1 text-center text-md-end md-mb-15px">
-                                <div class="fs-16 fw-600 text-dark-gray">03</div>
-                            </div>
-                            <div class="col-md-7 offset-lg-1 icon-with-text-style-01 md-mb-25px">
-                                <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
-                                    <div class="feature-box-icon me-50px md-me-35px">
-                                        <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/> 
-                                    </div>
-                                    <div class="feature-box-content">
-                                        <span class="d-inline-block text-dark-gray mb-5px fs-20 ls-minus-05px">Best <span class="fw-700">eCommerce solution</span></span>
-                                        <p class="w-90 md-w-100">Lorem ipsum is simply dummy text of the printing typesetting industry been text.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 text-center text-md-end">
-                                <a href="#" class="btn btn-dark-gray btn-box-shadow btn-medium btn-switch-text btn-rounded">
-                                    <span>
-                                        <span class="btn-double-text" data-text="Get started now">Get started now</span> 
-                                    </span>
-                                </a>
+                            <!-- Bouton de recherche -->
+                            <div class="col-12 col-md-6 col-lg-1 text-center text-md-start">
+                                <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
+                                    <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
+                </form>
+
+                <div>
+                    <div class="pagination-container d-flex justify-content-center">
+                        {{knp_pagination_render(admins, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
+                    </div>
                 </div>
+
+                <div class="row d-flex justify-content-center mt-4">
+                    <div class="col-12 col-md-9" data-anime='{ "el": "childs", "translateY": [15, 0], "opacity": [0,1], "duration": 800, "delay": 200, "staggervalue": 300, "easing": "easeOutQuad" }'>
+
+                        {% if admins is not empty %}
+                            {% for admin in admins %}
+                                <div class="row border-bottom border-2 border-color-dark-gray pb-50px mb-50px sm-pb-35px sm-mb-35px align-items-center">
+                                    {# <div class="col-md-1 text-center text-md-end md-mb-15px">
+                                        <div class="fs-16 fw-600 text-dark-gray">{{admin.id}}</div>
+                                    </div> #}
+                                    <div class="col-md-8 icon-with-text-style-01 md-mb-25px">
+                                        <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
+                                            
+                                            {% if admin.animator != null %}
+                                                <div class="feature-box-icon me-50px md-me-35px">
+                                                    <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/>
+                                                    <div class="fs-13 fw-600 text-success">Animateur</div> 
+                                                </div>
+                                            {% else %}
+                                                <div class="feature-box-icon me-50px md-me-35px">
+                                                    {# <img src="https://via.placeholder.com/130x130" class="w-75px" alt=""/> #}
+                                                    <div style="text-decoration: line-through;" class="fs-13 fw-600 text-light-gray">Animateur </div> 
+                                                </div>
+                                            {% endif %}
+
+                                            <div class="feature-box-content">
+                                                <div class="d-inline-block text-dark-gray fs-20 ls-minus-05px"><span class="fw-700">{{ admin.lastName|capitalize }}</span> {{ admin.firstName|capitalize }} </div><br/>
+                                                <div class="d-inline-block text-base-color mb-20px fs-15 ls-minus-05px">{{ admin.email }}</div>
+                                                <div class="administrator-activies-list w-100 fs-14">
+                                                    {% for activity in admin.activitiesByName %}
+                                                        <span class="admin-activity-pills" style="background-color:{{ activity.color }}">{{ activity.name }}</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 text-center text-md-end">
+                                        <a href="{{ path('admin_administrator_edit', { 'id':admin.id }) }}" class="edit-administrator-btn btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                                            <span>
+                                                <i class="fa-regular fa-folder-open"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="no-matching-search-message">Pas de résultats pour cette recherche</div>
+                        {% endif %}
+
+                    </div>
+                </div>
+
             </div>
-
-
+        </div>
     </section>
-    <!-- end section -->
 
-    <!-- start footer -->
     {% include 'main_partials/parts/_footer_minimum.html.twig' %}
-    <!-- end footer -->
 
 </body>
 

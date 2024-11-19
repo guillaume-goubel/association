@@ -14,5 +14,5 @@ class PasswordMatch extends Constraint
     /**
      * @Event form
      */
-    public $message = 'La date de fin doit être égale ou postérieure à la date de début.';
+    public $message = 'Le mot de passe répété doit être identique au mot de passe';
 }

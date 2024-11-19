@@ -19,14 +19,23 @@
         <div class="col-12 col-md-6 mt-1">
             <div class="d-flex align-items-center justify-content-between">
                 {{ form_row(form.plainPassword) }}
-                <div class="display-password-btn"><i class="fa-regular fa-eye icone-medium"></i></div>
+                <div data-input-id="administrator_plainPassword" class="display-password-btn"><i class="fa-regular fa-eye icone-medium"></i></div>
             </div>
         </div>
         <div class="col-12 col-md-6 mt-1">
             <div class="d-flex align-items-center justify-content-between">
-                {{ form_row(form.plainPasswordRepeat) }}
-                <div class="display-password-btn"><i class="fa-regular fa-eye icone-medium"></i></div>
+                <div>
+                    {{ form_label(form.plainPasswordRepeat) }}  
+                    {{ form_widget(form.plainPasswordRepeat) }} 
+                    {{ form_help(form.plainPasswordRepeat) }} 
+                </div>
+                <div data-input-id="administrator_plainPasswordRepeat" class="display-password-btn"><i class="fa-regular fa-eye icone-medium"></i></div>
             </div>
+            {% if form.plainPasswordRepeat.vars.errors|length > 0 %}
+                <div class="form-errors text-red fs-14">
+                    {{ form_errors(form.plainPasswordRepeat) }} 
+                </div>
+            {% endif %}
         </div>
     </div>
     <div class="row d-flex">

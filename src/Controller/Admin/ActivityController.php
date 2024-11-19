@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Activity;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,11 +17,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ActivityController extends AbstractController
 {
     #[Route('/activity', name: 'index')]
-    public function index(ActivityRepository $activityRepository, Request $request): Response
+    public function index(ActivityRepository $activityRepository, Request $request, UserRepository $userRepository): Response
     {   
         $user = $this->getUser();
         $userChoice = $request->query->get('userChoice') ?? $user->getId();
-        if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+        if(in_array('ROLE_SUPER_ADMIN', $user->getRoles()) && $request->query->get('userChoice') == null) {
             $userChoice = 'all';
         }
 
@@ -56,12 +57,15 @@ class ActivityController extends AbstractController
         // Transformer le tableau temporaire en tableau final
         $userList = array_values($tempUserArray);
 
+        $userChoiceInfos = ($userChoice !== 'all') ? $userRepository->findOneBy(['id' => $userChoice]) : 'all';
+
         return $this->render('admin/activity/index.html.twig', [
             "activities" => $activities,
             "userActivityArray" => $userActivityArray,
             "noUserActivityArray" => $noUserActivityArray,
             'userList' => $userList,
             'userChoice' => $userChoice,
+            'userChoiceInfos' => $userChoiceInfos,
         ]);
 
     }

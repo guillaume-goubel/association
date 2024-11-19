@@ -142,4 +142,16 @@ class ActivityRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
+    /**
+     * Retourne les activités ayant au moins un utilisateur associé
+     */
+    public function findActivitiesWithUsers(): array
+    {
+        return $this->createQueryBuilder('a')
+            ->join('a.users', 'u') 
+            ->where('u IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
+
 }

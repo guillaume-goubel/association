@@ -52,9 +52,19 @@
                         </div>
                     </form>
 
+
                     {% if not is_granted('ROLE_SUPER_ADMIN') %}
                         <div class="col-12">
-                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les activités dont je suis responsable<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">
+                                
+                                {% if userChoiceInfos != 'all' and userChoiceInfos.id != app.user.id %}
+                                    Les activités dont je suis responsable avec {{userChoiceInfos.firstName}} {{userChoiceInfos.lastName}}
+                                {% else %}
+                                    Les activités dont je suis responsable
+                                {% endif %}
+                                
+                                <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span>
+                            </div>
                             <div class="row mb-50px sm-mb-30px">
                                 
                                 {% for activity in userActivityArray %}
@@ -69,13 +79,6 @@
                                         </div>
                                         <div class="card-body">
                                             <h5 class="card-title">{{ activity.name|capitalize }}</h5>
-                                            {# <p class="card-text preformatted">
-                                                {% if activity.description|length > 100 %}
-                                                    {{ activity.description|slice(0, 100)|raw ~ '...' }}
-                                                {% else %}
-                                                    {{ activity.description|trim|raw }}
-                                                {% endif %}
-                                            </p> #}
                                             <div class="d-flex align-items-center">
                                                 <a href="{{ path('admin_activity_edit', { 'id': activity.id }) }}" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow ">Description</a>
                                                 <a style="width:130px;" href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_activity_index' }) }}" class="btn btn-very-small btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto ms-3">Evénement<span class="bg-base-color text-white"><i class="fa-solid fa-circle-plus"></i></span></a>
@@ -104,7 +107,17 @@
                     <div class="col-12">
                         
                         {% if not is_granted('ROLE_SUPER_ADMIN') and userChoice != app.user.id %}
-                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">Les activités des autres administrateurs <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                            <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">
+                                
+                                {% if userChoiceInfos != 'all' %}
+                                     Les activités de {{userChoiceInfos.firstName}} {{userChoiceInfos.lastName}}
+                                {% else %}
+                                    Les activités des autres administrateurs 
+                                {% endif %}
+                            
+                            <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span>
+                            </div>
+                        
                         {% endif %}
 
                         <div class="row mb-50px sm-mb-30px">
@@ -121,15 +134,6 @@
                                     </div>
                                     <div class="card-body">
                                         <h5 class="card-title">{{ activity.name|capitalize }}</h5>
-                                        {# <p class="card-text preformatted">
-                                        
-                                            {% if activity.description|length > 100 %}
-                                                {{ activity.description|slice(0, 100)|raw ~ '...' }}
-                                            {% else %}
-                                                {{ activity.description|trim|raw }}
-                                            {% endif %}
-                                        
-                                        </p> #}
 
                                         <a href="{{ path('admin_activity_edit', { 'id': activity.id }) }}" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow">Description</a>
                                         {% if is_granted('ROLE_SUPER_ADMIN') %}
