@@ -70,6 +70,7 @@ class AdministratorController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Opération effectuée');
             return $this->redirectToRoute('admin_administrator_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -107,7 +108,8 @@ class AdministratorController extends AbstractController
             }
             
             $entityManager->flush();
-
+            
+            $this->addFlash('success', 'Opération effectuée');
             return $this->redirectToRoute('admin_administrator_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -123,6 +125,7 @@ class AdministratorController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
         
+        $this->addFlash('success', 'Opération effectuée');
         return $this->redirectToRoute('admin_administrator_index', [], Response::HTTP_SEE_OTHER);
     }
 }

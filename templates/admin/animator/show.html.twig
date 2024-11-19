@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Animator{% endblock %}
+
+{% block body %}
+    <h1>Animator</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ animator.id }}</td>
+            </tr>
+            <tr>
+                <th>FirstName</th>
+                <td>{{ animator.firstName }}</td>
+            </tr>
+            <tr>
+                <th>LastName</th>
+                <td>{{ animator.lastName }}</td>
+            </tr>
+            <tr>
+                <th>Picture</th>
+                <td>{{ animator.picture }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ animator.email }}</td>
+            </tr>
+            <tr>
+                <th>Phone</th>
+                <td>{{ animator.phone }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_animator_index') }}">back to list</a>
+
+    <a href="{{ path('admin_animator_edit', {'id': animator.id}) }}">edit</a>
+
+    {{ include('admin/animator/_delete_form.html.twig') }}
+{% endblock %}

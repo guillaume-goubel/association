@@ -33,13 +33,19 @@
                     {% if event.animators is not empty %}
                         <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
                             {% for animator in event.animators %}
-                                <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border: 2px solid {{event.activity.color}};border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar">
+                                {% if animator.picture != null %}
+                                    <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                {% else %}
+                                    <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                {% endif %}
                             {% endfor %}
                         </div>
                     {% endif %}
                 </div>
             </div>
         </div>
+
+        
 
         <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
             <li style="height:85px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{event.name}}</li>

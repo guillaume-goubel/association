@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Animator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\Query;
 
 /**
  * @extends ServiceEntityRepository<Animator>
@@ -21,28 +22,38 @@ class AnimatorRepository extends ServiceEntityRepository
         parent::__construct($registry, Animator::class);
     }
 
-//    /**
-//     * @return Animator[] Returns an array of Animator objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
 
-//    public function findOneBySomeField($value): ?Animator
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    public function queryOrderingByName($activityChoice, $animatorChoice): Query
+    {
+        // return $this->createQueryBuilder('a')
+        //     ->orderBy('a.lastName', 'ASC')
+        //     ->getQuery()
+        // ;
+
+        $stmt = $this->createQueryBuilder('a');
+        $stmt->leftjoin('a.events', 'e');
+        $stmt->leftjoin('e.activity', 'ac');
+
+        if ($activityChoice && $activityChoice !== 'all') {
+            $stmt->andWhere('ac.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $activityChoice);
+        }
+
+        if ($animatorChoice && $animatorChoice !== 'all') {
+            $stmt->andWhere('a.id = :animatorChoice');
+            $stmt->setParameter('animatorChoice', $animatorChoice);
+        }
+
+        $stmt->orderBy('a.lastName', 'ASC')  ;
+        return $stmt->getQuery();
+    }
+
+    public function animatorsList(): array
+    {
+        $stmt = $this->createQueryBuilder('a');
+        $stmt->orderBy('a.lastName', 'ASC')  ;
+        return $stmt->getQuery()->getResult();
+    }
+
+
 }

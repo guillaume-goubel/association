@@ -26,6 +26,7 @@ class Animator
 
     #[ORM\Column(length: 200, nullable: true)]
     private ?string $picture = null;
+    private $pictureFile;
 
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $email = null;
@@ -33,11 +34,17 @@ class Animator
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $phone = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $isEnabled = true;
+
     /**
      * @var Collection<int, Event>
      */
     #[ORM\ManyToMany(targetEntity: Event::class, mappedBy: 'animators')]
     private Collection $events;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $description = null;
 
     public function __construct()
     {
@@ -107,6 +114,18 @@ class Animator
         return $this;
     }
 
+    public function getPictureFile()
+    {
+        return $this->pictureFile;
+    }
+
+    public function setPictureFile($pictureFile): self
+    {
+        $this->pictureFile = $pictureFile;
+
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -139,6 +158,50 @@ class Animator
         return $this->events;
     }
 
+    public function getActivitiesUniqByName(): Collection
+    {
+        // Convertit la collection en tableau, trie le tableau par la propriété ordering
+        $sortedEvents = $this->events->toArray();
+        usort($sortedEvents, function (Event $a, Event $b) {
+            return $a->getName() <=> $b->getName();
+        });
+
+        $activityNameArray = [];
+        foreach ($sortedEvents as $event) {
+            $activityNameArray [] = $event->getActivity()->getName();
+        }
+        return new ArrayCollection(array_unique($activityNameArray));
+    }
+
+    public function getActivitiesUniqByNameAndId(): Collection
+    {
+        // Convertit la collection en tableau, trie le tableau par le nom de l'activité
+        $sortedEvents = $this->events->toArray();
+        usort($sortedEvents, function (Event $a, Event $b) {
+            return $a->getActivity()->getName() <=> $b->getActivity()->getName();
+        });
+    
+        // Stockage temporaire pour éviter les doublons
+        $uniqueActivities = [];
+        $uniqueKeys = [];
+    
+        foreach ($sortedEvents as $event) {
+            $activity = $event->getActivity();
+            $key = $activity->getId(); // On utilise l'ID pour identifier les activités de façon unique
+            if (!in_array($key, $uniqueKeys, true)) {
+                $uniqueKeys[] = $key;
+                $uniqueActivities[] = [
+                    'name' => $activity->getName(),
+                    'id' => $activity->getId(),
+                ];
+            }
+        }
+    
+        // Retourne une Collection des activités uniques
+        return new ArrayCollection($uniqueActivities);
+    }
+    
+
     public function addEvent(Event $event): static
     {
         if (!$this->events->contains($event)) {
@@ -154,6 +217,31 @@ class Animator
         if ($this->events->removeElement($event)) {
             $event->removeAnimator($this);
         }
+
+        return $this;
+    }
+
+
+    public function getIsEnabled(): bool
+    {
+        return $this->isEnabled;
+    }
+
+    public function setIsEnabled(bool $isEnabled): self
+    {
+        $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
 
         return $this;
     }

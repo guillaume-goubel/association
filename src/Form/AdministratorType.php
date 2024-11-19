@@ -23,7 +23,7 @@ class AdministratorType extends AbstractType
 
         $builder
             ->add('isEnabled', CheckboxType::class, [
-                'label' => "Compte activé",
+                'label' => "Activer / Désactiver",
                 'attr' => ['class' => 'form-check-input'], // Classe Bootstrap pour les switches
                 'required' => false,
                 'help' => 'Cochez pour activer ou désactiver le compte.',

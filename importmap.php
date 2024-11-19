@@ -52,6 +52,10 @@ return [
         'path' => './assets/js/pages/admin/administrator.js',
         'entrypoint' => true,
     ],
+    'admin-animator' => [
+        'path' => './assets/js/pages/admin/animator.js',
+        'entrypoint' => true,
+    ],
     'admin-event' => [
         'path' => './assets/js/pages/admin/event.js',
         'entrypoint' => true,

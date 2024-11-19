@@ -1,0 +1,94 @@
+
+{{ form_start(form)}}
+    
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1 mb-5">
+            <div class="form-check form-switch">
+                {{ form_widget(form.isEnabled, { attr: { class: 'form-check-input me-2' } }) }}
+                {{ form_label(form.isEnabled, 'Activer / Désactiver', { label_attr: { class: 'form-check-label' } }) }}
+            </div>
+        </div>
+    </div>
+
+    {# <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-4"><i class="fa-solid fa-circle-info align-middle icon-medium text-base-color me-1"></i>ADMINISTRATEUR RATTACHÉ<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.user) }}
+        </div>
+    </div> #}
+
+    <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-4"><i class="fa-solid fa-circle-info align-middle icon-medium text-base-color me-1"></i>INFORMATIONS<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.firstName) }}
+        </div>
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.lastName) }}
+        </div>
+    </div>
+
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.email) }}
+        </div>
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.phone) }}
+        </div>
+        <div class="col-12 mt-1">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.pictureFile) }}
+
+            {% if animator != null %}
+                {% if animator.picture != null %}   
+                    
+                    <div class="image-main-container-event-form d-flex">
+                        <div class="image-container-event-form" style="background-image: url( {{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }} );">
+                        </div>
+
+                        <div class="ps-4">
+                            <div class="fs-13">Voici le portrait actuel</div>
+                            <div>
+                                <a href="#" class="btn btn-very-small btn-red left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto btn-round-edge-large" 
+                                    data-bs-toggle="modal" data-bs-target="#picture-deleteModal-{{ animator.id }}">
+                                    Effacer
+                                </a>
+                            </div>    
+                        </div>
+                    </div>
+
+                    <!-- DELETE main picture MODALE -->
+                    <div class="modal fade" id="picture-deleteModal-{{ animator.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title fs-14">Confirmer la suppression de l'image ?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer ">
+                                    <button type="button" class="btn btn-small" data-bs-dismiss="modal">Annuler</button>
+                                    <a href="{{ path('admin_animator_picture_delete', {id: animator.id}) }}"
+                                        class="btn btn-small btn-red btn-round-edge-large border-1 w-30">
+                                        Supprimer
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto border-radius-30px">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+
+{{ form_end(form) }}
+

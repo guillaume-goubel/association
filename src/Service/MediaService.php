@@ -17,21 +17,41 @@ class MediaService{
         $this->filesystem = $filesystem;
     }
     
-    public function upload(File $file): string
+    public function uploadEventPictures(File $file): string
     {
         $name = $this->generateName($file->guessExtension());
 
-        if (!file_exists($this->config['photo_directory'])) {
-            mkdir($this->config['photo_directory'], 0775, true);
+        if (!file_exists($this->config['event_photo_directory'])) {
+            mkdir($this->config['event_photo_directory'], 0775, true);
         };
         
-        $file->move($this->config['photo_directory'], $name);
+        $file->move($this->config['event_photo_directory'], $name);
         return $name;
     }
 
-    public function delete(string $filename): void
+    public function deleteEventPictures(string $filename): void
     {
-        $path = sprintf('%s/%s', $this->config['photo_directory'], $filename);
+        $path = sprintf('%s/%s', $this->config['event_photo_directory'], $filename);
+        if($this->filesystem->exists($path)){
+            $this->filesystem->remove($path);
+        }
+    }
+
+    public function uploadAnimatorPictures(File $file): string
+    {
+        $name = $this->generateName($file->guessExtension());
+
+        if (!file_exists($this->config['animator_photo_directory'])) {
+            mkdir($this->config['animator_photo_directory'], 0775, true);
+        };
+        
+        $file->move($this->config['animator_photo_directory'], $name);
+        return $name;
+    }
+
+    public function deleteAnimatorPictures(string $filename): void
+    {
+        $path = sprintf('%s/%s', $this->config['animator_photo_directory'], $filename);
         if($this->filesystem->exists($path)){
             $this->filesystem->remove($path);
         }

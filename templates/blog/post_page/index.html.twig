@@ -101,7 +101,17 @@
                                             <ul class="p-0 m-0 list-style-02 animators-infos-link" data-id='{{ event.id }}' data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
                                                 {% for animator in event.animators %}
                                                     <li class="animator-item my-1 d-flex align-items-center">
-                                                        <img style="width:60px;height:60px;border: 2px solid {{event.activity.color}};border-radius: 50%;" src="{{ customAsset('app/avatar-01.jpg')}}" alt="User 1" class="avatar">
+                                                        
+                                                        {% if animator.picture != null %}
+                                                            <div class="feature-box-icon me-15px">
+                                                                <img class="border-radius-50" style="width: 45px;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" class="w-75px" alt=""/>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="feature-box-icon me-15px">
+                                                                <img style="width: 40px;" src="{{ customAsset('app/default-avatar.png')}}" alt="">
+                                                            </div>
+                                                        {% endif %}
+                                                        
                                                         <div>
                                                             <div class="ms-2 animator-item-name">{{animator.firstName|capitalize}} {{animator.lastName|upper}}</div>
                                                         </div>
@@ -145,9 +155,9 @@
                                     {% if event.mainPicture != null %}
                                         <li class="grid-item transition-inner-all">
                                             <div class="gallery-box">
-                                                <a href="{{ customAsset('data/uploads/photos/' ~ event.mainPicture) }}" data-group="lightbox-gallery" title="">
+                                                <a href="{{ customAsset('data/uploads/event/photos/' ~ event.mainPicture) }}" data-group="lightbox-gallery" title="">
                                                     <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                        <img src="{{ customAsset('data/uploads/photos/' ~ event.mainPicture) }}" alt="" />
+                                                        <img src="{{ customAsset('data/uploads/event/photos/' ~ event.mainPicture) }}" alt="" />
                                                         <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
                                                             <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
                                                                 <i class="feather icon-feather-search text-white icon-small"></i>
@@ -162,9 +172,9 @@
                                     {% if event.picture2 != null %}
                                         <li class="grid-item transition-inner-all">
                                             <div class="gallery-box">
-                                                <a href="{{ customAsset('data/uploads/photos/' ~ event.picture2) }}" data-group="lightbox-gallery" title="">
+                                                <a href="{{ customAsset('data/uploads/event/photos/' ~ event.picture2) }}" data-group="lightbox-gallery" title="">
                                                     <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                        <img src="{{ customAsset('data/uploads/photos/' ~ event.picture2) }}" alt="" />
+                                                        <img src="{{ customAsset('data/uploads/event/photos/' ~ event.picture2) }}" alt="" />
                                                         <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
                                                             <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
                                                                 <i class="feather icon-feather-search text-white icon-small"></i>
@@ -179,9 +189,9 @@
                                     {% if event.picture3 != null %}
                                         <li class="grid-item transition-inner-all">
                                             <div class="gallery-box">
-                                                <a href="{{ customAsset('data/uploads/photos/' ~ event.picture3) }}" data-group="lightbox-gallery" title="">
+                                                <a href="{{ customAsset('data/uploads/event/photos/' ~ event.picture3) }}" data-group="lightbox-gallery" title="">
                                                     <div class="position-relative gallery-image bg-white overflow-hidden">
-                                                        <img src="{{ customAsset('data/uploads/photos/' ~ event.picture3) }}" alt="" />
+                                                        <img src="{{ customAsset('data/uploads/event/photos/' ~ event.picture3) }}" alt="" />
                                                         <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
                                                             <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
                                                                 <i class="feather icon-feather-search text-white icon-small"></i>

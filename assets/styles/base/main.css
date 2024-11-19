@@ -388,6 +388,9 @@ footer .elements-social ul li:last-child {
 .form-check-input{
     cursor: pointer;
 }
+.text-justify{
+    text-align: justify;
+}
 /* media query responsive */
 @media (max-width: 1199px) {
     header .btn.btn-switch-text.btn-small > span {

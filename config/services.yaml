@@ -5,10 +5,10 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     asset:
-        version: 25042024_1
+        version: 19112024_1
     media:
-        photo_directory: '%kernel.project_dir%/public/data/uploads/photos'
-
+        event_photo_directory: '%kernel.project_dir%/public/data/uploads/event/photos'
+        animator_photo_directory: '%kernel.project_dir%/public/data/uploads/animator/photos'
 services:
     # default configuration for services in *this* file
     _defaults:

@@ -51,7 +51,7 @@
                     <div class="row align-items-center justify-content-center mb-6 sm-mb-50px position-relative">
                         <div class="col-lg-6 col-md-10 position-relative md-mb-30px" data-anime='{ "effect": "slide", "color": "#ffffff", "direction":"lr", "easing": "easeOutQuad", "delay":50}'> 
                             {% if lastPastEvent.mainPicture != null %}
-                                <img style="opacity:1!important" class="w-100" src="{{ customAsset('data/uploads/photos/' ~ lastPastEvent.mainPicture )}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
+                                <img style="opacity:1!important" class="w-100" src="{{ customAsset('data/uploads/event/photos/' ~ lastPastEvent.mainPicture )}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
                             {% else %}
                                 <img style="opacity:1!important" class="w-100" src="{{ customAsset('app/default_image.jpg')}}" data-bottom-top="transform: translateY(-50px)" data-top-bottom="transform: translateY(50px)" alt="">
                             {% endif %}

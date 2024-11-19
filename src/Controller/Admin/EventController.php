@@ -180,7 +180,7 @@ class EventController extends AbstractController
     public function delete(Request $request, Event $event, EntityManagerInterface $entityManager, EventService $eventService): Response
     {
         // delete images
-        $eventService->deleteAllPictures($event); 
+        $eventService->deleteAllEventPictures($event); 
 
         // Edit data base 
         $entityManager->remove($event);
@@ -194,7 +194,7 @@ class EventController extends AbstractController
     public function pictureFileMainDelete(Event $event, MediaService $mediaService, EntityManagerInterface $em)
     {
         // Delete data
-        $mediaService->delete($event->getMainPicture());
+        $mediaService->deleteEventPictures($event->getMainPicture());
 
         // Delete on base
         $event->setMainPicture(NULL);
@@ -209,7 +209,7 @@ class EventController extends AbstractController
     public function pictureFile2Delete(Event $event, MediaService $mediaService, EntityManagerInterface $em)
     {
         // Delete data
-        $mediaService->delete($event->getPicture2());
+        $mediaService->deleteEventPictures($event->getPicture2());
 
         // Delete on base
         $event->setPicture2(NULL);
@@ -224,7 +224,7 @@ class EventController extends AbstractController
     public function pictureFile3Delete(Event $event, MediaService $mediaService, EntityManagerInterface $em)
     {
         // Delete data
-        $mediaService->delete($event->getPicture3());
+        $mediaService->deleteEventPictures($event->getPicture3());
 
         // Delete on base
         $event->setPicture3(NULL);

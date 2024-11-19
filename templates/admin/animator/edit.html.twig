@@ -7,10 +7,9 @@
 {% endblock %}
 
 {% block body %}
-
 <body data-mobile-nav-style="classic">
-    
     {{ parent() }}
+    
     <!-- start header -->
 	{% include 'admin/partials/parts/_header.html.twig' %}
 	<!-- end header -->
@@ -25,11 +24,10 @@
                         <div class="col-10">
                             {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
 
-                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS - Nouveau</h5>
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">ANIMATEUR - Modifier</h5>
                         </div>
                         <div class="admin-action col-2 d-flex justify-content-end">
-                            {% set redirect = app.request.get('from') ?: 'admin_event_index' %}
-                            <a href="{{ path(redirect) }}?from=admin_event_new">
+                            <a href="{{ path('admin_animator_index') }}">
                                 <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
                             </a>
                         </div>
@@ -38,29 +36,27 @@
 
                 <div class="col-10">
                     <div class="row mb-50px sm-mb-30px">     
-                        {{ include('admin/event/_form.html.twig') }}
+                        {{ include('admin/animator/_form.html.twig') }}
                     </div>
                 </div>
 
             </div>
         </div>
+        
+        {{ include('admin/animator/_delete_form.html.twig') }} 
+
     </section>
     <!-- end section -->
 
-    <!-- start footer -->
     {% include 'main_partials/parts/_footer_minimum.html.twig' %}
-    <!-- end footer -->
-
-    {% include 'main_partials/notifications/_notyFlashMessage.html.twig' %}
 
 </body>
-
 {% endblock %}
 
 {% block baseJavascripts %}   
     
     {% block importmap %}
-        {{ importmap(['app', 'base', 'admin-event']) }}
+        {{ importmap(['app', 'base', 'admin-administrator', 'admin-animator']) }}
     {% endblock %}
 
 {% endblock %}

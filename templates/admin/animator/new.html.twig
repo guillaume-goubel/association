@@ -1,6 +1,19 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}New Animator{% endblock %}
+
+{% block body %}
+    <h1>Create new Animator</h1>
+
+    {{ include('admin/animator/_form.html.twig') }}
+
+    <a href="{{ path('admin_animator_index') }}">back to list</a>
+{% endblock %} #}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}
+    Nouvel animateur
 {% endblock %}
 
 {% block stylesheets %}
@@ -25,11 +38,10 @@
                         <div class="col-10">
                             {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
 
-                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">EVENEMENTS - Nouveau</h5>
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">ANIMATEUR - Nouveau</h5>
                         </div>
                         <div class="admin-action col-2 d-flex justify-content-end">
-                            {% set redirect = app.request.get('from') ?: 'admin_event_index' %}
-                            <a href="{{ path(redirect) }}?from=admin_event_new">
+                            <a href="{{ path('admin_animator_index') }}">
                                 <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
                             </a>
                         </div>
@@ -38,7 +50,7 @@
 
                 <div class="col-10">
                     <div class="row mb-50px sm-mb-30px">     
-                        {{ include('admin/event/_form.html.twig') }}
+                        {{ include('admin/animator/_form.html.twig') }}
                     </div>
                 </div>
 
@@ -47,11 +59,7 @@
     </section>
     <!-- end section -->
 
-    <!-- start footer -->
     {% include 'main_partials/parts/_footer_minimum.html.twig' %}
-    <!-- end footer -->
-
-    {% include 'main_partials/notifications/_notyFlashMessage.html.twig' %}
 
 </body>
 
@@ -60,8 +68,9 @@
 {% block baseJavascripts %}   
     
     {% block importmap %}
-        {{ importmap(['app', 'base', 'admin-event']) }}
+        {{ importmap(['app', 'base', 'admin-administrator']) }}
     {% endblock %}
 
 {% endblock %}
+
 
