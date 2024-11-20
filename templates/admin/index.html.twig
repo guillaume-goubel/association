@@ -28,12 +28,92 @@
                         {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
                         
                         <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">ACCUEIL</h5>
-                        <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
-                        <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
+                        
+                        <div>
+                            <div style="gap:4%;" class="row justify-content-center counter-style-07 ps-3 pe-3 mt-3" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                                <div class="col text-center sm-mb-30px kpi-card">
+                                    {# ADMINS #}
+                                    <div class="d-flex justify-content-around">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="kpi-icon-container">
+                                                <i class="fa-solid fa-calendar icon-medium"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{eventsLength}}">
+                                                <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
+                                            </div>
+                                            <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Evénements</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col text-center sm-mb-30px kpi-card">
+                                    {# ADMINS #}
+                                    <div class="d-flex justify-content-around">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="kpi-icon-container">
+                                                <i class="fa-solid fa-grip icon-medium"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{activitiesLength}}">
+                                                <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
+                                            </div>
+                                            <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Activités</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                            <div style="gap:4%;" class="row justify-content-center counter-style-07 ps-3 pe-3 mt-3" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                                <div class="col text-center sm-mb-30px kpi-card">
+                                    {# ADMINS #}
+                                    <div class="d-flex justify-content-around">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="kpi-icon-container">
+                                                <i class="fa-solid fa-users-gear icon-medium"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{administratorsLength}}">
+                                                <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
+                                            </div>
+                                            <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Administrateurs</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col text-center sm-mb-30px kpi-card">
+                                    {# ADMINS #}
+                                    <div class="d-flex justify-content-around">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="kpi-icon-container">
+                                                <i class="fa-solid fa-users icon-medium"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{animatorsLength}}">
+                                                <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
+                                            </div>
+                                            <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Animateurs</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
+                            <p>Lorem ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic.</p>
+                        </div>
+
                     </div>
 
-                    {# <div class="col-12">
-                        <div class="row mb-50px sm-mb-30px">
+                    <div class="col-12">
+                        
+                        {# <div class="row mb-50px sm-mb-30px">
                             <div class="tag-cloud col-12 col-md-9 text-center text-md-start sm-mb-15px">
                                 <a href="blog-grid.html">Development</a> 
                                 <a href="blog-grid.html">Event</a>
@@ -69,8 +149,8 @@
                                     <li><a class="behance" href="http://www.behance.com/" target="_blank"><i class="fa-brands fa-behance"></i><span></span></a></li>
                                 </ul>
                             </div>
-                        </div>
-                    </div> #}
+                        </div> #}
+                    </div>
                     <!-- end blog details -->
                 </div>
 

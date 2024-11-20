@@ -22,9 +22,14 @@ class AdminHomeController extends AbstractController
         }else{
             $activitiesForThisUser = $user->getActivitiesByName();
         }
+        
         return $this->render('admin/index.html.twig', [
             'activitiesForThisUser' => $activitiesForThisUser,
-            'lastEventCreated' => $eventRepository->findLastEventsforAdmin(3)
+            'lastEventCreated' => $eventRepository->findLastEventsforAdmin(3),
+            'administratorsLength' => 0,
+            'animatorsLength' => 0,
+            'eventsLength' => 0,
+            'activitiesLength' => 0,
         ]);
     }
 

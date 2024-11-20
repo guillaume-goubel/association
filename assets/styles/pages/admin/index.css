@@ -13,3 +13,91 @@
     padding-left: 5px;
     position: relative;
 }
+
+/* KPI */
+.vertical-counter{
+    font-size: 35px;
+}
+
+/* KPI cards */
+.cardContainer {
+    flex-basis:95%;
+    padding:10px 20px;
+    font-family: "Ubuntu", sans-serif;
+    text-transform: capitalize;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    gap:4%;
+  }
+  
+  .card {
+    padding: 20px;
+    border-radius: 15px;
+    background-color: white;
+    width: 22%;
+    min-height:30px;
+    color: grey;
+    margin:15px 0;
+    box-shadow: 3px 4px 8px 2px rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: space-between;
+    gap: 5%;
+  }
+  .card div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-basis: 70%;
+    text-align: center;
+  }
+  .card i {
+    background: #b3f0ff;
+    color: #00a3cc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    padding: 20px;
+    font-size:25px;
+  }
+  .card * {
+    text-wrap: nowrap;
+  }
+  .card strong {
+    color:black;
+    font-weight: 900;
+    font-size:25px;
+  }
+  @media (max-width: 850px) {
+    .cardContainer {
+      justify-content: space-between;
+      gap: unset;
+    }
+    .card {
+      width: 49%;
+    }
+  }
+  @media (max-width: 400px) {
+    .cardContainer {
+        justify-content: center;
+    }
+    .card {
+      width: 100%;
+    }
+  }
+
+/* KPIs */
+.kpi-card{
+    box-shadow: 3px 4px 8px 2px rgba(0,0,0,0.5);
+    padding: 20px;
+    border-radius: 15px;
+}
+.kpi-icon-container{
+    padding: 7px 12px;
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+}
