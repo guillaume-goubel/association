@@ -25,10 +25,6 @@ class AnimatorRepository extends ServiceEntityRepository
 
     public function queryOrderingByName($activityChoice, $animatorChoice): Query
     {
-        // return $this->createQueryBuilder('a')
-        //     ->orderBy('a.lastName', 'ASC')
-        //     ->getQuery()
-        // ;
 
         $stmt = $this->createQueryBuilder('a');
         $stmt->leftjoin('a.events', 'e');
@@ -53,6 +49,18 @@ class AnimatorRepository extends ServiceEntityRepository
         $stmt = $this->createQueryBuilder('a');
         $stmt->orderBy('a.lastName', 'ASC')  ;
         return $stmt->getQuery()->getResult();
+    }
+
+    public function getAllAnimatorsCount(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = " SELECT COUNT(a.id) as total FROM animator a;
+            ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAssociative();
+        return $result;
     }
 
 

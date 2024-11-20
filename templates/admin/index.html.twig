@@ -29,18 +29,19 @@
                         
                         <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">ACCUEIL</h5>
                         
-                        <div>
+                        {# KPIs #}
+                        <div>        
+                            {# EVENTS #}
                             <div style="gap:4%;" class="row justify-content-center counter-style-07 ps-3 pe-3 mt-3" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
                                 <div class="col text-center sm-mb-30px kpi-card">
-                                    {# ADMINS #}
                                     <div class="d-flex justify-content-around">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <div class="kpi-icon-container">
+                                            <div class="kpi-icon-container" style="background-color:#00b4d8">
                                                 <i class="fa-solid fa-calendar icon-medium"></i>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{eventsLength}}">
+                                        <div class="kpi-result-container">
+                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{eventsKpi.total}}">
                                                 <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
                                             </div>
                                             <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Evénements</span>
@@ -48,36 +49,36 @@
                                     </div>
                                 </div>
 
+                                {# ACTIVITIES #}
                                 <div class="col text-center sm-mb-30px kpi-card">
-                                    {# ADMINS #}
                                     <div class="d-flex justify-content-around">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <div class="kpi-icon-container">
+                                            <div class="kpi-icon-container" style="background-color:#90e0ef">
                                                 <i class="fa-solid fa-grip icon-medium"></i>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{activitiesLength}}">
+                                        <div class="kpi-result-container">
+                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{activitiesKpi.total}}">
                                                 <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
                                             </div>
                                             <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Activités</span>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             
                             <div style="gap:4%;" class="row justify-content-center counter-style-07 ps-3 pe-3 mt-3" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                                
+                                {# ADMINS #}
                                 <div class="col text-center sm-mb-30px kpi-card">
-                                    {# ADMINS #}
                                     <div class="d-flex justify-content-around">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <div class="kpi-icon-container">
-                                                <i class="fa-solid fa-users-gear icon-medium"></i>
+                                            <div class="kpi-icon-container" style="background-color:#03045e">
+                                                <i class="fa-solid fa-users-gear icon-custom"></i>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{administratorsLength}}">
+                                        <div class="kpi-result-container">
+                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{administratorsKpi}}">
                                                 <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
                                             </div>
                                             <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Administrateurs</span>
@@ -86,21 +87,22 @@
                                 </div>
 
                                 <div class="col text-center sm-mb-30px kpi-card">
-                                    {# ADMINS #}
+                                    {# ANIMATORS #}
                                     <div class="d-flex justify-content-around">
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <div class="kpi-icon-container">
-                                                <i class="fa-solid fa-users icon-medium"></i>
+                                            <div class="kpi-icon-container" style="background-color:#0077b6">
+                                                <i class="fa-solid fa-users icon-custom"></i>
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{animatorsLength}}">
+                                        <div class="kpi-result-container">
+                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{animatorsKpi.total}}">
                                                 <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
                                             </div>
                                             <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Animateurs</span>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                         
@@ -165,9 +167,9 @@
                                         <figure>
                                             <div class="feature-box-icon" style="background-color:{{ event.activity.color }}">
                                                 {% if event.activity.pictureType == "image" %}
-                                                    <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
+                                                    <img class="my-2" style="width: 35px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
                                                 {% else %}
-                                                    <i class="{{ event.activity.picture }} align-middle icon-large icon-large text-white my-3"></i>
+                                                    <i class="{{ event.activity.picture }} align-middle icon-medium text-white my-3"></i>
                                                 {% endif %}
                                             </div>
                                         </figure>
@@ -183,7 +185,7 @@
                         </ul>
                     </div>
                     <div class="mb-15 md-mb-50px xs-mb-35px">
-                        <div class="fw-600 fs-19 lh-22 ls-minus-05px text-dark-gray border-bottom border-color-dark-gray border-2 d-block mb-30px pb-15px position-relative">Créer un évènement parmi mes activités</div>
+                        <div class="fw-600 fs-19 lh-22 ls-minus-05px text-dark-gray border-bottom border-color-dark-gray border-2 d-block mb-30px pb-15px position-relative">Créer un évènement par activité</div>
                         <ul class="category-list-sidebar position-relative">
                             
                             {% for activity in activitiesForThisUser %}

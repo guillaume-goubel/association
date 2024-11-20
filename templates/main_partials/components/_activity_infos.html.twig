@@ -13,7 +13,11 @@
             </div>
             <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-800">{{ activity.name }}<span style="background-color:{{ activity.color }};" class="h-8px bottom-10px opacity-6 separator-animation"></span></span></h4>
         </div>
-        <p class="fs-14 mb-35px sm-mb-25px preformatted">{{activity.description|raw}}</p> 
+        
+        <div>
+            <div></div>
+            <div><p class="fs-14 mb-35px sm-mb-25px preformatted">{{activity.description|raw}}</p> </div>
+        </div>
         
         {% if isEvents %}
             <a href="{{ path('agenda_index') }}?monthChoice=all&yearChoice=all&activityChoice={{ activity.id }}&from=activity-section" style="padding: 3px 18px;" class="btn btn-small btn-gradient-emerald-blue-emerald-green btn-hover-animation-switch btn-round-edge btn-box-shadow">
@@ -23,8 +27,6 @@
                     <span class="btn-icon text-white mt-8"><i class="feather icon-feather-arrow-right"></i></span>
                 </span>
             </a>
-        {% else %}
-            
         {% endif %}
 
     </div> 

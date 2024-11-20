@@ -154,4 +154,16 @@ class ActivityRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getAllActivitiesCount(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = " SELECT COUNT(a.id) as total FROM activity a;
+            ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAssociative();
+        return $result;
+    }
+
 }

@@ -159,6 +159,15 @@ footer .elements-social ul li:last-child {
     -webkit-border-radius: 30px 30px 0 0;
     border-radius: 30px 30px 0 0;
 }
+.blog-image{
+    width: 100%; /* largeur de l'élément */
+    height: 100vh; /* hauteur de l'élément (100% de la hauteur de la fenêtre) */
+    background-size: cover; /* Ajuste l'image pour couvrir l'élément */
+    background-repeat: no-repeat; /* Empêche la répétition */
+    background-position: center center; /* Centrer l'image */
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+}
 .event-list-container{
     min-height: 60vh;
 }
@@ -179,9 +188,6 @@ footer .elements-social ul li:last-child {
 .mt-minus-2px {
     margin-top: -2px;
 }
-.main-card-container{
-    height: 470px;
-}
 .main-card-container-last-event{
     height: 350px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -200,8 +206,9 @@ footer .elements-social ul li:last-child {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
 }
 .main-card-container {
+    height: 470px;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide pour l'état normal */
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Ombre légère par défaut */
+    box-shadow: 0 13px 19px rgba(0, 0, 0, 0.2); /* Ombre légère par défaut */
 }
 .no-hover:hover {
     color: inherit;

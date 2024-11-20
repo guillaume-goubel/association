@@ -380,4 +380,16 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();                  
     }
 
+    public function getAllEventsCount(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = " SELECT COUNT(e.id) as total FROM event e;
+            ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAssociative();
+        return $result;
+    }
+
 }

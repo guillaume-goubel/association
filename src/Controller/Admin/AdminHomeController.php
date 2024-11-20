@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Repository\ActivityRepository;
+use App\Repository\AnimatorRepository;
 use App\Repository\EventRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -13,7 +15,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class AdminHomeController extends AbstractController
 {
     #[Route('/index', name: 'index')]
-    public function index(EventRepository $eventRepository, ActivityRepository $activityRepository): Response
+    public function index(EventRepository $eventRepository, ActivityRepository $activityRepository, AnimatorRepository $animatorRepository, UserRepository $userRepository): Response
     {   
         $user = $this->getUser();
         
@@ -22,14 +24,14 @@ class AdminHomeController extends AbstractController
         }else{
             $activitiesForThisUser = $user->getActivitiesByName();
         }
-        
+
         return $this->render('admin/index.html.twig', [
             'activitiesForThisUser' => $activitiesForThisUser,
             'lastEventCreated' => $eventRepository->findLastEventsforAdmin(3),
-            'administratorsLength' => 0,
-            'animatorsLength' => 0,
-            'eventsLength' => 0,
-            'activitiesLength' => 0,
+            'administratorsKpi' => count($userRepository->adminsList()),
+            'animatorsKpi' => $animatorRepository->getAllAnimatorsCount(),
+            'eventsKpi' => $eventRepository->getAllEventsCount(),
+            'activitiesKpi' => $activityRepository->getAllActivitiesCount(),
         ]);
     }
 
