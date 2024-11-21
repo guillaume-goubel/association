@@ -1,0 +1,21 @@
+<div class="row mb-6 sm-mb-30px">
+    <div class="col-12" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
+        
+        <div class="row align-items-center pt-10px g-0 pb-10px border-bottom border-color-transparent-dark-light position-relative">
+            <div class="col-md-1 text-start text-md-center sm-mb-10px">
+                <span class="fs-18 alt-font">Annulé</span>
+            </div>
+            <div class="col-md-3 offset-md-1 d-flex align-items-center sm-mb-10px">
+                <i class="line-icon-Vector-5 icon-large me-20px"></i>
+                <span class="fw-600 fs-16">{{ event.activity.name }}</span>
+            </div>
+            <div class="col-md-7 last-paragraph-no-margin">
+                <div>toto</div>
+                <p class="fs-13">
+                    {{ event.name|length > 75 ? event.name|slice(0, 75) ~ '...' : event.name }}
+                </p>
+            </div>
+        </div>
+        
+    </div>
+</div>

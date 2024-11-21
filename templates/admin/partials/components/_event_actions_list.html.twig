@@ -1,0 +1,24 @@
+{# EDIT BUTTON #}
+{% if event.user != null and isEventActionsButtonVisible == true %}
+
+    <div class="d-flex flex-column">
+        
+        {% if is_granted('ROLE_SUPER_ADMIN') or (is_granted('ROLE_ADMIN') and event.user.id == app.user.id ) %}
+            <div data-id="{{ event.id }}" class="event-action-container {{ (event.isEnabled) ? 'enabled' : 'disabled' }} event-list">
+                <a href="#" data-current-status="{{ (event.isEnabled) ? 'enabled' : 'disabled' }}" data-id="{{ event.id }}" class="change-event-status btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                    <i data-id="list-{{ event.id }}" class="event-icon {{ (event.isEnabled) ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark' }}"></i>
+                </a>
+            </div>
+        {% endif %}
+
+        {% if event.user.id == app.user.id or is_granted('ROLE_SUPER_ADMIN') %}
+            <div class="event-action-container edit event-list ">
+                <a style="#" href="{{ path('admin_event_edit', { 'id': event.id}) }}?from={{ app.request.attributes.get('_route') }}" class="btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                    <i class="fa-regular fa-folder-open"></i>
+                </a>
+            </div>
+        {% endif %}
+
+    </div>
+
+{% endif %}

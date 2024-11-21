@@ -20,52 +20,6 @@
 .fade:not(.show) {
     opacity: inherit!important;
 }
-
-/* Loader Dots */
-#loader-container{
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 99999;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.loader-dots {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 60px;
-    margin: 0 auto;
-}
-
-.dot {
-    width: 10px;
-    height: 10px;
-    background-color: var(--base-color);
-    border-radius: 50%;
-    animation: bounce 1.5s infinite;
-}
-
-.dot:nth-child(2) {
-    animation-delay: 0.3s;
-}
-
-.dot:nth-child(3) {
-    animation-delay: 0.6s;
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
-}
-
 /* JS CALENDAR */
 .fc-daygrid-more-link.fc-more-link,
 .fc-event.fc-event-start.fc-event-end.fc-event-past.fc-daygrid-event.fc-daygrid-dot-event,

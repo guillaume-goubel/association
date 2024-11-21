@@ -1,7 +1,7 @@
 <div class="entry-meta fs-15 mb-50px">
-    <span>
-    <i class="text-dark-gray feather icon-feather-user"></i>
-    {{ app.user.firstName }} {{ app.user.lastName }}
-    </span>
+    <div>
+        <i class="text-dark-gray feather icon-feather-user"></i>
+        {{ app.user.firstName }} {{ app.user.lastName }}
+    </div>
     <a id="disconnectBtn" href="{{ path('app_logout')}}"><i class="fa-solid fa-power-off icon-medim text-base-color me-1"></i>Déconnexion</a>
 </div>

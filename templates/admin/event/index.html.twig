@@ -18,9 +18,9 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="main-section right-side-bar">
+    <section class="main-section">
         <div class="container">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details d-flex align-items-center"> 
@@ -30,8 +30,8 @@
                         </div>
 
                         <div class="admin-action col-2 d-flex justify-content-end">
-                            <a class="me-4" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
-                            <a class="ms-4" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                            <a class="me-8" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
+                            <a class="ms-8" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -93,25 +93,17 @@
                     </div>
                 </form>
 
-                <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5">
+                <!-- Pagination -->
+                <div class="pagination-container d-flex justify-content-center">
+                    {{knp_pagination_render(events, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
+                </div>
 
-                    <!-- Pagination -->
-                    <div class="pagination-container d-flex justify-content-center">
-                        {{knp_pagination_render(events, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
-                    </div>
-                    
-                    {% if events is not empty %}
-                        {% for event in events %}
-                            {% if event.isMultiDay %}
-                                {% include 'main_partials/components/_event_journey_card.html.twig' %}
-                            {% else %}
-                                {% include 'main_partials/components/_event_regular_card.html.twig' %}
-                            {% endif %}
-                        {% endfor %}
-                    {% else %}
-                        <div class="no-matching-search-message">Pas de résultats pour cette recherche</div>
-                    {% endif %}
+                <div id="events-cards-render" class="row d-none align-items-center justify-content-start pb-5">
+                    {% include 'admin/event/partials/components/_events_card_render.html.twig' %}
+                </div>
 
+                <div id="events-list-render" class="row d-none align-items-center justify-content-center pb-5">
+                    {% include 'admin/event/partials/components/_events_list_render.html.twig' %}
                 </div>
 
             </div>
@@ -120,6 +112,7 @@
     <!-- end section -->
 
     {% include 'main_partials/modals/_map_modal.html.twig' %}
+	{% include 'main_partials/components/_loader-container.html.twig' %}
 
     <!-- start footer -->
     {% include 'main_partials/parts/_footer_minimum.html.twig' %}

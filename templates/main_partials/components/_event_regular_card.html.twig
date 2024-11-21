@@ -1,7 +1,7 @@
 <div style="position:relative;" class="activity-card col-lg-3 col-md-8 md-mb-30px mb-2">
     
     {# EDIT BUTTON #}
-    {% include "admin/partials/components/_event_actions.html.twig" %}
+    {% include "admin/partials/components/_event_actions_card.html.twig" %}
 
     {# CONTENT #}
     <div class="bg-white border border-radius-30px p-5 text-center main-card-container"> 
@@ -81,9 +81,7 @@
             {# <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li> #}
             <li class="d-flex justify-content-center">
                 <div class="pricing-footer w-70" style="height:35px;">
-                    {# {% if event.description != null or event.preparationInfos != null %} #}
-                        <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed() }) }}" class="btn btn-very-small btn-base-color btn-round-edge-large border-1 w-100">Plus d'informations</a>
-                    {# {% endif %} #}
+                    <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed() }) }}" class="btn btn-very-small btn-base-color btn-round-edge-large border-1 w-100">Plus d'informations</a>
                 </div>
             </li>
         </ul>

@@ -1,0 +1,12 @@
+{# LIST #}
+{% if events is not empty %}
+    {% for event in events %}
+        {% if event.isMultiDay %}
+            {% include 'main_partials/components/_event_journey_list.html.twig' %}
+        {% else %}
+            {% include 'main_partials/components/_event_regular_list.html.twig' %}
+        {% endif %}
+    {% endfor %}
+{% else %}
+    <div class="no-matching-search-message">Pas de résultats pour cette recherche</div>
+{% endif %}

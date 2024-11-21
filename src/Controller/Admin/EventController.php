@@ -52,7 +52,7 @@ class EventController extends AbstractController
         $pagination = $paginator->paginate(
             $eventsQuery, // la requête ou liste d'objets
             $page,        // page actuelle
-            8      // nombre d'événements par page (vous pouvez ajuster ce chiffre)
+            8    // nombre d'événements par page (vous pouvez ajuster ce chiffre)
         );
     
         return $this->render('admin/event/index.html.twig', [

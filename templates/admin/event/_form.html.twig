@@ -8,19 +8,19 @@
 {{ form_start(form)}}
     
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600"><i class="fa-solid fa-circle-info align-middle icon-large text-base-color me-1"></i>LES INFORMATIONS DE BASES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
-    <div class="row d-flex aside-form">
+    <div class="row d-flex ">
         <div class="col-12 mt-1 {{ (is_granted('ROLE_SUPER_ADMIN')) ? '' : 'd-none' }}">
             {{ form_row(form.user) }}
         </div>
-        <div class="col-6 mt-1">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.cityPlace) }}
         </div>
-        <div class="col-6 mt-1">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.activity) }}
         </div>
     </div>
-    <div class="row d-flex aside-form">
-        <div class="col-6 mt-1">
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_label(form.dateStartAt) }}  
             {{ form_widget(form.dateStartAt) }} 
             {% if form.dateStartAt.vars.errors|length > 0 %}
@@ -29,12 +29,12 @@
                 </div>
             {% endif %}
         </div>
-        <div class="col-6 mt-1">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.timeStartAt) }}
         </div>
     </div>
-    <div class="row d-flex aside-form">
-        <div class="col-6 mt-1">
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_label(form.dateEndAt) }}  
             {{ form_widget(form.dateEndAt) }} 
             {% if form.dateEndAt.vars.errors|length > 0 %}
@@ -43,26 +43,26 @@
                 </div>
             {% endif %}
         </div>
-        <div class="col-6 mt-1">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.timeEndAt) }}
         </div>
     </div>
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5"><i class="fa-solid fa-circle-info align-middle icon-large text-yellow me-1"></i>LES INFORMATIONS COMPLEMENTAIRES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
-    <div class="row d-flex aside-form">
-        <div class="col-6 mt-1">
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.name) }}
         </div>
-        <div class="col-6 mt-1">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.animators) }}
         </div>
     </div>
-    <div class="row d-flex aside-form">
-        <div class="col-6 mt-1">
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.eventDistance) }}
         </div>
     </div>
 
-    <div class="row d-flex aside-form">
+    <div class="row d-flex ">
         <div class="col-12 mt-1">
             {{ form_row(form.description) }}
         </div>
@@ -72,8 +72,8 @@
     </div>
 
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5"><i class="fa-solid fa-image align-middle icon-large text-base-color me-1"></i>LES PHOTOS<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
-    <div class="row d-flex aside-form">  
-        <div class="col-6 mt-1">
+    <div class="row d-flex ">  
+        <div class="col-12 col-md-6 mt-1">
 
             {{ form_row(form.mainPictureFile) }}
 
@@ -119,7 +119,7 @@
 
         </div>
 
-        <div class="col-6 mt-1">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.picture2File) }}
 
             {% if event != null %}
@@ -164,7 +164,7 @@
 
         </div>
 
-        <div class="col-6 mt-4">
+        <div class="col-12 col-md-6 mt-4">
             {{ form_row(form.picture3File) }}
 
             {% if event != null %}
@@ -235,11 +235,11 @@
     </div>
     {# AUTOCOMPLETION PART -- end #}
 
-    <div class="row d-flex aside-form">  
-        <div class="col-6 mt-1">
+    <div class="row d-flex ">  
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.rdvAddress) }}
         </div>
-        <div class="col-6 mt-1">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.rdvCity) }}
         </div>
         <div class="col-12 mt-1">
@@ -247,17 +247,17 @@
         </div>
     </div>
     
-    <div class="row d-flex aside-form">  
-        <div class="col-6 mt-1">
+    <div class="row d-flex ">  
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.rdvLatitude) }}
         </div>
 
-        <div class="col-6 mt-1">
+        <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.rdvLongitude) }}
         </div>
     </div>
 
-    <div class="row d-flex aside-form justify-content-center mt-5">
+    <div class="row d-flex justify-content-center mt-5">
          <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto border-radius-30px">{{ button_label|default('Enregistrer') }}</button>
     </div>
 
