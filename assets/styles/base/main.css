@@ -239,7 +239,7 @@ footer .elements-social ul li:last-child {
 }
 .event-action-container.edit.event-list{
     bottom: 5px;
-    right: 35px;
+    right: 15px;
 }
 .event-action-container.edit a{
     width: 50px;
@@ -269,7 +269,7 @@ footer .elements-social ul li:last-child {
     justify-content: center;
 }
 .event-action-container.disabled.event-list{
-    right: 95px;
+    right: 70px;
     bottom: 5px;
 }
 .event-action-container.disabled a{
@@ -300,7 +300,7 @@ footer .elements-social ul li:last-child {
     justify-content: center;
 }
 .event-action-container.enabled.event-list{
-    right: 95px;
+    right: 70px;
     bottom: 5px;
 }
 .event-action-container.enabled a{

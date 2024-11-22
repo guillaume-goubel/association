@@ -86,7 +86,7 @@ class Event
     private array $photos = [];
 
     #[ORM\Column]
-    private ?bool $isEnabled = true;
+    private ?bool $isEnabled = false;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $mainPicture = null;
@@ -108,6 +108,9 @@ class Event
 
     #[ORM\Column(length: 150)]
     private ?string $cityPlace = null;
+
+    #[ORM\Column]
+    private ?bool $isCanceled = false;
 
     public function __construct()
     {
@@ -463,6 +466,18 @@ class Event
             return $this->dateStartAt->format('Y-m-d') !== $this->dateEndAt->format('Y-m-d');
         }
         return false; // Si l'une des deux dates n'est pas définie, on considère que ce n'est pas multi-jour
+    }
+
+    public function isCanceled(): ?bool
+    {
+        return $this->isCanceled;
+    }
+
+    public function setCanceled(bool $isCanceled): static
+    {
+        $this->isCanceled = $isCanceled;
+
+        return $this;
     }
 
 }

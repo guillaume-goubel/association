@@ -447,6 +447,9 @@ b, strong {
   line-height: 25rem;
 }
 /* Line height */
+.lh-small {
+  line-height: 1.3;
+}
 .lh-0px {
   line-height: 0px;
 }
