@@ -6,22 +6,23 @@ use App\Entity\User;
 use App\Entity\Event;
 use App\Entity\Activity;
 use App\Entity\Animator;
+use App\Validator\DateRange;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Constraints\Type;
 use Symfony\Component\Validator\Constraints\GreaterThanOrEqual;
-use App\Validator\DateRange;
 
 class EventType extends AbstractType
 {
@@ -33,6 +34,12 @@ class EventType extends AbstractType
         $creationDate = $options['creation_date'];
 
         $builder
+            ->add('isCanceled', CheckboxType::class, [
+                'label' => "Annuler",
+                'attr' => ['class' => 'form-check-input'], // Classe Bootstrap pour les switches
+                'required' => false,
+                'help' => 'Cochez pour annuler ou restaurer l\'événement.',
+            ])
             ->add('name', TextType::class, [
                 'label' => "Un titre ou une très courte description (75 caractères max)",
                 'attr' => ['class' => 'form-control', 'maxlength' => 75],

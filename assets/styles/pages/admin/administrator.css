@@ -22,13 +22,6 @@
     cursor: pointer;
     border-radius: 5px;
 }
-.admin-activity-pills{
-    padding: 5px 17px;
-    border-radius: 20px;
-    font-weight: 600;
-    color: white;
-    white-space: nowrap;
-}
 .edit-administrator-btn{
     width: 50px;
     height: 50px;

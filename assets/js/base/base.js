@@ -148,10 +148,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let eventId = element.getAttribute('data-id');
 
             if (currentStatus == 'disabled') {
-                currentStatusVerbatim.innerHTML = "Cet événement est actuellement <strong class='text-red'>inactif</strong>";
+                currentStatusVerbatim.innerHTML = "Cet événement est actuellement <strong class='text-red'>invisible</strong>";
                 currentStatusQuestion.innerHTML = "Confirmer son activation ?";
             }else{
-                currentStatusVerbatim.innerHTML = "Cet événement est actuellement <strong class='text-green'>actif</strong>";
+                currentStatusVerbatim.innerHTML = "Cet événement est actuellement <strong class='text-green'>visible</strong>";
                 currentStatusQuestion.innerHTML = "Confirmer sa désactivation ?";
             }
 

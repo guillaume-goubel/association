@@ -468,12 +468,12 @@ class Event
         return false; // Si l'une des deux dates n'est pas définie, on considère que ce n'est pas multi-jour
     }
 
-    public function isCanceled(): ?bool
+    public function getIsCanceled(): ?bool
     {
         return $this->isCanceled;
     }
 
-    public function setCanceled(bool $isCanceled): static
+    public function setIsCanceled(bool $isCanceled): self
     {
         $this->isCanceled = $isCanceled;
 

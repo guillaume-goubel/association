@@ -3,9 +3,33 @@
 <div id="isRdvGeoAlreadyExitsElmt" data-param="{{ (event.rdvLatitude != null and event.rdvLongitude != null) ? 'true' : 'false' }}"></div>
 <div id="rdvLatElmt" data-param="{{ (event.rdvLatitude != null) ? event.rdvLatitude : 'false' }}"></div>
 <div id="rdvLongElmt" data-param="{{ (event.rdvLongitude != null) ? event.rdvLongitude : 'false' }}"></div>
+<div id="eventCanceledStatus" data-param="{{ event.getisCanceled|number_format }}"></div>
 {# ! DATA FOR JS **************************************************************************** #}
 
 {{ form_start(form)}}
+    
+    {% if event.isCanceled == false %}
+        {% set checkLabel = "Annuler l'événement" %}
+        {% set eventCanceledInfos = "Sera ANNULÉ après l'enregistrement" %}
+    {% else %}
+        {% set checkLabel = "Restaurer l'événement" %}
+        {% set eventCanceledInfos = "Sera RESTAURÉ après l'enregistrement" %}
+    {% endif %}
+    <div style="border-top: 1px dashed;border-bottom:1px dashed;" class="mb-5 row {{ (event != null and event.id != null) ? 'd-flex' : 'd-none' }}  ">
+        {% if event.isCanceled == true %}
+            <div class="fs-14 fw-600 mt-2">L'événement est actuellement <span class="admin-activity-pills bg-alert">Annulé</span> </div>
+        {% else %}
+            <div class="fs-14 fw-600 mt-2">L'événement est actuellement <span class="admin-activity-pills bg-success">Actif</span> </div>            
+        {% endif %}
+
+        <div class="col-12 col-md-6 my-3">
+            <div class="form-check form-switch">
+                {{ form_widget(form.isCanceled, { attr: { class: 'form-check-input me-2' } }) }}
+                {{ form_label(form.isCanceled, checkLabel, { label_attr: { class: 'form-check-label' } }) }}
+                <div style="margin-left:21px;" class="d-none fs-13" id="eventCanceledInfos">{{eventCanceledInfos}}</div>
+            </div>
+        </div>
+    </div>
     
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600"><i class="fa-solid fa-circle-info align-middle icon-large text-base-color me-1"></i>LES INFORMATIONS DE BASES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
     <div class="row d-flex ">
@@ -278,7 +302,6 @@
         if (isAddressAlreadyExistElmt == 'true' ){
             isAddressAlreadyExist = true;
             rdvLat = parseFloat(document.getElementById("rdvLatElmt").getAttribute("data-param"));
-            console.log(rdvLat);
             rdvLong = parseFloat(document.getElementById("rdvLongElmt").getAttribute("data-param"));
         }
         
@@ -388,6 +411,36 @@
             }
         });
     });
+
+    // Récupérer les éléments
+    const checkbox = document.getElementById('event_isCanceled');
+    const eventCanceledInfos = document.getElementById('eventCanceledInfos');
+    const eventCanceledStatus = document.getElementById('eventCanceledStatus').getAttribute('data-param')
+    console.log(eventCanceledStatus);
+
+    // Fonction pour basculer la classe
+    if (eventCanceledStatus == '0' ){
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                eventCanceledInfos.classList.remove('d-none');
+                eventCanceledInfos.classList.add('d-block');
+            } else {
+                eventCanceledInfos.classList.remove('d-block');
+                eventCanceledInfos.classList.add('d-none');
+            }
+        });
+
+    }else{
+        checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                eventCanceledInfos.classList.remove('d-block');
+                eventCanceledInfos.classList.add('d-none');
+            } else {
+                eventCanceledInfos.classList.remove('d-none');
+                eventCanceledInfos.classList.add('d-block');
+            }
+        });
+    }
 
 </script>
 
