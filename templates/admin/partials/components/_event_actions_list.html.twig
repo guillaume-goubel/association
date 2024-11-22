@@ -4,9 +4,9 @@
     <div class="d-flex flex-column">
         
         {% if is_granted('ROLE_SUPER_ADMIN') or (is_granted('ROLE_ADMIN') and event.user.id == app.user.id ) %}
-            <div data-id="{{ event.id }}" class="event-action-container {{ (event.isEnabled) ? 'enabled' : 'disabled' }} event-list">
-                <a href="#" data-current-status="{{ (event.isEnabled) ? 'enabled' : 'disabled' }}" data-id="{{ event.id }}" class="change-event-status btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
-                    <i data-id="list-{{ event.id }}" class="event-icon {{ (event.isEnabled) ? 'fa-solid fa-circle-check' : 'fa-solid fa-circle-xmark' }}"></i>
+            <div data-id="list-{{ event.id }}" class="event-action-container {{ (event.isEnabled) ? 'enabled' : 'disabled' }} event-list">
+                <a href="#" data-current-status="{{ (event.isEnabled) ? 'enabled' : 'disabled' }}" data-id="list-{{ event.id }}" class="change-event-status btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                    <i data-id="list-{{ event.id }}" class="event-icon {{ (event.isEnabled) ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash' }}"></i>
                 </a>
             </div>
         {% endif %}

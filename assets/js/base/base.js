@@ -166,9 +166,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
         e.preventDefault();
         eventChangeStatusBtn.classList.add('d-none');
         const url = this.getAttribute('data-path');
+        const eventId = this.getAttribute('data-id');
 
         let data = new FormData();
-        data.append('eventId', this.getAttribute('data-id'));
+        data.append('eventId', eventId);
     
         fetch(url, {
             method: 'POST',
@@ -177,7 +178,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
         .then(response => response.json())
         .then(data => {
             
-            let eventId = data.event.id;
             let newStatus = data.event.isEnabled;
 
             let eventIcon = document.querySelector(`.event-icon[data-id="${eventId}"]`);
@@ -188,12 +188,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
             if (eventIcon) {
                 if (newStatus) {
                     // Si l'événement est activé, icône "check"
-                    eventIcon.classList.remove('fa-circle-xmark');
-                    eventIcon.classList.add('fa-circle-check');
+                    eventIcon.classList.remove('fa-eye-slash');
+                    eventIcon.classList.add('fa-eye');
                 } else {
                     // Si l'événement est désactivé, icône "xmark"
-                    eventIcon.classList.remove('fa-circle-check');
-                    eventIcon.classList.add('fa-circle-xmark');
+                    eventIcon.classList.remove('fa-eye');
+                    eventIcon.classList.add('fa-eye-slash');
                 }
             }
             // Mettre à jour la classe de 'event-action-container' en fonction du statut

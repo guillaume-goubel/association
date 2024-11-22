@@ -239,7 +239,10 @@ class EventController extends AbstractController
     public function changeStatus(Request $request, EventRepository $eventRepository, EntityManagerInterface $em): JsonResponse
     {
         
-        $event = $eventRepository->findOneBy(['id' => $request->request->get('eventId')]);
+        $eventIdNoformat = $request->request->get('eventId');
+        $eventId = explode("-", $eventIdNoformat)[1];
+
+        $event = $eventRepository->findOneBy(['id' => $eventId]);
 
         if (!$event) {
             return new JsonResponse(['error' => 'Event not found'], 404);
