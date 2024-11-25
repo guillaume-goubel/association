@@ -33,7 +33,7 @@ class HomeController extends AbstractController
             "activities" => $activityRepository->findBy(["isEnabled"=>1], ['ordering' => 'ASC']),
             'isEventActionsButtonVisible' => false,
             'nextUpcomingEvent' => $eventRepository->findNextUpcomingEvent(),
-            'nextUpcomingList' => $eventRepository->findNextUpcomingList(),
+            'events' => $eventRepository->findNextUpcomingList(),
             'lastPastEvent' => $lastPastEvent,
             'lastPastEventList' => $lastPastEventList
         ]);

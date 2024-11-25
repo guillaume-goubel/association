@@ -27,9 +27,17 @@
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">ADMINISTRATEUR - Modifier</h5>
                         </div>
                         <div class="admin-action col-2 d-flex justify-content-end">
-                            <a href="{{ path('admin_administrator_index') }}">
-                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
-                            </a>
+
+                            {% if app.request.get('from') == 'admin_animator_index' %}
+                                <a href="{{ path('admin_animator_index') }}">
+                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                                </a>
+                            {% else %}
+                                <a href="{{ path('admin_administrator_index') }}">
+                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                                </a>
+                            {% endif %}
+
                         </div>
                     </div>
                 </div>

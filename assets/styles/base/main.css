@@ -457,6 +457,20 @@ footer .elements-social ul li:last-child {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
+/* EVENT BY LIST */
+.event-background-light {
+    background-color: #FFFFFF; 
+    border: 1px solid #D1C7BD;
+    border-radius: 30px;
+}
+
+/* Couleur de la ligne foncée */
+.event-background-dark {
+    background-color: #FFFFFF; 
+    border: 1px solid #D1C7BD;
+    border-radius: 30px;
+}
+
 @keyframes bounce {
     0%, 100% {
         transform: translateY(0);

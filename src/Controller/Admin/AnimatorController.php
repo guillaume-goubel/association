@@ -65,7 +65,8 @@ class AnimatorController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager, AnimatorService $animatorService): Response
     {
         $animator = new Animator();
-        $form = $this->createForm(AnimatorType::class, $animator);
+        $form = $this->createForm(AnimatorType::class, $animator,[
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -97,7 +98,10 @@ class AnimatorController extends AbstractController
     public function edit(Request $request, Animator $animator, EntityManagerInterface $entityManager, AnimatorService $animatorService): Response
     {
 
-        $form = $this->createForm(AnimatorType::class, $animator);
+        $form = $this->createForm(AnimatorType::class, $animator,[
+            'current_user' => $animator->getUser()
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

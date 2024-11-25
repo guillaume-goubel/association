@@ -84,19 +84,27 @@
                                     <div class="col-md-8 icon-with-text-style-01 md-mb-25px">
                                         <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
 
-                                            {% if animator.picture != null %}
-                                                <div class="feature-box-icon me-50px md-me-35px">
-                                                    <img class="border-radius-50" style="width: 70px;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" class="w-75px" alt=""/>
-                                                </div>
-                                            {% else %}
-                                                <div class="feature-box-icon me-50px md-me-35px">
-                                                    <img style="width: 65px;" src="{{ customAsset('app/default-avatar.png')}}" alt="">
-                                                </div>
-                                            {% endif %}
+                                            <div class="feature-box-icon d-flex align-items-center flex-column me-50px md-me-35px">
+                                                <img 
+                                                    class="border-radius-50" 
+                                                    style="width: {{ animator.picture != null ? '70px' : '65px' }};" 
+                                                    src="{{ animator.picture != null 
+                                                        ? customAsset('data/uploads/animator/photos/' ~ animator.picture) 
+                                                        : customAsset('app/default-avatar.png') }}" 
+                                                    alt=""
+                                                />
+                                                {% if animator.user != null %}
+                                                    <div>
+                                                        <a href="{{ path('admin_administrator_edit', { 'id':animator.user.id, 'from':"admin_animator_index" }) }}"><i class="fa-solid fa-gear icon-large mt-20px"></i></a>
+                                                        <div class="fs-13">Admin.</div>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
 
                                             <div class="feature-box-content">
                                                 <div class="d-inline-block text-dark-gray fs-20 ls-minus-05px"><span class="fw-700">{{ animator.lastName|upper }}</span> {{ animator.firstName|capitalize }} </div><br/>
-                                                <div class="d-inline-block text-base-color fs-15 ls-minus-05px">{{ animator.email }} {{ animator.phone }}</div><br/>
+                                                <div class="d-inline-block text-base-color fs-15 ls-minus-05px">{{ animator.email }}</div><br/>
+                                                <div class="d-inline-block text-base-color fs-15 ls-minus-05px">{{ animator.phone }}</div><br/>
                                                 <div class="d-inline-block text-base-color mb-20px fs-13 ls-minus-05px">
                                                     {% if animator.getIsEnabled == true %}
                                                         <span class="admin-activity-pills bg-success">Activé</span>
@@ -111,10 +119,9 @@
                                                             <span class="admin-activity-pills bg-base-color">{{ activityName }}</span>
                                                         {% endfor %}
                                                     {% else %}
-                                                        <span>Sans événement rattaché</span>
+                                                        <span>L'animateur n'est actuellement rattaché à aucune activité.</span>
                                                     {% endif %}
                                                     
-
                                                 </div>
                                             </div>
 

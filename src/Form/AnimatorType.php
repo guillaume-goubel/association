@@ -22,6 +22,9 @@ class AnimatorType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        
+        $currentUser = $options['current_user'];
+
         $builder
             ->add('isEnabled', CheckboxType::class, [
                 'label' => "Activer / Désactiver",
@@ -83,24 +86,36 @@ class AnimatorType extends AbstractType
                     // ])
                 ]
             ])
-        // ->add('user', EntityType::class, [
-        //     'label' => 'Administrateur rattaché',
-        //     'class' => User::class,
-        //     'choice_label' => function (User $user) {
-        //         return '#'.$user->getId()." ".$user->getCompleteNameByLastName(); // Appel de la méthode pour obtenir le nom complet
-        //     },
-        //     'attr' => ['class' => 'form-control'],
-        //     'query_builder' => function (EntityRepository $er) {
-        //         return $er->createQueryBuilder('u')
-        //             ->leftJoin('u.animator', 'a')
-        //             ->where('a.id IS NULL')
-        //             ->andwhere('u.roles LIKE :role')  // Cherche les utilisateurs avec ROLE_ADMIN dans le tableau des rôles
-        //             ->setParameter('role', '%ROLE_ADMIN%')  // Recherche la chaîne 'ROLE_ADMIN' dans la colonne roles
-        //             ->orderBy('u.lastName', 'ASC'); // Vous pouvez aussi trier par firstName ou lastName
-        //     },
-        //     'placeholder' => '...',
-        //     'required' => false,
-        // ])
+        ->add('user', EntityType::class, [
+            'label' => 'Administrateur rattaché',
+            'class' => User::class,
+            'choice_label' => function (User $user) {
+                return '#'.$user->getId()." ".$user->getCompleteNameByLastName(); // Appel de la méthode pour obtenir le nom complet
+            },
+            'attr' => ['class' => 'form-control'],
+            'query_builder' => function (EntityRepository $er) use ($options) {
+                // Récupérez le `user` actuellement rattaché
+                $currentUser = $options['current_user'];
+        
+                // Construisez la requête
+                $qb = $er->createQueryBuilder('u')
+                    ->leftJoin('u.animator', 'a')
+                    ->where('u.roles LIKE :role')  // Cherche les utilisateurs avec ROLE_ADMIN
+                    ->setParameter('role', '%ROLE_ADMIN%')
+                    ->orderBy('u.lastName', 'ASC');
+        
+                if ($currentUser) {
+                    $qb->andWhere('a.id IS NULL OR u.id = :currentUser')
+                    ->setParameter('currentUser', $currentUser->getId());
+                } else {
+                    $qb->andWhere('a.id IS NULL');
+                }
+        
+                return $qb;
+            },
+            'placeholder' => '...',
+            'required' => false,
+        ])
         ;
     }
 
@@ -108,6 +123,7 @@ class AnimatorType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Animator::class,
+            'current_user' => null,
         ]);
     }
 }

@@ -87,10 +87,10 @@
                                             <div class="fs-10">Responsable(s) de l'activité</div>
                                             <div class="row">
                                                 {% if activity.users is empty %}
-                                                    <div class="col-6 fs-13 text-red fw-600">SANS</div>
+                                                    <div class="col-6 fs-12 text-red fw-600">SANS</div>
                                                 {% else %}
                                                     {% for user in activity.users %}
-                                                        <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
+                                                        <div class="col-6 fs-12">{{user.firstName|capitalize}} {{user.lastName}}</div>
                                                     {% endfor %}
                                                 {% endif %}
                                             </div>
@@ -143,10 +143,10 @@
                                         <div class="fs-10">Responsable(s) de l'activité</div>
                                         <div class="row">
                                             {% if activity.users is empty %}
-                                                    <div class="col-6 fs-13 text-red c">SANS</div>
+                                                    <div class="col-6 fs-12 text-red c">SANS</div>
                                             {% else %}
                                                 {% for user in activity.users %}
-                                                    <div class="col-6 fs-13">{{user.firstName|capitalize}} {{user.lastName}}</div>
+                                                    <div class="col-6 fs-12">{{user.firstName|capitalize}} {{user.lastName}}</div>
                                                 {% endfor %}
                                             {% endif %}
                                         </div>

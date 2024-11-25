@@ -83,7 +83,7 @@
             </div>
 
             <form action="" method="get">
-                <small>Voici la liste des futurs événements par mois de commencement et par activités</small>
+                {# <small>Voici la liste des futurs événements par mois de commencement et par activités</small> #}
                 <div class="col-12 blog-standard mb-2">
                     <div class="row gy-2">
                         <!-- Filtre mois -->
@@ -131,8 +131,8 @@
                 {{knp_pagination_render(events, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
             </div>
             
-            <div class="row align-items-center justify-content-start pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
-                {% if events is not empty %}
+            <div class="row align-items-center justify-content-center pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
+                {# {% if events is not empty %}
                     {% for event in events %}
                         {% if event.isMultiDay %}
                             {% include 'main_partials/components/_event_journey_card.html.twig' %}
@@ -142,7 +142,16 @@
                     {% endfor %}
                 {% else %}
                     <div class="no-matching-search-message">Pas de résultats pour cette recherche - cliquer sur le bouton <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i> </div>
-                {% endif %}
+                {% endif %} #}
+
+                <div id="events-cards-render" class="row d-none align-items-center justify-content-start pb-5">
+                    {% include 'admin/event/partials/components/_events_card_render.html.twig' %}
+                </div>
+
+                <div id="events-list-render" class="row d-none align-items-center justify-content-center pb-5 mt-5">
+                    {% include 'admin/event/partials/components/_events_list_render.html.twig' %}
+                </div>
+
             </div>
 
         </div>
