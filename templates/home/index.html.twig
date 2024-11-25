@@ -34,7 +34,7 @@
             <section class="bg-very-light-gray pt-20px pb-20px sm-pt-40px" data-anime='{ "opacity": [0, 1], "translateY": [0, 0], "easing": "easeOutQuad", "duration": 1000,"staggervalue": 300, "delay": 600 }'>
                 <div class="container overlap-section">
                     <div class="row justify-content-center overlap-section border-radius-6px overflow-hidden g-0 box-shadow-extra-large">
-                        <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5 fs-15 text-dark-gray">Bientôt !</strong><span class="fw-700 text-base-color">{{nextUpcomingEvent.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
+                        <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5 fs-15 text-dark-gray">{{ (nextUpcomingEvent.dateStartAt|date('Ymd') == 'now'|date('Ymd') ) ? 'Aujourd\'hui ' : 'Bientôt ' }}</strong><span class="fw-700 text-base-color">{{nextUpcomingEvent.dateStartAt|format_date('medium',  locale= 'fr')}} <span class="fs-14">à {{nextUpcomingEvent.timeStartAt|date('H:i')}}</span></span> 
                             <span class="ps-5 pe-2">{{nextUpcomingEvent.activity.name|capitalize}} à {{nextUpcomingEvent.cityPlace|capitalize}}</span> 
                         </div>
                         <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index', { 'id': nextUpcomingEvent.id, 'is_passed': false }) }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-20 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
@@ -183,7 +183,7 @@
                     
                     <div id="calendar"></div>
 
-                    <div class="fs-14 text-base-color ls-1px fw-600 pb-2">Vos {{nextUpcomingList|length}} prochains rendez-vous<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+                    <div class="fs-14 text-base-color ls-1px fw-600 pb-2">{{nextUpcomingList|length}} prochain{{ (nextUpcomingList|length > 1) ? 's' : '' }} rendez-vous<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
 
                     {% for event in nextUpcomingList %}
                         {% if event.isMultiDay %}

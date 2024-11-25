@@ -3,6 +3,11 @@
     {# EDIT BUTTON #}
     {% include "admin/partials/components/_event_actions_card.html.twig" %}
 
+    {# CANCELED INFO #}
+    {% if  event.isCanceled == true %}
+        <div class="canceled-label"><span class="admin-activity-pills bg-alert fs-13">Annulé</span></div>
+    {% endif %}
+
     {# CONTENT #}
     <div class="bg-white border border-radius-30px p-5 text-center main-card-container"> 
         <div class="d-flex">

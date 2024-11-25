@@ -8,6 +8,7 @@ use App\Service\EventService;
 use App\Service\MediaService;
 use App\Repository\EventRepository;
 use App\Repository\ActivityRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,11 +27,16 @@ class EventController extends AbstractController
     
         $yearChoice = $request->query->get('yearChoice') ?? date("Y");
         $monthChoice = $request->query->get('monthChoice') ?? date("m");
-        $creatorChoice = $request->query->get('creatorChoice') ?? $this->getUser()->getId();
+        $creatorChoice = $request->query->get('creatorChoice') ?? null;
         $dateChoice = $request->query->get('dateChoice') ?? 'dateStartAt';
         
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
-            $creatorChoice = $monthChoice = 'all';
+            
+            if($creatorChoice == null){
+                $creatorChoice = 'all';
+            }
+        }else{
+            $creatorChoice = $this->getUser()->getId();
         }
         
         $activityChoice = $request->query->get('activityChoice') ?? "all";
@@ -71,7 +77,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
+    public function new(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
     {
         $event = new Event();
         $user = $this->getUser();
@@ -84,8 +90,20 @@ class EventController extends AbstractController
         $creationDate = $request->query->get('creationDate') ?? null;
 
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+            $users = $userRepository->adminsList();
+            
+            // Si le tableau n'est pas vide, on récupère le premier utilisateur
+            if (count($users) > 0) {
+                $userFirst = $users[0];
+            } else {
+                // Si le tableau est vide, $userFirst sera null
+                $userFirst = null;
+            }
+
             foreach ($activityRepository->findAll() as $activity) {
-                array_push($userActivityArray, $activity->getId());
+                if ($activity->isActivityInUserControl($userFirst) === true) {
+                    array_push($userActivityArray, $activity->getId());
+                }
             }
         }else{
             foreach ($activityRepository->findBy(["isEnabled" => 1], ['ordering' => 'ASC']) as $activity) {
@@ -125,9 +143,10 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Event $event, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
+    public function edit(Request $request, UserRepository $userRepository, Event $event, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
     {   
         $user = $this->getUser();
+        $isNewEvent = $event->getId() === null;
         
         // Vérification si l'ID de l'utilisateur connecté correspond à l'ID de l'utilisateur de l'événement
         if ($user->getId() !== $event->getUser()->getId() && !in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
@@ -138,8 +157,20 @@ class EventController extends AbstractController
         $userActivityArray = [];
 
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+            $users = $userRepository->adminsList();
+            
+            // Si le tableau n'est pas vide, on récupère le premier utilisateur
+            if (count($users) > 0) {
+                $userFirst = $users[0];
+            } else {
+                // Si le tableau est vide, $userFirst sera null
+                $userFirst = null;
+            }
+                  
             foreach ($activityRepository->findAll() as $activity) {
-                array_push($userActivityArray, $activity->getId());
+                if ($activity->isActivityInUserControl($userFirst) === true) {
+                    array_push($userActivityArray, $activity->getId());
+                }
             }
         }else{
             foreach ($activityRepository->findBy(["isEnabled" => 1], ['ordering' => 'ASC']) as $activity) {
@@ -151,12 +182,13 @@ class EventController extends AbstractController
         
         $form = $this->createForm(EventType::class, $event, [
             'activity_ids' => $userActivityArray,
+            'selected_activity' => $isNewEvent ? null : $event->getActivity()
         ]);
         
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+                        
             $eventService->process($event);
             
             if(!in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
@@ -168,7 +200,6 @@ class EventController extends AbstractController
             $this->addFlash('success', 'Opération effectuée');
             return $this->redirectToRoute('admin_event_edit', ['id' => $event->getId()], Response::HTTP_SEE_OTHER);
         }
-
 
         return $this->render('admin/event/edit.html.twig', [
             'event' => $event,
@@ -260,6 +291,29 @@ class EventController extends AbstractController
 
         // Retourne la réponse JSON avec la liste des activités
         return new JsonResponse(['event' => $eventData]);
+    }
+
+    #[Route('/change/activities', name: 'change_activities', methods: ['POST'])]
+    public function getActivitiesByUser(Request $request, ActivityRepository $activityRepository): JsonResponse
+    {
+        $userId = $request->request->get('userId');
+
+        $activities = $activityRepository->getActivitiesByUser($userId);
+
+        if (!$activities) {
+            return new JsonResponse(['error' => 'Event not found'], 404);
+        }
+
+        $activitiesArray = [];
+        foreach ($activities as $activity) {
+            $activitiesArray [ ] = [
+                'id'=> $activity->getId(),
+                'name'=> $activity->getName(),
+            ];
+        }
+
+        // Retourne la réponse JSON avec la liste des activités
+        return new JsonResponse(['activitiesArray' => $activitiesArray]);
     }
 
 }

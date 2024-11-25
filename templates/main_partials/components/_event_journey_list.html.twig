@@ -1,21 +1,75 @@
-<div class="row mb-6 sm-mb-30px">
+<div style="position:relative;" class="row mb-6 sm-mb-15px px-0">
     <div class="col-12" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
-        
-        <div class="row align-items-center pt-10px g-0 pb-10px border-bottom border-color-transparent-dark-light position-relative">
-            <div class="col-md-1 text-start text-md-center sm-mb-10px">
-                <span class="fs-18 alt-font">Annulé</span>
+
+        <div class="row align-items-center pt-15px g-0 pb-25px border-bottom {{ (loop.index0 == 0) ? 'border-top' : '' }}  border-color-transparent-dark-light position-relative">
+            <div class="col-md-1 sm-mb-10px">
+                {% if  event.isCanceled == true %}
+                    <div><span class="admin-activity-pills bg-alert fs-14">Annulé</span></div>
+                {% endif %}
             </div>
-            <div class="col-md-3 offset-md-1 d-flex align-items-center sm-mb-10px">
-                <i class="line-icon-Vector-5 icon-large me-20px"></i>
-                <span class="fw-600 fs-16">{{ event.activity.name }}</span>
+            <div class="col-md-1 sm-mb-10px d-flex justify-content-between">
+                
+                <div>                
+                    <div class="fs-16 lh-20 ls-minus-05px text-dark-gray fw-600">
+                        <span class="fs-10">du</span> {{event.dateStartAt|format_date('short',  locale= 'fr')}}
+                    </div> 
+                    <div class="fs-16 lh-20 ls-minus-05px text-dark-gray fw-600">
+                        <span class="fs-10">au</span> {{event.dateEndAt|format_date('short',  locale= 'fr')}}
+                    </div>
+
+                    <div class="fs-13"><i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</div>
+                </div>
+
+                <div>
+                    <div><span class="fs-12">Début :</span>{{event.timeStartAt|date('H:i')}}</div>
+                    {% if event.timeEndAt != null %}
+                        <div><span class="fs-12">Fin :</span>{{event.timeEndAt|date('H:i')}}</div>
+                    {% endif %}
+
+                </div>
+
             </div>
-            <div class="col-md-7 last-paragraph-no-margin">
-                <div>toto</div>
-                <p class="fs-13">
+            <div class="col-12 offset-md-1 d-flex align-items-center justify-content-between sm-mb-10px">
+                
+                <div class="d-flex align-items-center">
+                    <div style="width:36px;height:36px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2 me-2">
+                        {% if event.activity.pictureType == "image" %}
+                            <img class="my-2" style="width: 20px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
+                        {% else %}
+                            <i class="{{ event.activity.picture }} align-middle icon-small text-white my-3"></i>
+                        {% endif %}
+                    </div>
+                    <div style="width:130px;" class="fw-600 fs-15">{{ event.activity.name }}</div>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    {% if event.animators is not empty %}
+                        <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
+                            {% for animator in event.animators %}
+                                {% if animator.picture != null %}
+                                    <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                {% else %}
+                                    <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+            <div class="col-12 last-paragraph-no-margin">
+                <p class="fs-13 lh-small mb-4">
                     {{ event.name|length > 75 ? event.name|slice(0, 75) ~ '...' : event.name }}
                 </p>
+                <div class="pricing-footer w-35 mb-4" style="height:35px;">
+                    <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed() }) }}" class="btn btn-very-small btn-transparent-base-color btn-round-edge-large border-1 w-100">Fiche infos.</a>
+                </div>
             </div>
         </div>
         
     </div>
+
+    {# EDIT BUTTON #}
+    {% include "admin/partials/components/_event_actions_list.html.twig" %}
+
 </div>

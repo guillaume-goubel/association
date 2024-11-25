@@ -169,7 +169,7 @@ class EventType extends AbstractType
                         ->setParameter('enabled', true)
                         ->orderBy('a.name', 'ASC');
                 },
-                'data' => $selectedActivity ? $selectedActivity : null,
+                'data' => isset($selectedActivity) ? $selectedActivity : null,
             ])
             ->add('animators', EntityType::class, [
                 'label' => 'Rattacher à un/des animateurs',

@@ -32,4 +32,46 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     }
 
+    // GET activities by user change
+    const userChoiceElmt = document.getElementById('event_user');
+
+    if (userChoiceElmt) {     
+        userChoiceElmt.addEventListener('change', function(e) {
+            
+            e.preventDefault(); 
+            
+            const url = document.getElementById('getActivitiesByUserPARAM').getAttribute('data-path');
+            const userId = userChoiceElmt.value;  
+            
+            let data = new FormData();
+            data.append('userId', userId); 
+
+            fetch(url, {
+                method: 'POST',
+                body: data,
+            })
+            .then(response => response.json())  
+            .then(data => {
+                
+                // Récupère l'élément select avec l'ID 'event_activity'
+                const activitiesElmt = document.getElementById('event_activity');
+                
+                // Vider le select avant de rajouter les nouvelles options
+                activitiesElmt.innerHTML = '';
+                
+                // Parcourt les activités renvoyées et ajoute une option pour chaque activité
+                data.activitiesArray.forEach(activity => {
+                    const option = document.createElement('option');
+                    option.value = activity.id; // Utilise l'ID de l'activité comme valeur
+                    option.textContent = activity.name; // Affiche le nom de l'activité comme texte
+                    activitiesElmt.appendChild(option); // Ajoute l'option au select
+                });
+
+            })
+            .catch(error => {
+                console.error('Erreur lors de la requête AJAX :', error);
+            });
+        });
+    }
+
 });

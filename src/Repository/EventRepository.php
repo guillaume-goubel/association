@@ -51,7 +51,7 @@ class EventRepository extends ServiceEntityRepository
         if ($dateChoice == 'dateStartAt') {
             $stmt->addOrderBy('e.dateStartAt', 'ASC');
         }else{
-            $stmt->addOrderBy('e.createdAt', 'ASC');
+            $stmt->addOrderBy('e.createdAt', 'DESC');
         }
 
         return $stmt->getQuery();
@@ -332,52 +332,56 @@ class EventRepository extends ServiceEntityRepository
         return $result;
     }
 
-    public function findNextUpcomingEvent():mixed
+    public function findNextUpcomingEvent(): mixed
     {
-        $today = new \DateTime();
-        $today->setTime(0, 0); // On enlève l'heure pour exclure toute date du jour
-
+        $now = new \DateTime();
+    
         return $this->createQueryBuilder('e')
-            ->andWhere('e.dateStartAt > :today')        
-            ->andWhere('e.isEnabled = :isEnabled')      
-            ->setParameter('today', $today)
+            ->andWhere('e.isEnabled = :isEnabled') // Filtre pour événements actifs
+            ->andWhere('(e.dateStartAt > :today OR (e.dateStartAt = :today AND e.timeStartAt >= :currentTime))') // Date et heure
             ->setParameter('isEnabled', true)
-            ->orderBy('e.dateStartAt', 'ASC')          
-            ->setMaxResults(1)                          
+            ->setParameter('today', $now->format('Y-m-d')) // La date actuelle
+            ->setParameter('currentTime', $now->format('H:i:s')) // L'heure actuelle
+            ->orderBy('e.dateStartAt', 'ASC') // Trier d'abord par date
+            ->addOrderBy('e.timeStartAt', 'ASC') // Puis par heure
+            ->setMaxResults(1) // Limiter à un seul résultat
             ->getQuery()
-            ->getOneOrNullResult();                     
+            ->getOneOrNullResult(); // Retourner null si aucun résultat trouvé
     }
 
-    public function findNextUpcomingList():mixed
+    public function findNextUpcomingList(): mixed
     {
-        $today = new \DateTime();
-        $today->setTime(0, 0);
-
+        $now = new \DateTime();
+    
         return $this->createQueryBuilder('e')
-            ->andWhere('e.dateStartAt > :today')        
-            ->andWhere('e.isEnabled = :isEnabled')     
-            ->setParameter('today', $today)
+            ->andWhere('e.isEnabled = :isEnabled') // Filtre pour événements actifs
+            ->andWhere('(e.dateStartAt > :today OR (e.dateStartAt = :today AND e.timeStartAt >= :currentTime))') // Date et heure
             ->setParameter('isEnabled', true)
-            ->orderBy('e.dateStartAt', 'ASC')          
-            ->setMaxResults(4)                         
+            ->setParameter('today', $now->format('Y-m-d')) // La date actuelle
+            ->setParameter('currentTime', $now->format('H:i:s')) // L'heure actuelle
+            ->orderBy('e.dateStartAt', 'ASC') // Trier d'abord par date
+            ->addOrderBy('e.timeStartAt', 'ASC') // Puis par heure
+            ->setMaxResults(4) // Limiter à un seul résultat
             ->getQuery()
-            ->getResult();                  
+            ->getResult(); // Retourner null si aucun résultat trouvé
     }
 
-    public function findLastPastEventsList():mixed
+    public function findLastPastEventsList(): mixed
     {
-        $today = new \DateTime();
-        $today->setTime(0, 0);
-
+        $now = new \DateTime();
+    
         return $this->createQueryBuilder('e')
-            ->andWhere('e.dateStartAt < :today')        
-            ->andWhere('e.isEnabled = :isEnabled')     
-            ->setParameter('today', $today)
+            ->andWhere('e.isEnabled = :isEnabled') // Filtre pour événements actifs
+            ->andWhere(
+                '(e.dateEndAt < :today OR (e.dateEndAt = :today AND e.timeEndAt IS NOT NULL AND e.timeEndAt <= :currentTime))'
+            ) // Exclure les événements avec timeEndAt=NULL aujourd'hui
             ->setParameter('isEnabled', true)
-            ->orderBy('e.dateStartAt', 'ASC')          
-            ->setMaxResults(4)                         
+            ->setParameter('today', $now->format('Y-m-d')) // La date actuelle
+            ->setParameter('currentTime', $now->format('H:i:s')) // L'heure actuelle
+            ->orderBy('e.dateEndAt', 'ASC') // Trier par date de début
+            ->setMaxResults(4) // Limiter à 4 résultats
             ->getQuery()
-            ->getResult();                  
+            ->getResult();
     }
 
     public function getAllEventsCount(): array

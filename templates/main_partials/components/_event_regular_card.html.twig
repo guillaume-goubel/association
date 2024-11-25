@@ -7,6 +7,7 @@
     {% if  event.isCanceled == true %}
         <div class="canceled-label"><span class="admin-activity-pills bg-alert fs-13">Annulé</span></div>
     {% endif %}
+    
     {# CONTENT #}
     <div class="bg-white border border-radius-30px p-5 text-center main-card-container"> 
         <div class="d-flex">
@@ -27,7 +28,13 @@
             
             <div style="height:85px;" class="w-100 mb-5">
                 <span class="fs-16 d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
-                <span class="fs-18 lh-30 ls-minus-05px d-block text-dark-gray fw-600">{{event.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
+                <span class="fs-18 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
+                    {% if event.dateStartAt|date('Y-m-d') == "now"|date('Y-m-d') %}
+                        Aujourd'hui
+                    {% else %}
+                        {{ event.dateStartAt|format_date('medium', locale= 'fr') }}
+                    {% endif %}
+                </span>
             </div>
         </div>
         
