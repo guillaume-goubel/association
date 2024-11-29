@@ -22,12 +22,12 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, string $activityChoice, string $dateChoice): Query
+    public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, string $activityChoice, string $dateChoice, string $isPassedChoice, string $isCanceledChoice): Query
     {
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
 
-        if ($yearChoice) {
+        if ($yearChoice && $yearChoice != 'all') {
             $stmt->andwhere('YEAR(e.dateStartAt) = :year');
             $stmt->setParameter('year', $yearChoice);
         }
@@ -47,11 +47,32 @@ class EventRepository extends ServiceEntityRepository
             $stmt->setParameter('activityChoice', $activityChoice);
         }
 
-
         if ($dateChoice == 'dateStartAt') {
             $stmt->addOrderBy('e.dateStartAt', 'ASC');
         }else{
             $stmt->addOrderBy('e.createdAt', 'DESC');
+        }
+
+        if ($isPassedChoice != 'all') {
+            $now = new \DateTime();
+            if ($isPassedChoice == 'isPassed') {
+                // Si l'événement est "passé" (dateEndAt est strictement inférieure à aujourd'hui)
+                $stmt->andWhere('e.dateEndAt < :today');
+            } else {
+                // Si l'événement n'est pas "passé" (dateEndAt est aujourd'hui ou dans le futur)
+                $stmt->andWhere('e.dateEndAt >= :today');
+            }
+            $stmt->setParameter('today', $now->format('Y-m-d')); // Comparaison sur la date
+        }
+
+        if ($isCanceledChoice != 'all') {
+            if ($isCanceledChoice == 'isCanceled') {
+                // Vérification si la date de fin est avant aujourd'hui
+                $stmt->andWhere('e.isCanceled = TRUE');
+            } else {
+                // Vérification si la date de fin est après ou égale à aujourd'hui
+                $stmt->andWhere('e.isCanceled = FALSE');
+            }
         }
 
         return $stmt->getQuery();
@@ -234,7 +255,7 @@ class EventRepository extends ServiceEntityRepository
     public function getDistinctMonthCreatedAt($yearChoice): array
     {
         $sql_yearChoice = "";
-        if ($yearChoice != null) {
+        if ($yearChoice != null && $yearChoice != 'all') {
             $sql_yearChoice = " AND YEAR(A.date_start_at) = :yearChoice ";
         }
 
@@ -245,13 +266,13 @@ class EventRepository extends ServiceEntityRepository
                         'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',
                         'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre') AS month_name
                 FROM `event` A
-                WHERE DATE(date_start_at) >= DATE(NOW())
+                WHERE id > 0
                 " . $sql_yearChoice . "
 
                 ORDER BY month_number";
 
         $stmt = $conn->prepare($sql);
-        if ($yearChoice != null) {
+        if ($yearChoice != null && $yearChoice != 'all') {
             $stmt->bindValue(':yearChoice', $yearChoice);
         }
         $result = $stmt->executeQuery()->fetchAllAssociative();

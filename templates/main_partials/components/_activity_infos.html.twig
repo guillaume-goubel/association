@@ -1,33 +1,70 @@
 <div class="row align-items-center justify-content-center mb-8 xs-mb-50px">
-    <div class="col-12 col-md-7 text-justify">
+    
+    <div class="col-12 col-md-10 text-justify">
+    
+        <div class="row d-flex align-items-center">
 
-        <div class="d-flex">
-            <div style="width:50px;" class="col-6 pe-sm-0 me-3">
-                <div style="height:50px;background-color:{{activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
-                    {% if activity.pictureType == "image" %}
-                        <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
-                    {% else %}
-                        <i class="{{ activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
-                    {% endif %}
+            <div class=" col-12 col-md-8 d-flex justify-content-start align-items-center mb-4">
+                <div style="width:50px;" class="col-6 pe-sm-0 me-3">
+                    <div style="height:50px;background-color:{{activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
+                        {% if activity.pictureType == "image" %}
+                            <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                        {% else %}
+                            <i class="{{ activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
+                        {% endif %}
+                    </div>
                 </div>
+                <h4 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in mb-0"><span class="text-highlight fw-600">{{ activity.name }}<span style="background-color:{{ activity.color }};" class="h-8px bottom-10px opacity-6 separator-animation"></span></span></h4>
             </div>
-            <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-800">{{ activity.name }}<span style="background-color:{{ activity.color }};" class="h-8px bottom-10px opacity-6 separator-animation"></span></span></h4>
+
+            {# program #}
+            {% if isEvents %}
+            <div class="col-12 col-md-4 d-flex justify-content-start mb-4">
+                <a href="{{ path('agenda_index') }}?monthChoice=all&yearChoice=all&activityChoice={{ activity.id }}&from=activity-section" style="padding: 3px 18px;" class="btn btn-small btn-gradient-emerald-blue-emerald-green btn-hover-animation-switch btn-round-edge btn-box-shadow">
+                    <span class="pt-4"> 
+                        <span class="btn-text fs-14 text-white">Programme</span>
+                        <span class="btn-icon text-white mt-8"><i class="feather icon-feather-arrow-right"></i></span>
+                        <span class="btn-icon text-white mt-8"><i class="feather icon-feather-arrow-right"></i></span>
+                    </span>
+                </a>
+            </div>
+            {% endif %}
+
         </div>
-        
+
+    </div>
+    
+    {# activity infos #}
+    <div class="col-12 col-md-10 text-justify px-4 {{ (animators is not empty) ? ' border-bottom mb-4 ' : '' }} ">
+
         <div>
             <div></div>
             <div><p class="fs-14 mb-35px sm-mb-25px preformatted">{{activity.description|raw}}</p> </div>
         </div>
-        
-        {% if isEvents %}
-            <a href="{{ path('agenda_index') }}?monthChoice=all&yearChoice=all&activityChoice={{ activity.id }}&from=activity-section" style="padding: 3px 18px;" class="btn btn-small btn-gradient-emerald-blue-emerald-green btn-hover-animation-switch btn-round-edge btn-box-shadow">
-                <span class="pt-4"> 
-                    <span class="btn-text fs-14 text-white">Programme</span>
-                    <span class="btn-icon text-white mt-8"><i class="feather icon-feather-arrow-right"></i></span>
-                    <span class="btn-icon text-white mt-8"><i class="feather icon-feather-arrow-right"></i></span>
-                </span>
-            </a>
-        {% endif %}
 
     </div> 
+
+    {# animators infos #}
+    {% if animators is not empty %}
+        <div class="row col-12 text-justify">
+            {% for animator in animators %}       
+                <div class="col-12 col-md-6 mb-35px md-ms-0 p-0">
+                    <div class="d-flex flex-column flex-sm-row align-items-center border-radius-6px ps-25px pe-25px pt-15px pb-15px xl-p-30px text-center text-sm-start last-paragraph-no-margin">
+                        <div class="testimonials-author w-60px me-25px xs-me-0 xs-mb-20px flex-shrink-0">
+                            {% if animator.picture != null %}
+                                <img class="border-radius-50 rounded-circle me-15px xs-me-0" style="width: 60px;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" class="w-75px" alt=""/>
+                            {% else %}
+                                <img clas="rounded-circle me-15px xs-me-0" style="width: 55px;" src="{{ customAsset('app/default-avatar.png')}}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="testimonials-content">
+                            <span class="alt-font text-dark-gray fw-500 mt-5px fs-17">{{ animator.firstName|capitalize }} <span class="alt-font text-dark-gray fw-600 mt-5px fs-17">{{ animator.lastName|upper }}</span></span>
+                            <p style="line-height: 1.7;" class="card-text preformatted fs-13">{{animator.description|raw}}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 </div>

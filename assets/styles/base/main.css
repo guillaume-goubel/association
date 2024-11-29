@@ -451,8 +451,16 @@ footer .elements-social ul li:last-child {
 }
 .canceled-label {
     position: absolute;
-    top: 0;
+    top: -5px;
     left: 50%;
+    padding: 1px 20px;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.passed-label {
+    position: absolute;
+    top: -5px;
+    left: 55px;
     padding: 1px 20px;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);

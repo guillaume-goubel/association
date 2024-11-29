@@ -25,31 +25,53 @@ class EventController extends AbstractController
     {
         $user = $this->getUser();
     
-        $yearChoice = $request->query->get('yearChoice') ?? date("Y");
-        $monthChoice = $request->query->get('monthChoice') ?? date("m");
+        $yearChoice = $request->query->get('yearChoice') ?? 'all';
+        $monthChoice = $request->query->get('monthChoice') ?? 'all';
         $creatorChoice = $request->query->get('creatorChoice') ?? null;
         $dateChoice = $request->query->get('dateChoice') ?? 'dateStartAt';
+        $isPassedChoice = $request->query->get('isPassedChoice') ?? 'isNoPassed';
+        $isCanceledChoice = $request->query->get('isCanceledChoice') ?? 'all';
+        $activityChoice = $request->query->get('activityChoice') ?? "all";
         
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
-            
             if($creatorChoice == null){
                 $creatorChoice = 'all';
             }
         }else{
-            $creatorChoice = $this->getUser()->getId();
+            if($creatorChoice != 'all' && $creatorChoice == null){
+                $creatorChoice = $this->getUser()->getId();
+            }
         }
         
-        $activityChoice = $request->query->get('activityChoice') ?? "all";
-    
         // Distinct month / year createdAt for select
         $yearsList = $eventRepository->getDistincYearCreatedAt();
         $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
         $creatorsList = $eventRepository->getDistinctCreator();
+
+        if ($creatorChoice == NULL) {
+            if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+                $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
+            }else{
+                $activityList = $activityRepository->getActivitiesByUser($user->getId());
+            }
+        }else{
+            $activityList = $activityRepository->getActivitiesByUser($creatorChoice);
+        }
     
-        $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
-    
+        // if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+        //     $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
+        // }else{
+            
+        //     if ($creatorChoice != 'all') {
+        //         $activityList = $activityRepository->getActivitiesByUser($user->getId());
+        //     }
+            
+        // }
+
+        // $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
+
         // Pagination
-        $eventsQuery = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice, $dateChoice);
+        $eventsQuery = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice, $dateChoice, $isPassedChoice, $isCanceledChoice);
         
         // Définir la page actuelle (par défaut, la page 1)
         $page = $request->query->getInt('page', 1); 
@@ -72,6 +94,8 @@ class EventController extends AbstractController
             'creatorChoice' => $creatorChoice,
             'activityChoice' => $activityChoice,
             'dateChoice' => $dateChoice,
+            'isPassedChoice' => $isPassedChoice,
+            'isCanceledChoice' => $isCanceledChoice,
             'isEventActionsButtonVisible' => true,
         ]);
     }

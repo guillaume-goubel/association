@@ -266,6 +266,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // GET activities by user change
     const userChoiceElmt = document.getElementById('event_user');
+    const getViewTypeElmt = document.getElementById('getViewTypePARAM');
+
+    var getViewTypeParam; // Déclarer la variable avec `let` ou `var` à l'extérieur des blocs
+    if (getViewTypeElmt) {
+        getViewTypeParam = getViewTypeElmt.getAttribute('data-param');   
+    } else {
+        getViewTypeParam = null;
+    }
 
     if (userChoiceElmt) {     
         userChoiceElmt.addEventListener('change', function(e) {
@@ -290,6 +298,14 @@ document.addEventListener("DOMContentLoaded", (event) => {
                 
                 // Vider le select avant de rajouter les nouvelles options
                 activitiesElmt.innerHTML = '';
+
+                // Ajouter l'option "all" si on est dans la vue admin event index
+                if (getViewTypeParam === 'admin_event_index') {
+                    const allOption = document.createElement('option');
+                    allOption.value = 'all'; // La valeur de l'option "all"
+                    allOption.textContent = 'Toutes les activités'; // Texte visible pour l'option
+                    activitiesElmt.appendChild(allOption); // Ajouter l'option au select
+                }
                 
                 // Parcourt les activités renvoyées et ajoute une option pour chaque activité
                 data.activitiesArray.forEach(activity => {

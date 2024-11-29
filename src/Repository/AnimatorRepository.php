@@ -63,5 +63,18 @@ class AnimatorRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function animatorsListByIds(array $animatorsId): array
+    {
+        $stmt = $this->createQueryBuilder('a');
+        
+        if ($animatorsId) {
+            $stmt->andWhere('a.id IN (:animators)');
+            $stmt->setParameter('animators', $animatorsId);
+        }
+        
+        $stmt->orderBy('a.lastName', 'ASC')  ;
+        return $stmt->getQuery()->getResult();
+    }
+
 
 }

@@ -166,4 +166,23 @@ class ActivityRepository extends ServiceEntityRepository
         return $result;
     }
 
+    public function getAnimatorsByActivity($activityId): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = " SELECT DISTINCT(ea.animator_id) FROM `activity` as a 
+                 INNER JOIN event e
+                 ON e.activity_id = a.id
+ 
+                 INNER JOIN event_animator ea 
+                 ON ea.event_id = e.id
+ 
+                 WHERE a.id = $activityId
+            ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
 }

@@ -66,6 +66,10 @@
 .fc-day-past{
     background-color: var(--fc-neutral-bg-color);
 }
+.fc .fc-toolbar-title {
+    font-size: 1.55em;
+    font-weight: 600;
+}
 @media (max-width: 991px) {
     .fc-daygrid-day-bottom{
         margin-top: -9px!important;

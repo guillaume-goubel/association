@@ -448,11 +448,15 @@ class Event
 
     public function isPassed(): bool
     {
-        // Vérifie si la date de début est avant la date actuelle
+        // Vérifie si la date de fin existe
         if ($this->dateEndAt instanceof \DateTimeInterface) {
-            return $this->dateEndAt < new \DateTime(); // Compare à la date actuelle
+            // Compare uniquement les dates sans prendre en compte l'heure
+            $currentDate = (new \DateTime())->format('Y-m-d');
+            $eventEndDate = $this->dateEndAt->format('Y-m-d');
+            
+            return $eventEndDate < $currentDate; // L'événement est passé si sa date de fin est avant aujourd'hui
         }
-        return false; // Si la date de début n'est pas définie, renvoie false
+        return false; // Si la date de fin n'est pas définie, l'événement n'est pas considéré comme passé
     }
 
     /**

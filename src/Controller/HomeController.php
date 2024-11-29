@@ -40,7 +40,7 @@ class HomeController extends AbstractController
     }
 
     #[Route('/activity/infos', name: 'activity_infos', methods: ['POST'])]
-    public function activityInfos(Request $request, ActivityRepository $activityRepository, EventRepository $eventRepository):JsonResponse
+    public function activityInfos(Request $request, ActivityRepository $activityRepository, EventRepository $eventRepository, AnimatorRepository $animatorRepository):JsonResponse
     {
         
         $activityId = $request->request->get('activityId');
@@ -50,10 +50,16 @@ class HomeController extends AbstractController
         $events = $eventsQuery->getResult();
         $isEvents = !empty($events);
 
+        $animatorsId = $activityRepository->getAnimatorsByActivity($activityId);
+        if(!empty($animatorsId)){
+            $animators = $animatorRepository->animatorsListByIds($animatorsId);
+        }
+
         return new JsonResponse([
             'content' => $this->renderView('main_partials/components/_activity_infos.html.twig', [
                 'activity' => $activity,
-                'isEvents' => $isEvents
+                'isEvents' => $isEvents,
+                'animators' => $animators ?? null
             ])
         ]);
     }

@@ -26,3 +26,17 @@ label{
     font-size: 14px;
     font-weight: 600;
 }
+#eventFilterContainer{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    margin-bottom:20px;
+}
+@media only screen and (max-width: 600px) {
+    #eventFilterContainer{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+}

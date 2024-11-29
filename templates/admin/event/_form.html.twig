@@ -5,6 +5,7 @@
 <div id="rdvLongElmt" data-param="{{ (event.rdvLongitude != null) ? event.rdvLongitude : 'false' }}"></div>
 <div id="eventCanceledStatus" data-param="{{ event.getisCanceled|number_format }}"></div>
 <div id="getActivitiesByUserPARAM" data-path="{{ path('admin_event_change_activities')}}"></div>
+<div id="getViewTypePARAM" data-param="admin_event_form"></div>
 {# ! DATA FOR JS **************************************************************************** #}
 
 {{ form_start(form)}}
