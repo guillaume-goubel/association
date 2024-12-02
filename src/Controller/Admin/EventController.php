@@ -25,6 +25,11 @@ class EventController extends AbstractController
     #[Route('/index', name: 'index', methods: ['GET'])]
     public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository, PaginatorInterface $paginator): Response
     {
+        // View type in session
+        $session = $request->getSession();
+        if ($session->get('event_view_type') == null) {
+            $session->set('event_view_type', 'card');
+        }
         $user = $this->getUser();
     
         $yearChoice = $request->query->get('yearChoice') ?? 'all';
@@ -68,12 +73,13 @@ class EventController extends AbstractController
         // Définir la page actuelle (par défaut, la page 1)
         $page = $request->query->getInt('page', 1); 
     
+        $limit = ($session->get('event_view_type') === 'card') ? 8 : 30;
         $pagination = $paginator->paginate(
-            $eventsQuery, // la requête ou liste d'objets
-            $page,        // page actuelle
-            8   // nombre d'événements par page (vous pouvez ajuster ce chiffre)
+            $eventsQuery,
+            $page,        
+            $limit   
         );
-    
+
         return $this->render('admin/event/index.html.twig', [
             'events' => $pagination,  // utilisez la pagination ici
             'yearsList' => $yearsList,
@@ -90,6 +96,7 @@ class EventController extends AbstractController
             'isPassedChoice' => $isPassedChoice,
             'isCanceledChoice' => $isCanceledChoice,
             'isEventActionsButtonVisible' => true,
+            'viewType' => $session->get('event_view_type') ?? 'card'
         ]);
     }
 
@@ -336,6 +343,20 @@ class EventController extends AbstractController
 
         // Retourne la réponse JSON avec la liste des activités
         return new JsonResponse(['activitiesArray' => $activitiesArray]);
+    }
+
+    #[Route('/change/session/viewtype', name: 'change_session_view_type', methods: ['POST'])]
+    public function changeViewTypeSession(Request $request): JsonResponse
+    {
+        $session = $request->getSession();
+        
+        if ($session->get('event_view_type') == 'card') {
+            $session->set('event_view_type', 'list');
+        }else{
+            $session->set('event_view_type', 'card');
+        }
+        
+        return new JsonResponse();
     }
 
 }

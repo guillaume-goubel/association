@@ -1,10 +1,10 @@
-{# LIST RENDER #}
+{# CARD RESPONSIVE #}
 {% if events is not empty %}
     {% for key, event in events %}
         {% if event.isMultiDay %}
-            {% include 'main_partials/components/_event_journey_list.html.twig' %}
+            {% include 'main_partials/components/_event_journey_card_responsive.html.twig' %}
         {% else %}
-            {% include 'main_partials/components/_event_regular_list.html.twig' %}
+            {% include 'main_partials/components/_event_regular_card_responsive.html.twig' %}
         {% endif %}
     {% endfor %}
 {% else %}

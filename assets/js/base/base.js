@@ -236,7 +236,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // CHANGE CARD OR LIST VIEW EVENT RENDERING -----------------------------------------------------------------
     const eventCardsElmtRender = document.getElementById("events-cards-render");
-    const eventListElmtRender = document.getElementById("events-list-render");
+    const eventListElmtRender = document.getElementById("events-card-responsive-render");
     
     // Fonction pour détecter si l'utilisateur est sur mobile
     function isMobile() {
@@ -264,7 +264,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         // }, 500);
     }
 
-    // GET activities by user change
+    // GET activities by user change ------------------------------------------------------------------------------
     const userChoiceElmt = document.getElementById('event_user');
     const getViewTypeElmt = document.getElementById('getViewTypePARAM');
 
@@ -322,9 +322,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
-    // EVENT LIST alternative background class function event loop 
-    // Récupérer l'élément parent
-    const eventListContainer = document.getElementById('events-list-render');
+    // EVENT LIST alternative background class function event loop ------------------------------------------------
+    const eventListContainer = document.getElementById('events-card-responsive-render');
 
     // Vérifier si l'élément existe
     if (eventListContainer) {
@@ -342,4 +341,27 @@ document.addEventListener("DOMContentLoaded", (event) => {
         });
     }
 
+    // Change session event view type ------------------------------------------------------------------------------
+    const switchTypeViewBtn = document.getElementById('switchTypeViewBtn');
+    if (switchTypeViewBtn) {
+
+        switchTypeViewBtn.addEventListener('click', function(e) {
+            
+            e.preventDefault(); 
+            
+            const url = document.getElementById('changeViewSessionPARAM').getAttribute('data-path');
+
+            fetch(url, {
+                method: 'POST'
+            })
+            .then(response => response.json())  
+            .then(data => {
+                document.getElementById('formSubmitBtn').click();
+            })
+            .catch(error => {
+                console.error('Erreur lors de la requête AJAX :', error);
+            });
+        });
+
+    }
 });

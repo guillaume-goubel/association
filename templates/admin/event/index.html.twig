@@ -13,6 +13,7 @@
 {# ! DATA FOR JS **************************************************************************** #}
 <div id="getActivitiesByUserPARAM" data-path="{{ path('admin_event_change_activities')}}"></div>
 <div id="getViewTypePARAM" data-param="admin_event_index"></div>
+<div id="changeViewSessionPARAM" data-path="{{ path('admin_event_change_session_view_type')}}"></div>
 {# ! DATA FOR JS **************************************************************************** #}
 
 <body data-mobile-nav-style="classic">
@@ -35,7 +36,7 @@
                         </div>
 
                         <div class="admin-action col-3 d-flex justify-content-end">
-                            <a class="ms-8"><i class="fa-regular fa-id-card align-middle icon-large text-golden-yellow me-2"></i></a>
+                            <a id="switchTypeViewBtn" class="ms-8"><i class="fa-regular fa-id-card align-middle icon-large text-golden-yellow me-2"></i></a>
                             <a class="ms-8" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
                             <a class="ms-8" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>
@@ -125,7 +126,7 @@
 
                         <!-- Bouton de recherche -->
                         <div class="d-flex flex-column col-12 col-md-1 col-lg-1">
-                            <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
+                            <button style="border-radius:8px;" id="formSubmitBtn" class="btn btn-very-small btn-transparent-base-color" type="submit">
                                 <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
                             </button>
                             <a href="{{ path('admin_event_index') }}" style="border-radius:8px;" class="btn btn-very-small btn-transparent-light-gray mt-10px">
@@ -144,12 +145,20 @@
                     </div>
                     
                     {# MODE VIEW CARD + CARD RESPONSIVE #}
-                    <div id="events-cards-render" class="row d-none align-items-center justify-content-start pb-5">
-                        {% include 'admin/event/partials/components/_events_card_render.html.twig' %}
-                    </div>
+                    {% if viewType == 'card' %}
+                        <div id="events-cards-render" class="row d-none align-items-center justify-content-start pb-5">
+                            {% include 'admin/event/partials/components/_events_card_render.html.twig' %}
+                        </div>
+                    {% else %}
+                        <div id="events-cards-render" class="row d-none mb-6 sm-mb-30px">
+                            <div class="col-12">    
+                                {% include 'admin/event/partials/components/_events_list_render.html.twig' %}
+                            </div>
+                        </div>
+                    {% endif %}
 
-                    <div id="events-list-render" class="row d-none align-items-center justify-content-center pb-5 mt-5">
-                        {% include 'admin/event/partials/components/_events_list_render.html.twig' %}
+                    <div id="events-card-responsive-render" class="row d-none align-items-center justify-content-center pb-5 mt-5">
+                        {% include 'admin/event/partials/components/_events_card_responsive_render.html.twig' %}
                     </div>
 
                 </div>

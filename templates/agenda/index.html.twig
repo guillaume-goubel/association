@@ -132,24 +132,13 @@
             </div>
             
             <div class="row align-items-center justify-content-center pricing-table-style-06 pb-5" data-anime='{ "el": "childs", "translateX": [30, 0], "opacity": [0,1], "duration": 300, "delay": 0, "staggervalue": 100, "easing": "easeOutQuad" }'>
-                {# {% if events is not empty %}
-                    {% for event in events %}
-                        {% if event.isMultiDay %}
-                            {% include 'main_partials/components/_event_journey_card.html.twig' %}
-                        {% else %}
-                            {% include 'main_partials/components/_event_regular_card.html.twig' %}
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    <div class="no-matching-search-message">Pas de résultats pour cette recherche - cliquer sur le bouton <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i> </div>
-                {% endif %} #}
 
                 <div id="events-cards-render" class="row d-none align-items-center justify-content-start pb-5">
                     {% include 'admin/event/partials/components/_events_card_render.html.twig' %}
                 </div>
 
-                <div id="events-list-render" class="row d-none align-items-center justify-content-center pb-5 mt-5">
-                    {% include 'admin/event/partials/components/_events_list_render.html.twig' %}
+                <div id="events-card-responsive-render" class="row d-none align-items-center justify-content-center pb-5 mt-5">
+                    {% include 'admin/event/partials/components/_events_card_responsive_render.html.twig' %}
                 </div>
 
             </div>
