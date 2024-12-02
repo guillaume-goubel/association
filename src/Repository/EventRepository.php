@@ -22,10 +22,13 @@ class EventRepository extends ServiceEntityRepository
         parent::__construct($registry, Event::class);
     }
 
-    public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, string $activityChoice, string $dateChoice, string $isPassedChoice, string $isCanceledChoice): Query
+    public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, 
+    string $activityChoice, string $dateChoice, string $isPassedChoice, 
+    string $isCanceledChoice, string $animatorChoice): Query
     {
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
+        $stmt->join('e.animators', 'an');
 
         if ($yearChoice && $yearChoice != 'all') {
             $stmt->andwhere('YEAR(e.dateStartAt) = :year');
@@ -40,6 +43,11 @@ class EventRepository extends ServiceEntityRepository
         if ($creatorChoice && $creatorChoice != 'all') {
             $stmt->andwhere('e.user = :user');
             $stmt->setParameter('user', $creatorChoice);
+        }
+
+        if ($animatorChoice && $animatorChoice != 'all') {
+            $stmt->andwhere('an.id = :animator');
+            $stmt->setParameter('animator', $animatorChoice);
         }
 
         if ($activityChoice && $activityChoice != 'all') {
@@ -346,6 +354,25 @@ class EventRepository extends ServiceEntityRepository
 
                     GROUP BY U.id
                     ORDER BY U.last_name ASC
+               ";
+
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->executeQuery()->fetchAllAssociative();
+        return $result;
+    }
+
+    public function getDistinctAnimator(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = "    SELECT Ea.animator_id AS id, CONCAT(UPPER(A.last_name), ' ', A.first_name) AS name
+
+                    FROM `event_animator` Ea 
+                    LEFT JOIN animator A
+                    ON A.id = Ea.animator_id
+
+                    GROUP BY Ea.animator_id
+                    ORDER BY A.last_name ASC
                ";
 
         $stmt = $conn->prepare($sql);

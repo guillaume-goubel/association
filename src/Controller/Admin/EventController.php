@@ -6,10 +6,11 @@ use App\Entity\Event;
 use App\Form\EventType;
 use App\Service\EventService;
 use App\Service\MediaService;
+use App\Repository\UserRepository;
 use App\Repository\EventRepository;
 use App\Repository\ActivityRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\CheckAuthorizationService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin/event', name: 'admin_event_')]
 class EventController extends AbstractController
 {
+    
     #[Route('/index', name: 'index', methods: ['GET'])]
     public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository, PaginatorInterface $paginator): Response
     {
@@ -28,6 +30,7 @@ class EventController extends AbstractController
         $yearChoice = $request->query->get('yearChoice') ?? 'all';
         $monthChoice = $request->query->get('monthChoice') ?? 'all';
         $creatorChoice = $request->query->get('creatorChoice') ?? null;
+        $animatorChoice = $request->query->get('animatorChoice') ?? 'all';
         $dateChoice = $request->query->get('dateChoice') ?? 'dateStartAt';
         $isPassedChoice = $request->query->get('isPassedChoice') ?? 'isNoPassed';
         $isCanceledChoice = $request->query->get('isCanceledChoice') ?? 'all';
@@ -47,6 +50,7 @@ class EventController extends AbstractController
         $yearsList = $eventRepository->getDistincYearCreatedAt();
         $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
         $creatorsList = $eventRepository->getDistinctCreator();
+        $animatorsList = $eventRepository->getDistinctAnimator();
 
         if ($creatorChoice == NULL) {
             if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
@@ -58,29 +62,16 @@ class EventController extends AbstractController
             $activityList = $activityRepository->getActivitiesByUser($creatorChoice);
         }
     
-        // if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
-        //     $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
-        // }else{
-            
-        //     if ($creatorChoice != 'all') {
-        //         $activityList = $activityRepository->getActivitiesByUser($user->getId());
-        //     }
-            
-        // }
-
-        // $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
-
         // Pagination
-        $eventsQuery = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice, $dateChoice, $isPassedChoice, $isCanceledChoice);
+        $eventsQuery = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice, $dateChoice, $isPassedChoice, $isCanceledChoice, $animatorChoice);
         
         // Définir la page actuelle (par défaut, la page 1)
         $page = $request->query->getInt('page', 1); 
     
-        // Paginer les résultats
         $pagination = $paginator->paginate(
             $eventsQuery, // la requête ou liste d'objets
             $page,        // page actuelle
-            8    // nombre d'événements par page (vous pouvez ajuster ce chiffre)
+            8   // nombre d'événements par page (vous pouvez ajuster ce chiffre)
         );
     
         return $this->render('admin/event/index.html.twig', [
@@ -88,10 +79,12 @@ class EventController extends AbstractController
             'yearsList' => $yearsList,
             'monthsList' => $monthsList,
             'creatorsList' => $creatorsList,
+            'animatorsList' => $animatorsList,
             'activityList' => $activityList,
             'yearChoice' => $yearChoice,
             'monthChoice' => $monthChoice,
             'creatorChoice' => $creatorChoice,
+            'animatorChoice' => $animatorChoice,
             'activityChoice' => $activityChoice,
             'dateChoice' => $dateChoice,
             'isPassedChoice' => $isPassedChoice,
@@ -167,15 +160,14 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, UserRepository $userRepository, Event $event, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
+    public function edit(Request $request, UserRepository $userRepository, Event $event, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService, CheckAuthorizationService $checkAuthorizationService): Response
     {   
         $user = $this->getUser();
         $isNewEvent = $event->getId() === null;
         
-        // Vérification si l'ID de l'utilisateur connecté correspond à l'ID de l'utilisateur de l'événement
-        if ($user->getId() !== $event->getUser()->getId() && !in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+        if (!$checkAuthorizationService->checkProcess($user, 'admin_activity_edit', $event)) {
             // Redirige vers la liste des événements si les IDs ne correspondent pas
-            return $this->redirectToRoute('admin_event_index');
+            return $this->redirectToRoute('admin_index');
         }
         
         $userActivityArray = [];
@@ -232,8 +224,14 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['GET'])]
-    public function delete(Request $request, Event $event, EntityManagerInterface $entityManager, EventService $eventService): Response
+    public function delete(Request $request, Event $event, EntityManagerInterface $entityManager, EventService $eventService, CheckAuthorizationService $checkAuthorizationService): Response
     {
+        
+        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_activity_delete', $event)) {
+            // Redirige vers la liste des événements si les IDs ne correspondent pas
+            return $this->redirectToRoute('admin_index');
+        }
+        
         // delete images
         $eventService->deleteAllEventPictures($event); 
 

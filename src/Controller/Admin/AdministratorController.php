@@ -4,9 +4,10 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\AdministratorType;
-use App\Repository\ActivityRepository;
 use App\Repository\UserRepository;
+use App\Repository\ActivityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\CheckAuthorizationService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,8 +19,14 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdministratorController extends AbstractController
 {
     #[Route('/index', name: 'index', methods: ['GET'])]
-    public function index(UserRepository $userRepository, ActivityRepository $activityRepository, Request $request, PaginatorInterface $paginator): Response
+    public function index(UserRepository $userRepository, ActivityRepository $activityRepository, Request $request, PaginatorInterface $paginator, CheckAuthorizationService $checkAuthorizationService): Response
     {   
+        
+        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_administrator_index', null)) {
+            // Redirige vers la liste des événements si les IDs ne correspondent pas
+            return $this->redirectToRoute('admin_index');
+        }
+        
         $activityChoice = $request->query->get('activityChoice') ?? "all";
         $adminChoice = $request->query->get('adminChoice') ?? "all";
 
@@ -48,8 +55,13 @@ class AdministratorController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, CheckAuthorizationService $checkAuthorizationService): Response
     {
+        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_administrator_new', null)) {
+            // Redirige vers la liste des événements si les IDs ne correspondent pas
+            return $this->redirectToRoute('admin_index');
+        }
+        
         $user = new User();
         $form = $this->createForm(AdministratorType::class, $user);
         $form->handleRequest($request);
@@ -89,8 +101,13 @@ class AdministratorController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, CheckAuthorizationService $checkAuthorizationService): Response
     {
+        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_administrator_delete', null)) {
+            // Redirige vers la liste des événements si les IDs ne correspondent pas
+            return $this->redirectToRoute('admin_index');
+        }
+        
         $isNewUser = !$user->getId();
         
         $form = $this->createForm(AdministratorType::class, $user, [

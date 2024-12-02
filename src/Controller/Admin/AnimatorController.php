@@ -8,6 +8,7 @@ use App\Service\MediaService;
 use App\Service\AnimatorService;
 use App\Repository\AnimatorRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\CheckAuthorizationService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +20,9 @@ class AnimatorController extends AbstractController
 {
 
     #[Route('/index', name: 'index')]
-    public function index(AnimatorRepository $animatorRepository, Request $request, PaginatorInterface $paginator): Response
+    public function index(AnimatorRepository $animatorRepository, Request $request, PaginatorInterface $paginator, CheckAuthorizationService $checkAuthorizationService): Response
     {
+        
         $activityChoice = $request->query->get('activityChoice') ?? "all";
         $animatorChoice = $request->query->get('animatorChoice') ?? "all";
 
@@ -62,8 +64,13 @@ class AnimatorController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager, AnimatorService $animatorService): Response
+    public function new(Request $request, EntityManagerInterface $entityManager, AnimatorService $animatorService, CheckAuthorizationService $checkAuthorizationService): Response
     {
+        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_animator_new', null)) {
+            // Redirige vers la liste des événements si les IDs ne correspondent pas
+            return $this->redirectToRoute('admin_index');
+        }
+        
         $animator = new Animator();
         $form = $this->createForm(AnimatorType::class, $animator,[
         ]);
@@ -95,9 +102,13 @@ class AnimatorController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Animator $animator, EntityManagerInterface $entityManager, AnimatorService $animatorService): Response
+    public function edit(Request $request, Animator $animator, EntityManagerInterface $entityManager, AnimatorService $animatorService, CheckAuthorizationService $checkAuthorizationService): Response
     {
-
+        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_animator_edit', null)) {
+            // Redirige vers la liste des événements si les IDs ne correspondent pas
+            return $this->redirectToRoute('admin_index');
+        }
+        
         $form = $this->createForm(AnimatorType::class, $animator,[
             'current_user' => $animator->getUser()
         ]);
@@ -120,8 +131,13 @@ class AnimatorController extends AbstractController
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['GET'])]
-    public function delete(Request $request, Animator $animator, EntityManagerInterface $entityManager, AnimatorService $animatorService): Response
+    public function delete(Animator $animator, EntityManagerInterface $entityManager, AnimatorService $animatorService, CheckAuthorizationService $checkAuthorizationService): Response
     {
+        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_animator_delete', null)) {
+            // Redirige vers la liste des événements si les IDs ne correspondent pas
+            return $this->redirectToRoute('admin_index');
+        }
+        
         // delete images
         $animatorService->deleteAllAnimatorPictures($animator); 
 

@@ -50,7 +50,7 @@
             {{ form_label(form.dateStartAt) }}  
             {{ form_widget(form.dateStartAt) }} 
             {% if form.dateStartAt.vars.errors|length > 0 %}
-                <div class="form-errors text-red fs-14">
+                <div class="form-errors text-red fs-14 fw-600">
                     {{ form_errors(form.dateStartAt) }} 
                 </div>
             {% endif %}
@@ -64,7 +64,7 @@
             {{ form_label(form.dateEndAt) }}  
             {{ form_widget(form.dateEndAt) }} 
             {% if form.dateEndAt.vars.errors|length > 0 %}
-                <div class="form-errors text-red fs-14">
+                <div class="form-errors text-red fs-14 fw-600">
                     {{ form_errors(form.dateEndAt) }} 
                 </div>
             {% endif %}
@@ -84,7 +84,13 @@
     </div>
     <div class="row d-flex ">
         <div class="col-12 col-md-6 mt-1">
-            {{ form_row(form.eventDistance) }}
+            {{ form_label(form.eventDistance) }}  
+            {{ form_widget(form.eventDistance) }} 
+            {% if form.eventDistance.vars.errors|length > 0 %}
+                <div class="form-errors text-red fs-14 fw-600">
+                    {{ form_errors(form.eventDistance) }} 
+                </div>
+            {% endif %}
         </div>
     </div>
 

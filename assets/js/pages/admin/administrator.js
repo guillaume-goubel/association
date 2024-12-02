@@ -39,5 +39,37 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         });
     }
+    // Change name when change admin rattached
+    const animatorUserElmt = document.getElementById('animator_user');
+    if (animatorUserElmt) {
+        animatorUserElmt.addEventListener('change', function() {
+            // Récupérer la valeur sélectionnée dans le select
+            var selectedValue = this.value;
+            
+            // Récupérer les éléments des inputs pour le prénom et le nom
+            var firstNameInput = document.getElementById('animator_firstName');
+            var lastNameInput = document.getElementById('animator_lastName');
+            
+            // Si l'option choisie est vide, effacer les champs prénom et nom
+            if (selectedValue === "") {
+                firstNameInput.value = '';
+                lastNameInput.value = '';
+            } else {
+                // Récupérer le texte de l'option sélectionnée
+                var selectedOptionText = this.options[this.selectedIndex].text;
+                
+                // Enlever le préfixe #id et séparer le nom et le prénom
+                var nameParts = selectedOptionText.replace(/^#\d+\s*/, '').split(' ');
+                
+                // Assurer que le tableau contient bien 2 éléments : Nom et Prénom
+                if (nameParts.length === 2) {
+                    lastNameInput.value = nameParts[0];  // Nom
+                    firstNameInput.value = nameParts[1]; // Prénom
+                }
+            }
+        });
+    }
+
+    
     
 });

@@ -28,9 +28,11 @@
                             <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-600">ANIMATEURS<span style="background-color:#0077b6;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></h4>
                         </div>
 
-                        <div class="admin-action col-2 d-flex justify-content-end">
-                            <a class="ms-4" href="{{ path('admin_animator_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
-                        </div>
+                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                            <div class="admin-action col-2 d-flex justify-content-end">
+                                <a class="ms-4" href="{{ path('admin_animator_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                            </div>
+                        {% endif %}
                         
                     </div>
                 </div>
@@ -95,10 +97,16 @@
                                                 />
                                                 {% if animator.user != null %}
                                                     <div>
-                                                        <a href="{{ path('admin_administrator_edit', { 'id':animator.user.id, 'from':"admin_animator_index" }) }}"><i class="fa-solid fa-gear icon-large mt-20px"></i></a>
+                                                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                                            <a href="{{ path('admin_administrator_edit', { 'id':animator.user.id, 'from':"admin_animator_index" }) }}"><i class="fa-solid fa-gear icon-large mt-20px"></i></a>
+                                                        {% else %}
+                                                            <div><i class="fa-solid fa-gear icon-large mt-20px"></i></div>
+                                                        {% endif %}
+                                                        
                                                         <div class="fs-13">Admin.</div>
                                                     </div>
                                                 {% endif %}
+
                                             </div>
 
                                             <div class="feature-box-content">
@@ -128,11 +136,15 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-4 text-center text-md-end">
-                                        <a href="{{ path('admin_animator_edit', { 'id':animator.id }) }}" class="edit-administrator-btn btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
-                                            <span>
-                                                <i class="fa-regular fa-folder-open"></i>
-                                            </span>
-                                        </a>
+                                        
+                                        {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                            <a href="{{ path('admin_animator_edit', { 'id':animator.id }) }}" class="edit-administrator-btn btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                                                <span>
+                                                    <i class="fa-regular fa-folder-open"></i>
+                                                </span>
+                                            </a>
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             {% endfor %}

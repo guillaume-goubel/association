@@ -6,6 +6,7 @@ use App\Entity\Activity;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
 use App\Repository\UserRepository;
+use App\Service\CheckAuthorizationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,14 +49,26 @@ class ActivityController extends AbstractController
                 if (!isset($tempUserArray[$userId])) {
                     $tempUserArray[$userId] = [
                         'id' => $userId,
-                        'name' => $user->getFirstName() . ' ' . $user->getLastName()
+                        'name' => ucfirst(strtolower($user->getLastName())) . ' ' . ucfirst(strtolower($user->getFirstName())),
+                        'lastName' => $user->getLastName(), // Stocker aussi LastName pour le tri
+                        'firstName' => $user->getFirstName() // Optionnel si tri secondaire nécessaire
                     ];
                 }
             }
         }
         
-        // Transformer le tableau temporaire en tableau final
-        $userList = array_values($tempUserArray);
+        // Trier le tableau temporaire par LastName
+        usort($tempUserArray, function($a, $b) {
+            return strcmp($a['lastName'], $b['lastName']); // Comparaison alphabétique des noms de famille
+        });
+
+        // Transformer le tableau temporaire en tableau final sans les clés supplémentaires
+        $userList = array_map(function($user) {
+            return [
+                'id' => $user['id'],
+                'name' => $user['name']
+            ];
+        }, $tempUserArray);
 
         $userChoiceInfos = ($userChoice !== 'all') ? $userRepository->findOneBy(['id' => $userChoice]) : 'all';
 
@@ -100,7 +113,7 @@ class ActivityController extends AbstractController
     }
 
     #[Route('/activity/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Activity $activity, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Activity $activity, EntityManagerInterface $entityManager, CheckAuthorizationService $checkAuthorizationService): Response
     {
         $user = $this->getUser();
 
@@ -108,9 +121,12 @@ class ActivityController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            
+            if ($checkAuthorizationService->checkProcess($this->getUser(), 'admin_activity_edit', null)) {
+                $entityManager->flush();
+                $this->addFlash('success', 'Opération effectuée');    
+            }
 
-            $this->addFlash('success', 'Opération effectuée');
             return $this->redirectToRoute('admin_activity_index', [], Response::HTTP_SEE_OTHER);
         }
 

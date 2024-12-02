@@ -80,17 +80,17 @@ class EventType extends AbstractType
                 'label' => "L'évènement comporte-t-il un parcours (en km) ",
                 'help' => 'La distance doit être un nombre entier supérieur à zéro',
                 'attr' => ['class' => 'form-control', 'min' => 1, 'step' => 1],
-                'data' => null,
+                // 'data' => null,
                 'html5' => true,
                 'required' => false,
                 'constraints' => [
                     new Assert\Positive([
                         'message' => "La distance de l'événement doit être un nombre strictement positif.",
                     ]),
-                    new Type([
-                        'type' => 'integer',
-                        'message' => "La distance doit être un nombre entier.",
-                    ])
+                    // new Type([
+                    //     'type' => 'integer',
+                    //     'message' => "La distance doit être un nombre entier.",
+                    // ])
                 ],
             ])
             ->add('rdvPlaceName', TextType::class, [

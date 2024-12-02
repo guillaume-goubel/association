@@ -206,7 +206,7 @@ footer .elements-social ul li:last-child {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
 }
 .main-card-container {
-    height: 470px;
+    height: 410px;
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide pour l'état normal */
     box-shadow: 0 13px 19px rgba(0, 0, 0, 0.2); /* Ombre légère par défaut */
 }

@@ -18,11 +18,11 @@
     </div>
 
     {# {% if is_granted('ROLE_SUPER_ADMIN') or isUserActivityOwner == true %} #}
-    {% if is_granted('ROLE_SUPER_ADMIN') %}
+    {# {% if is_granted('ROLE_SUPER_ADMIN') %} #}
         <div class="row d-flex justify-content-center mt-5">
             <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto border-radius-30px">{{ button_label|default('Modifier') }}</button>
         </div>
-    {% endif %}
+    {# {% endif %} #}
 
 {{ form_end(form) }}
 

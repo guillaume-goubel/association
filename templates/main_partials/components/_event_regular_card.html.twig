@@ -1,4 +1,4 @@
-<div style="position:relative;" class="activity-card col-lg-3 col-md-8 md-mb-30px mb-2">
+<div style="position:relative;" class="activity-card col-lg-3 col-md-8 md-mb-40px mb-3">
     
     {# EDIT BUTTON #}
     {% include "admin/partials/components/_event_actions_card.html.twig" %}
@@ -31,7 +31,7 @@
                 </div>
             </div>
             
-            <div style="height:85px;" class="w-100 mb-5">
+            <div style="height:70px;" class="w-100 mb-5">
                 <span class="fs-16 d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
                 <span class="fs-18 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
                     {% if event.dateStartAt|date('Y-m-d') == "now"|date('Y-m-d') %}
@@ -64,25 +64,25 @@
         
 
         <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
-            <li style="height:85px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{event.name}}</li>
-            <li style="border-bottom:none!important;" class="border-color-extra-medium-gray pt-15px pb-0px text-dark-gray fw-500 d-flex">
+            <li style="height:67px;overflow:hidden;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{ event.name|length > 60 ? event.name|slice(0, 60) ~ '...' : event.name }}</li>
+            <li style="border-bottom:none!important;" class="border-color-extra-medium-gray pt-15px pb-0px text-dark-gray fs-14 fw-500 d-flex">
             <i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</li>
             <li class="border-color-extra-medium-gray pt-15px pb-15px d-flex">
             <i class="feather icon-feather-clock me-5px"></i>
                 <div style="width:95px;" class="me-5 d-flex align-items-baseline">
                     <div class="fs-11 me-1">Début :</div>
-                    <div>{{event.timeStartAt|date('H:i')}}</div>
+                    <div class="fs-14 fw-600">{{event.timeStartAt|date('H:i')}}</div>
                 </div>
 
                 {% if event.timeEndAt != null %}
                     <div style="width:95px;" class="d-flex align-items-baseline">
                         <div class="fs-11 me-1">Fin :</div>
-                        <div>{{event.timeEndAt|date('H:i')}}</div>
+                        <div class="fs-14 fw-600">{{event.timeEndAt|date('H:i')}}</div>
                     </div>
                 {% endif %}
             </li>
 
-            <li style="height:75px;border-bottom:none!important;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex flex-column">
+            <li style="height:55px;border-bottom:none!important;" class="border-color-extra-medium-gray pt-10px pb-10px d-flex flex-column">
                 {% if event.rdvAddress != null %}
                     <div class="fs-12 mb-4">Rendez-vous :
                         {% if event.rdvLatitude != null and event.rdvLongitude != null %}

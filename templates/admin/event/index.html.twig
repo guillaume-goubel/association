@@ -34,8 +34,9 @@
                             <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-600">ÉVÉNEMENTS<span style="background-color:#00b4d8;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></h4>
                         </div>
 
-                        <div class="admin-action col-2 d-flex justify-content-end">
-                            <a class="me-8" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
+                        <div class="admin-action col-3 d-flex justify-content-end">
+                            <a class="ms-8"><i class="fa-regular fa-id-card align-middle icon-large text-golden-yellow me-2"></i></a>
+                            <a class="ms-8" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
                             <a class="ms-8" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>
                     </div>
@@ -78,7 +79,7 @@
                                     <!-- Filtre activité -->
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <select id="event_activity" name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                            <option {{ activityChoice =='all' ? 'selected' : '' }} value="all">Toutes activités</option>
+                                            <option {{ activityChoice =='all' ? 'selected' : '' }} value="all">Toute activité</option>
                                             {% for item in activityList %}
                                                 <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
                                             {% endfor %}
@@ -96,19 +97,26 @@
                                             <option {{ dateChoice == 'createdAt' ? 'selected' : '' }} value="createdAt">Date de création</option>
                                         </select>
                                     </div> #}
-                                                                        <!-- Filtre date -->
+                                    <div class="col-12 col-md-6 col-lg-4">
+                                        <select name="animatorChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ animatorChoice =='all' ? 'selected' : '' }} value="all">Tout animateur</option>
+                                            {% for item in animatorsList %}
+                                                <option {{ animatorChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>                                    <!-- Filtre date -->
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <select name="isPassedChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                            <option {{ isPassedChoice == 'all' ? 'selected' : '' }} value="all">Evénement terminé et à venir</option>
-                                            <option {{ isPassedChoice == 'isNoPassed' ? 'selected' : '' }} value="isNoPassed">Evénement à venir</option>
-                                            <option {{ isPassedChoice == 'isPassed' ? 'selected' : '' }} value="isPassed">Evénement terminé</option>
+                                            <option {{ isPassedChoice == 'all' ? 'selected' : '' }} value="all">Terminés et à venir</option>
+                                            <option {{ isPassedChoice == 'isNoPassed' ? 'selected' : '' }} value="isNoPassed">A venir</option>
+                                            <option {{ isPassedChoice == 'isPassed' ? 'selected' : '' }} value="isPassed">Terminés</option>
                                         </select>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-4">
                                         <select name="isCanceledChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                            <option {{ isCanceledChoice == 'all' ? 'selected' : '' }} value="all">Evénement annulé et en cours</option>
-                                            <option {{ isCanceledChoice == 'isNoCanceled' ? 'selected' : '' }} value="isNoCanceled">Evénement en cours</option>
-                                            <option {{ isCanceledChoice == 'isCanceled' ? 'selected' : '' }} value="isCanceled">Evénement annulé</option>
+                                            <option {{ isCanceledChoice == 'all' ? 'selected' : '' }} value="all">Annulés et maintenus</option>
+                                            <option {{ isCanceledChoice == 'isNoCanceled' ? 'selected' : '' }} value="isNoCanceled">Maintenus</option>
+                                            <option {{ isCanceledChoice == 'isCanceled' ? 'selected' : '' }} value="isCanceled">Annulés</option>
                                         </select>
                                     </div>
                                 </div>
@@ -134,7 +142,8 @@
                     <div class="pagination-container d-flex justify-content-center">
                         {{knp_pagination_render(events, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
                     </div>
-
+                    
+                    {# MODE VIEW CARD + CARD RESPONSIVE #}
                     <div id="events-cards-render" class="row d-none align-items-center justify-content-start pb-5">
                         {% include 'admin/event/partials/components/_events_card_render.html.twig' %}
                     </div>
