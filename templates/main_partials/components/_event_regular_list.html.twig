@@ -41,10 +41,10 @@
 
             <div style="width:150px;" class="d-flex flex-column col-md-1 sm-mb-10px ">
                 {% if  event.isPassed == true %}
-                    <div><span class="admin-activity-pills bg-info fs-14 mx-2">Terminé</span></div>
+                    <div><span class="admin-activity-pills bg-medium-gray fs-12 mx-2">Terminé</span></div>
                 {% endif %}
                 {% if  event.isCanceled == true %}
-                    <div><span class="admin-activity-pills bg-alert fs-14 mx-2">Annulé</span></div>
+                    <div><span class="admin-activity-pills bg-alert fs-12 mx-2">Annulé</span></div>
                 {% endif %}
             </div>
 
@@ -64,7 +64,7 @@
                     {% if event.user.id == app.user.id or is_granted('ROLE_SUPER_ADMIN') %}
                         <div class="event-action-container edit event-list ">
                             <a style="#" href="{{ path('admin_event_edit', { 'id': event.id}) }}?from={{ app.request.attributes.get('_route') }}" class="btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
-                                <i class="fa-regular fa-folder-open"></i>
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </div>
                     {% endif %}

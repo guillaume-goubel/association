@@ -238,7 +238,7 @@ footer .elements-social ul li:last-child {
     justify-content: center;
 }
 .event-action-container.edit.event-list{
-    bottom: 5px;
+    bottom: 0px;
     right: 15px;
 }
 .event-action-container.edit a{
@@ -270,7 +270,7 @@ footer .elements-social ul li:last-child {
 }
 .event-action-container.disabled.event-list{
     right: 70px;
-    bottom: 5px;
+    bottom: 0px;
 }
 .event-action-container.disabled a{
     width: 50px;
@@ -301,7 +301,7 @@ footer .elements-social ul li:last-child {
 }
 .event-action-container.enabled.event-list{
     right: 70px;
-    bottom: 5px;
+    bottom: 0px;
 }
 .event-action-container.enabled a{
     width: 50px;

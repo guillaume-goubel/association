@@ -176,11 +176,15 @@ class EventType extends AbstractType
                 'help' => 'Appuyer sur la touche "CONTROL" en cliquant pour faire des sélections multiples',
                 'attr' => ['class' => 'form-control'],
                 'class' => Animator::class,
-                'choice_label' => function (Animator $user) {
-                    return $user->getCompleteNameByLastName(); // Appel de la méthode pour obtenir le nom complet
+                'choice_label' => function (Animator $animator) {
+                    return $animator->getCompleteNameByLastName();
                 },
                 'multiple' => true,
                 'required' => false,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('a')
+                        ->orderBy('a.lastName', 'ASC');
+                },
             ])
             ->add('user', EntityType::class, [
                 'label' => 'Rattacher à un administrateur',
@@ -202,7 +206,10 @@ class EventType extends AbstractType
                 'label_attr' => [
                     'class' => 'labelCustom'
                 ],
-                'attr' => ['class' => 'form-control'],
+                'attr' => [
+                    'class' => 'form-control',
+                    'accept' => 'image/*' 
+                ],
                 'required' => false,
                 'constraints' => [
                     new File([
@@ -221,7 +228,10 @@ class EventType extends AbstractType
                     'class' => 'labelCustom'
                 ],
                 'required' => false,
-                'attr' => ['class' => 'form-control'],
+                'attr' => [
+                    'class' => 'form-control',
+                    'accept' => 'image/*' // Limiter les fichiers acceptés aux images
+                ],
                 'constraints' => [
                     new File([
                         'mimeTypes' => 'image/*',
@@ -239,7 +249,10 @@ class EventType extends AbstractType
                     'class' => 'labelCustom'
                 ],
                 'required' => false,
-                'attr' => ['class' => 'form-control'],
+                'attr' => [
+                    'class' => 'form-control',
+                    'accept' => 'image/*' // Limiter les fichiers acceptés aux images
+                ],
                 'constraints' => [
                     new File([
                         'mimeTypes' => 'image/*',

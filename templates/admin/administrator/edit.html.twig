@@ -15,7 +15,7 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="main-section right-side-bar">
+    <section class="main-section">
         <div class="container">
             <div class="row justify-content-center">
                 
@@ -28,7 +28,7 @@
                         </div>
                         <div class="admin-action col-2 d-flex justify-content-end">
 
-                            {% if app.request.get('from') == 'admin_animator_index' %}
+                            {# {% if app.request.get('from') == 'admin_animator_index' %}
                                 <a href="{{ path('admin_animator_index') }}">
                                     <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
                                 </a>
@@ -36,7 +36,11 @@
                                 <a href="{{ path('admin_administrator_index') }}">
                                     <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
                                 </a>
-                            {% endif %}
+                            {% endif %} #}
+
+                            <a href="#" id="backButton">
+                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                            </a>
 
                         </div>
                     </div>

@@ -24,7 +24,7 @@ class EventRepository extends ServiceEntityRepository
 
     public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, 
     string $activityChoice, string $dateChoice, string $isPassedChoice, 
-    string $isCanceledChoice, string $animatorChoice): Query
+    string $isCanceledChoice, string $animatorChoice, string $isEnabledChoice): Query
     {
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
@@ -80,6 +80,16 @@ class EventRepository extends ServiceEntityRepository
             } else {
                 // Vérification si la date de fin est après ou égale à aujourd'hui
                 $stmt->andWhere('e.isCanceled = FALSE');
+            }
+        }
+
+        if ($isEnabledChoice != 'all') {
+            if ($isEnabledChoice == 'isEnabled') {
+                // Vérification si la date de fin est avant aujourd'hui
+                $stmt->andWhere('e.isEnabled = TRUE');
+            } else {
+                // Vérification si la date de fin est après ou égale à aujourd'hui
+                $stmt->andWhere('e.isEnabled = FALSE');
             }
         }
 

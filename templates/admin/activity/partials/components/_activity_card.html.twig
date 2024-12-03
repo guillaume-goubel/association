@@ -1,0 +1,55 @@
+<div class="card col-12 col-md-4 m-1">
+    
+    <div class="d-flex justify-content-between">
+            
+        <div class="feature-box-icon" style="background-color:{{activity.color}};height:55px;width:55px;">
+                <div>
+                    {% if activity.pictureType == "image" %}
+                        <img class="my-2" style="width: 30px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                    {% else %}
+                        <i class="{{ activity.picture }} align-middle icon-medium text-white my-3"></i>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if activity.getAnimatorsByActivity() is not empty %}
+                <div class="avatar-stack ">
+                    {% for animator in activity.getAnimatorsByActivity() %}
+                        {% if animator.picture != null %}
+                            <a class="avatar w-50px" href="{{ path('admin_animator_index') }}?animatorChoice={{ animator.id }}">
+                                <img style="border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1">
+                            </a>
+                        {% else %}
+                            <a class="avatar w-50px" href="{{ path('admin_animator_index') }}?animatorChoice={{ animator.id }}">
+                                <img style="border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1">
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+        </div>
+
+    <div class="card-body">
+        <h5 class="card-title">{{ activity.name|capitalize }}</h5>
+
+        <a href="{{ path('admin_activity_edit', { 'id': activity.id }) }}" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow">Description</a>
+        {% if is_granted('ROLE_SUPER_ADMIN') or activity.getIsActivityInUserControl() %}
+            <a style="width:130px;" href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_activity_index' }) }}" class="btn btn-very-small btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto ms-3">Evénement<span class="bg-base-color text-white"><i class="fa-solid fa-circle-plus"></i></span></a>
+        {% endif %}
+    </div>
+
+    <div style="height:150px;overflow:auto;" class="card-footer mb-3">
+        <div class="fs-10">Administrateur{{ (activity.users|length > 1) ? 's' : '' }} de l'activité</div>
+        <div class="row">
+            {% if activity.users is empty %}
+                <div class="col-6 fs-12 text-red fw-600">SANS</div>
+            {% else %}
+                {% for user in activity.users %}
+                    <div class="col-6 fs-12">{{user.firstName|capitalize}} {{user.lastName}}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+</div>

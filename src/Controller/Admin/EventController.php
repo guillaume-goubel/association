@@ -39,6 +39,7 @@ class EventController extends AbstractController
         $dateChoice = $request->query->get('dateChoice') ?? 'dateStartAt';
         $isPassedChoice = $request->query->get('isPassedChoice') ?? 'isNoPassed';
         $isCanceledChoice = $request->query->get('isCanceledChoice') ?? 'all';
+        $isEnabledChoice = $request->query->get('isEnabledChoice') ?? 'all';
         $activityChoice = $request->query->get('activityChoice') ?? "all";
         
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
@@ -68,7 +69,9 @@ class EventController extends AbstractController
         }
     
         // Pagination
-        $eventsQuery = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, $creatorChoice, $activityChoice, $dateChoice, $isPassedChoice, $isCanceledChoice, $animatorChoice);
+        $eventsQuery = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, 
+        $creatorChoice, $activityChoice, $dateChoice, $isPassedChoice, 
+        $isCanceledChoice, $animatorChoice, $isEnabledChoice);
         
         // Définir la page actuelle (par défaut, la page 1)
         $page = $request->query->getInt('page', 1); 
@@ -95,6 +98,7 @@ class EventController extends AbstractController
             'dateChoice' => $dateChoice,
             'isPassedChoice' => $isPassedChoice,
             'isCanceledChoice' => $isCanceledChoice,
+            'isEnabledChoice' => $isEnabledChoice,
             'isEventActionsButtonVisible' => true,
             'viewType' => $session->get('event_view_type') ?? 'card'
         ]);

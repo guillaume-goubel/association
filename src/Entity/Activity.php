@@ -47,6 +47,8 @@ class Activity
     #[ORM\Column(length: 10, nullable: true)]
     private ?string $pictureType = null;
 
+    private ?bool $isActivityInUserControl = false;
+
     /**
      * @var Collection<int, User>
      */
@@ -254,5 +256,32 @@ class Activity
         }
 
         return $this;
-    }   
+    }  
+    
+    public function getAnimatorsByActivity(): array
+    {
+        $animatorsArray = [];
+        
+        foreach ($this->events as $event) {
+            foreach ($event->getAnimators() as $animator) {
+                if (!in_array($animator, $animatorsArray, true)) {
+                    $animatorsArray[] = $animator;
+                }
+            }
+        }
+    
+        return $animatorsArray;
+    }
+
+    public function getIsActivityInUserControl(): ?bool
+    {
+        return $this->isActivityInUserControl;
+    }
+
+    public function setIsActivityInUserControl(bool $isActivityInUserControl): static
+    {
+        $this->isActivityInUserControl = $isActivityInUserControl;
+
+        return $this;
+    }
 }

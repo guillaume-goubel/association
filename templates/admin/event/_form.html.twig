@@ -107,7 +107,13 @@
     <div class="row d-flex ">  
         <div class="col-12 col-md-6 mt-1">
 
-            {{ form_row(form.mainPictureFile) }}
+            {{ form_label(form.mainPictureFile) }}  
+            {{ form_widget(form.mainPictureFile) }} 
+            {% if form.mainPictureFile.vars.errors|length > 0 %}
+                <div class="form-errors text-red fs-14 fw-600">
+                    {{ form_errors(form.mainPictureFile) }} 
+                </div>
+            {% endif %}
 
             {% if event != null %}
                 {% if event.mainPicture != null %}   
@@ -152,7 +158,14 @@
         </div>
 
         <div class="col-12 col-md-6 mt-1">
-            {{ form_row(form.picture2File) }}
+
+            {{ form_label(form.picture2File) }}  
+            {{ form_widget(form.picture2File) }} 
+            {% if form.picture2File.vars.errors|length > 0 %}
+                <div class="form-errors text-red fs-14 fw-600">
+                    {{ form_errors(form.picture2File) }} 
+                </div>
+            {% endif %}
 
             {% if event != null %}
                 {% if event.picture2 != null %}   
@@ -197,7 +210,14 @@
         </div>
 
         <div class="col-12 col-md-6 mt-4">
-            {{ form_row(form.picture3File) }}
+        
+            {{ form_label(form.picture3File) }}  
+            {{ form_widget(form.picture3File) }} 
+            {% if form.picture3File.vars.errors|length > 0 %}
+                <div class="form-errors text-red fs-14 fw-600">
+                    {{ form_errors(form.picture3File) }} 
+                </div>
+            {% endif %}
 
             {% if event != null %}
                 {% if event.picture3 != null %}   

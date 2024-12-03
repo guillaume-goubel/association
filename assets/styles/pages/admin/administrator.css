@@ -41,9 +41,10 @@
     font-size: 21px;
 }
 .administrator-activies-list{
-    word-wrap: break-word; /* Permet de couper une longue chaîne si nécessaire */
-    overflow-wrap: break-word; /* Support plus moderne, remplace word-wrap */
-    white-space: normal; /* Permet un retour à la ligne naturel */
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    white-space: normal;
+    margin-top: 12px; 
 }
 #administrator_isEnabled{
     /* background-color: red; */

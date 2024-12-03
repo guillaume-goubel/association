@@ -77,16 +77,17 @@
                 </div>
 
                 <div class="row d-flex justify-content-center mt-4">
-                    <div class="col-12 col-md-9" data-anime='{ "el": "childs", "translateY": [15, 0], "opacity": [0,1], "duration": 800, "delay": 200, "staggervalue": 300, "easing": "easeOutQuad" }'>
+                    <div class="col-12 col-md-9" data-anime='{ "el": "childs", "translateY": [15, 0], "opacity": [0,1], "duration": 100, "delay": 100, "staggervalue": 100, "easing": "easeOutQuad" }'>
 
                         {% if animators is not empty %}
                             {% for animator in animators %}
-                                <div class="row border-bottom border-2 border-color-dark-gray pb-50px mb-50px sm-pb-35px sm-mb-35px align-items-center">
+                                <div class="row border-bottom border-1 border-color-light-gray pb-25px mb-25px sm-pb-20px sm-mb-20px align-items-center">
 
-                                    <div class="col-md-8 icon-with-text-style-01 md-mb-25px">
-                                        <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin">
+                                    <div class="col-12 col-md-9 icon-with-text-style-01 md-mb-25px">
+                                        
+                                        <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin d-flex">
 
-                                            <div class="feature-box-icon d-flex align-items-center flex-column me-50px md-me-35px">
+                                            <div class="feature-box-icon d-flex align-items-center flex-column me-50px md-me-35px col-12 col-md-2">
                                                 <img 
                                                     class="border-radius-50" 
                                                     style="width: {{ animator.picture != null ? '70px' : '65px' }};" 
@@ -109,22 +110,18 @@
 
                                             </div>
 
-                                            <div class="feature-box-content">
+                                            <div class="feature-box-content col-12 col-md-8">
                                                 <div class="d-inline-block text-dark-gray fs-20 ls-minus-05px"><span class="fw-700">{{ animator.lastName|upper }}</span> {{ animator.firstName|capitalize }} </div><br/>
                                                 <div class="d-inline-block text-base-color fs-15 ls-minus-05px">{{ animator.email }}</div><br/>
-                                                <div class="d-inline-block text-base-color fs-15 ls-minus-05px">{{ animator.phone }}</div><br/>
-                                                <div class="d-inline-block text-base-color mb-20px fs-13 ls-minus-05px">
-                                                    {% if animator.getIsEnabled == true %}
-                                                        <span class="admin-activity-pills bg-success">Activé</span>
-                                                    {% else %}
-                                                        <span class="admin-activity-pills bg-alert">Désactivé</span>
-                                                    {% endif %}
-                                                </div>
                                                 
+                                                {% if animator.phone != null %}
+                                                    <div class="d-inline-block text-base-color fs-15 ls-minus-05px">{{ animator.phone }}</div><br/>
+                                                {% endif %}
+
                                                 <div class="administrator-activies-list w-100 fs-14">
                                                     {% if  animator.getActivitiesUniqByName is not empty %}
                                                         {% for activityName in animator.getActivitiesUniqByName %}
-                                                            <span class="admin-activity-pills bg-base-color">{{ activityName }}</span>
+                                                            <span class="admin-activity-pills bg-base-color fs-13">{{ activityName }}</span>
                                                         {% endfor %}
                                                     {% else %}
                                                         <span>L'animateur n'est actuellement rattaché à aucune activité.</span>
@@ -134,18 +131,36 @@
                                             </div>
 
                                         </div>
+
                                     </div>
-                                    <div class="col-lg-3 col-md-4 text-center text-md-end">
+
+                                    <div class="col-12 col-md-3 text-center text-md-end d-flex flex-column align-items-start">
                                         
-                                        {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                            <a href="{{ path('admin_animator_edit', { 'id':animator.id }) }}" class="edit-administrator-btn btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                                        <div class="d-inline-block text-base-color mb-20px fs-13 ls-minus-05px">
+                                            {% if animator.getIsEnabled == true %}
+                                                <span class="admin-activity-pills bg-success fs-13">Activé</span>
+                                            {% else %}
+                                                <span class="admin-activity-pills bg-alert fs-13">Désactivé</span>
+                                            {% endif %}
+                                        </div>
+
+                                        <div class="d-flex justify-content-start">
+                                            {# {% if is_granted('ROLE_SUPER_ADMIN') %} #}
+                                                <a href="{{ path('admin_animator_edit', { 'id':animator.id }) }}" class="edit-administrator-btn btn btn-very-small d-table d-lg-inline-block lg-mb-15px mx-2">
+                                                    <span>
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </span>
+                                                </a>
+                                            {# {% endif %} #}
+                                            <a href="{{ path('admin_event_index') }}?monthChoice=all&yearChoice=all&animatorChoice={{ animator.id }}&isPassedChoice=all" class="edit-administrator-btn btn btn-very-small d-table d-lg-inline-block lg-mb-15px mx-2">
                                                 <span>
                                                     <i class="fa-regular fa-folder-open"></i>
                                                 </span>
                                             </a>
-                                        {% endif %}
+                                        </div>
 
                                     </div>
+
                                 </div>
                             {% endfor %}
                         {% else %}

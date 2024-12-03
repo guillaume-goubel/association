@@ -36,7 +36,6 @@
                         </div>
 
                         <div class="admin-action col-3 d-flex justify-content-end">
-                            <a id="switchTypeViewBtn" class="ms-8"><i class="fa-regular fa-id-card align-middle icon-large text-golden-yellow me-2"></i></a>
                             <a class="ms-8" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
                             <a class="ms-8" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>
@@ -51,7 +50,7 @@
                             <div class="col-12 blog-standard mb-2">
                                 <div class="row gy-2"> <!-- gy-2 ajoute un espacement vertical entre les colonnes sur mobile -->
                                     <!-- Filtre mois -->
-                                    <div class="col-12 col-md-6 col-lg-2">
+                                    <div class="col-12 col-md-2">
                                         <select name="monthChoice" class="form-select form-select-sm" aria-label="Sélectionner un mois">
                                             <option {{ monthChoice == 'all' ? 'selected' : '' }} value="all">Tout mois</option>
                                             {% for item in monthsList %}
@@ -60,7 +59,7 @@
                                         </select>
                                     </div>
                                     <!-- Filtre année -->
-                                    <div class="col-12 col-md-6 col-lg-2">
+                                    <div class="col-12 col-md-2">
                                         <select name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
                                             <option {{ yearChoice == 'all' ? 'selected' : '' }} value="all">Toute année</option>
                                             {% for item in yearsList %}
@@ -69,7 +68,7 @@
                                         </select>
                                     </div>
                                     <!-- Filtre créateur -->
-                                    <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="col-12 col-md-4">
                                         <select id="event_user" name="creatorChoice" class="form-select form-select-sm" aria-label="Sélectionner un créateur">
                                             <option {{ creatorChoice =='all' ? 'selected' : '' }} value="all">Tout administrateur</option>
                                             {% for item in creatorsList %}
@@ -78,11 +77,11 @@
                                         </select>
                                     </div>
                                     <!-- Filtre activité -->
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <select id="event_activity" name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                            <option {{ activityChoice =='all' ? 'selected' : '' }} value="all">Toute activité</option>
-                                            {% for item in activityList %}
-                                                <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                    <div class="col-12 col-md-4">
+                                        <select name="animatorChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ animatorChoice =='all' ? 'selected' : '' }} value="all">Tout animateur</option>
+                                            {% for item in animatorsList %}
+                                                <option {{ animatorChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>
@@ -98,26 +97,33 @@
                                             <option {{ dateChoice == 'createdAt' ? 'selected' : '' }} value="createdAt">Date de création</option>
                                         </select>
                                     </div> #}
-                                    <div class="col-12 col-md-6 col-lg-4">
-                                        <select name="animatorChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                            <option {{ animatorChoice =='all' ? 'selected' : '' }} value="all">Tout animateur</option>
-                                            {% for item in animatorsList %}
-                                                <option {{ animatorChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                    <div class="col-12 col-md-3">
+                                        <select id="event_activity" name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ activityChoice =='all' ? 'selected' : '' }} value="all">Toute activité</option>
+                                            {% for item in activityList %}
+                                                <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
                                             {% endfor %}
                                         </select>
                                     </div>                                    <!-- Filtre date -->
-                                    <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="col-12 col-md-3">
                                         <select name="isPassedChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
                                             <option {{ isPassedChoice == 'all' ? 'selected' : '' }} value="all">Terminés et à venir</option>
                                             <option {{ isPassedChoice == 'isNoPassed' ? 'selected' : '' }} value="isNoPassed">A venir</option>
                                             <option {{ isPassedChoice == 'isPassed' ? 'selected' : '' }} value="isPassed">Terminés</option>
                                         </select>
                                     </div>
-                                    <div class="col-12 col-md-6 col-lg-4">
+                                    <div class="col-12 col-md-3">
                                         <select name="isCanceledChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
                                             <option {{ isCanceledChoice == 'all' ? 'selected' : '' }} value="all">Annulés et maintenus</option>
                                             <option {{ isCanceledChoice == 'isNoCanceled' ? 'selected' : '' }} value="isNoCanceled">Maintenus</option>
                                             <option {{ isCanceledChoice == 'isCanceled' ? 'selected' : '' }} value="isCanceled">Annulés</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <select name="isEnabledChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ isEnabledChoice == 'all' ? 'selected' : '' }} value="all">Visibles et cachés</option>
+                                            <option {{ isEnabledChoice == 'isEnabled' ? 'selected' : '' }} value="isEnabled">Visibles</option>
+                                            <option {{ isEnabledChoice == 'isDisabled' ? 'selected' : '' }} value="isDisabled">Cachés</option>
                                         </select>
                                     </div>
                                 </div>
@@ -129,7 +135,10 @@
                             <button style="border-radius:8px;" id="formSubmitBtn" class="btn btn-very-small btn-transparent-base-color" type="submit">
                                 <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
                             </button>
-                            <a href="{{ path('admin_event_index') }}" style="border-radius:8px;" class="btn btn-very-small btn-transparent-light-gray mt-10px">
+                            <button id="switchTypeViewBtn" style="border-radius:8px;" id="formSubmitBtn" class="btn btn-very-small btn-transparent-base-color mt-10px" type="submit">
+                                <i style="font-size:15px; margin-left:0!important;" class="{{ (viewType == 'card') ? 'fa-solid fa-list' : 'fa-solid fa-table-columns' }} "></i>
+                            </button>
+                            <a href="{{ path('admin_event_index') }}" style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color mt-10px">
                                 <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-arrows-rotate"></i>
                             </a>
                         </div>

@@ -32,16 +32,17 @@ class ActivityController extends AbstractController
         $noUserActivityArray = [];
         foreach ($activities as $activity) {
             if ($activity->isActivityInUserControl($user) === true) {
+                $activity->setIsActivityInUserControl(true);
                 array_push($userActivityArray, $activity);
             }else{
+                $activity->setIsActivityInUserControl(false);
                 array_push($noUserActivityArray, $activity);
             }
         }
 
+        // Récupérer tous les identifiants d'utilisateurs sans doublons
         $userList = [];
         $tempUserArray = [];
-        
-        // Récupérer tous les identifiants d'utilisateurs sans doublons
         foreach ($activityRepository->findAll() as $activity) {
             foreach ($activity->getUsers() as $user) {
                 $userId = $user->getId();
@@ -56,13 +57,9 @@ class ActivityController extends AbstractController
                 }
             }
         }
-        
-        // Trier le tableau temporaire par LastName
         usort($tempUserArray, function($a, $b) {
             return strcmp($a['lastName'], $b['lastName']); // Comparaison alphabétique des noms de famille
         });
-
-        // Transformer le tableau temporaire en tableau final sans les clés supplémentaires
         $userList = array_map(function($user) {
             return [
                 'id' => $user['id'],
@@ -73,7 +70,6 @@ class ActivityController extends AbstractController
         $userChoiceInfos = ($userChoice !== 'all') ? $userRepository->findOneBy(['id' => $userChoice]) : 'all';
 
         return $this->render('admin/activity/index.html.twig', [
-            "activities" => $activities,
             "userActivityArray" => $userActivityArray,
             "noUserActivityArray" => $noUserActivityArray,
             'userList' => $userList,

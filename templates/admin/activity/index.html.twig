@@ -17,7 +17,7 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="main-section right-side-bar">
+    <section class="main-section">
         <div class="container">
             <div class="row justify-content-center">
                 
@@ -35,9 +35,7 @@
                                     <select name="userChoice" class="form-select form-select-sm" aria-label="Sélectionner un créateur">
                                         <option {{ userChoice == 'all' ? 'selected' : '' }} value="all">Tout administrateur</option>
                                         {% for user in userList %}
-                                            {# {% if user.id != app.user.id %} #}
-                                                <option {{ userChoice == user.id ? 'selected' : '' }} value="{{ user.id }}">{{ user.name }}</option>
-                                            {# {% endif %} #}
+                                            <option {{ userChoice == user.id ? 'selected' : '' }} value="{{ user.id }}">{{ user.name }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
@@ -51,15 +49,14 @@
                         </div>
                     </form>
 
-
                     {% if not is_granted('ROLE_SUPER_ADMIN') %}
                         <div class="col-12">
                             <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">
                                 
                                 {% if userChoiceInfos != 'all' and userChoiceInfos.id != app.user.id %}
-                                    Les activités dont je suis responsable avec {{userChoiceInfos.firstName}} {{userChoiceInfos.lastName}}
+                                    Les activités dont je suis administrateur avec {{userChoiceInfos.firstName}} {{userChoiceInfos.lastName}}
                                 {% else %}
-                                    Les activités dont je suis responsable
+                                    Les activités dont je suis administrateur
                                 {% endif %}
                                 
                                 <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span>
@@ -67,36 +64,7 @@
                             <div class="row mb-50px sm-mb-30px">
                                 
                                 {% for activity in userActivityArray %}
-                                    
-                                    <div class="card col-12 col-md-4 m-1">
-                                        <div class="feature-box-icon" style="background-color:{{activity.color}}">
-                                            {% if activity.pictureType == "image" %}
-                                                <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
-                                            {% else %}
-                                                <i class="{{ activity.picture }} align-middle icon-large icon-large text-white my-3"></i>
-                                            {% endif %}
-                                        </div>
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ activity.name|capitalize }}</h5>
-                                            <div class="d-flex align-items-center">
-                                                <a href="{{ path('admin_activity_edit', { 'id': activity.id }) }}" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow ">Description</a>
-                                                <a style="width:130px;" href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_activity_index' }) }}" class="btn btn-very-small btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto ms-3">Evénement<span class="bg-base-color text-white"><i class="fa-solid fa-circle-plus"></i></span></a>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer mb-3">
-                                            <div class="fs-10">Responsable(s) de l'activité</div>
-                                            <div class="row">
-                                                {% if activity.users is empty %}
-                                                    <div class="col-6 fs-12 text-red fw-600">SANS</div>
-                                                {% else %}
-                                                    {% for user in activity.users %}
-                                                        <div class="col-6 fs-12">{{user.firstName|capitalize}} {{user.lastName}}</div>
-                                                    {% endfor %}
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                    </div>
-
+                                    {% include 'admin/activity/partials/components/_activity_card.html.twig' %}
                                 {% endfor %}
 
                             </div>
@@ -109,7 +77,7 @@
                             <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">
                                 
                                 {% if userChoiceInfos != 'all' %}
-                                     Les activités de {{userChoiceInfos.firstName}} {{userChoiceInfos.lastName}}
+                                    Les activités de {{userChoiceInfos.firstName}} {{userChoiceInfos.lastName}}
                                 {% else %}
                                     Les activités des autres administrateurs 
                                 {% endif %}
@@ -122,37 +90,7 @@
                         <div class="row mb-50px sm-mb-30px">
                             
                             {% for activity in noUserActivityArray %}
-
-                                <div class="card col-12 col-md-4 m-1">
-                                    <div class="feature-box-icon" style="background-color:{{activity.color}}">
-                                        {% if activity.pictureType == "image" %}
-                                            <img class="my-2" style="width: 40px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
-                                        {% else %}
-                                            <i class="{{ activity.picture }} align-middle icon-large icon-extra-large text-white my-3"></i>
-                                        {% endif %}
-                                    </div>
-                                    <div class="card-body">
-                                        <h5 class="card-title">{{ activity.name|capitalize }}</h5>
-
-                                        <a href="{{ path('admin_activity_edit', { 'id': activity.id }) }}" class="btn btn-very-small btn-box-shadow btn-rounded btn-yellow">Description</a>
-                                        {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                            <a style="width:130px;" href="{{ path('admin_event_new', { 'activityId': activity.id, 'from' : 'admin_activity_index' }) }}" class="btn btn-very-small btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto ms-3">Evénement<span class="bg-base-color text-white"><i class="fa-solid fa-circle-plus"></i></span></a>
-                                        {% endif %}
-                                    </div>
-                                    <div class="card-footer mb-3">
-                                        <div class="fs-10">Responsable(s) de l'activité</div>
-                                        <div class="row">
-                                            {% if activity.users is empty %}
-                                                    <div class="col-6 fs-12 text-red c">SANS</div>
-                                            {% else %}
-                                                {% for user in activity.users %}
-                                                    <div class="col-6 fs-12">{{user.firstName|capitalize}} {{user.lastName}}</div>
-                                                {% endfor %}
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </div>
-
+                                {% include 'admin/activity/partials/components/_activity_card.html.twig' %}
                             {% endfor %}
 
                         </div>

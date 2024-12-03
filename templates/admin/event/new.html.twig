@@ -16,7 +16,7 @@
 	<!-- end header -->
 
     <!-- start section -->
-    <section class="main-section right-side-bar">
+    <section class="main-section">
         <div class="container">
             <div class="row justify-content-center">
                 
@@ -28,10 +28,18 @@
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">ÉVÉNEMENTS - Nouveau</h5>
                         </div>
                         <div class="admin-action col-2 d-flex justify-content-end">
-                            {% set redirect = app.request.get('from') ?: 'admin_event_index' %}
-                            <a href="{{ path(redirect) }}?from=admin_event_new">
-                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
-                            </a>
+                            
+                            {% if app.request.get('from') == null %}
+                                <a href="#" id="backButton">
+                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                                </a>
+                            {% else %}
+                                {% set redirect = app.request.get('from') ?: 'admin_event_index' %}
+                                <a href="{{ path(redirect) }}?from=admin_event_new">
+                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                                </a>
+                            {% endif %}
+                            
                         </div>
                     </div>
                 </div>
