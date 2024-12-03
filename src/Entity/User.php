@@ -65,10 +65,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?bool $isEnabled = true;
 
+    /**
+     * @var Collection<int, Notification>
+     */
+    #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'author')]
+    private Collection $notifications;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -313,6 +320,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsEnabled(bool $isEnabled): self
     {
         $this->isEnabled = $isEnabled;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): static
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): static
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getAuthor() === $this) {
+                $notification->setAuthor(null);
+            }
+        }
 
         return $this;
     }

@@ -49,7 +49,19 @@ class CheckAuthorizationService{
             case "admin_animator_delete":
                 if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
                     return true;
-                }             
+                }
+            case "admin_notification_new":
+                if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+                    return true;
+                }  
+            case "admin_notification_edit":
+                if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+                    return true;
+                }   
+            case "admin_notification_delete":
+                if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+                    return true;
+                }               
             default:
                 return false;
         }

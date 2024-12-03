@@ -9304,7 +9304,8 @@ button:focus {
 .post-sidebar.blog-side-image li:last-child {
   margin-bottom: 0;
 }
-.tag-cloud a {
+.tag-cloud a,
+.tag-cloud .likes-count  {
   display: inline-block;
   text-align: center;
   font-size: 14px;

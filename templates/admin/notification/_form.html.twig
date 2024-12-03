@@ -1,0 +1,31 @@
+
+{{ form_start(form)}}
+    
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1 mb-5">
+            <div class="form-check form-switch">
+                {{ form_widget(form.isEnabled, { attr: { class: 'form-check-input me-2' } }) }}
+                {{ form_label(form.isEnabled, 'Désactiver / Activer ', { label_attr: { class: 'form-check-label' } }) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex ">
+        <div class="col-12 col-md-6 mt-1">
+            {{ form_row(form.name) }}
+        </div>
+    </div>
+
+    <div class="row d-flex ">
+        <div class="col-12 mt-1">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center mt-5">
+        <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto border-radius-30px">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+
+{{ form_end(form) }}
+
+

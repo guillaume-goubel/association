@@ -28,143 +28,44 @@
                         {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
                                                 
                         {# KPIs #}
-                        <div>        
-                            {# EVENTS #}
-                            <div style="gap:4%;" class="row justify-content-center counter-style-07 ps-3 pe-3 mt-3" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                                <div class="col text-center sm-mb-30px kpi-card">
-                                    <div class="d-flex justify-content-around">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="kpi-icon-container" style="background-color:#00b4d8">
-                                                <i class="fa-solid fa-calendar icon-medium"></i>
-                                            </div>
-                                        </div>
-                                        <div class="kpi-result-container">
-                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{eventsKpi.total}}">
-                                                <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
-                                            </div>
-                                            <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Evénements</span>
-                                        </div>
-                                    </div>
-                                </div>
+                        {% include 'admin/partials/components/_admin_home_kpi.html.twig' %}
 
-                                {# ACTIVITIES #}
-                                <div class="col text-center sm-mb-30px kpi-card">
-                                    <div class="d-flex justify-content-around">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="kpi-icon-container" style="background-color:#90e0ef">
-                                                <i class="fa-solid fa-grip icon-medium"></i>
-                                            </div>
-                                        </div>
-                                        <div class="kpi-result-container">
-                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{activitiesKpi.total}}">
-                                                <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
-                                            </div>
-                                            <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Activités</span>
+                    </div>
+                    
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <div class="col-12 mb-2">
+                            <a href="{{ path('admin_notification_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                        </div>
+                    {% endif %}
+
+                    {# Notifications #}
+                    {% for notification in notifications %}
+                        <div class="col-12 mb-2">
+                            
+                            <div class="row mb-10px">
+                                <div class="tag-cloud col-7 text-start {{ (notification.name is empty) ? ' hidden ' : '' }}">
+                                    <div class="likes-count {{ (notification.name is empty) ? ' d-none ' : '' }}">{{notification.name}}</div> 
+                                </div> 
+                            
+                                <div class="tag-cloud col-5 text-uppercase text-end">
+                                    <div class="likes-count fw-500 mx-0" href=""><i class="fa-regular fa-heart text-red me-10px"></i><span class="text-dark-gray text-dark-gray-hover">{{notification.createdAt|format_date('full',  locale= 'fr')}}</span></div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-block d-md-flex w-100 box-shadow-extra-large align-items-center border-radius-4px p-6">
+                                        <div class="w-100 text-center text-md-start">
+                                            <p class="card-text preformatted fs-14">{{notification.description}}</p>
+                                            <p class="btn-link btn-large text-dark-gray mt-20px fw-600 fs-14">{{notification.author.getCompleteNameByfirstName()}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             
-                            <div style="gap:4%;" class="row justify-content-center counter-style-07 ps-3 pe-3 mt-3" data-anime='{ "el": "childs", "translateY": [50, 0], "opacity": [0,1], "duration": 1200, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
-                                
-                                {# ADMINS #}
-                                <div class="col text-center sm-mb-30px kpi-card">
-                                    <div class="d-flex justify-content-around">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="kpi-icon-container" style="background-color:#03045e">
-                                                <i class="fa-solid fa-users-gear icon-custom"></i>
-                                            </div>
-                                        </div>
-                                        <div class="kpi-result-container">
-                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{administratorsKpi}}">
-                                                <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
-                                            </div>
-                                            <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Administrateurs</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col text-center sm-mb-30px kpi-card">
-                                    {# ANIMATORS #}
-                                    <div class="d-flex justify-content-around">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="kpi-icon-container" style="background-color:#0077b6">
-                                                <i class="fa-solid fa-users icon-custom"></i>
-                                            </div>
-                                        </div>
-                                        <div class="kpi-result-container">
-                                            <div class="vertical-counter d-inline-flex text-dark-gray fw-800 mb-0 position-relative z-index-0" data-to="{{animatorsKpi.total}}">
-                                                <span class="text-highlight position-absolute bottom-9px w-100"><span class="bg-gradient-flamingo-amethyst-green h-10px opacity-2"></span></span>
-                                            </div>
-                                            <span class="d-block fs-14 fw-700 text-uppercase text-dark-gray">Animateurs</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
+                    {% endfor %}
 
-                    </div>
-
-                    <div class="col-12 mb-2">
-                        
-                        <div class="row mb-10px">
-                            <div class="tag-cloud col-12 col-md-9 text-center text-md-start sm-mb-15px">
-                                <a href="blog-grid.html">Development</a> 
-                                <a href="blog-grid.html">Event</a>
-                                <a href="blog-grid.html">Multimedia </a>
-                                <a href="blog-grid.html">Fashion</a>
-                            </div> 
-                            <div class="tag-cloud col-12 col-md-3 text-uppercase text-center text-md-end">
-                                <a class="likes-count fw-500 mx-0" href="#"><i class="fa-regular fa-heart text-red me-10px"></i><span class="text-dark-gray text-dark-gray-hover">05 Likes</span></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mb-7">
-                                <div class="d-block d-md-flex w-100 box-shadow-extra-large align-items-center border-radius-4px p-8">
-                                    <div class="w-140px text-center me-60px sm-mx-auto">
-                                        <img src="https://via.placeholder.com/125x125" class="rounded-circle w-110px" alt="">
-                                        <a href="blog-grid.html" class="text-dark-gray fw-500 mt-25px d-inline-block lh-20">Colene Landin</a>
-                                        <span class="fs-15 lh-20 d-block sm-mb-15px">Co-founder</span>
-                                    </div>
-                                    <div class="w-75 sm-w-100 text-center text-md-start">
-                                        <p class="mb-5px">Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type.</p>
-                                        <a href="blog-grid.html" class="btn btn-link btn-large text-dark-gray mt-20px fw-600">All author posts</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 mb-2">
-                        
-                        <div class="row mb-10px">
-                            <div class="tag-cloud col-12 col-md-9 text-center text-md-start sm-mb-15px">
-                                <a href="blog-grid.html">Development</a> 
-                                <a href="blog-grid.html">Event</a>
-                                <a href="blog-grid.html">Multimedia </a>
-                                <a href="blog-grid.html">Fashion</a>
-                            </div> 
-                            <div class="tag-cloud col-12 col-md-3 text-uppercase text-center text-md-end">
-                                <a class="likes-count fw-500 mx-0" href="#"><i class="fa-regular fa-heart text-red me-10px"></i><span class="text-dark-gray text-dark-gray-hover">05 Likes</span></a>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 mb-7">
-                                <div class="d-block d-md-flex w-100 box-shadow-extra-large align-items-center border-radius-4px p-8">
-                                    <div class="w-140px text-center me-60px sm-mx-auto">
-                                        <img src="https://via.placeholder.com/125x125" class="rounded-circle w-110px" alt="">
-                                        <a href="blog-grid.html" class="text-dark-gray fw-500 mt-25px d-inline-block lh-20">Colene Landin</a>
-                                        <span class="fs-15 lh-20 d-block sm-mb-15px">Co-founder</span>
-                                    </div>
-                                    <div class="w-75 sm-w-100 text-center text-md-start">
-                                        <p class="mb-5px">Lorem ipsum is simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type.</p>
-                                        <a href="blog-grid.html" class="btn btn-link btn-large text-dark-gray mt-20px fw-600">All author posts</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
 
