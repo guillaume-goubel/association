@@ -33,14 +33,15 @@
                     </div>
                     
                     {% if is_granted('ROLE_SUPER_ADMIN') %}
-                        <div class="col-12 mb-2">
-                            <a href="{{ path('admin_notification_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                        <div class="col-12 mb-2 text-end">
+                            <a href="{{ path('admin_notification_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color"></i></a>
                         </div>
                     {% endif %}
 
                     {# Notifications #}
                     {% for notification in notifications %}
-                        <div class="col-12 mb-2">
+                        
+                        <div style="position:relative;" class="col-12 mb-55px">
                             
                             <div class="row mb-10px">
                                 <div class="tag-cloud col-7 text-start {{ (notification.name is empty) ? ' hidden ' : '' }}">
@@ -48,22 +49,62 @@
                                 </div> 
                             
                                 <div class="tag-cloud col-5 text-uppercase text-end">
-                                    <div class="likes-count fw-500 mx-0" href=""><i class="fa-regular fa-heart text-red me-10px"></i><span class="text-dark-gray text-dark-gray-hover">{{notification.createdAt|format_date('full',  locale= 'fr')}}</span></div>
+                                    <div class="likes-count fw-500 mx-0" href=""><i class="fa-regular fa-calendar text-red me-10px"></i><span class="text-dark-gray text-dark-gray-hover">{{notification.createdAt|format_date('full',  locale= 'fr')}}</span></div>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-12">
-                                    <div class="d-block d-md-flex w-100 box-shadow-extra-large align-items-center border-radius-4px p-6">
+                                    <div class="d-block d-md-flex w-100 box-shadow-extra-large align-items-center border-radius-4px p-5">
                                         <div class="w-100 text-center text-md-start">
+                                            {% if notification.isEnabled == false %}
+                                                <div class="w-15 admin-activity-pills bg-alert fs-13 mb-2">Non visible</div>
+                                            {% endif %}
                                             <p class="card-text preformatted fs-14">{{notification.description}}</p>
                                             <p class="btn-link btn-large text-dark-gray mt-20px fw-600 fs-14">{{notification.author.getCompleteNameByfirstName()}}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}                          
+                                <div class="notification-action-container d-flex justify-content-end">
+
+                                    <a href="{{ path('admin_notification_edit', { 'id':notification.id }) }}" class="notification-edit-btn btn btn-very-small d-table d-lg-inline-block lg-mb-15px mx-2">
+                                        <span>
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                        </span>
+                                    </a>
+
+                                    <a class="notification-delete-btn btn btn-very-small d-table d-lg-inline-block lg-mb-15px mx-2" href="#" data-bs-toggle="modal" data-bs-target="#notification-deleteModal-{{ notification.id }}">
+                                        <span>
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </span>
+                                    </a>
+                                </div>
+                            {% endif %}
                             
                         </div>
+
+                        <!-- DELETE notification MODALE -->
+                        <div class="modal fade" id="notification-deleteModal-{{ notification.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title fs-14">Confirmer la suppression de la notification ?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-small" data-bs-dismiss="modal">Annuler</button>
+                                    <a href="{{ path('admin_notification_delete', {id: notification.id}) }}"
+                                        class="btn btn-small btn-red btn-round-edge-large border-1 w-30">
+                                        Supprimer
+                                    </a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
                     {% endfor %}
 
 

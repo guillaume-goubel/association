@@ -42,6 +42,22 @@ header .btn.btn-switch-text.btn-small > span {
 .form-errors ul{
     padding-left: 0px;
 }
+.pagination .page-item .page-link{
+    font-size: 14px;
+    font-weight: 500;
+}
+.form-check-input:checked {
+    background-color: green;
+    border-color: none;
+}
+.form-check-input {
+    background-color: red;
+    border-color: none;
+}
+label {
+    font-size: 14px;
+    font-weight: 600;
+}
 /* heading */
 h1, .h1 {
     line-height: 4rem;

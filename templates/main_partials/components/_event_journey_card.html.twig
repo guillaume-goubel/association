@@ -68,7 +68,7 @@
                 
                 <div style="width:95px;" class="me-5 d-flex align-items-baseline">
                     <div class="fs-11 me-1">Départ :</div>
-                    <div class="fs-14 fw-600">{{event.timeStartAt|date('H:i')}}</div>
+                    <div class="fs-14 fw-600">{{event.timeStartAt|date('H:i')}} {{event.id}}</div>
                 </div>
 
                 {% if event.timeEndAt != null %}

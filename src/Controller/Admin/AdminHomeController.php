@@ -23,8 +23,10 @@ class AdminHomeController extends AbstractController
         
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
             $activitiesForThisUser = $activityRepository->findBy([], ['name' => 'ASC']);
+            $notifications = $notificationRepository->findBy([], ['createdAt' => 'DESC']);
         }else{
             $activitiesForThisUser = $user->getActivitiesByName();
+            $notifications = $notificationRepository->getAllNotificationsEnabled();
         }
 
         return $this->render('admin/index.html.twig', [
@@ -34,7 +36,7 @@ class AdminHomeController extends AbstractController
             'animatorsKpi' => $animatorRepository->getAllAnimatorsCount(),
             'eventsKpi' => $eventRepository->getAllEventsCount(),
             'activitiesKpi' => $activityRepository->getAllActivitiesCount(),
-            'notifications' => $notificationRepository->getAllNotificationsEnabled(),
+            'notifications' => $notifications,
         ]);
     }
 

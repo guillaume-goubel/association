@@ -123,3 +123,45 @@
 .category-list-sidebar li:hover{
   opacity: 1;
 }
+/* NOTIFICATION */
+.notification-edit-btn{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 10px 11px !important;
+  background-color: white;
+  color: var(--base-color);
+  border: 1px solid var(--base-color);
+}
+.notification-edit-btn:hover {
+  color: white;
+  background-color: var(--base-color);
+}
+.notification-edit-btn span i{
+  padding-top: 3px;
+  margin-left: 0 !important;
+  font-size: 21px;
+}
+.notification-delete-btn{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 10px 11px !important;
+  background-color: white;
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+.notification-delete-btn:hover {
+  color: white;
+  background-color: var(--red);
+}
+.notification-delete-btn span i{
+  padding-top: 3px;
+  margin-left: 0 !important;
+  font-size: 21px;
+}
+.notification-action-container{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}

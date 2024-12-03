@@ -27,8 +27,8 @@ class EventRepository extends ServiceEntityRepository
     string $isCanceledChoice, string $animatorChoice, string $isEnabledChoice): Query
     {
         $stmt = $this->createQueryBuilder('e');
-        $stmt->join('e.activity', 'a');
-        $stmt->join('e.animators', 'an');
+        $stmt->leftjoin('e.activity', 'a');
+        $stmt->leftjoin('e.animators', 'an');
 
         if ($yearChoice && $yearChoice != 'all') {
             $stmt->andwhere('YEAR(e.dateStartAt) = :year');

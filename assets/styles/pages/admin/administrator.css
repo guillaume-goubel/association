@@ -47,16 +47,7 @@
     margin-top: 12px; 
 }
 #administrator_isEnabled{
-    /* background-color: red; */
     border: none;
-}
-.form-check-input:checked {
-    background-color: green;
-    border-color: none;
-}
-.form-check-input {
-    background-color: red;
-    border-color: none;
 }
 #changePassWordBtn:hover{
     border:1px solid var(--base-color) !important;

@@ -26,6 +26,14 @@ label{
     font-size: 14px;
     font-weight: 600;
 }
+.form-check-input:checked {
+    background-color: red;
+    border-color: none;
+}
+.form-check-input {
+    background-color: green;
+    border-color: none;
+}
 #eventFilterContainer{
     display: flex;
     align-items: start;

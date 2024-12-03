@@ -117,15 +117,6 @@ header .navbar-brand img {
     font-size: 3.25rem;
     line-height: 3.425rem;
 }
-/* checkbox */
-/* .form-check-input:checked {
-    background-color: var(--base-color);
-    border-color: var(--base-color);
-}
-.form-check-input:focus {
-    outline: none;
-    box-shadow: none;
-} */
 /* footer */
 footer {
     padding-top: 100px;

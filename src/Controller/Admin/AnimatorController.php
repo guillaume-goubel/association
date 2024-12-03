@@ -141,7 +141,6 @@ class AnimatorController extends AbstractController
         // delete images
         $animatorService->deleteAllAnimatorPictures($animator); 
 
-        
         $entityManager->remove($animator);
         $entityManager->flush();
         $this->addFlash('success', 'Opération effectuée');

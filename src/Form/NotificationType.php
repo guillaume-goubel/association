@@ -21,9 +21,9 @@ class NotificationType extends AbstractType
                 'label' => "Votre message *Obligatoire",
                 'required' => true,
                 'attr' => [
-                    'rows' => '5' , 
+                    'rows' => '6' , 
                     'class' => 'form-control', 
-                    'style' => 'resize: vertical;height: 200px;'
+                    'style' => 'resize: vertical;height: 300px;'
                 ],
             ])
             ->add('name', TextType::class, [
@@ -41,6 +41,7 @@ class NotificationType extends AbstractType
                 'label' => "Activer / Désactiver",
                 'attr' => ['class' => 'form-check-input'],
                 'help' => 'Cochez pour activer ou désactiver la notification.',
+                'required' => false,
             ])
         ;
     }

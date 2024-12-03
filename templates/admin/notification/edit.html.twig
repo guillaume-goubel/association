@@ -1,13 +1,65 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Notification{% endblock %}
+{% block title %}
+    Modification notification
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Notification</h1>
 
-    {{ include('admin/notification/_form.html.twig', {'button_label': 'Update'}) }}
+<body data-mobile-nav-style="classic">
+    {{ parent() }}
+    
+    <!-- start header -->
+	{% include 'admin/partials/parts/_header.html.twig' %}
+	<!-- end header -->
 
-    <a href="{{ path('app_admin_notification_index') }}">back to list</a>
+    <!-- start section -->
+    <section class="main-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                
+                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                    <div class="row blog-details mb-3 d-flex align-items-center"> 
+                        <div class="col-10">
+                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
 
-    {{ include('admin/notification/_delete_form.html.twig') }}
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">NOTIFICATION - Modifier</h5>
+                        </div>
+                        <div class="admin-action col-2 d-flex justify-content-end">
+                            <a href="#" id="backButton">
+                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-10">
+                    <div class="row mb-50px sm-mb-30px">     
+                        {{ include('admin/notification/_form.html.twig') }}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/parts/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+</body>
 {% endblock %}
+
+{% block baseJavascripts %}   
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base', 'admin-notification']) }}
+    {% endblock %}
+
+{% endblock %}
+
