@@ -73,7 +73,7 @@ class EventService{
             $startDate = $event->getDateStartAt();
             $endDate = $event->getDateEndAt() ?? $startDate; // Si pas de date de fin, on utilise la date de début comme date de fin
             $timeStart = $event->getTimeStartAt()->format('H:i');
-            $timeEnd = $event->getTimeEndAt() ? $event->getTimeEndAt()->format('H:i') : null;
+            $timeEnd = $event->getTimeEndAt() ? $event->getTimeEndAt()->format('H:i') : null; // Fin par défaut à 23:59
             $eventDateStartAtFormat = $startDate->format('d/m/Y');
             $eventDateEndAtFormat = $endDate->format('d/m/Y');
 
@@ -90,24 +90,58 @@ class EventService{
 
                 // On boucle sur chaque jour entre la date de début et la date de fin
                 while ($currentDate <= $endDate) {
-                    $eventDatesArray[] = $this->formatEventData($event, $currentDate, $timeStart, $timeEnd, $eventDuration, $dayCounter, $totalDays, $eventDateStartAtFormat, $eventDateEndAtFormat);
+                    $eventDatesArray[] = $this->formatEventData(
+                        $event,
+                        $currentDate,
+                        $timeStart,
+                        $timeEnd,
+                        $eventDuration,
+                        $dayCounter,
+                        $totalDays,
+                        $eventDateStartAtFormat,
+                        $eventDateEndAtFormat
+                    );
                     $currentDate->modify('+1 day');
                     $dayCounter++;
                 }
             } else {
+                
                 // Événement d'une seule journée
-                $eventDatesArray[] = $this->formatEventData($event, $startDate, $timeStart, $timeEnd, $eventDuration, 1, 1, null, null);
+                // if ($endDate == $startDate && $timeEnd && $timeStart > $timeEnd) {
+                //     $timeEnd = $timeStart; // Corrige les incohérences horaires
+                // }
+
+                $eventDatesArray[] = $this->formatEventData(
+                    $event,
+                    $startDate,
+                    $timeStart,
+                    $timeEnd,
+                    $eventDuration,
+                    1,
+                    1,
+                    null,
+                    null
+                );
             }
         }
 
         return json_encode($eventDatesArray);
     }
 
-    private function formatEventData($event, $date, $timeStart, $timeEnd, $eventDuration, $dayNumber, $totalDays, $eventDateStartAtFormat, $eventDateEndAtFormat ): array
-    {
+    private function formatEventData(
+        $event,
+        $date,
+        $timeStart,
+        $timeEnd,
+        $eventDuration,
+        $dayNumber,
+        $totalDays,
+        $eventDateStartAtFormat,
+        $eventDateEndAtFormat
+    ): array {
         return [
-            'start' => $date->format('Y-m-d') . 'T' . $timeStart,
-            'end' => $date->format('Y-m-d') . 'T' . $timeEnd,
+            'start' => $date->format('Y-m-d') . 'T' . '01:00',
+            'end' => $timeEnd ? $date->format('Y-m-d') . 'T' . '23:59' : null, // Ajout de la condition pour éviter une heure de fin nulle
             'backgroundColor' => '#4581cc',
             'extendedProps' => [
                 'id' => $event->getId(),
@@ -116,9 +150,9 @@ class EventService{
                 'rdv' => trim($event->getRdvAddress() . ' ' . ($event->getRdvPlaceName() ?? '')),
                 'rdvDate' => $date->format('d/m/Y'),
                 'rdvTime' => $timeStart,
-                'rdvTimeEnd' => $timeEnd,
+                'rdvTimeEnd' => $timeEnd ?? null,
                 'duration' => $eventDuration,
-                'durationTotal' => ($eventDuration === 'long') ? $totalDays : 1, 
+                'durationTotal' => ($eventDuration === 'long') ? $totalDays : 1,
                 'durationDayNumber' => ($eventDuration === 'long') ? "$dayNumber/$totalDays" : null,
                 'eventDateStartAt' => $eventDateStartAtFormat,
                 'eventDateEndAt' => $eventDateEndAtFormat

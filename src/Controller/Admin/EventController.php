@@ -27,81 +27,116 @@ class EventController extends AbstractController
     {
         // View type in session
         $session = $request->getSession();
-        if ($session->get('event_view_type') == null) {
+        if ($session->get('event_view_type') === null) {
             $session->set('event_view_type', 'card');
         }
-        $user = $this->getUser();
     
-        $yearChoice = $request->query->get('yearChoice') ?? 'all';
-        $monthChoice = $request->query->get('monthChoice') ?? 'all';
-        $creatorChoice = $request->query->get('creatorChoice') ?? null;
-        $animatorChoice = $request->query->get('animatorChoice') ?? 'all';
-        $dateChoice = $request->query->get('dateChoice') ?? 'dateStartAt';
-        $isPassedChoice = $request->query->get('isPassedChoice') ?? 'isNoPassed';
-        $isCanceledChoice = $request->query->get('isCanceledChoice') ?? 'all';
-        $isEnabledChoice = $request->query->get('isEnabledChoice') ?? 'all';
-        $activityChoice = $request->query->get('activityChoice') ?? "all";
+        $user = $this->getUser();
         
-        if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
-            if($creatorChoice == null){
-                $creatorChoice = 'all';
+        // Obtenez les filtres depuis la requête ou la session
+        $reload = $request->query->get('reload') ?? null;
+        if ($reload) {
+            $session->remove('filter_parameter');
+            return $this->redirectToRoute('admin_event_index');
+        }
+
+        $filters = $this->getFilterParameters($request, $session);
+    
+        // Logique spécifique pour 'creatorChoice'
+        if (in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+            if ($filters['creatorChoice'] === null) {
+                $filters['creatorChoice'] = 'all';
             }
-        }else{
-            if($creatorChoice != 'all' && $creatorChoice == null){
-                $creatorChoice = $this->getUser()->getId();
+        } else {
+            if ($filters['creatorChoice'] === null) {
+                $filters['creatorChoice'] = $user->getId();
             }
         }
-        
+    
         // Distinct month / year createdAt for select
         $yearsList = $eventRepository->getDistincYearCreatedAt();
-        $monthsList = $eventRepository->getDistinctMonthCreatedAt($yearChoice);
+        $monthsList = $eventRepository->getDistinctMonthCreatedAt($filters['yearChoice']);
         $creatorsList = $eventRepository->getDistinctCreator();
         $animatorsList = $eventRepository->getDistinctAnimator();
-
-        if ($creatorChoice == NULL) {
-            if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
+    
+        if ($filters['creatorChoice'] === null) {
+            if (in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
                 $activityList = $activityRepository->findBy([], ['name' => 'ASC']);
-            }else{
+            } else {
                 $activityList = $activityRepository->getActivitiesByUser($user->getId());
             }
-        }else{
-            $activityList = $activityRepository->getActivitiesByUser($creatorChoice);
+        } else {
+            $activityList = $activityRepository->getActivitiesByUser($filters['creatorChoice']);
         }
     
         // Pagination
-        $eventsQuery = $eventRepository->getEventListforAdmin($yearChoice, $monthChoice, 
-        $creatorChoice, $activityChoice, $dateChoice, $isPassedChoice, 
-        $isCanceledChoice, $animatorChoice, $isEnabledChoice);
-        
+        $eventsQuery = $eventRepository->getEventListforAdmin(
+            $filters['yearChoice'],
+            $filters['monthChoice'],
+            $filters['creatorChoice'],
+            $filters['activityChoice'],
+            $filters['dateChoice'],
+            $filters['isPassedChoice'],
+            $filters['isCanceledChoice'],
+            $filters['animatorChoice'],
+            $filters['isEnabledChoice']
+        );
+    
         // Définir la page actuelle (par défaut, la page 1)
-        $page = $request->query->getInt('page', 1); 
+        $page = $request->query->getInt('page', 1);
     
         $limit = ($session->get('event_view_type') === 'card') ? 8 : 30;
         $pagination = $paginator->paginate(
             $eventsQuery,
-            $page,        
-            $limit   
+            $page,
+            $limit
         );
-
+    
         return $this->render('admin/event/index.html.twig', [
-            'events' => $pagination,  // utilisez la pagination ici
+            'events' => $pagination,
             'yearsList' => $yearsList,
             'monthsList' => $monthsList,
             'creatorsList' => $creatorsList,
             'animatorsList' => $animatorsList,
             'activityList' => $activityList,
-            'yearChoice' => $yearChoice,
-            'monthChoice' => $monthChoice,
-            'creatorChoice' => $creatorChoice,
-            'animatorChoice' => $animatorChoice,
-            'activityChoice' => $activityChoice,
-            'dateChoice' => $dateChoice,
-            'isPassedChoice' => $isPassedChoice,
-            'isCanceledChoice' => $isCanceledChoice,
-            'isEnabledChoice' => $isEnabledChoice,
+            'yearChoice' => $filters['yearChoice'],
+            'monthChoice' => $filters['monthChoice'],
+            'creatorChoice' => $filters['creatorChoice'],
+            'animatorChoice' => $filters['animatorChoice'],
+            'activityChoice' => $filters['activityChoice'],
+            'dateChoice' => $filters['dateChoice'],
+            'isPassedChoice' => $filters['isPassedChoice'],
+            'isCanceledChoice' => $filters['isCanceledChoice'],
+            'isEnabledChoice' => $filters['isEnabledChoice'],
             'isEventActionsButtonVisible' => true,
-            'viewType' => $session->get('event_view_type') ?? 'card'
+            'viewType' => $session->get('event_view_type') ?? 'card',
         ]);
+    }
+    
+    private function getFilterParameters(Request $request, $session): array
+    {
+        $defaults = [
+            'yearChoice' => 'all',
+            'monthChoice' => 'all',
+            'creatorChoice' => null,
+            'animatorChoice' => 'all',
+            'dateChoice' => 'dateStartAt',
+            'isPassedChoice' => 'isNoPassed',
+            'isCanceledChoice' => 'all',
+            'isEnabledChoice' => 'all',
+            'activityChoice' => 'all',
+        ];
+
+        // Récupérer les filtres depuis la requête ou la session
+        $filters = [];
+        foreach ($defaults as $key => $default) {
+            $filters[$key] = $request->query->get($key, $session->get("filter_parameter")[$key] ?? $default);
+        }
+
+        // Mettre à jour la session avec les nouveaux filtres
+        $session->set('filter_parameter', $filters);
+
+        return $filters;
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
