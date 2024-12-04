@@ -177,7 +177,6 @@ class EventController extends AbstractController
         $isNewEvent = $event->getId() === null;
         
         if (!$checkAuthorizationService->checkProcess($user, 'admin_activity_edit', $event)) {
-            // Redirige vers la liste des événements si les IDs ne correspondent pas
             return $this->redirectToRoute('admin_index');
         }
         
@@ -193,7 +192,7 @@ class EventController extends AbstractController
                 // Si le tableau est vide, $userFirst sera null
                 $userFirst = null;
             }
-                  
+
             foreach ($activityRepository->findAll() as $activity) {
                 if ($activity->isActivityInUserControl($userFirst) === true) {
                     array_push($userActivityArray, $activity->getId());
@@ -206,16 +205,17 @@ class EventController extends AbstractController
                 }
             }
         }
-        
+
         $form = $this->createForm(EventType::class, $event, [
             'activity_ids' => $userActivityArray,
-            'selected_activity' => $isNewEvent ? null : $event->getActivity()
+            'selected_activity' => $isNewEvent ? null : $event->getActivity(),
+            'is_passed' => $event->isPassed()
         ]);
         
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-                        
+            
             $eventService->process($event);
             
             if(!in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {

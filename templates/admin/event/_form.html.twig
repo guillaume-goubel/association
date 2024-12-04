@@ -9,6 +9,13 @@
 {# ! DATA FOR JS **************************************************************************** #}
 
 {{ form_start(form)}}
+
+    {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+        <div style="border-top: 1px dashed;border-bottom:1px dashed;" class="mb-5 row fs-14 fw-600">
+            Cet événement est terminé. </br> Certains champs sont cachés ou non modifiables (annulation, dates, rendez-vous etc..).
+            Pour forcer au changement de ces champs, merci de contacter votre super administrateur pour qu'il prenne la main sur cet évènement.
+        </div>
+    {% endif %}
     
     {% if event.isCanceled == false %}
         {% set checkLabel = "Annuler l'événement" %}
@@ -17,7 +24,8 @@
         {% set checkLabel = "Maintenir l'événement" %}
         {% set eventCanceledInfos = "L'événement sera RESTAURÉ après l'enregistrement" %}
     {% endif %}
-    <div style="border-top: 1px dashed;border-bottom:1px dashed;" class="mb-5 row {{ (event != null and event.id != null) ? 'd-flex' : 'd-none' }}  ">
+    <div style="border-top: 1px dashed;border-bottom:1px dashed;" class="mb-5 row {{ ((event != null and event.id != null and event.isPassed() == false) or is_granted('ROLE_SUPER_ADMIN')) ? 'd-flex' : 'd-none' }}  ">
+        
         {% if event.isCanceled == true %}
             <div class="fs-14 fw-600 mt-2">L'événement est actuellement <span class="admin-activity-pills bg-alert">Annulé</span> </div>
         {% else %}
@@ -45,10 +53,16 @@
             {{ form_row(form.activity) }}
         </div>
     </div>
-    <div class="row d-flex ">
+    <div class="row d-flex">
         <div class="col-12 col-md-6 mt-1">
             {{ form_label(form.dateStartAt) }}  
-            {{ form_widget(form.dateStartAt) }} 
+            
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.dateStartAt , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.dateStartAt) }} 
+            {% endif %}
+
             {% if form.dateStartAt.vars.errors|length > 0 %}
                 <div class="form-errors text-red fs-14 fw-600">
                     {{ form_errors(form.dateStartAt) }} 
@@ -56,13 +70,23 @@
             {% endif %}
         </div>
         <div class="col-12 col-md-6 mt-1">
-            {{ form_row(form.timeStartAt) }}
+            {{ form_label(form.timeStartAt) }}  
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.timeStartAt , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.timeStartAt) }} 
+            {% endif %}
         </div>
     </div>
     <div class="row d-flex ">
         <div class="col-12 col-md-6 mt-1">
             {{ form_label(form.dateEndAt) }}  
-            {{ form_widget(form.dateEndAt) }} 
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.dateEndAt , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.dateEndAt) }} 
+            {% endif %}
+            
             {% if form.dateEndAt.vars.errors|length > 0 %}
                 <div class="form-errors text-red fs-14 fw-600">
                     {{ form_errors(form.dateEndAt) }} 
@@ -70,7 +94,12 @@
             {% endif %}
         </div>
         <div class="col-12 col-md-6 mt-1">
-            {{ form_row(form.timeEndAt) }}
+            {{ form_label(form.timeEndAt) }} 
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.timeEndAt , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.timeEndAt) }} 
+            {% endif %}
         </div>
     </div>
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5"><i class="fa-solid fa-circle-info align-middle icon-large text-yellow me-1"></i>LES INFORMATIONS COMPLEMENTAIRES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
@@ -264,7 +293,7 @@
 
     {# AUTOCOMPLETION PART -- start #}
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5 mb-2"><i class="fa-solid fa-map-location-dot icon-large text-base-color me-1"></i>LE LIEU DE RENDEZ-VOUS<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
-    <div class="pac-card p-1" id="pac-card">
+    <div class="pac-card p-1 {{ ((event != null and event.id != null and event.isPassed() == false) or is_granted('ROLE_SUPER_ADMIN')) ? '' : 'd-none' }}" id="pac-card">
         <div>
             <div id="title">Indiquez ici l'adresse pour auto-complétion</div>
         </div>
@@ -289,28 +318,53 @@
 
     <div class="row d-flex ">  
         <div class="col-12 col-md-6 mt-1">
-            {{ form_row(form.rdvAddress) }}
+            {{ form_label(form.rdvAddress) }}
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.rdvAddress , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.rdvAddress) }} 
+            {% endif %}
         </div>
         <div class="col-12 col-md-6 mt-1">
-            {{ form_row(form.rdvCity) }}
+            {{ form_label(form.rdvCity) }}
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.rdvCity , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.rdvCity) }} 
+            {% endif %}
         </div>
         <div class="col-12 mt-1">
-            {{ form_row(form.rdvPlaceName) }}
+            {{ form_label(form.rdvPlaceName) }}
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.rdvPlaceName , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.rdvPlaceName) }} 
+            {% endif %}        
         </div>
     </div>
     
     <div class="row d-flex ">  
         <div class="col-12 col-md-6 mt-1">
-            {{ form_row(form.rdvLatitude) }}
+            {{ form_label(form.rdvLatitude) }}
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.rdvLatitude , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.rdvLatitude) }} 
+            {% endif %}        
         </div>
 
         <div class="col-12 col-md-6 mt-1">
-            {{ form_row(form.rdvLongitude) }}
+            {{ form_label(form.rdvLongitude) }}
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.rdvLongitude , { attr: { readonly: 'readonly' } }) }} 
+            {% else %}
+                {{ form_widget(form.rdvLongitude) }} 
+            {% endif %}
         </div>
     </div>
 
     <div class="row d-flex justify-content-center mt-5">
-         <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto border-radius-30px">{{ button_label|default('Enregistrer') }}</button>
+        <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto border-radius-30px">{{ button_label|default('Enregistrer') }}</button>
     </div>
 
 {{ form_end(form) }}

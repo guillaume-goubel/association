@@ -30,6 +30,7 @@ class EventType extends AbstractType
         $activityIds = $options['activity_ids'];
         $selectedActivity = $options['selected_activity'];
         $creationDate = $options['creation_date'];
+        $isPassed = $options['is_passed'];
 
         $builder
             ->add('isCanceled', CheckboxType::class, [
@@ -37,7 +38,7 @@ class EventType extends AbstractType
                 'attr' => ['class' => 'form-check-input'], // Classe Bootstrap pour les switches
                 'required' => false,
                 'help' => 'Cochez pour annuler ou restaurer l\'événement.',
-            ])
+            ])          
             ->add('name', TextType::class, [
                 'label' => "Un titre ou une très courte description (75 caractères max)",
                 'attr' => ['class' => 'form-control', 'maxlength' => 75],
@@ -110,13 +111,13 @@ class EventType extends AbstractType
                 'required' => false,
             ])
             ->add('rdvLatitude', TextType::class, [
-                'label' => "Coodonnées de latitude du rendez-vous ",
+                'label' => "Coordonnées de latitude du rendez-vous ",
                 'attr' => ['class' => 'form-control'],
                 'help' => "Peut être renseigné automatiquement via la recherche sur la carte ...",
                 'required' => false,
             ])
             ->add('rdvLongitude', TextType::class, [
-                'label' => "Coodonnées de longitude du rendez-vous ",
+                'label' => "Coordonnées de longitude du rendez-vous ",
                 'attr' => ['class' => 'form-control'],
                 'help' => "Peut être renseigné automatiquement via la recherche sur la carte ...",
                 'required' => false,
@@ -133,25 +134,7 @@ class EventType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('dateStartAt', null, [
-                'label' => 'Commence le ... *',
-                'attr' => ['class' => 'form-control', 'min' => (new \DateTime())->format('Y-m-d')],
-                'widget' => 'single_text',
-                'required' => true,
-                // 'data' => $creationDate instanceof \DateTime ? $creationDate : ($creationDate ? new \DateTime($creationDate) : null),
-                'data' => $creationDate instanceof \DateTime 
-                    ? $creationDate 
-                    : ($creationDate ? new \DateTime($creationDate) : ($options['data']->getDateStartAt() ?? null)),
-            ])
-            ->add('dateEndAt', null, [
-                'label' => 'Termine le ... *',
-                'attr' => ['class' => 'form-control', 'min' => (new \DateTime())->format('Y-m-d')],
-                'widget' => 'single_text',
-                'required' => true,
-                'constraints' => [
-                    new DateRange(),
-                ],
-            ])
+
             ->add('activity', EntityType::class, [
                 'class' => Activity::class,
                 'label' => "Rattacher à un type d'activité *",
@@ -263,6 +246,66 @@ class EventType extends AbstractType
                 ]
             ])
         ;
+
+        // Vérification si l'évènement est passé , changer les contraintes
+        
+        if($isPassed){
+
+        $builder
+            ->add('dateStartAt', null, [
+                'label' => 'Commence le ... *',
+                'attr' => ['class' => 'form-control'],
+                'widget' => 'single_text',
+                'required' => true,
+                'data' => $creationDate instanceof \DateTime 
+                    ? $creationDate 
+                    : ($creationDate ? new \DateTime($creationDate) : ($options['data']->getDateStartAt() ?? null)),
+            ])
+            ->add('dateEndAt', null, [
+                'label' => 'Termine le ... *',
+                'attr' => ['class' => 'form-control'],
+                'widget' => 'single_text',
+                'required' => true,
+                'constraints' => [
+                    new DateRange(),
+                ],
+            ]);
+
+        }else{
+
+        $builder
+            ->add('dateStartAt', null, [
+                'label' => 'Commence le ... *',
+                'attr' => [
+                    'class' => 'form-control', 
+                    'min' => (new \DateTime())->format('Y-m-d') // Pour HTML5
+                ],
+                'widget' => 'single_text',
+                'required' => true,
+                'data' => $creationDate instanceof \DateTime 
+                    ? $creationDate 
+                    : ($creationDate ? new \DateTime($creationDate) : ($options['data']->getDateStartAt() ?? null)),
+                'constraints' => [
+                    new Assert\GreaterThanOrEqual([
+                        'value' => 'today',
+                        'message' => "La date de début doit être supérieure ou égale à aujourd'hui."
+                    ])
+                ],
+            ])
+
+            ->add('dateEndAt', null, [
+                'label' => 'Termine le ... *',
+                'attr' => ['class' => 'form-control', 'min' => (new \DateTime())->format('Y-m-d')],
+                'widget' => 'single_text',
+                'required' => true,
+                'constraints' => [
+                    new DateRange(),
+                ],
+            ]);
+
+        }
+        
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void
@@ -272,6 +315,7 @@ class EventType extends AbstractType
             'activity_ids' => [],
             'selected_activity' => null,
             'creation_date' => null,
+            'is_passed' => null,
         ]);
     }
 }

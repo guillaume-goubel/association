@@ -22,8 +22,8 @@ class DateRangeValidator extends ConstraintValidator
         }
 
         // Récupère les dates de début et de fin
-        $startDate = $entity->getDateStartAt(); // Accéder à dateStartAt avec son getter
-        $endDate = $value; // La valeur de dateEndAt est passée au validateur
+        $startDate = $entity->getDateStartAt(); 
+        $endDate = $value; 
 
         // Vérifie que dateEndAt est bien supérieur ou égal à dateStartAt
         if ($startDate && $endDate && $endDate < $startDate) {

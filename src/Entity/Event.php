@@ -51,10 +51,6 @@ class Event
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     #[Assert\NotBlank(null,"La date de début est obligatoire.")]
-    #[Assert\GreaterThanOrEqual(
-        value: 'today',
-        message: "La date de début est obligatoire toto"
-    )]
     private ?\DateTimeInterface $dateStartAt = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
