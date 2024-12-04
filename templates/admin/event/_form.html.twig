@@ -439,7 +439,6 @@
             const place = autocomplete.getPlace();
 
             function autoCompletionForm(place) {
-                console.log(place);
 
                 document.getElementById("event_rdvAddress").value = "";
                 document.getElementById("event_rdvCity").value = "";
@@ -498,7 +497,6 @@
     const checkbox = document.getElementById('event_isCanceled');
     const eventCanceledInfos = document.getElementById('eventCanceledInfos');
     const eventCanceledStatus = document.getElementById('eventCanceledStatus').getAttribute('data-param')
-    console.log(eventCanceledStatus);
 
     // Fonction pour basculer la classe
     if (eventCanceledStatus == '0' ){

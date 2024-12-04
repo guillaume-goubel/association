@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         if (eventLinkDefault) {
             const formattedDate = `${String(clickedDate.getMonth() + 1).padStart(2, '0')}/${String(clickedDate.getDate()).padStart(2, '0')}/${clickedDate.getFullYear()}`;
             const eventLink = document.getElementById('eventCreatedAt');
-            eventLink.href = `${eventLinkDefault}?creationDate=${encodeURIComponent(formattedDate)}&from=calendar_index`;
+            eventLink.href = `${eventLinkDefault}?creationDate=${encodeURIComponent(formattedDate)}&from=admin_calendar_index`;
 
             modalFooter.classList.toggle('d-none', !isFutureOrToday);
         }

@@ -182,21 +182,22 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function getEventListforCalendarFor12Months(string $activityChoice, string $userChoice, string $yearChoice): array
+    public function getEventListforCalendarFor12Months(string $activityChoice, string $creatorChoice, string $yearChoice, ?string $animatorChoice, ?string $isPassedChoice, ?string $isCanceledChoice, ?string $isEnabledChoice): array
     {
 
         // Création d'un objet QueryBuilder
         $stmt = $this->createQueryBuilder('e');
-        $stmt->join('e.activity', 'a');
+        $stmt->leftjoin('e.activity', 'a');
+        $stmt->leftjoin('e.animators', 'an');
         
         if ($activityChoice && $activityChoice !== 'all') {
             $stmt->andWhere('a.id = :activityChoice')
                 ->setParameter('activityChoice', $activityChoice);
         }
 
-        if ($userChoice && $userChoice !== 'all') {
-            $stmt->andWhere('e.user = :userChoice')
-                ->setParameter('userChoice', $userChoice);
+        if ($creatorChoice && $creatorChoice !== 'all') {
+            $stmt->andWhere('e.user = :creatorChoice')
+                ->setParameter('creatorChoice', $creatorChoice);
         }
 
         switch ($yearChoice) {
@@ -217,7 +218,49 @@ class EventRepository extends ServiceEntityRepository
                     ->setParameter('year', $yearChoice);
                 break;
         }
-        
+
+        if ($animatorChoice && $animatorChoice != 'all') {
+            $stmt->andwhere('an.id = :animator');
+            $stmt->setParameter('animator', $animatorChoice);
+        }
+
+        if ($activityChoice && $activityChoice != 'all') {
+            $stmt->andwhere('a.id = :activityChoice');
+            $stmt->setParameter('activityChoice', $activityChoice);
+        }
+
+        if ($isPassedChoice != 'all') {
+            $now = new \DateTime();
+            if ($isPassedChoice == 'isPassed') {
+                // Si l'événement est "passé" (dateEndAt est strictement inférieure à aujourd'hui)
+                $stmt->andWhere('e.dateEndAt < :today');
+            } else {
+                // Si l'événement n'est pas "passé" (dateEndAt est aujourd'hui ou dans le futur)
+                $stmt->andWhere('e.dateEndAt >= :today');
+            }
+            $stmt->setParameter('today', $now->format('Y-m-d')); // Comparaison sur la date
+        }
+
+        if ($isCanceledChoice != 'all') {
+            if ($isCanceledChoice == 'isCanceled') {
+                // Vérification si la date de fin est avant aujourd'hui
+                $stmt->andWhere('e.isCanceled = TRUE');
+            } else {
+                // Vérification si la date de fin est après ou égale à aujourd'hui
+                $stmt->andWhere('e.isCanceled = FALSE');
+            }
+        }
+
+        if ($isEnabledChoice != 'all') {
+            if ($isEnabledChoice == 'isEnabled') {
+                // Vérification si la date de fin est avant aujourd'hui
+                $stmt->andWhere('e.isEnabled = TRUE');
+            } else {
+                // Vérification si la date de fin est après ou égale à aujourd'hui
+                $stmt->andWhere('e.isEnabled = FALSE');
+            }
+        }
+
         // Tri des résultats par la date de début des événements
         $stmt->addOrderBy('e.dateStartAt', 'ASC');
         

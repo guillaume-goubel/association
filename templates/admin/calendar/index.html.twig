@@ -1,0 +1,169 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+
+    {# ! PARAM ------------------------------- #}
+    <div id="yearChoiceElmt" data-param="{{ yearChoice }}"></div>
+    {# ! PARAM ------------------------------- #}
+
+    {{ parent() }}
+
+    {% include 'admin/partials/parts/_header.html.twig' %}
+
+    <!-- start section -->
+    <section class="main-section bg-very-light-gray">
+        <div class="container">
+            
+            <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                <div class="row blog-details d-flex align-items-center"> 
+                    
+                    <div class="col-12 col-md-10">
+                        {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+
+                        <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">CALENDRIER</h5>
+                    </div>
+
+                    <div class="admin-action col-12 col-md-2 d-flex align-items-center justify-content-end">
+                        {% set redirect = app.request.get('from') == 'admin_event_new' ? 'admin_event_index' : app.request.get('from') ?: 'admin_event_index' %}
+
+                        {% if app.request.get('from') == 'admin_event_index' %}
+                            <a href="{{ path('admin_event_index') }}">
+                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                            </a>
+                        {% else %}
+                            <a href="{{ path(redirect) }}">
+                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="row d-flex align-items-center justify-content-between">
+                <form action="" method="get">
+                    
+                    <div id="eventFilterContainer" class="d-flex justify-content-between">
+
+                        <div class="row col-12 col-md-10">
+                            <div class="col-12 blog-standard mb-2">
+                                <div class="row gy-2">
+                                    <!-- Filtre year -->
+                                    <div class="col-12 col-md-4">
+                                        <select name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ yearChoice == 'yearDepth' ? 'selected' : '' }} value="yearDepth">Aujourd'hui + 1 an</option>
+                                            {% for item in yearsList %}
+                                                <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <!-- Filtre user -->
+                                    <div class="col-12 col-md-4">
+                                        <select name="creatorChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ creatorChoice == 'all' ? 'selected' : '' }} value="all">Tout administrateur</option>
+                                            {% for item in creatorList %}
+                                                <option {{ creatorChoice == item.user_id ? 'selected' : '' }} value="{{ item.user_id }}">{{ item.creator }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <!-- Filtre activité -->
+                                    <div class="col-12 col-md-4">
+                                        <select name="animatorChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ animatorChoice =='all' ? 'selected' : '' }} value="all">Tout animateur</option>
+                                            {% for item in animatorsList %}
+                                                <option {{ animatorChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    {# From page #}
+                                    <input name="from" type="hidden" value="{{ app.request.get('from') }}">
+                                </div>
+                            </div>
+
+                            <div class="col-12 blog-standard mb-2">
+                                <div class="row gy-2">
+                                    <div class="col-12 col-md-3">
+                                        <select name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ activityChoice == 'all' ? 'selected' : '' }} value="all">Toutes activités</option>
+                                            {% for item in activityList %}
+                                                <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <select name="isPassedChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ isPassedChoice == 'all' ? 'selected' : '' }} value="all">Terminés et à venir</option>
+                                            <option {{ isPassedChoice == 'isNoPassed' ? 'selected' : '' }} value="isNoPassed">A venir</option>
+                                            <option {{ isPassedChoice == 'isPassed' ? 'selected' : '' }} value="isPassed">Terminés</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <select name="isCanceledChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ isCanceledChoice == 'all' ? 'selected' : '' }} value="all">Annulés et maintenus</option>
+                                            <option {{ isCanceledChoice == 'isNoCanceled' ? 'selected' : '' }} value="isNoCanceled">Maintenus</option>
+                                            <option {{ isCanceledChoice == 'isCanceled' ? 'selected' : '' }} value="isCanceled">Annulés</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-3">
+                                        <select name="isEnabledChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                            <option {{ isEnabledChoice == 'all' ? 'selected' : '' }} value="all">Visibles et cachés</option>
+                                            <option {{ isEnabledChoice == 'isEnabled' ? 'selected' : '' }} value="isEnabled">Visibles</option>
+                                            <option {{ isEnabledChoice == 'isDisabled' ? 'selected' : '' }} value="isDisabled">Cachés</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="d-flex flex-column col-12 col-md-1">
+                            <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
+                                <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                            <a href="{{ path('admin_calendar_index') }}?reload=true" style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color mt-10px">
+                                <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-arrows-rotate"></i>
+                            </a>
+                        </div>
+
+                    </div>
+
+                </form>
+                <div class="fs-13">{{eventsCount}} résultat{{eventsCount > 1 ? 's' : ''}}</div>
+            </div>
+
+            <div id="calendar"></div>
+        </div>
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/parts/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+    {% include 'calendar/partials/_event_modal.html.twig' %}
+    {% include 'main_partials/components/_loader-container.html.twig' %}
+
+</body>
+<!-- end subscription popup -->
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script>
+        const events = {{ eventDateJson|raw }};
+    </script>
+
+    {% block importmap %}
+        {{ importmap(['app', 'base', 'calendar']) }}
+    {% endblock %}
+
+{% endblock %}

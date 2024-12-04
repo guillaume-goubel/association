@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="admin-action col-3 d-flex justify-content-end">
-                            <a class="ms-8" href="{{ path('calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
+                            <a class="ms-8" href="{{ path('admin_calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
                             <a class="ms-8" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>
                     </div>
@@ -47,6 +47,7 @@
                     <div id="eventFilterContainer" class="d-flex">
                         
                         <div class="row col-12 col-md-10">
+                            
                             <div class="col-12 blog-standard mb-2">
                                 <div class="row gy-2"> <!-- gy-2 ajoute un espacement vertical entre les colonnes sur mobile -->
                                     <!-- Filtre mois -->
@@ -128,6 +129,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
 
                         <!-- Bouton de recherche -->
@@ -142,6 +144,7 @@
                                 <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-arrows-rotate"></i>
                             </a>
                         </div>
+
                     </div>
 
                 </form>
@@ -149,7 +152,7 @@
                 <div class="px-5" style="min-height:60vh;">
 
                     <!-- Pagination -->
-                    <div class="pagination-container d-flex justify-content-center mb-4">
+                    <div class="pagination-container d-flex justify-content-center">
                         {{knp_pagination_render(events, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig')}}
                     </div>
                     

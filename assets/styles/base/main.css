@@ -46,6 +46,9 @@ header .btn.btn-switch-text.btn-small > span {
     font-size: 14px;
     font-weight: 500;
 }
+.pagination-container nav ul.pagination{
+    margin-bottom: 50px;
+}
 .form-check-input:checked {
     background-color: green;
     border-color: none;

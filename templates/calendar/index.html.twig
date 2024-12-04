@@ -16,55 +16,20 @@
 
     {{ parent() }}
 
-	{% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index'  %}
-        {% include 'admin/partials/parts/_header.html.twig' %}
-    {% else %}
-        {% include 'calendar/partials/_calendar_header.html.twig' %}
-    {% endif %}
+    {% include 'calendar/partials/_calendar_header.html.twig' %}
 
     <!-- start section -->
     <section class="main-section bg-very-light-gray">
         <div class="container">
             
-            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index' %}
-                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
-                    <div class="row blog-details d-flex align-items-center"> 
-                        
-                        <div class="col-12 col-md-10">
-                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
 
-                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-5">CALENDRIER</h5>
-                        </div>
-
-                        <div class="admin-action col-12 col-md-2 d-flex align-items-center justify-content-end">
-                            {# {% set redirect = app.request.get('from') == 'admin_event_new' ? 'admin_event_index' : app.request.get('from') ?: 'admin_event_index' %}
-                            <a href="{{ path(redirect) }}">
-                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
-                            </a> #}
-                            {% set redirect = app.request.get('from') == 'admin_event_new' ? 'admin_event_index' : app.request.get('from') ?: 'admin_event_index' %}
-
-                            {% if app.request.get('from') == 'admin_event_index' %}
-                                <a href="#" id="backButton">
-                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
-                                </a>
-                            {% else %}
-                                <a href="{{ path(redirect) }}">
-                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
-                                </a>
-                            {% endif %}
-                        </div>
-                        
-                    </div>
+            <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
+                <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
+                    <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
+                        Calendrier<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
+                    </h3>
                 </div>
-            {% else %}
-                <div class="row justify-content-center mb-3 lg-mb-50px sm-mb-30px">
-                    <div class="col-lg-12 sm-mb-15px d-flex justify-content-center align-items-center">
-                        <h3 class="highlight-separator text-dark-gray alt-font ls-minus-1px fw-700" data-shadow-animation="true" data-animation-delay="1500">
-                            Calendrier<span><img src="{{ asset('app/highlight-separator.svg') }}" alt=""></span>
-                        </h3>
-                    </div>
-                </div>
-            {% endif %}
+            </div>
 
             <div class="row d-flex align-items-center justify-content-between">
                 <form class="col-12 col-md-10" action="" method="get">
@@ -72,27 +37,6 @@
                     <div class="col-12 blog-standard">
                         <div class="row gy-2">
                             
-                            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and app.request.get('from') != 'home_index' %}
-                                <!-- Filtre year -->
-                                <div class="col-12 col-md-3">
-                                    <select name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                        <option {{ yearChoice == 'yearDepth' ? 'selected' : '' }} value="yearDepth">Aujourd'hui + 1 an</option>
-                                        {% for item in yearsList %}
-                                            <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                                <!-- Filtre user -->
-                                <div class="col-12 col-md-3">
-                                    <select name="userChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                        <option {{ userChoice == 'all' ? 'selected' : '' }} value="all">Tout administrateur</option>
-                                        {% for item in userList %}
-                                            <option {{ userChoice == item.user_id ? 'selected' : '' }} value="{{ item.user_id }}">{{ item.creator }}</option>
-                                        {% endfor %}
-                                    </select>
-                                </div>
-                            {% endif %}
-
                             <!-- Filtre activité -->
                             <div class="col-12 col-md-3">
                                 <select name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
@@ -140,7 +84,6 @@
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <script>
         const events = {{ eventDateJson|raw }};
-        console.log(events);
     </script>
 
     {% block importmap %}
