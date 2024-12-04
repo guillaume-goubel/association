@@ -148,11 +148,11 @@ document.addEventListener("DOMContentLoaded", (event) => {
             let eventId = element.getAttribute('data-id');
 
             if (currentStatus == 'disabled') {
-                currentStatusVerbatim.innerHTML = "Cet événement est actuellement <strong class='text-red'>invisible</strong>";
-                currentStatusQuestion.innerHTML = "Confirmer son activation ?";
+                currentStatusVerbatim.innerHTML = "Cet événement est actuellement <strong class='text-red'>masqué</strong>";
+                currentStatusQuestion.innerHTML = "Confirmer le fait de le rendre visible pour l'utilisateur ?";
             }else{
                 currentStatusVerbatim.innerHTML = "Cet événement est actuellement <strong class='text-green'>visible</strong>";
-                currentStatusQuestion.innerHTML = "Confirmer sa désactivation ?";
+                currentStatusQuestion.innerHTML = "Confirmer le fait de le rendre masqué pour l'utilisateur ?";
             }
 
             disabledEventLink.setAttribute('data-current-status', currentStatus);

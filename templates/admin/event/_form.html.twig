@@ -12,16 +12,16 @@
     
     {% if event.isCanceled == false %}
         {% set checkLabel = "Annuler l'événement" %}
-        {% set eventCanceledInfos = "Sera ANNULÉ après l'enregistrement" %}
+        {% set eventCanceledInfos = "L'événement sera ANNULÉ après l'enregistrement" %}
     {% else %}
-        {% set checkLabel = "Restaurer l'événement" %}
-        {% set eventCanceledInfos = "Sera RESTAURÉ après l'enregistrement" %}
+        {% set checkLabel = "Maintenir l'événement" %}
+        {% set eventCanceledInfos = "L'événement sera RESTAURÉ après l'enregistrement" %}
     {% endif %}
     <div style="border-top: 1px dashed;border-bottom:1px dashed;" class="mb-5 row {{ (event != null and event.id != null) ? 'd-flex' : 'd-none' }}  ">
         {% if event.isCanceled == true %}
             <div class="fs-14 fw-600 mt-2">L'événement est actuellement <span class="admin-activity-pills bg-alert">Annulé</span> </div>
         {% else %}
-            <div class="fs-14 fw-600 mt-2">L'événement est actuellement <span class="admin-activity-pills bg-success">Actif</span> </div>            
+            <div class="fs-14 fw-600 mt-2">L'événement est actuellement <span class="admin-activity-pills bg-success">Maintenu</span> </div>            
         {% endif %}
 
         <div class="col-12 col-md-6 my-3">
