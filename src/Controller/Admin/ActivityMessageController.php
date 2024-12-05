@@ -5,12 +5,13 @@ namespace App\Controller\Admin;
 use App\Entity\Activity;
 use App\Entity\ActivityMessage;
 use App\Form\ActivityMessageType;
+use App\Repository\ActivityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ActivityMessageRepository;
-use App\Repository\ActivityRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
@@ -88,4 +89,25 @@ class ActivityMessageController extends AbstractController
         $this->addFlash('success', 'Opération effectuée');
         return $this->redirectToRoute('admin_activity_message_index', ['activityId' => $activityId], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/message/activity', name: 'content', methods: ['POST'])]
+    public function getActivitycontentByActivityMessage(Request $request, ActivityMessageRepository $activityMessageRepository): JsonResponse
+    {
+        $activityMessageId = $request->request->get('activityMessageId');
+        $activityMessage = $activityMessageRepository->findOneBy(['id' => $activityMessageId]);
+
+        if (!$activityMessage) {
+            return new JsonResponse(['error' => 'Event not found'], 404);
+        }
+
+        $activityMessagesArray [ ] = [
+            'id'=> $activityMessage->getId(),
+            'name'=> $activityMessage->getName(),
+            'description'=> $activityMessage->getDescription(),
+        ];
+        
+        // Retourne la réponse JSON avec la liste des activités
+        return new JsonResponse(['activityMessagesArray' => $activityMessagesArray]);
+    }
+
 }

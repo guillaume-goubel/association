@@ -208,7 +208,8 @@ class EventController extends AbstractController
         return $this->render('admin/event/new.html.twig', [
             'event' => $event,
             'form' => $form,
-            'activityChoice' => $activityChoice
+            'activityChoice' => $activityChoice,
+            'activityByDefault' => $activityByDefault,
         ]);
     }
 
@@ -251,7 +252,9 @@ class EventController extends AbstractController
         $form = $this->createForm(EventType::class, $event, [
             'activity_ids' => $userActivityArray,
             'selected_activity' => $isNewEvent ? null : $event->getActivity(),
-            'is_passed' => $event->isPassed()
+            'is_passed' => $event->isPassed(),
+            'activity_by_default' => $event->getActivity(),
+
         ]);
         
         $form->handleRequest($request);
@@ -273,6 +276,7 @@ class EventController extends AbstractController
         return $this->render('admin/event/edit.html.twig', [
             'event' => $event,
             'form' => $form,
+            'activityByDefault' => $event->getActivity(),
         ]);
     }
 
@@ -406,7 +410,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/message/activity', name: 'message_activity', methods: ['POST'])]
-    public function getActivityMessageByActivityPARAM(Request $request, ActivityRepository $activityRepository): JsonResponse
+    public function getActivityMessageByActivity(Request $request, ActivityRepository $activityRepository): JsonResponse
     {
         $activityId = $request->request->get('activityId');
         $activity = $activityRepository->findOneBy(['id' => $activityId]);

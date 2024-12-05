@@ -348,6 +348,8 @@ footer .elements-social ul li:last-child {
 .preformatted{
     white-space: pre-line;
     text-align: justify;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 /* ACTIVITY CARD */
 .activity-card {

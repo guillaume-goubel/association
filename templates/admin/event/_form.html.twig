@@ -7,6 +7,7 @@
 <div id="getActivitiesByUserPARAM" data-path="{{ path('admin_event_change_activities')}}"></div>
 <div id="getViewTypePARAM" data-param="admin_event_form"></div>
 <div id="getActivityMessageByActivityPARAM" data-path="{{ path('admin_event_message_activity')}}"></div>
+<div id="getActivitycontentByActivityMessagePARAM" data-path="{{ path('admin_activity_message_content')}}"></div>
 {# ! DATA FOR JS **************************************************************************** #}
 
 {{ form_start(form)}}
@@ -103,7 +104,7 @@
             {% endif %}
         </div>
     </div>
-    <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5"><i class="fa-solid fa-circle-info align-middle icon-large text-yellow me-1"></i>LES INFORMATIONS COMPLEMENTAIRES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+    <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5"><i class="fa-solid fa-circle-question align-middle icon-large text-yellow me-1"></i>LES INFORMATIONS COMPLEMENTAIRES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
     <div class="row d-flex ">
         <div class="col-12 col-md-6 mt-1">
             {{ form_row(form.name) }}
@@ -128,8 +129,26 @@
         <div class="col-12 mt-1">
             {{ form_row(form.description) }}
         </div>
-        <div class="col-12 mt-4">            
-            {{ form_row(form.activityMessage) }}
+    </div>
+
+    <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5"><i class="fa-solid fa-circle-info align-middle icon-large text-info me-1"></i>LES INFORMATIONS IMPORTANTES<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
+    <div class="row d-flex">
+        <div class="col-12 mt-1">            
+            {{ form_label(form.activityMessage) }}  
+            {{ form_widget(form.activityMessage) }}
+            
+            {% if event.activityMessage == null %}
+                <div id="activityMessageContentContainer" class="mt-2 {{ (event.activityMessage != null) ? '' : ' d-none ' }}">
+                    <label class="fw-500 text-light-gray" for="">Le contenu du message</label>
+                    <div class="card-text preformatted" id="activityMessageContent"></div>
+                </div>
+            {% else %}
+                <div id="activityMessageContentContainer" class="mt-2 {{ (event.activityMessage != null) ? '' : ' d-none ' }}">
+                    <label class="fw-500 text-light-gray" for="">Le contenu du message</label>
+                    <div class="card-text preformatted" id="activityMessageContent">{{ event.activityMessage.description|raw }}</div>
+                </div>
+            {% endif %}
+            
         </div>
         <div class="col-12 mt-4">            
             {{ form_row(form.preparationInfos) }}

@@ -40,6 +40,17 @@ label{
     justify-content: space-between;
     margin-bottom:20px;
 }
+#event_activityMessage{
+    width: 300px;
+}
+#activityMessageContent{
+    font-size: 14px;
+    line-height: 1.2;
+}
+#activityMessageContentContainer{
+    border-left: 3px solid var(--base-color);
+    padding-left: 20px;
+}
 @media only screen and (max-width: 600px) {
     #eventFilterContainer{
         display: flex;

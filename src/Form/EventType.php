@@ -68,7 +68,7 @@ class EventType extends AbstractType
                 'required' => true,
             ])
             ->add('preparationInfos', TextareaType::class, [
-                'label' => "Les informations importantes pour préparer l'événement (Complémentaires)",
+                'label' => "Les informations importantes  - Complémentaires au message standard",
                 'required' => false,
                 'attr' => [
                     'rows' => '5' , 
@@ -185,8 +185,7 @@ class EventType extends AbstractType
             ])
             ->add('activityMessage', EntityType::class, [
                 'class' => ActivityMessage::class,
-                'label' => "Les informations importantes pour préparer l'événement (Informations pré-fabriquées)",
-                'help' => 'Sélectionnez un message lié à cette activité.',
+                'label' => "Les informations importantes - Message standard",
                 'choice_label' => 'name', // Définit le label affiché dans la liste déroulante
                 'attr' => ['class' => 'form-control'], // Ajout de classe pour un style Bootstrap
                 'required' => false, // Pas obligatoire
