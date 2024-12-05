@@ -32,6 +32,7 @@ class EventType extends AbstractType
         $selectedActivity = $options['selected_activity'];
         $creationDate = $options['creation_date'];
         $isPassed = $options['is_passed'];
+        $activityByDefault =$options['activity_by_default'];
 
         $builder
             ->add('isCanceled', CheckboxType::class, [
@@ -67,7 +68,7 @@ class EventType extends AbstractType
                 'required' => true,
             ])
             ->add('preparationInfos', TextareaType::class, [
-                'label' => "Les informations importantes pour préparer l'événement ",
+                'label' => "Les informations importantes pour préparer l'événement (Complémentaires)",
                 'required' => false,
                 'attr' => [
                     'rows' => '5' , 
@@ -135,7 +136,6 @@ class EventType extends AbstractType
                 'widget' => 'single_text',
                 'required' => false,
             ])
-
             ->add('activity', EntityType::class, [
                 'class' => Activity::class,
                 'label' => "Rattacher à un type d'activité *",
@@ -185,16 +185,24 @@ class EventType extends AbstractType
             ])
             ->add('activityMessage', EntityType::class, [
                 'class' => ActivityMessage::class,
-                'label' => 'Message associé à l\'activité',
+                'label' => "Les informations importantes pour préparer l'événement (Informations pré-fabriquées)",
                 'help' => 'Sélectionnez un message lié à cette activité.',
                 'choice_label' => 'name', // Définit le label affiché dans la liste déroulante
                 'attr' => ['class' => 'form-control'], // Ajout de classe pour un style Bootstrap
                 'required' => false, // Pas obligatoire
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('am')
-                        ->orderBy('am.name', 'ASC'); // Trier les messages par nom
+                'query_builder' => function (EntityRepository $er) use ($activityByDefault) {
+                    if (!empty($activityByDefault)) {
+                        return $er->createQueryBuilder('am')
+                            ->where('am.activity = :activity') 
+                            ->setParameter('activity', $activityByDefault)
+                            ->orderBy('am.name', 'ASC'); 
+                    } else {
+                        // Si aucune activité n'est disponible, on retourne une requête vide
+                        return $er->createQueryBuilder('am')
+                            ->where('1 = 0'); // Empêche tout résultat
+                    }
                 },
-            ])           
+            ])         
             ->add('mainPictureFile', FileType::class, [
                 'label' => 'Image principale',
                 'label_attr' => [
@@ -329,6 +337,7 @@ class EventType extends AbstractType
             'selected_activity' => null,
             'creation_date' => null,
             'is_passed' => null,
+            'activity_by_default' => null,
         ]);
     }
 }

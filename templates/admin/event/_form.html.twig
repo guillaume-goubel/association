@@ -6,6 +6,7 @@
 <div id="eventCanceledStatus" data-param="{{ event.getisCanceled|number_format }}"></div>
 <div id="getActivitiesByUserPARAM" data-path="{{ path('admin_event_change_activities')}}"></div>
 <div id="getViewTypePARAM" data-param="admin_event_form"></div>
+<div id="getActivityMessageByActivityPARAM" data-path="{{ path('admin_event_message_activity')}}"></div>
 {# ! DATA FOR JS **************************************************************************** #}
 
 {{ form_start(form)}}
@@ -127,26 +128,10 @@
         <div class="col-12 mt-1">
             {{ form_row(form.description) }}
         </div>
-        <div class="col-12 mt-4">
-            {# ACTIVITY PREPARATION MESSAGES  #}
-
-            {# {% if activityByDefault is not empty %}
-                <div class="col-12 blog-standard mb-2">
-                    <div class="row gy-2"> <!-- gy-2 ajoute un espacement vertical entre les colonnes sur mobile -->
-                        <div class="col-12 col-md-3">
-                            <select name="activityMessageChoice" class="form-select form-select-sm" aria-label="">
-                                
-                                <option value="">...</option>
-                                {% for activityMessage in activityByDefault.activityMessages %}
-                                    <option value="{{activityMessage.id}}">{{activityMessage.name}}</option>
-                                {% endfor %}
-                                
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            {% endif %} #}
-            
+        <div class="col-12 mt-4">            
+            {{ form_row(form.activityMessage) }}
+        </div>
+        <div class="col-12 mt-4">            
             {{ form_row(form.preparationInfos) }}
         </div>
     </div>

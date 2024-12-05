@@ -168,23 +168,24 @@ class EventController extends AbstractController
                     array_push($userActivityArray, $activity->getId());
                 }
             }
+
+            $activityByDefault = $activityRepository->getFirstActivityByUser('all');
+
         }else{
             foreach ($activityRepository->findBy(["isEnabled" => 1], ['ordering' => 'ASC']) as $activity) {
                 if ($activity->isActivityInUserControl($user) === true) {
                     array_push($userActivityArray, $activity->getId());
                 }
             }
-        }
 
-        if (!empty($userActivityArray)) {
-            $activityDefaultListId = $userActivityArray[0];
-            $activityByDefault = $activityRepository->findOneBy(['id' => $activityDefaultListId]);
+            $activityByDefault = $activityRepository->getFirstActivityByUser($user->getId());
         }
 
         $form = $this->createForm(EventType::class, $event, [
             'activity_ids' => $userActivityArray,
             'selected_activity' => $activityChoice,
             'creation_date' => $creationDate,
+            'activity_by_default' => $activityByDefault
         ]);
         
         $form->handleRequest($request);
@@ -207,8 +208,7 @@ class EventController extends AbstractController
         return $this->render('admin/event/new.html.twig', [
             'event' => $event,
             'form' => $form,
-            'activityChoice' => $activityChoice,
-            'activityByDefault' => $activityByDefault,
+            'activityChoice' => $activityChoice
         ]);
     }
 
@@ -403,6 +403,31 @@ class EventController extends AbstractController
         }
         
         return new JsonResponse();
+    }
+
+    #[Route('/message/activity', name: 'message_activity', methods: ['POST'])]
+    public function getActivityMessageByActivityPARAM(Request $request, ActivityRepository $activityRepository): JsonResponse
+    {
+        $activityId = $request->request->get('activityId');
+        $activity = $activityRepository->findOneBy(['id' => $activityId]);
+
+        if (!$activity) {
+            return new JsonResponse(['error' => 'Event not found'], 404);
+        }
+
+        $activityMessages = $activity->getActivityMessages();
+
+        $activityMessagesArray = [];
+        foreach ($activityMessages as $activityMessage) {
+            $activityMessagesArray [ ] = [
+                'id'=> $activityMessage->getId(),
+                'name'=> $activityMessage->getName(),
+                'description'=> $activityMessage->getDescription(),
+            ];
+        }
+
+        // Retourne la réponse JSON avec la liste des activités
+        return new JsonResponse(['activityMessagesArray' => $activityMessagesArray]);
     }
 
 }

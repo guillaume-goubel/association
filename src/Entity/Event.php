@@ -108,6 +108,9 @@ class Event
     #[ORM\Column]
     private ?bool $isCanceled = false;
 
+    #[ORM\ManyToOne(inversedBy: 'events')]
+    private ?ActivityMessage $activityMessage = null;
+
     public function __construct()
     {
         $this->animators = new ArrayCollection();
@@ -476,6 +479,18 @@ class Event
     public function setIsCanceled(bool $isCanceled): self
     {
         $this->isCanceled = $isCanceled;
+
+        return $this;
+    }
+
+    public function getActivityMessage(): ?ActivityMessage
+    {
+        return $this->activityMessage;
+    }
+
+    public function setActivityMessage(?ActivityMessage $activityMessage): static
+    {
+        $this->activityMessage = $activityMessage;
 
         return $this;
     }

@@ -40,6 +40,25 @@ class ActivityRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
+    public function getFirstActivityByUser(?string $userChoice = null): ?Activity
+    {
+        $stmt = $this->createQueryBuilder('a')
+            ->where('a.isEnabled = :isEnabled')
+            ->setParameter('isEnabled', true);
+    
+        if ($userChoice && $userChoice !== 'all') {
+            $stmt->innerJoin('a.users', 'u')
+                ->andWhere('u.id = :userId')
+                ->setParameter('userId', $userChoice);
+        }
+    
+        // Ajout d'un tri et d'une limite pour obtenir la première activité
+        $stmt->orderBy('a.name', 'ASC')
+            ->setMaxResults(1);
+    
+        return $stmt->getQuery()->getOneOrNullResult();
+    }
+
     /**
      * Récupère les activités par mois et année des événements associés.
      *
