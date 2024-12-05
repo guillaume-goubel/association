@@ -64,10 +64,17 @@ class Activity
     #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'activity')]
     private Collection $events;
 
+    /**
+     * @var Collection<int, ActivityMessage>
+     */
+    #[ORM\OneToMany(targetEntity: ActivityMessage::class, mappedBy: 'activity')]
+    private Collection $activityMessages;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->events = new ArrayCollection();
+        $this->activityMessages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -281,6 +288,36 @@ class Activity
     public function setIsActivityInUserControl(bool $isActivityInUserControl): static
     {
         $this->isActivityInUserControl = $isActivityInUserControl;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ActivityMessage>
+     */
+    public function getActivityMessages(): Collection
+    {
+        return $this->activityMessages;
+    }
+
+    public function addActivityMessage(ActivityMessage $activityMessage): static
+    {
+        if (!$this->activityMessages->contains($activityMessage)) {
+            $this->activityMessages->add($activityMessage);
+            $activityMessage->setActivity($this);
+        }
+
+        return $this;
+    }
+
+    public function removeActivityMessage(ActivityMessage $activityMessage): static
+    {
+        if ($this->activityMessages->removeElement($activityMessage)) {
+            // set the owning side to null (unless already changed)
+            if ($activityMessage->getActivity() === $this) {
+                $activityMessage->setActivity(null);
+            }
+        }
 
         return $this;
     }

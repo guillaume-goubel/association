@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ activityMessage.id) }}">
+    <a href="#" data-bs-toggle="modal" data-bs-target="#activity-message-deleteModal-{{ activityMessage.id }}" class="btn"><i class="fa-solid fa-trash-can text-red me-2"></i>Effacer</a>
+</div>
+
+<div class="modal fade" id="activity-message-deleteModal-{{ activityMessage.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title fs-14">Confirmer la suppression ?</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer ">
+            <button type="button" class="btn btn-small" data-bs-dismiss="modal">Annuler</button>
+            <a href="{{ path('admin_activity_message_delete', {'id': activityMessage.id}) }}"
+                class="btn btn-small btn-red btn-round-edge-large border-1 w-30">
+                Supprimer
+            </a>
+        </div>
+        </div>
+    </div>
+</div>

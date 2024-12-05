@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+
+    {{ parent() }}
+
+    <!-- start header -->
+	{% include 'admin/partials/parts/_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section -->
+    <section class="main-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                
+                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                    <div class="row blog-details d-flex align-items-center"> 
+                        <div class="col-8">
+                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+                        </div>
+
+                        <div class="col-8 d-flex align-items-center">
+                            <div class="feature-box-icon mt-0" style="background-color:{{activity.color}};height:55px;width:55px;">
+                                <div>
+                                    {% if activity.pictureType == "image" %}
+                                        <img class="my-2" style="width: 30px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                                    {% else %}
+                                        <i class="{{ activity.picture }} align-middle icon-medium text-white my-3"></i>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="fs-22 fw-600 text-dark-gray ms-2">
+                                {{ activity.name}}
+                            </div>
+                        </div>
+
+                        <div class="admin-action col-3 d-flex justify-content-end">
+                            <a class="ms-8" href="{{ path('admin_activity_index') }}"><i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i></a>
+                            <a class="ms-8" href="{{ path('admin_activity_message_new') }}?activityId={{activity.id}}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-1">
+                <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">
+                    Liste des messages pré-fabriqués pour préparer les événements
+                    <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-2">
+                <div style="min-height:40vh;" class="d-flex flex-column align-items-center">
+                    <div class="row mb-50px sm-mb-30px d-flex justify-content-center col-12 col-md-8">
+                        
+                        {% if activityMessages is not empty %}
+                            {% for activityMessage in activityMessages %}
+                                {% include 'admin/activity_message/partials/components/_activity_message_card.html.twig' %}
+                            {% endfor %}
+                        {% else %}
+                            <div class="no-matching-search-message">Il n'y a pas de messages d'informations pour cette activité</div>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- end section -->
+
+    <!-- start footer -->
+    {% include 'main_partials/parts/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+</body>
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    
+    {% block importmap %}
+        {{ importmap(['app', 'base', 'admin-activity']) }}
+    {% endblock %}
+
+{% endblock %}

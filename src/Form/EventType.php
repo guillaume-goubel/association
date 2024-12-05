@@ -7,6 +7,7 @@ use App\Entity\Event;
 use App\Entity\Activity;
 use App\Entity\Animator;
 use App\Validator\DateRange;
+use App\Entity\ActivityMessage;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -181,7 +182,19 @@ class EventType extends AbstractType
                         ->setParameter('role', '%ROLE_ADMIN%')  // Recherche la chaîne 'ROLE_ADMIN' dans la colonne roles
                         ->orderBy('u.lastName', 'ASC'); // Vous pouvez aussi trier par firstName ou lastName
                 },
-            ])            
+            ])
+            ->add('activityMessage', EntityType::class, [
+                'class' => ActivityMessage::class,
+                'label' => 'Message associé à l\'activité',
+                'help' => 'Sélectionnez un message lié à cette activité.',
+                'choice_label' => 'name', // Définit le label affiché dans la liste déroulante
+                'attr' => ['class' => 'form-control'], // Ajout de classe pour un style Bootstrap
+                'required' => false, // Pas obligatoire
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('am')
+                        ->orderBy('am.name', 'ASC'); // Trier les messages par nom
+                },
+            ])           
             ->add('mainPictureFile', FileType::class, [
                 'label' => 'Image principale',
                 'label_attr' => [

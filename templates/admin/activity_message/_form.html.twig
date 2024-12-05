@@ -1,0 +1,42 @@
+{{ form_start(form)}}
+    
+    {% if activity != null %}
+        <div class="col-8 d-flex align-items-center">
+            <div class="feature-box-icon mt-0" style="background-color:{{activity.color}};height:55px;width:55px;">
+                <div>
+                    {% if activity.pictureType == "image" %}
+                        <img class="my-2" style="width: 30px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
+                    {% else %}
+                        <i class="{{ activity.picture }} align-middle icon-medium text-white my-3"></i>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="fs-22 fw-600 text-dark-gray ms-2">
+                {{ activity.name}}
+            </div>
+        </div>
+    {% endif %}
+    
+    <div class="row d-flex">
+        <div class="col-12 mt-2">
+            {{ form_row(form.name) }}
+        </div>
+    </div>
+    
+    <div class="row d-flex">
+        <div class="col-12 mt-2">
+            {{ form_row(form.description) }}
+        </div>
+    </div>
+
+    {# {% if is_granted('ROLE_SUPER_ADMIN') %} #}
+        <div class="row d-flex justify-content-center mt-5">
+            <button type="submit" class="btn btn-medium btn-base-color left-icon d-table d-lg-inline-block lg-mb-15px md-mx-auto border-radius-30px">{{ button_label|default('Enregistrer') }}</button>
+        </div>
+    {# {% endif %} #}
+
+{{ form_end(form) }}
+
+
+

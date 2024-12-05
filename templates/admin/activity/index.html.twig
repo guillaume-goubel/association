@@ -61,7 +61,7 @@
                                 
                                 <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span>
                             </div>
-                            <div class="row mb-50px sm-mb-30px">
+                            <div class="row mb-50px sm-mb-30px activity-card-container">
                                 
                                 {% for activity in userActivityArray %}
                                     {% include 'admin/activity/partials/components/_activity_card.html.twig' %}
@@ -87,7 +87,7 @@
                         
                         {% endif %}
 
-                        <div class="row mb-50px sm-mb-30px">
+                        <div class="row mb-50px sm-mb-30px activity-card-container">
                             
                             {% for activity in noUserActivityArray %}
                                 {% include 'admin/activity/partials/components/_activity_card.html.twig' %}

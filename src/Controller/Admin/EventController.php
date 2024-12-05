@@ -145,7 +145,7 @@ class EventController extends AbstractController
         $event = new Event();
         $user = $this->getUser();
         $userActivityArray = [];
-        $activityChoice = null;
+        $activityChoice = $activityByDefault = null;
         $activityId = $request->query->get('activityId') ?? null;
         if ($activityId){
             $activityChoice = $activityRepository->findOneBy(['id' => $activityId]);
@@ -176,6 +176,11 @@ class EventController extends AbstractController
             }
         }
 
+        if (!empty($userActivityArray)) {
+            $activityDefaultListId = $userActivityArray[0];
+            $activityByDefault = $activityRepository->findOneBy(['id' => $activityDefaultListId]);
+        }
+
         $form = $this->createForm(EventType::class, $event, [
             'activity_ids' => $userActivityArray,
             'selected_activity' => $activityChoice,
@@ -202,6 +207,8 @@ class EventController extends AbstractController
         return $this->render('admin/event/new.html.twig', [
             'event' => $event,
             'form' => $form,
+            'activityChoice' => $activityChoice,
+            'activityByDefault' => $activityByDefault,
         ]);
     }
 
