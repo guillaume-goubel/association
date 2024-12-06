@@ -30,6 +30,7 @@
 .trainer-box{
     padding-left:11px;
 }
+/* IMAGES ----------------------------------------------------------------------------*/
 /* Initialement caché */
 .gallery-container {
     opacity: 0;
@@ -69,5 +70,17 @@
 @media only screen and (max-width: 600px) {
     .animator-item {
       justify-content: start;
+    }
+  }
+@media only screen and (min-width: 600px) {
+    #main-container{
+        padding: 5rem;
+    }
+    .event-photos{
+        width: 222px;
+        height: 125px;
+    }
+    .animator-container{
+        justify-content: end;
     }
   }

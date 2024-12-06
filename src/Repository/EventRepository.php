@@ -105,6 +105,22 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findLastEventsforUser(int $limit): array
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+
+        return $this->createQueryBuilder('e')
+            ->andWhere('e.isEnabled = TRUE')
+            ->andWhere('e.isCanceled = FALSE')
+            ->andWhere('e.dateEndAt > :today')
+            ->setParameter('today', $today)
+            ->orderBy('RAND()') 
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
     public function getEventListforAgenda(string $yearChoice, string $monthChoice, string $activityChoice):Query
     {
         $today = new \DateTime();

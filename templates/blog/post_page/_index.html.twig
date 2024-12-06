@@ -1,0 +1,251 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+{% endblock %}
+
+{% block body %}
+
+<body data-mobile-nav-style="classic">
+
+    {# ! PARAM**************************************************************************** #}
+    <div id="rdvAddressElmt" data-param="{{ event.rdvAddress }} -- {{ event.rdvPlaceName }}"></div>    
+    <div id="latElmt" data-param="{{ event.rdvLatitude }}"></div>    
+    <div id="longElmt" data-param="{{ event.rdvLongitude }}"></div>
+    {# ! PARAM**************************************************************************** #}   
+    
+    {{ parent() }}
+    
+    <!-- start header -->
+	{% include 'blog/partials/_blog_header.html.twig' %}
+	<!-- end header -->
+
+    <!-- start section -->
+    <section class="main-section bg-very-light-gray">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8 blog-standard md-mb-50px sm-mb-40px px-5">
+
+                    <div class="col-12 blog-details mb-12"> 
+
+                        <div class="entry-meta mb-20px fs-15">
+                            <div style="position:relative;" class="row d-flex mb-3">
+                                {# EDIT BUTTON #}
+                                {% include "admin/partials/components/_event_actions_card.html.twig" with {'isEventActionsButtonVisible': true} %}
+                                
+                                <div class="col-12 col-md-5">
+                                    
+                                    <div class="fs-20 fw-600 text-base-color d-flex align-items-center mb-2 ">
+                                        <div>{{event.activity.name}}</div>
+                                        {# LOGO #}
+                                        <div style="width:50px;" class="col-6 pe-sm-0 mx-3">
+                                            <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
+                                                {% if event.activity.pictureType == "image" %}
+                                                    <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
+                                                {% else %}
+                                                    <i class="{{ event.activity.picture }} align-middle icon-medium text-white my-3"></i>
+                                                {% endif %}
+                                            </div>
+                                            <div class="fs-18 event-distance px-1">
+                                                {% if event.eventDistance != null %}
+                                                    {{event.eventDistance}} Km
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {% if event.isMultiDay %}
+                                        <div class="fs-14 mb-2">
+                                            Evénenement sur plusieurs jours
+                                        </div>
+                                    {% endif %}
+
+                                    <div class="d-flex">
+
+                                        {# DATE #}
+                                        <div class="d-flex flex-column">
+                                            <time class="text-center post-date border-radius-3px bg-medium-gray text-white fw-500 d-flex align-items-center p-2">
+                                                <span class="w-50px me-0 {{ (event.isMultiDay) ? '' : ' d-none ' }}">Du </span><span class="month d-block lh-24 text-uppercase w-170px">{{event.dateStartAt|format_date( (event.isMultiDay) ? 'medium' : 'full' ,  locale= 'fr')}}</span>
+                                            </time>
+                                            {% if event.isMultiDay %}
+                                                <time class="text-center post-date border-radius-3px bg-medium-gray text-white fw-500 d-flex align-items-center p-2 mt-2">
+                                                    <span class="w-50px me-0">Au </span><span class="month d-block lh-24 text-uppercase w-170px">{{event.dateEndAt|format_date('medium',  locale= 'fr')}}</span>
+                                                </time>
+                                            {% endif %}
+                                        </div>
+
+                                    </div>
+
+                                    <div><i class="feather icon-feather-map-pin me-5px mt-6"></i><span class="fs-18">{{event.cityPlace}}</span></div>
+                                    
+                                    {% if is_passed == false %}
+                                        <div class="me-5">
+                                            <span class="me-3"><i class="feather icon-feather-clock me-5px"></i>Début : <span class="fs-18">{{event.timeStartAt|date('H:i')}}</span></span>
+                                            {% if event.timeEndAt != null %}
+                                                <span class="me-1">Fin : <span class="fs-18">{{event.timeEndAt|date('H:i')}}</span></span>
+                                            {% endif %}
+                                        </div>
+                                    {% endif %}  
+
+                                </div>
+                                
+                                <div class="col-12 col-md-7 d-flex flex-column align-items-start mt-3">
+                                    <div class="trainer-box col-auto position-relative">
+                                        {% if event.animators is not empty %}
+                                            <ul class="p-0 m-0 list-style-02 animators-infos-link" data-id='{{ event.id }}' data-anime='{ "el": "childs", "translateY": [30, 0], "rotateY":[100, 0], "opacity": [0,1], "duration": 800, "delay": 0, "staggervalue": 150, "easing": "easeOutQuad" }'>
+                                                {% for animator in event.animators %}
+                                                    <li class="animator-item my-1 d-flex align-items-center">
+                                                        
+                                                        {% if animator.picture != null %}
+                                                            <div class="feature-box-icon me-15px">
+                                                                <img class="border-radius-50" style="width: 45px;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" class="w-75px" alt=""/>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="feature-box-icon me-15px">
+                                                                <img style="width: 40px;" src="{{ customAsset('app/default-avatar.png')}}" alt="">
+                                                            </div>
+                                                        {% endif %}
+                                                        
+                                                        <div>
+                                                            <div class="ms-2 animator-item-name">{{animator.firstName|capitalize}} {{animator.lastName|upper}}</div>
+                                                        </div>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {# MAP #} 
+                        {% if (is_passed == 'false' or is_passed == '0') and (event.rdvLatitude != null and event.rdvLongitude != null) %}
+                            <div class="text-medium-gray mb-2 mt-1 d-flex p-2" style="background-color: white;">
+                                <div class="col-12">
+                                    <div class="fs-13 mb-2">
+                                        <span>
+                                            <a class="btn btn-extra-small fw-600 btn-rounded with-rounded btn-white btn-box-shadow d-table d-lg-inline-block lg-mb-15px md-mx-auto" href="https://www.google.com/maps?q={{event.rdvLatitude}},{{event.rdvLongitude}}" target="_blank">
+                                            <img width="36px" src="{{ asset('app/google_maps_logo.png')}}" alt=""></a>
+                                        </span>
+                                        Lieu du rendez-vous : 
+                                        <span class="fw-600">{{ event.rdvAddress }} {{ event.rdvPlaceName }}</span>
+                                    </div>
+                                    <div id="map" style="z-index: 9;position: relative;">
+                                        <div id="mapOverlay">
+                                            <div id="zoomNotification">Appuyez sur <strong>Ctrl</strong> et utilisez la molette pour zoomer OU passez en plein écran</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        {# IMAGE GALLERY #} 
+                        {% if event.mainPicture != null or event.picture2 != null or event.picture2 != null %}
+                            <div class="container-fluid p-0 gallery-container">
+                                <ul class="image-gallery-style-01 mb-2 gallery-wrapper grid grid-3col xxl-grid-3col xl-grid-3col lg-grid-3col md-grid-2col sm-grid-2col xs-grid-1col gutter-small">
+                                    <li class="grid-sizer"></li> 
+                                    
+                                    {% if event.mainPicture != null %}
+                                        <li class="grid-item transition-inner-all">
+                                            <div class="gallery-box">
+                                                <a href="{{ customAsset('data/uploads/event/photos/' ~ event.mainPicture) }}" data-group="lightbox-gallery" title="">
+                                                    <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                        <img src="{{ customAsset('data/uploads/event/photos/' ~ event.mainPicture) }}" alt="" />
+                                                        <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                            <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                                <i class="feather icon-feather-search text-white icon-small"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if event.picture2 != null %}
+                                        <li class="grid-item transition-inner-all">
+                                            <div class="gallery-box">
+                                                <a href="{{ customAsset('data/uploads/event/photos/' ~ event.picture2) }}" data-group="lightbox-gallery" title="">
+                                                    <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                        <img src="{{ customAsset('data/uploads/event/photos/' ~ event.picture2) }}" alt="" />
+                                                        <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                            <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                                <i class="feather icon-feather-search text-white icon-small"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+
+                                    {% if event.picture3 != null %}
+                                        <li class="grid-item transition-inner-all">
+                                            <div class="gallery-box">
+                                                <a href="{{ customAsset('data/uploads/event/photos/' ~ event.picture3) }}" data-group="lightbox-gallery" title="">
+                                                    <div class="position-relative gallery-image bg-white overflow-hidden">
+                                                        <img src="{{ customAsset('data/uploads/event/photos/' ~ event.picture3) }}" alt="" />
+                                                        <div class="d-flex align-items-center justify-content-center position-absolute top-0px left-0px w-100 h-100 gallery-hover move-bottom-top">
+                                                            <div class="d-flex align-items-center justify-content-center w-50px h-50px rounded-circle bg-dark-gray">
+                                                                <i class="feather icon-feather-search text-white icon-small"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                    
+                                </ul>
+                            </div>
+                        {% endif %}
+                        
+                        {% if event.name != null %}
+                            <h5 class="text-dark-gray fw-600 w-80 sm-w-100 fs-22 mb-1 mt-3">{{event.name}}</h5>
+                        {% endif %}
+
+                        {# TEXT PRESENTATION #}
+                        <div class="row">
+                            {% if event.description != null %}
+                                <p class="card-text preformatted fs-14">{{event.description|raw}}</p>
+                            {% endif %}
+
+                            {% if is_passed == false and event.preparationInfos != null %}   
+                                <blockquote class="alt-font border-4 border-start border-color-base-color text-dark-gray fw-500 ps-40px mt-4 mb-4 ms-60px lg-ms-30px sm-ms-0 lg-ps-30px">
+                                    <footer class="fs-14 fw-600 text-base-color d-inline-block text-uppercase">Informations importantes pour la préparation de l'événement</footer>
+                                    <p class="card-text preformatted">{{event.preparationInfos|raw}}</p>
+                                </blockquote>
+                            {% endif %}
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- start footer -->
+    {% include 'main_partials/parts/_footer_minimum.html.twig' %}
+    <!-- end footer -->
+
+</body>
+<!-- end subscription popup -->
+
+{% endblock %}
+
+{% block baseJavascripts %}
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+
+    {% block importmap %}
+        {{ importmap(['app', 'base', 'blog']) }}
+    {% endblock %}
+
+{% endblock %}

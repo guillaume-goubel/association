@@ -1,13 +1,3 @@
-.feature-box-icon {
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 10px;
-    width: 70px;
-    border-radius: 50%;
-}
-
 .popular-post-sidebar li .media-body {
     line-height: normal;
     padding-left: 5px;
@@ -88,12 +78,6 @@
       width: 100%;
     }
   }
-
-.feature-box-icon{
-    width: 55px;
-    height: 55px;
-}
-
 /* KPIs */
 .kpi-card{
     box-shadow: 3px 4px 8px 2px rgba(0,0,0,0.5);

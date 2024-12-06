@@ -374,6 +374,18 @@ footer .elements-social ul li:last-child {
     font-weight: 600;
     padding-right: 13px;
 }
+.feature-box-icon{
+    height: 55px;
+    width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 22px;
+    border-radius: 50%;
+}
+.popular-post-sidebar li figure{
+    width: 70px;
+}
 /* map */
 .infowindow .mb-3 {
     font-weight: 500;
