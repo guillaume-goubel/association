@@ -20,7 +20,6 @@ class AgendaController extends AbstractController
         $yearChoice = $request->query->get('yearChoice') ?? date("Y");
         $monthChoice = $request->query->get('monthChoice') ?? 'all';
 
-        dump($yearChoice, $monthChoice);
         $activityChoice = $request->query->get('activityChoice') ?? "all";
 
         // Distinct month / year createdAt for select

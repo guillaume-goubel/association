@@ -19692,7 +19692,8 @@
   header .navbar-brand .mobile-logo {
     visibility: visible !important;
     opacity: 1 !important;
-    width: auto !important;
+    /* width: auto !important; */
+    width: 5rem !important;
   }
   header .navbar-brand .mobile-logo:focus {
     outline: none;
@@ -19701,13 +19702,13 @@
     outline: none;
   }
   header.sticky .navbar-brand {
-    padding: 22px 0;
+    padding: 8px 0;
   }
   header.sticky .navbar-nav .nav-link {
     color: var(--dark-gray);
   }
   header.sticky .fixed-header .navbar-brand, header.sticky .disable-fixed .navbar-brand {
-    padding: 22px 0;
+    padding: 8px 0;
   }
   header.sticky.sticky-active .navbar-brand .default-logo, header.sticky.sticky-active .navbar-brand .alt-logo {
     visibility: hidden;

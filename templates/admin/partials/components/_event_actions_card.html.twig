@@ -11,12 +11,14 @@
             </div>
         {% endif %}
 
-        {% if event.user.id == app.user.id or is_granted('ROLE_SUPER_ADMIN') %}
-            <div class="event-action-container edit">
-                <a style="#" href="{{ path('admin_event_edit', { 'id': event.id}) }}?from={{ app.request.attributes.get('_route') }}" class="btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
-                    <i class="fa-solid fa-pen-to-square"></i>
-                </a>
-            </div>
+        {% if app.user %}
+            {% if event.user.id == app.user.id or is_granted('ROLE_SUPER_ADMIN') %}
+                <div class="event-action-container edit">
+                    <a style="#" href="{{ path('admin_event_edit', { 'id': event.id}) }}?from={{ app.request.attributes.get('_route') }}" class="btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                </div>
+            {% endif %}
         {% endif %}
 
     </div>

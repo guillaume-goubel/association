@@ -111,8 +111,9 @@ class EventRepository extends ServiceEntityRepository
         $today->setTime(0, 0);
 
         $stmt = $this->createQueryBuilder('e');
-        $stmt->join('e.activity', 'a');
-        $stmt->andWhere('e.dateStartAt >= :today');   
+        $stmt->leftjoin('e.activity', 'a');
+        $stmt->andWhere('e.dateStartAt >= :today');  
+        $stmt->andWhere('e.isEnabled = TRUE');
         $stmt->setParameter('today', $today);
 
         if ($yearChoice && $yearChoice != 'all') {

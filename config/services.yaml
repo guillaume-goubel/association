@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
     asset:
-        version: 19112024_1
+        version: 06122024_1
     media:
         event_photo_directory: '%kernel.project_dir%/public/data/uploads/event/photos'
         animator_photo_directory: '%kernel.project_dir%/public/data/uploads/animator/photos'
