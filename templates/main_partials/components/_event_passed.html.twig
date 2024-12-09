@@ -1,5 +1,5 @@
 <li class="grid-item">
-    <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': true }) }}" class="card border-0 border-radius-30px main-card-container-last-event activity-card">
+    <a href="{{ path('blog_index', { 'id': event.id }) }}" class="card border-0 border-radius-30px main-card-container-last-event activity-card">
         
         
         
@@ -19,7 +19,7 @@
                         {% endif %}
                     </div>
                     
-                    <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
+                    <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center border-radius-50 p-2">
                         {% if event.activity.pictureType == "image" %}
                             <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
                         {% else %}

@@ -38,7 +38,11 @@ label{
     display: flex;
     align-items: start;
     justify-content: space-between;
-    margin-bottom:20px;
+    margin-bottom:40px;
+}
+#eventFilterBtn a,
+#eventFilterBtn button{
+    width: 120px;
 }
 #event_activityMessage{
     width: 300px;
@@ -50,6 +54,9 @@ label{
 #activityMessageContentContainer{
     border-left: 3px solid var(--base-color);
     padding-left: 20px;
+}
+.main-section{
+    background-color: #F9F6F3;
 }
 @media only screen and (max-width: 600px) {
     #eventFilterContainer{

@@ -116,7 +116,7 @@
                         <ul class="popular-post-sidebar position-relative">
                             {% for event in lastEventCreated %}
                                 <li class="d-flex align-items-center mb-0">
-                                    <a class="d-flex align-items-center" href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed(), 'from': 'admin_index' }) }}">
+                                    <a class="d-flex align-items-center" href="{{ path('blog_index', { 'id': event.id, 'from': 'admin_index' }) }}">
                                         <figure>
                                             <div class="feature-box-icon" style="background-color:{{ event.activity.color }}">
                                                 {% if event.activity.pictureType == "image" %}

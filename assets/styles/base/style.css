@@ -123,10 +123,10 @@ section.extra-big-section {
   padding-top: 160px;
   padding-bottom: 160px;
 }
-img {
+/* img {
   max-width: 100%;
   height: auto;
-}
+} */
 ul li {
   list-style: none;
 }

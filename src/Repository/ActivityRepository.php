@@ -139,7 +139,8 @@ class ActivityRepository extends ServiceEntityRepository
     
         $stmt = $this->createQueryBuilder('a')
             ->innerJoin('a.events', 'e')
-            ->where('a.isEnabled = true');
+            ->where('a.isEnabled = true')
+            ->andWhere('e.isEnabled = TRUE');
     
         if ($yearChoice == 'yearDepth') {
             $yearDefault = (new \DateTime())->format('Y');

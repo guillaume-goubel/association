@@ -29,7 +29,7 @@
                         </div>
                         <div class="admin-action col-2 d-flex justify-content-end">
                             {% if app.request.get('from') == 'blog_index' %}
-                                <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed(), 'from': 'admin_event_edit' }) }}">
+                                <a href="{{ path('blog_index', { 'id': event.id, 'from': 'admin_event_edit' }) }}">
                                     <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
                                 </a>
                             {% else %}

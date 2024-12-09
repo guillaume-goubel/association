@@ -1,7 +1,39 @@
-<div class="col-lg-12 pt-20px pb-20px border-bottom border-color-dark-gray ">
+<div class="col-lg-12 pt-10px pb-10px border-bottom border-color-dark-gray ">
     <div class="row align-items-center">
         
-        <div class="col-md-2 text-center"><span class="fw-600 text-uppercase text-dark-gray">{{event.dateStartAt|format_date('medium',  locale= 'fr')}}</span></div>
+        {# ADMIN INFOS #}
+        <div class="col-12 pe-0">
+            <div class="d-flex fs-13 justify-content-end">
+                
+                <div>
+                {{ event.user.getCompleteNameByFirstLetterFirstName()}}
+                </div>
+                
+                <div class="d-flex align-items-center flex-column">
+                    <div class="ms-8 w-100px">{{ event.createdAt|date('d/m/Y')}}</div>
+                    
+                    {% if event.updatedAt != null  %}
+                        <div class="ms-5 w-100px">{{ event.updatedAt|date('d/m/Y')}}</div>
+                    {% else %}
+                        <div class="ms-5 w-100px">---</div>
+                    {% endif %}
+                </div>
+        
+            </div>
+        </div>
+        
+        <div class="col-md-1 text-center">
+            <div class="event-id-container event-list"># {{ event.id }}</div>
+        </div>
+
+        <div class="col-md-2 text-center">
+            <div class="fs-16 lh-20 ls-minus-05px text-dark-gray fw-600">
+                <span class="fs-10">du</span> {{event.dateStartAt|format_date('short',  locale= 'fr')}}
+            </div> 
+            <div class="fs-16 lh-20 ls-minus-05px text-dark-gray fw-600">
+                <span class="fs-10">au</span> {{event.dateEndAt|format_date('short',  locale= 'fr')}}
+            </div>
+        </div>
         
         <div class="col-md-3 col-xl-2">
             <div class="fs-13"><i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</div>
@@ -15,7 +47,7 @@
 
         <div class="col-md-5 col-xl-7 col-lg-6 d-flex justify-content-center justify-content-md-start position-relative">
             <div class="d-flex align-items-center">
-                <div style="width:36px;height:36px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center border-radius-50 p-2 me-2">
+                <div style="border-radius:50%;width:36px;height:36px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center border-radius-50 p-2 me-2">
                     {% if event.activity.pictureType == "image" %}
                         <img class="my-2" style="width: 20px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
                     {% else %}
@@ -30,9 +62,9 @@
                     <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
                         {% for animator in event.animators %}
                             {% if animator.picture != null %}
-                                <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
                             {% else %}
-                                <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
                             {% endif %}
                         {% endfor %}
                     </div>
@@ -77,7 +109,5 @@
 
         </div>
 
-
-        {# <div class="col-md-3 col-lg-2 d-flex justify-content-center align-items-center"><i class="bi bi-suit-heart-fill text-red icon-very-small lh-0px me-10px"></i><div class="fs-14 text-uppercase"><span class="fw-600 text-dark-gray">10K+</span> Likes</div></div> #}
     </div>
 </div>

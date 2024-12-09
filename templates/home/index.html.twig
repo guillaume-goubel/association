@@ -37,7 +37,7 @@
                         <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5 fs-15 text-dark-gray">{{ (nextUpcomingEvent.dateStartAt|date('Ymd') == 'now'|date('Ymd') ) ? 'Aujourd\'hui ' : 'Bientôt ' }}</strong><span class="fw-700 text-base-color">{{nextUpcomingEvent.dateStartAt|format_date('medium',  locale= 'fr')}} <span class="fs-14">à {{nextUpcomingEvent.timeStartAt|date('H:i')}}</span></span> 
                             <span class="ps-5 pe-2">{{nextUpcomingEvent.activity.name|capitalize}} à {{nextUpcomingEvent.cityPlace|capitalize}}</span> 
                         </div>
-                        <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index', { 'id': nextUpcomingEvent.id, 'is_passed': false }) }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-20 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
+                        <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index', { 'id': nextUpcomingEvent.id}) }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-20 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
                     </div>
                 </div>
             </section>
@@ -82,7 +82,7 @@
                                 {% endif %}
                             </p> #}
 
-                            <a href="{{ path('blog_index', { 'id': lastPastEvent.id, 'is_passed': true }) }}" class="btn btn-medium btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
+                            <a href="{{ path('blog_index', { 'id': lastPastEvent.id}) }}" class="btn btn-medium btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
                                 <span>
                                     <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
                                     <span><i class="feather icon-feather-arrow-right"></i></span>

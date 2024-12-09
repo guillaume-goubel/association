@@ -229,6 +229,9 @@ footer .elements-social ul li:last-child {
     transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide pour l'état normal */
     box-shadow: 0 13px 19px rgba(0, 0, 0, 0.2); /* Ombre légère par défaut */
 }
+.main-card-container.admin-view {
+    /* height: 470px; */
+}
 .no-hover:hover {
     color: inherit;
     background-color: inherit;
@@ -340,6 +343,29 @@ footer .elements-social ul li:last-child {
     margin-left:0!important;
     font-size:21px;
 }
+/* ----------------------------------------- */
+.event-id-container{
+    right: 15px;
+    position: absolute;
+    background-color: white;
+    padding: 4px 15px;
+    border: 1px solid;
+    font-size: 15px;
+    border-radius: 9px;
+    font-weight: 600;
+    top: -17px;
+}
+.event-id-container.event-list{
+    position: inherit;
+}
+/* Admin infos in card */
+.admin-infos-in-card-container{
+    position: absolute;
+    bottom: -40px;
+    left: 35px;
+    line-height: 1.4;
+}
+
 /* ----------------------------------------- */
 .form-select-sm{
     padding: 6px 25px;

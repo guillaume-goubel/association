@@ -1,4 +1,4 @@
-<div style="position:relative;" class="activity-card col-lg-3 col-md-8 md-mb-40px mb-3">
+<div style="position:relative;" class="activity-card col-lg-3 col-md-8 md-mb-40px mb-8">
     
     {# EDIT BUTTON #}
     {% include "admin/partials/components/_event_actions_card.html.twig" %}
@@ -14,7 +14,7 @@
     {% endif %}
     
     {# CONTENT #}
-    <div class="bg-white border border-radius-30px p-5 text-center main-card-container"> 
+    <div class="bg-white border border-radius-30px p-5 text-center main-card-container {{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible) ? ' admin-view ' : '' }}"> 
         <div class="d-flex">
             <div style="width:50px;position:relative;" class="col-6 pe-sm-0 me-3">
                 <div style="position: absolute;top: -7px;" class="event-distance px-1">
@@ -22,7 +22,7 @@
                         {{event.eventDistance}} Km
                     {% endif %}
                 </div>
-                <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
+                <div style="{{ (event.eventDistance != null) ? ' margin-top:22px; ' : '' }}height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center border-radius-50 p-2">
                     {% if event.activity.pictureType == "image" %}
                         <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
                     {% else %}
@@ -51,9 +51,9 @@
                         <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
                             {% for animator in event.animators %}
                                 {% if animator.picture != null %}
-                                    <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
                                 {% else %}
-                                    <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -71,7 +71,7 @@
             <li class="border-color-extra-medium-gray pt-15px pb-15px d-flex">
             <i class="feather icon-feather-clock me-5px"></i>
                 <div style="width:95px;" class="me-5 d-flex align-items-baseline">
-                    <div class="fs-11 me-1">Début :</div>
+                    <div class="fs-11 me-1"></div>
                     <div class="fs-14 fw-600">{{event.timeStartAt|date('H:i')}}</div>
                 </div>
 
@@ -98,10 +98,31 @@
             {# <li style="height:95px;overflow:auto;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14"></li> #}
             <li class="d-flex justify-content-center">
                 <div class="pricing-footer w-70" style="height:35px;">
-                    <a href="{{ path('blog_index', { 'id': event.id, 'is_passed': event.isPassed() }) }}" class="btn btn-very-small btn-transparent-base-color btn-round-edge-large border-1 w-100">Plus d'informations</a>
+                    <a href="{{ path('blog_index', { 'id': event.id }) }}" class="btn btn-very-small btn-transparent-base-color btn-round-edge-large border-1 w-100">Plus d'informations</a>
                 </div>
             </li>
         </ul>
     </div>
+
+    {# AMIN INFOS #}
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible %}
+        <div class="admin-infos-in-card-container d-flex flex-column fs-13">
+            
+            <div>{{ event.user.getCompleteNameByFirstLetterFirstName()}}</div>
+            
+            <div class="d-flex align-items-center">
+                <div class="w-100px">{{ event.createdAt|date('d/m/Y')}}</div>
+                
+                {% if event.updatedAt != null  %}
+                    <div class="ms-5 w-100px">
+                    {{ event.updatedAt|date('d/m/Y')}}
+                    </div>
+                {% else %}
+                    <div class="ms-5 w-100px">---</div>
+                {% endif %}
+            </div>
+    
+        </div>
+    {% endif %}
     
 </div>

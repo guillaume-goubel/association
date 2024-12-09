@@ -206,6 +206,7 @@ class EventRepository extends ServiceEntityRepository
 
         // Création d'un objet QueryBuilder
         $stmt = $this->createQueryBuilder('e');
+        $stmt->andWhere('e.isEnabled = TRUE');
         $stmt->leftjoin('e.activity', 'a');
         $stmt->leftjoin('e.animators', 'an');
         

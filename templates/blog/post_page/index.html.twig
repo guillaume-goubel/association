@@ -29,40 +29,21 @@
         <div id="main-container" class="container bg-white ">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8 blog-standard md-mb-50px sm-mb-40px">
+                    
                     <!-- start blog details  -->
                     <div class="col-12 blog-details mb-12"> 
                         
                         <div class="entry-meta mb-20px fs-15 row d-flex align-items-center pb-20px pt-20px row">
-                            {# <div><i class="text-dark-gray feather icon-feather-calendar"></i><a href="blog-grid.html">26 August 2023</a></div>
-                            <div class="d-flex">
-                                                    
-                                {% if event.animators is not empty %}
-                                    <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
-                                        {% for animator in event.animators %}
-                                            {% if animator.picture != null %}
-                                                <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
-                                            {% else %}
-                                                <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
-                                            {% endif %}
-                                        {% endfor %}
-                                    </div>
+
+                            <div class="col-12 mb-3">
+                                {% if event.isCanceled %}   
+                                    <div><span class="admin-activity-pills bg-alert fs-16">Annulé</span></div>
                                 {% endif %}
                             </div>
-                            <div><i class="text-dark-gray feather icon-feather-folder"></i><a href="blog-grid.html">Creative</a></div>  #}
-                            {# <div>
-                                <i class="text-dark-gray feather icon-feather-calendar"></i>
-                                {% if event.dateStartAt|date('Y-m-d') == "now"|date('Y-m-d') %}
-                                    Aujourd'hui
-                                {% else %}
-                                    {{ event.dateStartAt|format_date('medium', locale= 'fr') }}
-                                {% endif %}
-                            </div> #}
-                            
-                            
                             
                             <div class="col-12 col-md-7 d-flex">
-                                
-                                {# DATE #}
+
+                                {# DATE #}                                
                                 <div class="d-flex">
                                     <div class="d-flex flex-column">
                                         <time class="text-center post-date border-radius-1px bg-very-light-gray text-dark-gray fw-500 d-flex align-items-center p-2">
@@ -95,9 +76,9 @@
                                         <div class="avatar-stack animators-infos-link ps-4" data-id='{{ event.id }}'>
                                             {% for animator in event.animators %}
                                                 {% if animator.picture != null %}
-                                                    <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
                                                 {% else %}
-                                                    <img style="width: {{ (event.animators|length > 1) ? '50px' : '65px' }};border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
                                                 {% endif %}
                                             {% endfor %}
                                         </div>

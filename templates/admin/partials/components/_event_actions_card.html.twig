@@ -21,6 +21,10 @@
             {% endif %}
         {% endif %}
 
+        {% if app.user %}
+            <div class="event-id-container"># {{ event.id }}</div>
+        {% endif %}
+
     </div>
 
 {% endif %}
