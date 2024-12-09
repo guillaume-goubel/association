@@ -190,18 +190,39 @@ class ActivityRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = " SELECT DISTINCT(ea.animator_id) FROM `activity` as a 
-                 INNER JOIN event e
-                 ON e.activity_id = a.id
+                INNER JOIN event e
+                ON e.activity_id = a.id
  
-                 INNER JOIN event_animator ea 
-                 ON ea.event_id = e.id
+                INNER JOIN event_animator ea 
+                ON ea.event_id = e.id
  
-                 WHERE a.id = $activityId
+                WHERE a.id = $activityId
             ";
 
         $stmt = $conn->prepare($sql);
         $result = $stmt->executeQuery()->fetchAllAssociative();
         return $result;
+    }
+
+    public function getActivitiesByEvents(int $activityId): array
+    {
+        $today = new \DateTime();
+        $today->setTime(0, 0);
+    
+        // Construction de la requête
+        $stmt = $this->createQueryBuilder('a')
+            ->innerJoin('a.events', 'e') // Join entre Activity et Event
+            ->andWhere('a.id != :activityId') // Événements futurs
+            ->setParameter('activityId', $activityId)
+            ->andWhere('a.isEnabled = TRUE') // Activités activées
+            ->andWhere('e.isEnabled = TRUE') // Événements activés
+            ->andWhere('e.isCanceled = FALSE') // Événements non annulés
+            ->andWhere('e.dateEndAt > :today') // Événements futurs
+            ->setParameter('today', $today)
+            ->orderBy('a.name', 'ASC'); // Tri par nom de l'activité
+    
+        // Exécution et retour des résultats
+        return $stmt->getQuery()->getResult();
     }
 
 }

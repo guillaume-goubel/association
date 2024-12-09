@@ -85,8 +85,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // Fonction pour afficher les détails d'un événement
     function renderEventDetails(event, currentDate) {
-        const isPassed = new Date(event.start) < currentDate;
-        const pathComplete = `/blog/${event.extendedProps.id}/index?is_passed=${isPassed}`;
+        const pathComplete = `/blog/${event.extendedProps.id}/index`;
         const eventProps = event.extendedProps;
 
         if (eventProps.duration == 'long') {

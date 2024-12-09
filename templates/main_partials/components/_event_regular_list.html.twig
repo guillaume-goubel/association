@@ -15,7 +15,7 @@
 
         <div class="col-md-5 col-xl-7 col-lg-6 d-flex justify-content-center justify-content-md-start position-relative">
             <div class="d-flex align-items-center">
-                <div style="width:36px;height:36px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2 me-2">
+                <div style="width:36px;height:36px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center width:50px;position:relative;border-radius-50 p-2 me-2">
                     {% if event.activity.pictureType == "image" %}
                         <img class="my-2" style="width: 20px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
                     {% else %}

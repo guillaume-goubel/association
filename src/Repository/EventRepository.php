@@ -105,7 +105,7 @@ class EventRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function findLastEventsforUser(int $limit): array
+    public function findLastEventsforUser(int $limit, int $eventId): array
     {
         $today = new \DateTime();
         $today->setTime(0, 0);
@@ -115,6 +115,8 @@ class EventRepository extends ServiceEntityRepository
             ->andWhere('e.isCanceled = FALSE')
             ->andWhere('e.dateEndAt > :today')
             ->setParameter('today', $today)
+            ->andWhere('e.id != :eventId')
+            ->setParameter('eventId', $eventId)
             ->orderBy('RAND()') 
             ->setMaxResults($limit)
             ->getQuery()

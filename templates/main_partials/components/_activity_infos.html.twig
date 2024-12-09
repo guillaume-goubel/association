@@ -6,7 +6,7 @@
 
             <div class=" col-12 col-md-8 d-flex justify-content-start align-items-center mb-4">
                 <div style="width:50px;" class="col-6 pe-sm-0 me-3">
-                    <div style="height:50px;background-color:{{activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
+                    <div style="height:50px;background-color:{{activity.color}}" class="d-flex align-items-center justify-content-center border-radius-50 p-2">
                         {% if activity.pictureType == "image" %}
                             <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ activity.picture )}}" alt="">
                         {% else %}

@@ -86,16 +86,12 @@
                                         <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin d-flex">
                                             
                                             {% if admin.animator != null %}
-                                                <a href="{{ path('admin_animator_edit', { 'id':admin.animator.id, 'from':"admin_administrator_index" }) }}" class="feature-box-icon col-12 col-md-2">
+                                                <a href="{{ path('admin_animator_edit', { 'id':admin.animator.id, 'from':"admin_administrator_index" }) }}" class="feature-box-icon col-12 col-md-2 d-flex flex-column w-100px">
                                                     
                                                     {% if admin.animator.picture != null %}
-                                                        <div>
-                                                            <img class="border-radius-50" style="width: 70px;" src="{{ customAsset('data/uploads/animator/photos/' ~ admin.animator.picture ) }}" class="w-75px" alt=""/>
-                                                        </div>
+                                                        <img class="border-radius-50 admin-action" style="width: 70px;" src="{{ customAsset('data/uploads/animator/photos/' ~ admin.animator.picture ) }}" class="w-75px" alt=""/>
                                                     {% else %}
-                                                        <div>
-                                                            <img style="width: 65px;" src="{{ customAsset('app/default-avatar.png')}}" alt="">
-                                                        </div>
+                                                        <img style="width: 65px;" class="admin-action" src="{{ customAsset('app/default-avatar.png')}}" alt="">
                                                     {% endif %}
                                                     
                                                     <div class="fs-13 fw-600 text-gray">Animateur</div> 

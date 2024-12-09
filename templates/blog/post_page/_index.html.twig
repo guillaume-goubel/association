@@ -43,6 +43,11 @@
                                         <div>{{event.activity.name}}</div>
                                         {# LOGO #}
                                         <div style="width:50px;" class="col-6 pe-sm-0 mx-3">
+                                            <div class="fs-18 event-distance px-1">
+                                                {% if event.eventDistance != null %}
+                                                    {{event.eventDistance}} Km
+                                                {% endif %}
+                                            </div>
                                             <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
                                                 {% if event.activity.pictureType == "image" %}
                                                     <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
@@ -50,11 +55,7 @@
                                                     <i class="{{ event.activity.picture }} align-middle icon-medium text-white my-3"></i>
                                                 {% endif %}
                                             </div>
-                                            <div class="fs-18 event-distance px-1">
-                                                {% if event.eventDistance != null %}
-                                                    {{event.eventDistance}} Km
-                                                {% endif %}
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                     

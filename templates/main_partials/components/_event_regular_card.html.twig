@@ -16,7 +16,12 @@
     {# CONTENT #}
     <div class="bg-white border border-radius-30px p-5 text-center main-card-container"> 
         <div class="d-flex">
-            <div style="width:50px;" class="col-6 pe-sm-0 me-3">
+            <div style="width:50px;position:relative;" class="col-6 pe-sm-0 me-3">
+                <div style="position: absolute;top: -7px;" class="event-distance px-1">
+                    {% if event.eventDistance != null %}
+                        {{event.eventDistance}} Km
+                    {% endif %}
+                </div>
                 <div style="height:50px;background-color:{{event.activity.color}}" class="d-flex align-items-center justify-content-center feature-box-icon border-radius-50 p-2">
                     {% if event.activity.pictureType == "image" %}
                         <img class="my-2" style="width: 28px;" src="{{ customAsset('app/' ~ event.activity.picture )}}" alt="">
@@ -24,11 +29,7 @@
                         <i class="{{ event.activity.picture }} align-middle icon-medium icon-extra-large text-white my-3"></i>
                     {% endif %}
                 </div>
-                <div class="event-distance px-1">
-                    {% if event.eventDistance != null %}
-                        {{event.eventDistance}} Km
-                    {% endif %}
-                </div>
+
             </div>
             
             <div style="height:70px;" class="w-100 mb-5">

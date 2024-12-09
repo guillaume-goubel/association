@@ -55,8 +55,29 @@
                     <div class="header-icon">  
                         <div class="header-button">
                             
-                            {% set section = app.request.get('from') ?: 'agenda-section' %}
+                            {# {% set section = app.request.get('from') ?: 'agenda-section' %}
                             <a href="{{ path('home_index') }}#{{ section }}" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
+                                <span>
+                                    <span class="btn-double-text" data-text="Retour">Retour</span>
+                                </span> 
+                            </a> #}
+
+                            {# {% if app.request.get('from') == 'blog_index' and app.request.get('event') %}
+                                <a href="{{ path('blog_index' , { 'id' : app.request.get('event') }) }}" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
+                                    <span>
+                                        <span class="btn-double-text" data-text="Retour">Retour</span>
+                                    </span> 
+                                </a>
+                            {% else %}
+                                {% set section = app.request.get('from') ?: 'agenda-section' %}
+                                <a href="{{ path('home_index') }}#{{ section }}" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
+                                    <span>
+                                        <span class="btn-double-text" data-text="Retour">Retour</span>
+                                    </span> 
+                                </a> 
+                            {% endif %} #}
+
+                            <a id="backButton" class="btn btn-yellow btn-small btn-switch-text btn-rounded text-transform-none btn-box-shadow purchase-envato">
                                 <span>
                                     <span class="btn-double-text" data-text="Retour">Retour</span>
                                 </span> 
@@ -98,10 +119,7 @@
                         <!-- Filtre année -->
                         <div class="col-12 col-md-3">
                             <select id="yearChoice" name="yearChoice" class="form-select form-select-sm" aria-label="Sélectionner une année">
-                                {% if yearsList|length > 1 %}
-                                    <option {{ yearChoice == 'all' ? 'selected' : '' }} value="all">Toute année</option>
-                                {% endif %}
-
+                                <option {{ yearChoice == 'all' ? 'selected' : '' }} value="all">Toute année</option>
                                 {% for item in yearsList %}
                                     <option {{ yearChoice == item.year ? 'selected' : '' }} value="{{ item.year }}">{{ item.year }}</option>
                                 {% endfor %}
