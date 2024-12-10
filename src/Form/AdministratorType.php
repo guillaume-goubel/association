@@ -28,6 +28,30 @@ class AdministratorType extends AbstractType
                 'required' => false,
                 'help' => 'Cochez pour activer ou désactiver le compte.',
             ])
+            ->add('isCrudCreate', CheckboxType::class, [
+                'label' => "Oui / Non",
+                'attr' => ['class' => 'form-check-input'], // Classe Bootstrap pour les switches
+                'required' => false,
+                'help' => 'Peut CREER un événement ?',
+            ])
+            ->add('isCrudEdit', CheckboxType::class, [
+                'label' => "Oui / Non",
+                'attr' => ['class' => 'form-check-input'], // Classe Bootstrap pour les switches
+                'required' => false,
+                'help' => 'Peut MODIFIER ou ANNULER un événement ?',
+            ])
+            ->add('isCrudDelete', CheckboxType::class, [
+                'label' => "Oui / Non",
+                'attr' => ['class' => 'form-check-input'], // Classe Bootstrap pour les switches
+                'required' => false,
+                'help' => 'Peut EFFACER un événement ?',
+            ])
+            ->add('isCrudEventCanceler', CheckboxType::class, [
+                'label' => "Oui / Non",
+                'attr' => ['class' => 'form-check-input'], // Classe Bootstrap pour les switches
+                'required' => false,
+                'help' => 'Que peut-il MODIFIER ?',
+            ])
             ->add('email', EmailType::class, [
                 'label' => "Email de connexion *",
                 'attr' => ['class' => 'form-control', 'maxlength' => 75],

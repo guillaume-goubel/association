@@ -43,14 +43,16 @@
 
                 <div class="col-12 col-md-10">
                     <div class="row mb-50px sm-mb-30px">     
-                        {{ include('admin/event/_form.html.twig') }}
+                        {{ include('admin/event/' ~ formTemplate ~ '.html.twig') }}
                     </div>
                 </div>
 
             </div>
         </div>
         
-        {{ include('admin/event/_delete_form.html.twig') }} 
+        {% if is_granted('ROLE_SUPER_ADMIN') or app.user.isCrudDelete %}
+            {{ include('admin/event/_delete_form.html.twig') }} 
+        {% endif %}
 
     </section>
     <!-- end section -->

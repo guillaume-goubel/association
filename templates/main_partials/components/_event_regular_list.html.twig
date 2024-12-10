@@ -9,13 +9,13 @@
                 {{ event.user.getCompleteNameByFirstLetterFirstName()}}
                 </div>
                 
-                <div class="d-flex align-items-center flex-column">
-                    <div class="ms-8 w-100px">{{ event.createdAt|date('d/m/Y')}}</div>
+                <div class="d-flex align-items-center">
+                    <div class="ms-8 w-100px"><i class="fa-solid fa-database me-2"></i>{{ event.createdAt|date('d/m/Y')}}</div>
                     
                     {% if event.updatedAt != null  %}
-                        <div class="ms-5 w-100px">{{ event.updatedAt|date('d/m/Y')}}</div>
+                        <div class="ms-5 w-100px"><i class="fa-solid fa-pen-to-square me-2"></i>{{ event.updatedAt|date('d/m/Y')}}</div>
                     {% else %}
-                        <div class="ms-5 w-100px">---</div>
+                        <div class="ms-5 w-100px"><i class="fa-solid fa-pen-to-square me-2"></i>---</div>
                     {% endif %}
                 </div>
         
@@ -74,7 +74,7 @@
             </div>
 
             {# EDIT BUTTON #}
-            {% if event.user != null and isEventActionsButtonVisible == true %}
+            {% if event.user != null and isEventActionsButtonVisible and app.user.getIsCrudEdit %}
 
                 <div class="d-flex flex-column">
                     

@@ -13,8 +13,8 @@
         <div class="passed-label"><span class="admin-activity-pills bg-medium-gray fs-13">Terminé</span></div>
     {% endif %}
 
-    {# CONTENT #}bg-gradient-very-ghost-white
-    <div class=" border border-radius-30px p-5 text-center main-card-container {{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible) ? ' admin-view ' : '' }}"> 
+    {# CONTENT #}
+    <div class="bg-gradient-very-ghost-white border border-radius-30px p-5 text-center main-card-container {{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible) ? ' admin-view ' : '' }}"> 
         <div class="d-flex">
             <div style="width:50px;position:relative;" class="col-6 pe-sm-0 me-3">
                 <div style="position: absolute;top: -7px;" class="event-distance px-1">
@@ -111,12 +111,12 @@
             <div>{{ event.user.getCompleteNameByFirstLetterFirstName()}}</div>
             
             <div class="d-flex align-items-center">
-                <div class="w-100px">{{ event.createdAt|date('d/m/Y')}}</div>
+                <div class="w-100px"><i class="fa-solid fa-database me-2"></i>{{ event.createdAt|date('d/m/Y')}}</div>
                 
                 {% if event.updatedAt != null  %}
-                    <div class="ms-5 w-100px">{{ event.updatedAt|date('d/m/Y')}}</div>
+                    <div class="ms-5 w-100px"><i class="fa-solid fa-pen-to-square me-2"></i>{{ event.updatedAt|date('d/m/Y')}}</div>
                 {% else %}
-                    <div class="ms-5 w-100px">---</div>
+                    <div class="ms-5 w-100px"><i class="fa-solid fa-pen-to-square me-2"></i>---</div>
                 {% endif %}
             </div>
     

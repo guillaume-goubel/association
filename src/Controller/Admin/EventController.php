@@ -6,11 +6,13 @@ use App\Entity\Event;
 use App\Form\EventType;
 use App\Service\EventService;
 use App\Service\MediaService;
+use App\Form\EventTypeCanceler;
 use App\Repository\UserRepository;
 use App\Repository\EventRepository;
 use App\Repository\ActivityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\CheckAuthorizationService;
+use App\Service\CheckEventCrudRightService;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -145,10 +147,17 @@ class EventController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService): Response
+    public function new(Request $request, UserRepository $userRepository, EntityManagerInterface $entityManager, 
+    ActivityRepository $activityRepository, EventService $eventService, CheckEventCrudRightService $checkEventCrudRightService): Response
     {
         $event = new Event();
         $user = $this->getUser();
+        
+        // RIGHTS
+        if (!$checkEventCrudRightService->checkProcess($user, 'admin_event_new')) {
+            return $this->redirectToRoute('admin_index');
+        }
+        
         $userActivityArray = [];
         $activityChoice = $activityByDefault = null;
         $activityId = $request->query->get('activityId') ?? null;
@@ -219,15 +228,20 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, UserRepository $userRepository, Event $event, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, EventService $eventService, CheckAuthorizationService $checkAuthorizationService): Response
+    public function edit(Request $request, UserRepository $userRepository, Event $event, EntityManagerInterface $entityManager, ActivityRepository $activityRepository, 
+    EventService $eventService, CheckAuthorizationService $checkAuthorizationService, CheckEventCrudRightService $checkEventCrudRightService): Response
     {   
         $user = $this->getUser();
-        $isNewEvent = $event->getId() === null;
         
-        if (!$checkAuthorizationService->checkProcess($user, 'admin_activity_edit', $event)) {
+        // RIGHTS
+        if (!$checkAuthorizationService->checkProcess($user, 'admin_event_edit', $event)) {
+            return $this->redirectToRoute('admin_index');
+        }
+        if (!$checkEventCrudRightService->checkProcess($user, 'admin_event_edit')) {
             return $this->redirectToRoute('admin_index');
         }
         
+        $isNewEvent = $event->getId() === null;
         $userActivityArray = [];
 
         if(in_array('ROLE_SUPER_ADMIN', $user->getRoles())) {
@@ -254,14 +268,19 @@ class EventController extends AbstractController
             }
         }
 
-        $form = $this->createForm(EventType::class, $event, [
-            'activity_ids' => $userActivityArray,
-            'selected_activity' => $isNewEvent ? null : $event->getActivity(),
-            'is_passed' => $event->isPassed(),
-            'activity_by_default' => $event->getActivity(),
+        if ($checkEventCrudRightService->checkProcess($user, 'admin_event_edit_canceler')) {
+            $form = $this->createForm(EventTypeCanceler::class, $event, []);
+            $formTemplate = '_form_canceler';
+        }else{
+            $form = $this->createForm(EventType::class, $event, [
+                'activity_ids' => $userActivityArray,
+                'selected_activity' => $isNewEvent ? null : $event->getActivity(),
+                'is_passed' => $event->isPassed(),
+                'activity_by_default' => $event->getActivity(),
+            ]);
+            $formTemplate = '_form';
+        }
 
-        ]);
-        
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -282,18 +301,25 @@ class EventController extends AbstractController
             'event' => $event,
             'form' => $form,
             'activityByDefault' => $event->getActivity(),
+            'formTemplate' => $formTemplate
         ]);
+
     }
 
     #[Route('/{id}/delete', name: 'delete', methods: ['GET'])]
-    public function delete(Request $request, Event $event, EntityManagerInterface $entityManager, EventService $eventService, CheckAuthorizationService $checkAuthorizationService): Response
+    public function delete(Request $request, Event $event, EntityManagerInterface $entityManager, 
+    EventService $eventService, CheckAuthorizationService $checkAuthorizationService, CheckEventCrudRightService $checkEventCrudRightService): Response
     {
-        
-        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_activity_delete', $event)) {
+        $user = $this->getUser();
+
+        // RIGHTS
+        if (!$checkAuthorizationService->checkProcess($this->getUser(), 'admin_event_delete', $event)) {
             // Redirige vers la liste des événements si les IDs ne correspondent pas
             return $this->redirectToRoute('admin_index');
         }
-        
+        if (!$checkEventCrudRightService->checkProcess($user, 'admin_event_delete')) {
+            return $this->redirectToRoute('admin_index');
+        }
         // delete images
         $eventService->deleteAllEventPictures($event); 
 

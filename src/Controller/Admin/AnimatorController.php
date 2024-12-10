@@ -93,14 +93,6 @@ class AnimatorController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Animator $animator): Response
-    {
-        return $this->render('admin/animator/show.html.twig', [
-            'animator' => $animator,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Animator $animator, EntityManagerInterface $entityManager, AnimatorService $animatorService, CheckAuthorizationService $checkAuthorizationService): Response
     {

@@ -26,38 +26,36 @@
     <!-- start section -->
     <section class="main-section">
         <div class="container">
+
+            <div class="row wrap-reverse d-flex align-tems-center mb-3">
+                <div class="col-12 col-md-9">
+                    <form class="row g-3 align-items-end">
+                        <div class="col-9 col-md-5">
+                            <input name="eventIdChoice" type="number" class="form-control" id="eventIdChoice" placeholder="# ...">
+                        </div>
+                        <div class="col-2 col-md-5">
+                            <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-light-gray" type="submit">
+                                <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="admin-action col-12 col-md-3 d-flex align-items-center justify-content-end">  
+                    <a id="switchTypeViewBtn" class="ms-8" href="#"><i class="{{ (viewType == 'card') ? ' fa-solid fa-list ' : ' fa-solid fa-table-columns ' }} align-middle icon-large text-majorelle-blue me-2"></i></a>
+                    <a class="ms-8" href="{{ path('admin_calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
+                    {% if is_granted('ROLE_SUPER_ADMIN') or app.user.isCrudCreate %}
+                        <a class="ms-8" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                    {% endif %}
+                </div>
+            </div>
+            
             <div class="row d-flex justify-content-center">
                 
-                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                <div class="col-12 blog-standard md-mb-50px sm-mb-5px sm-mt-40px">
                     <div class="row blog-details d-flex align-items-center"> 
                         <div class="col-8">
                             {# {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}   #}
                             <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-600">ÉVÉNEMENTS<span style="background-color:#00b4d8;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></h4>
-                            
-                            <div class="col-12 mb-3">
-                                <form class="row g-3 align-items-end">
-                                    <div class="col-12 col-md-5">
-                                        <label for="eventIdChoice"></label>
-                                        <input name="eventIdChoice" type="number" class="form-control" id="eventIdChoice" placeholder="# numéro événement ...">
-                                    </div>
-                                    <div class="col-12 col-md-5">
-                                        <button style="border-radius:8px;" class="btn btn-very-small btn-transparent-base-color" type="submit">
-                                            <i style="font-size:15px; margin-left:0!important;" class="fa-solid fa-magnifying-glass"></i>
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-
-                                                    {# <button  style="border-radius:8px;" id="formSubmitBtn" class="btn btn-very-small btn-transparent-base-color mt-10px" type="submit">
-                                <i style="font-size:15px; margin-left:0!important;" class="{{ (viewType == 'card') ? 'fa-solid fa-list' : 'fa-solid fa-table-columns' }} "></i>
-                            </button> #}
-
-                        <div class="admin-action col-3 d-flex justify-content-end">  
-                            <a id="switchTypeViewBtn" class="ms-8" href="#"><i class="{{ (viewType == 'card') ? ' fa-solid fa-list ' : ' fa-solid fa-table-columns ' }} align-middle icon-large text-majorelle-blue me-2"></i></a>
-                            <a class="ms-8" href="{{ path('admin_calendar_index', {'from':'admin_event_index'}) }}"><i class="fa-solid fa-calendar align-middle icon-large text-tropical-blue me-2"></i></a>
-                            <a class="ms-8" href="{{ path('admin_event_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
                         </div>
                     </div>
                 </div>
@@ -89,15 +87,14 @@
                                                 {% endfor %}
                                             </select>
                                         </div>
-                                        <!-- Filtre créateur -->
                                         <div class="col-12 col-md-4">
-                                            <select id="event_user" name="creatorChoice" class="form-select form-select-sm" aria-label="Sélectionner un créateur">
-                                                <option {{ creatorChoice =='all' ? 'selected' : '' }} value="all">Tout administrateur</option>
-                                                {% for item in creatorsList %}
-                                                    <option {{ creatorChoice == item.user_id ? 'selected' : '' }} value="{{ item.user_id }}">{{ item.creator }}</option>
+                                            <select id="event_activity" name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
+                                                <option {{ activityChoice =='all' ? 'selected' : '' }} value="all">Toute activité</option>
+                                                {% for item in activityList %}
+                                                    <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
                                                 {% endfor %}
                                             </select>
-                                        </div>
+                                        </div>    
                                         <!-- Filtre activité -->
                                         <div class="col-12 col-md-4">
                                             <select name="animatorChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
@@ -119,14 +116,15 @@
                                                 <option {{ dateChoice == 'createdAt' ? 'selected' : '' }} value="createdAt">Date de création</option>
                                             </select>
                                         </div> #}
+                                        <!-- Filtre créateur -->
                                         <div class="col-12 col-md-3">
-                                            <select id="event_activity" name="activityChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
-                                                <option {{ activityChoice =='all' ? 'selected' : '' }} value="all">Toute activité</option>
-                                                {% for item in activityList %}
-                                                    <option {{ activityChoice == item.id ? 'selected' : '' }} value="{{ item.id }}">{{ item.name }}</option>
+                                            <select id="event_user" name="creatorChoice" class="form-select form-select-sm" aria-label="Sélectionner un créateur">
+                                                <option {{ creatorChoice =='all' ? 'selected' : '' }} value="all">Tout administrateur</option>
+                                                {% for item in creatorsList %}
+                                                    <option {{ creatorChoice == item.user_id ? 'selected' : '' }} value="{{ item.user_id }}">{{ item.creator }}</option>
                                                 {% endfor %}
                                             </select>
-                                        </div>                                    <!-- Filtre date -->
+                                        </div>                                <!-- Filtre date -->
                                         <div class="col-12 col-md-3">
                                             <select name="isPassedChoice" class="form-select form-select-sm" aria-label="Sélectionner une activité">
                                                 <option {{ isPassedChoice == 'all' ? 'selected' : '' }} value="all">Terminés et à venir</option>

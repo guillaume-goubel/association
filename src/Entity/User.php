@@ -71,6 +71,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Notification::class, mappedBy: 'author')]
     private Collection $notifications;
 
+    #[ORM\Column]
+    private ?bool $isCrudCreate = false;
+
+    #[ORM\Column]
+    private ?bool $isCrudEdit = false;
+
+    #[ORM\Column]
+    private ?bool $isCrudDelete = false;
+
+    #[ORM\Column]
+    private ?bool $isCrudEventCanceler = false;
+
     public function __construct()
     {
         $this->activities = new ArrayCollection();
@@ -355,6 +367,54 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $notification->setAuthor(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIsCrudCreate(): ?bool
+    {
+        return $this->isCrudCreate;
+    }
+
+    public function setIsCrudCreate(?bool $isCrudCreate): static
+    {
+        $this->isCrudCreate = $isCrudCreate;
+
+        return $this;
+    }
+
+    public function getIsCrudEdit(): ?bool
+    {
+        return $this->isCrudEdit;
+    }
+
+    public function setIsCrudEdit(?bool $isCrudEdit): static
+    {
+        $this->isCrudEdit = $isCrudEdit;
+
+        return $this;
+    }
+
+    public function getIsCrudDelete(): ?bool
+    {
+        return $this->isCrudDelete;
+    }
+
+    public function setIsCrudDelete(?bool $isCrudDelete): static
+    {
+        $this->isCrudDelete = $isCrudDelete;
+
+        return $this;
+    }
+
+    public function getIsCrudEventCanceler(): ?bool
+    {
+        return $this->isCrudEventCanceler;
+    }
+
+    public function setIsCrudEventCanceler(?bool $isCrudEventCanceler): static
+    {
+        $this->isCrudEventCanceler = $isCrudEventCanceler;
 
         return $this;
     }

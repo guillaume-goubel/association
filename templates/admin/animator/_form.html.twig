@@ -2,7 +2,7 @@
 {{ form_start(form)}}
     
     <div class="row d-flex ">
-        <div class="col-12 col-md-6 mt-1 mb-5">
+        <div style="border-bottom: 1px dashed;" class="col-12 col-md-6 mt-1 mb-1 pb-2">
             <div class="form-check form-switch">
                 {{ form_widget(form.isEnabled, { attr: { class: 'form-check-input me-2' } }) }}
                 {{ form_label(form.isEnabled, 'Désactiver / Activer', { label_attr: { class: 'form-check-label' } }) }}

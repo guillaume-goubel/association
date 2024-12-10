@@ -1,5 +1,5 @@
 {# EDIT BUTTON #}
-{% if event.user != null and isEventActionsButtonVisible == true %}
+{% if event.user != null and isEventActionsButtonVisible and app.user.getIsCrudEdit %}
 
     <div class="d-flex flex-column">
         

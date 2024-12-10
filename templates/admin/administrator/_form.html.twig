@@ -2,10 +2,46 @@
 {{ form_start(form)}}
     
     <div class="row d-flex ">
-        <div class="col-12 col-md-6 mt-1 mb-5">
+        <div style="border-bottom: 1px dashed;"  class="col-12 col-md-6 mt-1 mb-5 pb-2">
             <div class="form-check form-switch">
                 {{ form_widget(form.isEnabled, { attr: { class: 'form-check-input me-2' } }) }}
                 {{ form_label(form.isEnabled, 'Désactiver / Activer', { label_attr: { class: 'form-check-label' } }) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="fs-14 text-base-color text-uppercase ls-1px fw-600">
+        <i class="fa-solid fa-user-gear align-middle icon-medium text-base-color me-1"></i>
+        DROIT - Evénements
+        <span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span>
+    </div>
+    <div class="row d-flex mb-5">
+        <div class="col-12 col-md-6 mt-2 mb-1">
+            <div class="form-check form-switch">
+                {{ form_help(form.isCrudCreate) }}
+                {{ form_widget(form.isCrudCreate, { attr: { class: 'form-check-input me-2' } }) }}
+                {{ form_label(form.isCrudCreate, 'Non / Oui', { label_attr: { class: 'form-check-label' } }) }}
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mt-1 mb-1">
+            <div class="form-check form-switch">
+                {{ form_help(form.isCrudDelete) }}
+                {{ form_widget(form.isCrudDelete, { attr: { class: 'form-check-input me-2' } }) }}
+                {{ form_label(form.isCrudDelete, 'Non / Oui', { label_attr: { class: 'form-check-label' } }) }}
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mt-2 mb-1">
+            <div class="form-check form-switch">
+                {{ form_help(form.isCrudEdit) }}
+                {{ form_widget(form.isCrudEdit, { attr: { class: 'form-check-input me-2' } }) }}
+                {{ form_label(form.isCrudEdit, 'Non / Oui', { label_attr: { class: 'form-check-label' } }) }}
+            </div>
+        </div>
+        <div class="col-12 col-md-6 mt-1 mb-1" id="isCrudEventCancelerElmt">
+            <div class="form-check form-switch">
+                {{ form_help(form.isCrudEventCanceler) }}
+                {{ form_widget(form.isCrudEventCanceler, { attr: { class: 'form-check-input me-2' } }) }}
+                {{ form_label(form.isCrudEventCanceler, 'Tout / QUE les annulations', { label_attr: { class: 'form-check-label' } }) }}
             </div>
         </div>
     </div>

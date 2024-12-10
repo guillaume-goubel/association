@@ -20,10 +20,8 @@
     {% endif %}
     
     {% if event.isCanceled == false %}
-        {% set checkLabel = "Annuler l'événement" %}
         {% set eventCanceledInfos = "L'événement sera ANNULÉ après l'enregistrement" %}
     {% else %}
-        {% set checkLabel = "Maintenir l'événement" %}
         {% set eventCanceledInfos = "L'événement sera RESTAURÉ après l'enregistrement" %}
     {% endif %}
     <div style="border-top: 1px dashed;border-bottom:1px dashed;" class="mb-5 row {{ ((event != null and event.id != null and event.isPassed() == false) or is_granted('ROLE_SUPER_ADMIN')) ? 'd-flex' : 'd-none' }}  ">
@@ -37,7 +35,7 @@
         <div class="col-12 col-md-6 my-3">
             <div class="form-check form-switch">
                 {{ form_widget(form.isCanceled, { attr: { class: 'form-check-input me-2' } }) }}
-                {{ form_label(form.isCanceled, checkLabel, { label_attr: { class: 'form-check-label' } }) }}
+                {{ form_label(form.isCanceled, "Maintenir / Annuler", { label_attr: { class: 'form-check-label' } }) }}
                 <div style="margin-left:21px;" class="d-none fs-13" id="eventCanceledInfos">{{eventCanceledInfos}}</div>
             </div>
         </div>

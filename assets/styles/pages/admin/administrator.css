@@ -55,3 +55,15 @@
     color: var(--base-color);
     cursor: pointer;
 }
+.help-text{
+    padding-left: 20px;
+    line-height: 1.3;
+}
+#administrator_isCrudEventCanceler:checked{
+    background-color: #a6cdfc;
+    border-color: white;
+}
+#administrator_isCrudEventCanceler{
+    background-color: #a6cdfc;
+    border-color: white;
+}

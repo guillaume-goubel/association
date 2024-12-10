@@ -31,6 +31,9 @@ header .navbar-brand img {
 header .btn.btn-switch-text.btn-small > span {
     padding: 11px 25px 9px;
 }
+.wrap-reverse{
+    flex-wrap: wrap-reverse;
+}
 .sticky .header-transparent .header-button .btn { 
     background-color: var(--yellow);
 }
@@ -51,11 +54,11 @@ header .btn.btn-switch-text.btn-small > span {
 }
 .form-check-input:checked {
     background-color: green;
-    border-color: none;
+    border-color: white;
 }
 .form-check-input {
     background-color: red;
-    border-color: none;
+    border-color: white;
 }
 label {
     font-size: 14px;
@@ -349,7 +352,7 @@ footer .elements-social ul li:last-child {
     right: 15px;
     position: absolute;
     background-color: white;
-    padding: 4px 15px;
+    padding: 0px 15px;
     border: 1px solid;
     font-size: 15px;
     border-radius: 9px;
@@ -370,7 +373,6 @@ footer .elements-social ul li:last-child {
     border-left: none;
     border-right: none;
     border-top: none;
-    border-bottom: 1px solid #000;
     border-radius: 0 !important;
     background-color: transparent;
 }
