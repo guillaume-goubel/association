@@ -1,4 +1,4 @@
-<div style="position:relative;" class="row mb-6 sm-mb-30px px-0">
+<div style="position:relative;" class="row mb-6 sm-mb-30px px-3 bg-gradient-very-ghost-white">
     <div class="col-12" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
 
         <div class="row align-items-center pt-15px g-0 pb-25px position-relative">
@@ -9,7 +9,11 @@
                 {% if  event.isCanceled == true %}
                     <div><span class="admin-activity-pills bg-alert fs-12 mx-2">Annulé</span></div>
                 {% endif %}
+                    
+                {% if event.user != null and isEventActionsButtonVisible == true %}
                     <div class="event-id-container"># {{ event.id }}</div>
+                {% endif %}
+
             </div>
             <div class="col-md-1 sm-mb-10px d-flex justify-content-between">
                 
@@ -51,9 +55,9 @@
                         <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
                             {% for animator in event.animators %}
                                 {% if animator.picture != null %}
-                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                    <img class="avatar {{ (event.animators|length == 1) ? ' ms-0 ' : '' }}"  style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1">
                                 {% else %}
-                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                    <img class="avatar {{ (event.animators|length == 1) ? ' ms-0 ' : '' }}"  style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1">
                                 {% endif %}
                             {% endfor %}
                         </div>

@@ -1,8 +1,6 @@
 <li class="grid-item">
     <a href="{{ path('blog_index', { 'id': event.id }) }}" class="card border-0 border-radius-30px main-card-container-last-event activity-card">
-        
-        
-        
+
         {% if event.mainPicture != null %}
             <div class="blog-image" style="background-image:url({{ customAsset('data/uploads/event/photos/' ~ event.mainPicture )}});">
         {% else %}    
@@ -13,6 +11,7 @@
         <div class="card-body p-7">
             <div class="d-flex">
                 <div style="width:50px;position:relative;" class="col-6 pe-sm-0 me-3">
+                    
                     <div style="position: absolute;top: -7px;" class="event-distance px-1">
                         {% if event.eventDistance != null %}
                             {{event.eventDistance}} Km
@@ -30,7 +29,20 @@
                 </div>
                 
                 <div class="w-100 ms-3">
-                    <span class="fs-16 lh-30 ls-minus-05px d-block text-dark-gray fw-600">{{event.dateStartAt|format_date('medium',  locale= 'fr')}}</span> 
+                    
+                    {% if event.isMultiDay %}
+                        <div class="fs-16 lh-20 ls-minus-05px text-dark-gray fw-600">
+                            <span class="fs-10">du</span> {{event.dateStartAt|format_date('short',  locale= 'fr')}}
+                        </div> 
+                        <div class="fs-16 lh-20 ls-minus-05px text-dark-gray fw-600">
+                            <span class="fs-10">au</span> {{event.dateEndAt|format_date('short',  locale= 'fr')}}
+                        </div>
+                    {% else %}
+                        <span class="fs-16 lh-30 ls-minus-05px d-block text-dark-gray fw-600">
+                            {{event.dateStartAt|format_date('medium',  locale= 'fr')}}
+                        </span> 
+                    {% endif %}
+
                     <span class="fs-14 mb-15px d-inline-block fw-600">{{event.activity.name|capitalize}}</span>
                 </div>
             </div>

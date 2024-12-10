@@ -479,7 +479,12 @@
 
                 if (place.address_components) {
                     let address_components = place.address_components;
-                    document.getElementById("event_rdvAddress").value = place.formatted_address;
+                    if(address_components[5].long_name == "France"){
+                        document.getElementById("event_rdvAddress").value = address_components[0].long_name + " " + address_components[1].long_name + ", " + address_components[6].long_name + " " + address_components[2].long_name;
+                    }else{
+                        document.getElementById("event_rdvAddress").value = place.formatted_address;
+                    }
+
                     let cityName = address_components[2].long_name;
                     document.getElementById("event_rdvCity").value = cityName;
                 }

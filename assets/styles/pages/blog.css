@@ -73,6 +73,12 @@
 .figure-logo{
     height: 80px!important;
 }
+.category-list-sidebar li {
+    opacity: 0.6;
+}
+.category-list-sidebar li:hover{
+    opacity: 1;
+  }
 @media only screen and (max-width: 600px) {
     .animator-item {
       justify-content: start;

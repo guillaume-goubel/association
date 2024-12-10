@@ -29,6 +29,9 @@
         .pagination li, .link-to-map{
             cursor: pointer;
         }
+        .activity-card{
+            margin-bottom: 15px!important;
+        }
     </style>
 {% endblock %}
 
@@ -155,7 +158,7 @@
                     {% include 'admin/event/partials/components/_events_card_render.html.twig' %}
                 </div>
 
-                <div id="events-card-responsive-render" class="row d-none align-items-center justify-content-center pb-5 mt-5">
+                <div id="events-card-responsive-render" class="row d-none align-items-center justify-content-center pb-5 mt-5 px-5">
                     {% include 'admin/event/partials/components/_events_card_responsive_render.html.twig' %}
                 </div>
 

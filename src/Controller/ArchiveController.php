@@ -17,7 +17,7 @@ class ArchiveController extends AbstractController
     public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository, PaginatorInterface $paginator): Response
     {
         $yearChoice = $request->query->get('yearChoice') ?? date("Y");
-        $monthChoice = $request->query->get('monthChoice') ?? date("m");
+        $monthChoice = $request->query->get('monthChoice') ?? 'all';
         $activityChoice = $request->query->get('activityChoice') ?? "all";
 
         // Distinct month / year createdAt for select

@@ -209,24 +209,25 @@ footer .elements-social ul li:last-child {
 }
 .main-card-container-last-event{
     height: 350px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de flottement */
 }
 .main-card-container-last-event:hover{
     transform: scale(1.02); /* Légère augmentation de la taille */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Ombre pour un effet de flottement */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); /* Ombre pour un effet de flottement */
     cursor:pointer;
 }
 .main-card-container-last-event:active {
     transform: scale(0.98); /* Légère réduction de la taille lors du clic */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Ombre réduite pour un effet de clic */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Ombre réduite pour un effet de clic */
 }
 .activity-card:hover .main-card-container {
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Effet d'ombre */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Effet d'ombre */
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* Animation fluide */
 }
 .main-card-container {
     height: 410px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation fluide pour l'état normal */
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* Animation fluide pour l'état normal */
     box-shadow: 0 13px 19px rgba(0, 0, 0, 0.2); /* Ombre légère par défaut */
 }
 .main-card-container.admin-view {
@@ -365,7 +366,14 @@ footer .elements-social ul li:last-child {
     left: 35px;
     line-height: 1.4;
 }
-
+#eventIdChoice{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: 1px solid #000;
+    border-radius: 0 !important;
+    background-color: transparent;
+}
 /* ----------------------------------------- */
 .form-select-sm{
     padding: 6px 25px;
@@ -379,7 +387,7 @@ footer .elements-social ul li:last-child {
 }
 /* ACTIVITY CARD */
 .activity-card {
-    transition: transform 0.3s ease;
+    transition: transform 0.1s ease;
 }
 .activity-card:hover {
     transform: translateY(-5px);
@@ -439,13 +447,17 @@ footer .elements-social ul li:last-child {
     align-items: center;
 }
 .avatar {
-    width: 50px;               /* Taille du cercle */
-    height: 50px;              /* Taille du cercle */
+    width: 50px;               
+    height: 50px;              
     border-radius: 50%;        /* Rendre l'image circulaire */
-    border: 2px solid #fff;    /* Bordure blanche pour un effet de contour */
+    /* border: 2px solid #fff;    */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ombre pour du relief */
     margin-left: -15px;        /* Chevauchement entre les cercles */
     object-fit: cover;         /* Remplir le cercle avec l'image */
+}
+#eventFilterBtn a,
+#eventFilterBtn button{
+    width: 120px;
 }
 .text-highlight span{
     bottom: 4px;
@@ -530,6 +542,7 @@ footer .elements-social ul li:last-child {
     background-color: #FFFFFF; 
     border: 1px solid #D1C7BD;
     border-radius: 30px;
+    box-shadow: 0 13px 19px rgba(0, 0, 0, 0.2);
 }
 
 /* Couleur de la ligne foncée */
@@ -537,6 +550,7 @@ footer .elements-social ul li:last-child {
     background-color: #FFFFFF; 
     border: 1px solid #D1C7BD;
     border-radius: 30px;
+    box-shadow: 0 13px 19px rgba(0, 0, 0, 0.2);
 }
 
 @keyframes bounce {

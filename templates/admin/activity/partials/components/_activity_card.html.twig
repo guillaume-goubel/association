@@ -16,12 +16,12 @@
             <div class="avatar-stack ">
                 {% for animator in activity.getAnimatorsByActivity() %}
                     {% if animator.picture != null %}
-                        <a class="avatar w-50px" href="{{ path('admin_animator_index') }}?animatorChoice={{ animator.id }}&from=admin_activity_index">
-                            <img style="border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1">
+                        <a style="width:40px;height:40px;" class="avatar {{ (activity.getAnimatorsByActivity()|length == 1) ? ' ms-0 ' : '' }}"   href="{{ path('admin_animator_index') }}?animatorChoice={{ animator.id }}&from=admin_activity_index">
+                            <img style="width:40px;height:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1">
                         </a>
                     {% else %}
-                        <a class="avatar w-50px" href="{{ path('admin_animator_index') }}?animatorChoice={{ animator.id }}&from=admin_activity_index">
-                            <img style="border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1">
+                        <a style="width:40px;height:40px;" class="avatar {{ (activity.getAnimatorsByActivity()|length == 1) ? ' ms-0 ' : '' }}"   href="{{ path('admin_animator_index') }}?animatorChoice={{ animator.id }}&from=admin_activity_index">
+                            <img style="width:40px;height:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1">
                         </a>
                     {% endif %}
                 {% endfor %}

@@ -62,9 +62,9 @@
                     <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
                         {% for animator in event.animators %}
                             {% if animator.picture != null %}
-                                <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                <img class="avatar {{ (event.animators|length == 1) ? ' ms-0 ' : '' }}"  style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1">
                             {% else %}
-                                <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                <img class="avatar {{ (event.animators|length == 1) ? ' ms-0 ' : '' }}"  style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1">
                             {% endif %}
                         {% endfor %}
                     </div>

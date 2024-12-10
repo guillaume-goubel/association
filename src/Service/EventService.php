@@ -156,7 +156,8 @@ class EventService{
                 'durationDayNumber' => ($eventDuration === 'long') ? "$dayNumber/$totalDays" : null,
                 'eventDateStartAt' => $eventDateStartAtFormat,
                 'eventDateEndAt' => $eventDateEndAtFormat,
-                'isCanceled' => $event->getIsCanceled()
+                'isCanceled' => $event->getIsCanceled(),
+                'isEnabled' => $event->isEnabled(),
             ]
         ];
     }

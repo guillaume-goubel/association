@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
             if (targetElement) {
                 if (isMobile()) {
                     // Calculer la position avec un ajustement de 50px
-                    const offset = targetElement.getBoundingClientRect().top + window.scrollY - 130;
+                    const offset = targetElement.getBoundingClientRect().top + window.scrollY - 50;
     
                     // Effectuer le défilement manuel
                     window.scrollTo({ top: offset, behavior: 'auto' });
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
                     if (menuBtn) {
                         setTimeout(() => {
                             menuBtn.click();
-                        }, 500);
+                        }, 100);
                     }
                 } else {
                     // Défilement fluide sans ajustement

@@ -40,10 +40,6 @@ label{
     justify-content: space-between;
     margin-bottom:40px;
 }
-#eventFilterBtn a,
-#eventFilterBtn button{
-    width: 120px;
-}
 #event_activityMessage{
     width: 300px;
 }
@@ -57,6 +53,9 @@ label{
 }
 .main-section{
     background-color: #F9F6F3;
+}
+.activity-card{
+    margin-bottom: 8%;
 }
 @media only screen and (max-width: 600px) {
     #eventFilterContainer{

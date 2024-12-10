@@ -25,6 +25,10 @@ class EventController extends AbstractController
     #[Route('/index', name: 'index', methods: ['GET'])]
     public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository, PaginatorInterface $paginator): Response
     {
+        
+        // eventIdChoice
+        $eventIdChoice = $request->query->get('eventIdChoice') ?? null;
+        
         // View type in session
         $session = $request->getSession();
         if ($session->get('event_view_type') === null) {
@@ -79,7 +83,8 @@ class EventController extends AbstractController
             $filters['isPassedChoice'],
             $filters['isCanceledChoice'],
             $filters['animatorChoice'],
-            $filters['isEnabledChoice']
+            $filters['isEnabledChoice'],
+            $eventIdChoice
         );
     
         // Définir la page actuelle (par défaut, la page 1)

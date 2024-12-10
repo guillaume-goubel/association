@@ -17,7 +17,7 @@ class BlogController extends AbstractController
     public function index(Event $event, Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository): Response
     {           
         return $this->render('blog/post_page/index.html.twig', [
-            'is_passed' => $request->query->get('is_passed') ?? $event->isPassed(),
+            'is_passed' => $event->isPassed(),
             'event' => $event,
             'lastEventCreated' => $eventRepository->findLastEventsforUser(3, $event->getId()),
             'getActivitiesByEvents' => $activityRepository->getActivitiesByEvents($event->getActivity()->getId()),

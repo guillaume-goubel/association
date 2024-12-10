@@ -1,4 +1,4 @@
-<div style="position:relative;" class="activity-card col-lg-3 col-md-8 md-mb-40px mb-8">
+<div style="position:relative;" class="activity-card col-lg-3 col-md-8">
     
     {# EDIT BUTTON #}
     {% include "admin/partials/components/_event_actions_card.html.twig" %}
@@ -14,7 +14,7 @@
     {% endif %}
     
     {# CONTENT #}
-    <div class="bg-white border border-radius-30px p-5 text-center main-card-container {{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible) ? ' admin-view ' : '' }}"> 
+    <div class="bg-gradient-very-ghost-white border border-radius-30px p-5 text-center main-card-container {{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible) ? ' admin-view ' : '' }}"> 
         <div class="d-flex">
             <div style="width:50px;position:relative;" class="col-6 pe-sm-0 me-3">
                 <div style="position: absolute;top: -7px;" class="event-distance px-1">
@@ -51,9 +51,9 @@
                         <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
                             {% for animator in event.animators %}
                                 {% if animator.picture != null %}
-                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                    <img class="avatar {{ (event.animators|length == 1) ? ' ms-0 ' : '' }}"  style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1">
                                 {% else %}
-                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                    <img class="avatar {{ (event.animators|length == 1) ? ' ms-0 ' : '' }}"  style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1">
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -67,7 +67,7 @@
         <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
             <li style="height:67px;overflow:hidden;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{ event.name|length > 60 ? event.name|slice(0, 60) ~ '...' : event.name }}</li>
             <li style="border-bottom:none!important;" class="border-color-extra-medium-gray pt-15px pb-0px text-dark-gray fs-14 fw-500 d-flex">
-            <i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}} {{event.id}}</li>
+            <i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</li>
             <li class="border-color-extra-medium-gray pt-15px pb-15px d-flex">
             <i class="feather icon-feather-clock me-5px"></i>
                 <div style="width:95px;" class="me-5 d-flex align-items-baseline">

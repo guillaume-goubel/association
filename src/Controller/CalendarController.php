@@ -19,16 +19,37 @@ class CalendarController extends AbstractController
         $yearChoice = $request->query->get('yearChoice') ?? "yearDepth";
         $userChoice = $request->query->get('userChoice') ?? "all";
         $activityChoice = $request->query->get('activityChoice') ?? "all";
+        $animatorChoice = $isPassedChoice = $isCanceledChoice = $isEnabledChoice = 'all';
+        $eventIdChoice = null;
         
         $activityList = $activityRepository->findByMonthAndYearForCalendar($yearChoice);
         $userList = $eventRepository->getDistinctCreator();
 
-        $events = $eventRepository->getEventListforCalendarFor12Months($activityChoice, $userChoice, $yearChoice, 'all', 'all', 'all', 'all');
+        $justEnabledEvents = TRUE;
+        $events = $eventRepository->getEventListforCalendarFor12Months(
+            $activityChoice, 
+            $userChoice,
+            $yearChoice,
+            $animatorChoice, 
+            $isPassedChoice, 
+            $isCanceledChoice, 
+            $isEnabledChoice, 
+            $eventIdChoice, 
+            $justEnabledEvents
+        );
+
         $eventDateJson = $eventService->getEventListForCalendarEvents($events);
+
+        $dates = [];
+        foreach ($events as $event) {
+            $dates [] = $event->getDateStartAt()->format('m/d/Y');
+        }
+        $dateCounts = array_count_values($dates);
 
         return $this->render('calendar/index.html.twig', [
             'eventsCount' => count($events),
             'eventDateJson' => $eventDateJson,
+            'dateCounts' => json_encode($dateCounts),
             'activityList' => $activityList,
             'activityChoice' => $activityChoice,
             'yearChoice' => $yearChoice,

@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
     
     var isAdminIsLogged = document.getElementById('isAdminIsLogged').getAttribute('data-param');
     var yearChoice = document.getElementById('yearChoiceElmt').getAttribute('data-param');
-   
+
     //  CALENDAR PART ----------------------------------------------------------------
     var calendarEl = document.getElementById('calendar');
     var calendarDuration = (yearChoice === 'yearDepth') ? { months: 12 } : { year: 1 };
@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
         if (eventLinkDefault) {
             const formattedDate = `${String(clickedDate.getMonth() + 1).padStart(2, '0')}/${String(clickedDate.getDate()).padStart(2, '0')}/${clickedDate.getFullYear()}`;
             const eventLink = document.getElementById('eventCreatedAt');
-            eventLink.href = `${eventLinkDefault}?creationDate=${encodeURIComponent(formattedDate)}&from=calendar_index`;
+            eventLink.href = `${eventLinkDefault}?creationDate=${encodeURIComponent(formattedDate)}&from=admin_calendar_index`;
 
             modalFooter.classList.toggle('d-none', !isFutureOrToday);
         }
@@ -85,41 +85,48 @@ document.addEventListener("DOMContentLoaded", (event) => {
 
     // Fonction pour afficher les détails d'un événement
     function renderEventDetails(event, currentDate) {
+        const isPassed = new Date(event.end) < currentDate;
         const pathComplete = `/blog/${event.extendedProps.id}/index`;
         const eventProps = event.extendedProps;
 
         if (eventProps.duration == 'long') {
             return `
-                <div class="col-12 col-md-10 mb-4">
+                <div class="col-12 col-md-10 mb-4 border-bottom pb-2">
                     <div>
+                        <div class="d-flex mb-2 align-items-center">
+                            ${eventProps.isCanceled ? `<div ><span class="admin-activity-pills bg-alert fs-13">Annulé</span></div>` : ''}
+                            ${!eventProps.isEnabled ? `<div class="ms-2"><i class="event-icon fa-solid fa-eye-slash text-red fs-30"></i></div>` : ''}
+                        </div>
+
                         <strong class="me-1">${eventProps.genre}</strong>
-                        <div>${eventProps.title || ''}</div>
                         <div class="fs-14">Evénement sur ${eventProps.durationTotal} jours. <span>(${eventProps.durationDayNumber})</span></div>
-                        <div class="fs-14">
+                        <div class="fs-14" style="line-height:1.2;">
                             <span class="me-2"><span class="fs-12">Date début: </span>${eventProps.eventDateStartAt}</span>
                             <span><span class="fs-12">Date fin: </span>${eventProps.eventDateEndAt}</span>
                         </div>
 
-                        ${!isPassed && eventProps.rdv ? `<span class="fs-12">Rendez-vous: </span><span class="fs-14">${eventProps.rdv}</span><br>` : ''}
+                        ${!isPassed && eventProps.rdv ? `<span class="fs-12">Rendez-vous: </span><span class="fs-14 fw-600">${eventProps.rdv}</span><br>` : ''}
                     </div>
-                    <a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-150px">Plus d'informations</a>
+                    <a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-150px mt-2">Plus d'informations</a>
                 </div>`;
         }else{
             return `
-            <div class="col-12 col-md-10 mb-4">
+            <div class="col-12 col-md-10 mb-4 border-bottom pb-2">
                 <div>
-                    <strong class="me-1">${eventProps.genre}</strong>
-                    <div>${eventProps.title || ''}</div>
-                    <div class="fs-14">
-                        ${!isPassed && eventProps.rdvTime ? `<span class="me-2"><span class="fs-12">Horaire début:</span> ${eventProps.rdvTime}</span>` : ''}
-                        ${!isPassed && eventProps.rdvTimeEnd ? `<span><span class="fs-12"> Horaire fin:</span> ${eventProps.rdvTimeEnd}</span>` : ''}
+                    <div class="d-flex mb-2 align-items-center">
+                        ${eventProps.isCanceled ? `<div ><span class="admin-activity-pills bg-alert fs-13">Annulé</span></div>` : ''}
+                        ${!eventProps.isEnabled ? `<div class="ms-2"><i class="event-icon fa-solid fa-eye-slash text-red fs-30"></i></div>` : ''}
                     </div>
-                    ${!isPassed && eventProps.rdv ? `<span class="fs-12">Rendez-vous: </span><span class="fs-14">${eventProps.rdv}</span><br>` : ''}
+                    <strong class="me-1">${eventProps.genre}</strong>
+                    <div class="fs-14" style="line-height:1.2;">
+                        ${!isPassed && eventProps.rdvTime ? `<span class="me-2"><span class="fs-12"><i class="feather icon-feather-clock me-5px"></i></span> ${eventProps.rdvTime}</span>` : ''}
+                        ${!isPassed && eventProps.rdvTimeEnd ? `<span><span class="fs-12"> Fin:</span> ${eventProps.rdvTimeEnd}</span>` : ''}
+                    </div>
+                    ${!isPassed && eventProps.rdv ? `<span class="fs-12">Rendez-vous: </span><span class="fs-14 fw-600">${eventProps.rdv}</span><br>` : ''}
                 </div>
-                <a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-150px">Plus d'informations</a>
+                <a href="${pathComplete}" class="btn btn-very-small btn-yellow btn-box-shadow btn-round-edge border-1 w-150px mt-2">Plus d'informations</a>
             </div>`;
         }
-
     }
 
     // Initialiser le calendrier

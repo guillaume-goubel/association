@@ -24,11 +24,16 @@ class EventRepository extends ServiceEntityRepository
 
     public function getEventListforAdmin(string $yearChoice, string $monthChoice, string $creatorChoice, 
     string $activityChoice, string $dateChoice, string $isPassedChoice, 
-    string $isCanceledChoice, string $animatorChoice, string $isEnabledChoice): Query
+    string $isCanceledChoice, string $animatorChoice, string $isEnabledChoice, ?string $eventIdChoice): Query
     {
         $stmt = $this->createQueryBuilder('e');
         $stmt->leftjoin('e.activity', 'a');
         $stmt->leftjoin('e.animators', 'an');
+
+        if ($eventIdChoice) {
+            $stmt->andwhere('e.id = :eventIdChoice');
+            $stmt->setParameter('eventIdChoice', $eventIdChoice);
+        }
 
         if ($yearChoice && $yearChoice != 'all') {
             $stmt->andwhere('YEAR(e.dateStartAt) = :year');
@@ -160,8 +165,10 @@ class EventRepository extends ServiceEntityRepository
 
         $stmt = $this->createQueryBuilder('e');
         $stmt->join('e.activity', 'a');
-        $stmt->andWhere('e.dateStartAt < :today');   
+        $stmt->andWhere('e.dateEndAt < :today');   
         $stmt->setParameter('today', $today);
+        $stmt->andWhere('e.isCanceled = FALSE');
+        $stmt->andWhere('e.isEnabled = TRUE');
 
         if ($yearChoice) {
             $stmt->andwhere('YEAR(e.dateStartAt) = :year');
@@ -178,7 +185,7 @@ class EventRepository extends ServiceEntityRepository
             $stmt->setParameter('activityChoice', $activityChoice);
         }
 
-        $stmt->addOrderBy('e.dateStartAt', 'ASC');
+        $stmt->addOrderBy('e.dateStartAt', 'DESC');
         return $stmt->getQuery();
     }
 
@@ -201,12 +208,13 @@ class EventRepository extends ServiceEntityRepository
         return $stmt->getQuery()->getResult();
     }
 
-    public function getEventListforCalendarFor12Months(string $activityChoice, string $creatorChoice, string $yearChoice, ?string $animatorChoice, ?string $isPassedChoice, ?string $isCanceledChoice, ?string $isEnabledChoice): array
+    public function getEventListforCalendarFor12Months(string $activityChoice, string $creatorChoice, 
+    string $yearChoice, ?string $animatorChoice, ?string $isPassedChoice, ?string $isCanceledChoice, 
+    ?string $isEnabledChoice, ?string $eventIdChoice, bool $justEnabledEvents): array
     {
 
         // Création d'un objet QueryBuilder
         $stmt = $this->createQueryBuilder('e');
-        $stmt->andWhere('e.isEnabled = TRUE');
         $stmt->leftjoin('e.activity', 'a');
         $stmt->leftjoin('e.animators', 'an');
         
@@ -244,11 +252,6 @@ class EventRepository extends ServiceEntityRepository
             $stmt->setParameter('animator', $animatorChoice);
         }
 
-        if ($activityChoice && $activityChoice != 'all') {
-            $stmt->andwhere('a.id = :activityChoice');
-            $stmt->setParameter('activityChoice', $activityChoice);
-        }
-
         if ($isPassedChoice != 'all') {
             $now = new \DateTime();
             if ($isPassedChoice == 'isPassed') {
@@ -279,6 +282,15 @@ class EventRepository extends ServiceEntityRepository
                 // Vérification si la date de fin est après ou égale à aujourd'hui
                 $stmt->andWhere('e.isEnabled = FALSE');
             }
+        }
+
+        if ($eventIdChoice && $eventIdChoice !== null) {
+            $stmt->andwhere('e.id = :eventIdChoice');
+            $stmt->setParameter('eventIdChoice', $eventIdChoice);
+        }
+        
+        if($justEnabledEvents){
+            $stmt->andWhere('e.isEnabled = TRUE');
         }
 
         // Tri des résultats par la date de début des événements
@@ -492,14 +504,14 @@ class EventRepository extends ServiceEntityRepository
         $now = new \DateTime();
     
         return $this->createQueryBuilder('e')
-            ->andWhere('e.isEnabled = :isEnabled') // Filtre pour événements actifs
+            ->andWhere('e.isEnabled = TRUE')
+            ->andWhere('e.isCanceled = FALSE') // Filtre pour événements actifs
             ->andWhere(
                 '(e.dateEndAt < :today OR (e.dateEndAt = :today AND e.timeEndAt IS NOT NULL AND e.timeEndAt <= :currentTime))'
             ) // Exclure les événements avec timeEndAt=NULL aujourd'hui
-            ->setParameter('isEnabled', true)
             ->setParameter('today', $now->format('Y-m-d')) // La date actuelle
             ->setParameter('currentTime', $now->format('H:i:s')) // L'heure actuelle
-            ->orderBy('e.dateEndAt', 'ASC') // Trier par date de début
+            ->orderBy('e.dateEndAt', 'DESC') // Trier par date de début
             ->setMaxResults(4) // Limiter à 4 résultats
             ->getQuery()
             ->getResult();

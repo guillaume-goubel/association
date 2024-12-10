@@ -24,7 +24,7 @@
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details d-flex align-items-center justify-content-between"> 
                         <div class="col-8">
-                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+                            {# {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %} #}
                             <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-600">ADMINISTRATEURS<span style="background-color:#03045e;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></h4>
                         </div>
 
@@ -86,7 +86,7 @@
                                         <div class="feature-box feature-box-left-icon-middle last-paragraph-no-margin d-flex">
                                             
                                             {% if admin.animator != null %}
-                                                <a href="{{ path('admin_animator_edit', { 'id':admin.animator.id, 'from':"admin_administrator_index" }) }}" class="feature-box-icon col-12 col-md-2 d-flex flex-column w-100px">
+                                                <a class="feature-box-icon col-12 col-md-2 d-flex flex-column align-items-center" href="{{ path('admin_animator_edit', { 'id':admin.animator.id, 'from':"admin_administrator_index" }) }}" >
                                                     
                                                     {% if admin.animator.picture != null %}
                                                         <img class="border-radius-50 admin-action" style="width: 70px;" src="{{ customAsset('data/uploads/animator/photos/' ~ admin.animator.picture ) }}" class="w-75px" alt=""/>
@@ -94,11 +94,11 @@
                                                         <img style="width: 65px;" class="admin-action" src="{{ customAsset('app/default-avatar.png')}}" alt="">
                                                     {% endif %}
                                                     
-                                                    <div class="fs-13 fw-600 text-gray">Animateur</div> 
+                                                    <div class="fs-13">Anim.</div> 
                                                 </a>
                                             {% else %}
-                                                <div class="feature-box-icon col-12 col-md-2">
-                                                    <div style="color:transparent;">Animateur</div> 
+                                                <div class="feature-box-icon col-12 col-md-2 d-flex flex-column align-items-center">
+                                                    ---
                                                 </div>
                                             {% endif %}
 
@@ -117,7 +117,7 @@
 
                                     </div>
 
-                                    <div class="col-12 col-md-3 text-center text-md-end d-flex flex-column align-items-start">
+                                    <div class="col-12 col-md-3 text-center text-md-end d-flex flex-column align-items-center">
  
                                         <div class="d-inline-block text-base-color mb-20px fs-13 ls-minus-05px">
                                             {% if admin.getIsEnabled == true %}

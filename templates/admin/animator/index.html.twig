@@ -24,7 +24,7 @@
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details d-flex align-items-center justify-content-between"> 
                         <div class="col-8">
-                            {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %}
+                            {# {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %} #}
                             <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-600">ANIMATEURS<span style="background-color:#0077b6;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></h4>
                         </div>
 
@@ -106,11 +106,11 @@
                                                     alt=""
                                                 />
                                                 {% if animator.user != null %}
-                                                    <div>
+                                                    <div class="d-flex flex-column align-items-center">
                                                         {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                                            <a href="{{ path('admin_administrator_edit', { 'id':animator.user.id, 'from':"admin_animator_index" }) }}"><i class="fa-solid fa-gear icon-large mt-20px"></i></a>
+                                                            <a href="{{ path('admin_administrator_edit', { 'id':animator.user.id, 'from':"admin_animator_index" }) }}"><i class="fa-solid fa-gear icon-medium mt-10px"></i></a>
                                                         {% else %}
-                                                            <div><i class="fa-solid fa-gear icon-large mt-20px"></i></div>
+                                                            <div><i class="fa-solid fa-gear icon-medium mt-10px"></i></div>
                                                         {% endif %}
                                                         
                                                         <div class="fs-13">Admin.</div>
@@ -143,7 +143,7 @@
 
                                     </div>
 
-                                    <div class="col-12 col-md-3 text-center text-md-end d-flex flex-column align-items-start">
+                                    <div class="col-12 col-md-3 text-center text-md-end d-flex flex-column align-items-center">
                                         
                                         <div class="d-inline-block text-base-color mb-20px fs-13 ls-minus-05px">
                                             {% if animator.getIsEnabled == true %}

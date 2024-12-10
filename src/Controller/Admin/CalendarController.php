@@ -16,6 +16,9 @@ class CalendarController extends AbstractController
     #[Route('/index', name: 'index')]
     public function index(Request $request, EventRepository $eventRepository, ActivityRepository $activityRepository, EventService $eventService): Response
     {
+        // eventIdChoice
+        $eventIdChoice = $request->query->get('eventIdChoice') ?? null;
+
         // Obtenez les filtres depuis la requête ou la session
         $session = $request->getSession();
         $filters = $this->getFilterParameters($request, $session);
@@ -45,6 +48,7 @@ class CalendarController extends AbstractController
         $creatorList = $eventRepository->getDistinctCreator();
         $animatorsList = $eventRepository->getDistinctAnimator();
     
+        $justEnabledEvents = false;
         $events = $eventRepository->getEventListforCalendarFor12Months(
             $filters['activityChoice'],
             $filters['creatorChoice'],
@@ -52,14 +56,23 @@ class CalendarController extends AbstractController
             $filters['animatorChoice'],
             $filters['isPassedChoice'],
             $filters['isCanceledChoice'],
-            $filters['isEnabledChoice']
+            $filters['isEnabledChoice'],
+            $eventIdChoice, // Si vous voulez, modifiez `eventIdChoice` à chaque itération pour simuler différentes requêtes.
+            $justEnabledEvents
         );
-    
+        
         $eventDateJson = $eventService->getEventListForCalendarEvents($events);
-    
+
+        $dates = [];
+        foreach ($events as $event) {
+            $dates [] = $event->getDateStartAt()->format('m/d/Y');
+        }
+        $dateCounts = array_count_values($dates);
+
         return $this->render('admin/calendar/index.html.twig', [
             'eventsCount' => count($events),
             'eventDateJson' => $eventDateJson,
+            'dateCounts' => json_encode($dateCounts),
             'activityList' => $activityList,
             'activityChoice' => $filters['activityChoice'],
             'yearChoice' => $filters['yearChoice'],

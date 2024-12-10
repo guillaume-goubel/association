@@ -1,4 +1,4 @@
-<div style="position:relative;" class="activity-card col-lg-3 col-md-8 md-mb-40px mb-8">
+<div style="position:relative;" class="activity-card col-lg-3 col-md-8">
     
     {# EDIT BUTTON #}
     {% include "admin/partials/components/_event_actions_card.html.twig" %}
@@ -13,8 +13,8 @@
         <div class="passed-label"><span class="admin-activity-pills bg-medium-gray fs-13">Terminé</span></div>
     {% endif %}
 
-    {# CONTENT #}
-    <div class="bg-white border border-radius-30px p-5 text-center main-card-container {{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible) ? ' admin-view ' : '' }}"> 
+    {# CONTENT #}bg-gradient-very-ghost-white
+    <div class=" border border-radius-30px p-5 text-center main-card-container {{ (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible) ? ' admin-view ' : '' }}"> 
         <div class="d-flex">
             <div style="width:50px;position:relative;" class="col-6 pe-sm-0 me-3">
                 <div style="position: absolute;top: -7px;" class="event-distance px-1">
@@ -50,9 +50,9 @@
                         <div class="avatar-stack animators-infos-link" data-id='{{ event.id }}'>
                             {% for animator in event.animators %}
                                 {% if animator.picture != null %}
-                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1" class="avatar">
+                                    <img class="avatar {{ (event.animators|length == 1) ? ' ms-0 ' : '' }}"  style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('data/uploads/animator/photos/' ~ animator.picture ) }}" alt="User 1">
                                 {% else %}
-                                    <img style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1" class="avatar">
+                                    <img class="avatar {{ (event.animators|length == 1) ? ' ms-0 ' : '' }}"  style="height:40px;width:40px;border-radius: 50%;" src="{{ customAsset('app/default-avatar.png')}}" alt="User 1">
                                 {% endif %}
                             {% endfor %}
                         </div>

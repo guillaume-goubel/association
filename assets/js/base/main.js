@@ -110,9 +110,14 @@
 
     // Navbar collapse - classic menu
     $('.navbar-collapse.collapse').on('show.bs.collapse', function (e) {
+        
+
         if (!$('body').hasClass('navbar-collapse-show')) {
+                        
             $('body').addClass('navbar-collapse-show');
             $('html').addClass('overflow-hidden');
+            $('section').css('opacity', '0.3');
+            
             if ($('body').attr('data-mobile-nav-bg-color') && $('.navbar-modern-inner').length) {
                 var bgColor = $('body').attr('data-mobile-nav-bg-color');
                 $('.navbar-show-modern-bg').css('background', bgColor);
@@ -147,7 +152,9 @@
             $('.navbar-collapse-clone').css('max-height', (windowHeight - headerHeight));
         }
     }).on('hide.bs.collapse', function (e) {
+
         if ($('body').hasClass('navbar-collapse-show')) {
+            $('section').css('opacity', '1');
             $('body').removeClass('navbar-collapse-show');
             $('html').removeClass('overflow-hidden');
         }
