@@ -1,4 +1,4 @@
-<div style="position:relative;" class="row mb-6 sm-mb-30px px-3 bg-gradient-very-ghost-white">
+<div style="position:relative;" class="row mb-6 sm-mb-70px px-3 bg-gradient-very-ghost-white">
     <div class="col-12" data-anime='{ "el": "childs", "translateY": [30, 0], "opacity": [0,1], "duration": 600, "delay": 0, "staggervalue": 300, "easing": "easeOutQuad" }'>
 
         <div class="row align-items-center pt-15px g-0 pb-25px position-relative">
@@ -14,6 +14,22 @@
                     <div class="event-id-container"># {{ event.id }}</div>
                 {% endif %}
 
+                {% if event.user != null and isEventActionsButtonVisible == true %}
+                    <div class="admin-infos-in-card-container d-flex flex-column fs-13">
+                        <div>{{ event.user.getCompleteNameByFirstLetterFirstName()}}</div>
+                        
+                        <div class="d-flex align-items-center">
+                            <div class="w-100px"><i class="fa-solid fa-database me-2"></i>{{ event.createdAt|date('d/m/Y')}}</div>
+                            
+                            {% if event.updatedAt != null  %}
+                                <div class="ms-5 w-100px"><i class="fa-solid fa-pen-to-square me-2"></i>{{ event.updatedAt|date('d/m/Y')}}</div>
+                            {% else %}
+                                <div class="ms-5 w-100px"><i class="fa-solid fa-pen-to-square me-2"></i>---</div>
+                            {% endif %}
+                        </div>
+
+                    </div>
+                {% endif %}
             </div>
             <div class="col-md-1 sm-mb-10px d-flex justify-content-between">
                 

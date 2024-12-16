@@ -345,6 +345,13 @@ document.addEventListener("DOMContentLoaded", (event) => {
     const switchTypeViewBtn = document.getElementById('switchTypeViewBtn');
     if (switchTypeViewBtn) {
 
+        // hide if mobile
+        if (isMobile()) {
+            switchTypeViewBtn.style.display = 'none';
+        }else{
+            switchTypeViewBtn.style.display = 'flex';
+        }
+        
         switchTypeViewBtn.addEventListener('click', function(e) {
             
             e.preventDefault(); 

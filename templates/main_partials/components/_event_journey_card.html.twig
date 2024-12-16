@@ -110,7 +110,6 @@
     {# AMIN INFOS #}
     {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and isEventActionsButtonVisible %}
         <div class="admin-infos-in-card-container d-flex flex-column fs-13">
-            
             <div>{{ event.user.getCompleteNameByFirstLetterFirstName()}}</div>
             
             <div class="d-flex align-items-center">
@@ -122,7 +121,7 @@
                     <div class="ms-5 w-100px"><i class="fa-solid fa-pen-to-square me-2"></i>---</div>
                 {% endif %}
             </div>
-    
+
         </div>
     {% endif %}
     
