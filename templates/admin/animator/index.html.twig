@@ -21,11 +21,10 @@
         <div class="container">
             <div class="row">
                 
-                <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
+                {# <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details d-flex align-items-center justify-content-between"> 
                         <div class="col-8">
-                            {# {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %} #}
-                            <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-600">ANIMATEURS<span style="background-color:#0077b6;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></h4>
+                            <div style="font-size:2.1rem;" class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in mb-3"><span class="text-highlight fw-600">ANIMATEURS<span style="background-color:#0077b6;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></h4>
                         </div>
 
                         <div class="admin-action col-2 d-flex justify-content-end">
@@ -41,6 +40,32 @@
                             {% endif %}
                         </div>
 
+                    </div>
+                </div> #}
+
+                <div class="col-12 blog-standard md-mb-50px sm-mb-10px d-flex justify-content-end">
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                        <div class="admin-action col-2 d-flex justify-content-end">
+                            <a class="ms-4" href="{{ path('admin_animator_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                        </div>
+
+                        {% if app.request.get('from') == 'admin_activity_index' %}
+                            {# <a href="{{ path('admin_activity_index')}}">
+                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                            </a> #}
+                            <a id="backButton" href="#">
+                                <i class="fa-solid fa-circle-left align-middle icon-large text-base-color ms-20px"></i>
+                            </a>
+                        {% endif %}
+
+                    {% endif %}
+
+
+                </div>
+
+                <div class="col-12 blog-standard md-mb-50px sm-mb-10px d-flex align-items-center justify-content-start">
+                    <div class="col-12 ">
+                        <div style="font-size:2.1rem;" class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in mb-3"><span class="text-highlight fw-600">ANIMATEURS<span style="background-color:#0077b6;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></div>
                     </div>
                 </div>
 
