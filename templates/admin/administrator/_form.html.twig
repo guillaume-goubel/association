@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="col-12 col-md-6 mt-1 mb-1">
-            <div class="form-check form-switch">
+            <div class="form-check form-switch" id="isCrudEventDeleteElmt">
                 {{ form_help(form.isCrudDelete) }}
                 {{ form_widget(form.isCrudDelete, { attr: { class: 'form-check-input me-2' } }) }}
                 {{ form_label(form.isCrudDelete, 'Non / Oui', { label_attr: { class: 'form-check-label' } }) }}
@@ -41,7 +41,7 @@
             <div class="form-check form-switch">
                 {{ form_help(form.isCrudEventCanceler) }}
                 {{ form_widget(form.isCrudEventCanceler, { attr: { class: 'form-check-input me-2' } }) }}
-                {{ form_label(form.isCrudEventCanceler, 'Tout / QUE les annulations', { label_attr: { class: 'form-check-label' } }) }}
+                {{ form_label(form.isCrudEventCanceler, 'TOUT / QUE les annulations', { label_attr: { class: 'form-check-label' } }) }}
             </div>
         </div>
     </div>

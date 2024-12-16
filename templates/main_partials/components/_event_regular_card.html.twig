@@ -66,19 +66,21 @@
 
         <ul class="p-0 mt-20px mb-30px list-style-01 text-start lh-normal">
             <li style="height:67px;overflow:hidden;" class="border-color-extra-medium-gray pt-20px pb-20px d-flex fs-14">{{ event.name|length > 60 ? event.name|slice(0, 60) ~ '...' : event.name }}</li>
-            <li style="border-bottom:none!important;" class="border-color-extra-medium-gray pt-15px pb-0px text-dark-gray fs-14 fw-500 d-flex">
-            <i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</li>
+            <li style="height:35px;border-bottom:none!important;overflow:hidden;" class="border-color-extra-medium-gray pt-15px pb-0px text-dark-gray fs-14 fw-500 d-flex">
+                <i class="feather icon-feather-map-pin me-5px"></i>
+                {{ event.cityPlace|length > 45 ? event.cityPlace|capitalize|slice(0, 25) ~ '...' : event.cityPlace|capitalize }}
+            </li>
             <li class="border-color-extra-medium-gray pt-15px pb-15px d-flex">
             <i class="feather icon-feather-clock me-5px"></i>
                 <div style="width:95px;" class="me-5 d-flex align-items-baseline">
                     <div class="fs-11 me-1"></div>
-                    <div class="fs-14 fw-600">{{event.timeStartAt|date('H:i')}}</div>
+                    <div class="fs-14 fw-600">{{ event.timeStartAt|date('H') }}h {{ event.timeStartAt|date('i') }}</div>
                 </div>
 
                 {% if event.timeEndAt != null %}
                     <div style="width:95px;" class="d-flex align-items-baseline">
                         <div class="fs-11 me-1">Fin :</div>
-                        <div class="fs-14 fw-600">{{event.timeEndAt|date('H:i')}}</div>
+                        <div class="fs-14 fw-600">{{ event.timeEndAt|date('H') }}h {{ event.timeEndAt|date('i') }}</div>
                     </div>
                 {% endif %}
             </li>
@@ -105,7 +107,7 @@
     </div>
 
     {# AMIN INFOS #}
-    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') and isEventActionsButtonVisible %}
+    {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN')) and isEventActionsButtonVisible %}
         <div class="admin-infos-in-card-container d-flex flex-column fs-13">
             
             <div>{{ event.user.getCompleteNameByFirstLetterFirstName()}}</div>

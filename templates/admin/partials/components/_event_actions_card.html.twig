@@ -1,9 +1,9 @@
 {# EDIT BUTTON #}
-{% if event.user != null and isEventActionsButtonVisible and app.user.getIsCrudEdit %}
+{% if event.user != null and isEventActionsButtonVisible %}
 
     <div class="d-flex flex-column">
         
-        {% if is_granted('ROLE_SUPER_ADMIN') or (is_granted('ROLE_ADMIN') and event.user.id == app.user.id ) %}
+        {% if (is_granted('ROLE_SUPER_ADMIN') or (is_granted('ROLE_ADMIN') and event.user.id == app.user.id )) and app.user.getIsCrudEdit %}
             <div data-id="card-{{ event.id }}" class="event-action-container {{ (event.isEnabled) ? 'enabled' : 'disabled' }}">
                 <a href="#" data-current-status="{{ (event.isEnabled) ? 'enabled' : 'disabled' }}" data-id="card-{{ event.id }}" class="change-event-status btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
                     <i data-id="card-{{ event.id }}" class="event-icon {{ (event.isEnabled) ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash' }}"></i>
@@ -12,7 +12,7 @@
         {% endif %}
 
         {% if app.user %}
-            {% if event.user.id == app.user.id or is_granted('ROLE_SUPER_ADMIN') %}
+            {% if (event.user.id == app.user.id or is_granted('ROLE_SUPER_ADMIN')) and app.user.getIsCrudEdit %}
                 <div class="event-action-container edit">
                     <a style="#" href="{{ path('admin_event_edit', { 'id': event.id}) }}?from={{ app.request.attributes.get('_route') }}" class="btn btn-very-small d-table d-lg-inline-block lg-mb-15px md-mx-auto">
                         <i class="fa-solid fa-pen-to-square"></i>
@@ -21,7 +21,7 @@
             {% endif %}
         {% endif %}
 
-        {% if app.user %}
+        {% if app.user and isEventActionsButtonVisible %}
             <div class="event-id-container"># {{ event.id }}</div>
         {% endif %}
 

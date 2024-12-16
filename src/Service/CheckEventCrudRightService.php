@@ -23,7 +23,7 @@ class CheckEventCrudRightService{
                     return true;
                 } 
             case "admin_event_edit_canceler":
-                if(in_array('ROLE_SUPER_ADMIN', $user->getRoles()) || $user->getIsCrudEventCanceler()) {
+                if($user->getIsCrudEventCanceler()) {
                     return true;
                 }                   
             default:

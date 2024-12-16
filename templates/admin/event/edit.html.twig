@@ -23,9 +23,8 @@
                 <div class="col-12 blog-standard md-mb-50px sm-mb-40px">
                     <div class="row blog-details mb-3 d-flex align-items-center"> 
                         <div class="col-10">
-                            {# {% include 'admin/partials/components/_admin_connexion_infos.html.twig' %} #}
-
                             <h5 class="text-dark-gray fw-600 w-80 sm-w-100 mb-1">ÉVÉNEMENTS - Modifier</h5>
+                            <div><span id="event-id-container" class="me-2"># {{ event.id }}</span><span class="me-2">{{ event.cityPlace}}</span><span class="me-2">{{ event.activity.name}}</span><span class="me-2">{{event.dateEndAt|format_date('medium',  locale= 'fr')}}</span></div>
                         </div>
                         <div class="admin-action col-2 d-flex justify-content-end">
                             {% if app.request.get('from') == 'blog_index' %}

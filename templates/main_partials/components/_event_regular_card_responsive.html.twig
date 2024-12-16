@@ -18,13 +18,15 @@
                 
                 <div>
                     <div class="fs-18 lh-30 ls-minus-05px d-block text-dark-gray fw-600">{{event.dateStartAt|format_date('medium',  locale= 'fr')}}</div> 
-                    <div class="fs-13"><i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</div>
+                    <div style="line-height:1.4;height:30px;" class="fs-13 w-195px"><i class="feather icon-feather-map-pin me-5px"></i>
+                        {{ event.cityPlace|length > 45 ? event.cityPlace|capitalize|slice(0, 45) ~ '...' : event.cityPlace|capitalize }}
+                    </div>
                 </div>
 
-                <div>
-                    <div><span class="fs-12">Début :</span>{{event.timeStartAt|date('H:i')}}</div>
+                <div style="line-height:1.4;" class="d-flex flex-column ps-2">
+                    <div class="w-100px"><span class="fs-12"><i class="feather icon-feather-clock me-5px"></i></span>{{ event.timeStartAt|date('H') }}h {{ event.timeStartAt|date('i') }}</div>
                     {% if event.timeEndAt != null %}
-                    <div><span class="fs-12">Fin :</span>{{event.timeEndAt|date('H:i')}}</div>
+                    <div class="w-100px"><span class="fs-12">Fin :</span>{{ event.timeEndAt|date('H') }}h {{ event.timeEndAt|date('i') }}</div>
                     {% endif %}
                 </div>
 
@@ -62,7 +64,7 @@
                     {{ event.name|length > 75 ? event.name|slice(0, 75) ~ '...' : event.name }}
                 </p>
                 <div class="pricing-footer w-55 mb-4" style="height:35px;">
-                    <a href="{{ path('blog_index', { 'id': event.id }) }}" class="btn btn-very-small btn-transparent-base-color btn-round-edge-large border-1 w-100">Fiche informations</a>
+                    <a href="{{ path('blog_index', { 'id': event.id }) }}" class="btn btn-very-small btn-transparent-base-color btn-round-edge-large border-1 w-100">Détails</a>
                 </div>
             </div>
         </div>

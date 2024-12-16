@@ -34,8 +34,15 @@
             <section class="bg-very-light-gray pt-20px pb-20px sm-pt-40px" data-anime='{ "opacity": [0, 1], "translateY": [0, 0], "easing": "easeOutQuad", "duration": 1000,"staggervalue": 300, "delay": 600 }'>
                 <div class="container overlap-section">
                     <div class="row justify-content-center overlap-section border-radius-6px overflow-hidden g-0 box-shadow-extra-large">
-                        <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px"><strong class="pe-5 fs-15 text-dark-gray">{{ (nextUpcomingEvent.dateStartAt|date('Ymd') == 'now'|date('Ymd') ) ? 'Aujourd\'hui ' : 'Bientôt ' }}</strong><span class="fw-700 text-base-color">{{nextUpcomingEvent.dateStartAt|format_date('medium',  locale= 'fr')}} <span class="fs-14">à {{nextUpcomingEvent.timeStartAt|date('H:i')}}</span></span> 
-                            <span class="ps-5 pe-2">{{nextUpcomingEvent.activity.name|capitalize}} à {{nextUpcomingEvent.cityPlace|capitalize}}</span> 
+                        <div class="col-lg-9 text-center fw-600 fs-20 lg-fs-20 ls-minus-05px text-dark-gray bg-white p-20px md-p-15px">
+
+                            {% if nextUpcomingEvent.isCanceled %}
+                                <span class="admin-activity-pills bg-alert fs-13 me-5">Annulé</span>
+                            {% else %}
+                                <strong class="pe-5 fs-15 text-dark-gray">{{ (nextUpcomingEvent.dateStartAt|date('Ymd') == 'now'|date('Ymd') ) ? 'Aujourd\'hui ' : 'Bientôt ' }}</strong>
+                            {% endif %}
+                            <span class="fw-700 text-base-color">{{nextUpcomingEvent.dateStartAt|format_date('medium',  locale= 'fr')}} <span class="fs-14">à {{nextUpcomingEvent.timeStartAt|date('H:i')}}</span></span> 
+                            <span class="ps-5 pe-2">{{nextUpcomingEvent.activity.name|capitalize}} <span class="fs-15 fw-500">à {{ nextUpcomingEvent.cityPlace|length > 45 ? nextUpcomingEvent.cityPlace|capitalize|slice(0, 45) ~ '...' : nextUpcomingEvent.cityPlace|capitalize }}</span></span> 
                         </div>
                         <div class="col-lg-3 text-center bg-yellow pt-20px pb-20px md-p-20px"><a href="{{ path('blog_index', { 'id': nextUpcomingEvent.id}) }}" class="fw-700 text-dark-gray text-dark-gray-hover fs-20 lg-fs-20 ls-minus-05px">Informations ici<i class="feather icon-feather-arrow-right ms-5px"></i></a></div>
                     </div>
@@ -84,7 +91,7 @@
 
                             <a href="{{ path('blog_index', { 'id': lastPastEvent.id}) }}" class="btn btn-medium btn-yellow btn-box-shadow btn-rounded btn-switch-text mt-4">
                                 <span>
-                                    <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
+                                    <span class="btn-double-text" data-text="Plus d'informations">Plus d'informations</span>
                                     <span><i class="feather icon-feather-arrow-right"></i></span>
                                 </span>
                             </a>
@@ -323,7 +330,7 @@
                         <div class="overflow-hidden pt-55px">
                             <a href="{{ path('about_index') }}" class="btn btn-medium btn-yellow btn-rounded btn-box-shadow btn-switch-text d-inline-block me-15px xs-m-10px align-middle fw-600" data-anime='{ "translateY": [100, 0], "easing": "easeOutCubic", "duration": 900, "delay": 500 }'>
                                 <span>
-                                    <span class="btn-double-text" data-text="Plus d'informations ?">Plus d'informations ?</span>
+                                    <span class="btn-double-text" data-text="Plus d'informations">Plus d'informations</span>
                                     <span><i class="feather icon-feather-arrow-right"></i></span>
                                 </span>
                             </a>

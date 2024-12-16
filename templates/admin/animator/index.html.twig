@@ -28,20 +28,19 @@
                             <h5 class="alt-font fw-600 text-dark-gray ls-minus-1px shadow-none shadow-in"><span class="text-highlight fw-600">ANIMATEURS<span style="background-color:#0077b6;" class="h-5px bottom-10px opacity-6 separator-animation"></span></span></h4>
                         </div>
 
-                            <div class="admin-action col-2 d-flex justify-content-end">
-                                
-                                {% if app.request.get('from') == 'admin_activity_index' %}
-                                    <a href="{{ path('admin_activity_index')}}">
-                                        <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
-                                    </a>
-                                {% endif %}
+                        <div class="admin-action col-2 d-flex justify-content-end">
+                            
+                            {% if app.request.get('from') == 'admin_activity_index' %}
+                                <a href="{{ path('admin_activity_index')}}">
+                                    <i class="fa-solid fa-circle-left align-middle icon-large text-base-color me-2"></i>
+                                </a>
+                            {% endif %}
 
-                                {% if is_granted('ROLE_SUPER_ADMIN') %}
-                                    <a class="ms-4" href="{{ path('admin_animator_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
-                                {% endif %}
-                            </div>
-                        
-                        
+                            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                                <a class="ms-4" href="{{ path('admin_animator_new') }}"><i class="fa-solid fa-circle-plus align-middle icon-large text-base-color me-2"></i></a>
+                            {% endif %}
+                        </div>
+
                     </div>
                 </div>
 

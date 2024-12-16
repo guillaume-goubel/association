@@ -44,7 +44,7 @@
                                 {% endif %}
                             </div>
                             
-                            <div class="col-12 col-md-7 d-flex">
+                            <div class="col-12 col-md-7 d-flex align-items-center">
 
                                 {# DATE #}                                
                                 <div class="d-flex">
@@ -88,18 +88,17 @@
                                 </div>
                             </div>
 
-                                    {% if event.isMultiDay %}
-                                        <div class="col-12">
-                                            <div class="fs-14">
-                                                Evénenement sur plusieurs jours
-                                            </div>
-                                        </div>
-                                    {% endif %}
-
+                            {% if event.isMultiDay %}
+                                <div class="col-12">
+                                    <div class="fs-14">
+                                        Evénenement sur plusieurs jours
+                                    </div>
+                                </div>
+                            {% endif %}
 
                         </div>
 
-                            <div class="fs-20 fw-600 text-base-color d-flex align-items-center mb-2 ">
+                        <div class="fs-20 fw-600 text-base-color d-flex align-items-center mb-2 ">
                             
                             {# LOGO #}
                             <div id="logo-container" class="d-flex align-items-center">

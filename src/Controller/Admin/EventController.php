@@ -268,10 +268,13 @@ class EventController extends AbstractController
             }
         }
 
+        // Si l'admin n'est que canceler ....
         if ($checkEventCrudRightService->checkProcess($user, 'admin_event_edit_canceler')) {
+            dump('here');
             $form = $this->createForm(EventTypeCanceler::class, $event, []);
             $formTemplate = '_form_canceler';
         }else{
+            dump('here2');
             $form = $this->createForm(EventType::class, $event, [
                 'activity_ids' => $userActivityArray,
                 'selected_activity' => $isNewEvent ? null : $event->getActivity(),

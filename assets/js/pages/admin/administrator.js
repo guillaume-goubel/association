@@ -73,22 +73,24 @@ document.addEventListener("DOMContentLoaded", (event) => {
     // Manage the EDIT authoriztion switch --------------------
     const isCrudEditSwitch = document.getElementById('administrator_isCrudEdit');
     const isCrudEventCancelerElmt = document.getElementById('isCrudEventCancelerElmt');
+    const isCrudEventDeleteElmt = document.getElementById('isCrudEventDeleteElmt');
 
     // Fonction pour gérer l'état de la classe
     function toggleCrudEventCanceler() {
         if (!isCrudEditSwitch.checked) {
             // Si isCrudEdit est false, ajouter la classe d-none
             isCrudEventCancelerElmt.classList.add('d-none');
+            isCrudEventDeleteElmt.classList.add('d-none');
         } else {
             // Sinon, retirer la classe d-none
             isCrudEventCancelerElmt.classList.remove('d-none');
+            isCrudEventDeleteElmt.classList.remove('d-none');
         }
     }
 
     // Ajout d'un événement sur le changement de l'état du switch
-    isCrudEditSwitch.addEventListener('change', toggleCrudEventCanceler);
-
-    // Appel initial pour définir l'état au chargement
-    toggleCrudEventCanceler();
-
+    if (isCrudEditSwitch && isCrudEventCancelerElmt && isCrudEventDeleteElmt) {
+        isCrudEditSwitch.addEventListener('change', toggleCrudEventCanceler);
+        toggleCrudEventCanceler();
+    }
 });

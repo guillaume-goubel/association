@@ -24,7 +24,7 @@
     {% else %}
         {% set eventCanceledInfos = "L'événement sera RESTAURÉ après l'enregistrement" %}
     {% endif %}
-    <div style="border-top: 1px dashed;border-bottom:1px dashed;" class="mb-5 row {{ ((event != null and event.id != null and event.isPassed() == false) or is_granted('ROLE_SUPER_ADMIN')) ? 'd-flex' : 'd-none' }}  ">
+    <div style="border-top: 1px dashed;border-bottom:1px dashed;" class="mb-5 row {{ ((event.id != null and event.isPassed() == false) or is_granted('ROLE_SUPER_ADMIN')) ? 'd-flex' : 'd-none' }}  ">
         
         {% if event.isCanceled == true %}
             <div class="fs-14 fw-600 mt-2">L'événement est actuellement <span class="admin-activity-pills bg-alert">Annulé</span> </div>
@@ -133,16 +133,18 @@
     <div class="row d-flex">
         <div class="col-12 mt-1">            
             {{ form_label(form.activityMessage) }}  
-            {{ form_widget(form.activityMessage) }}
+            {% if event.isPassed() and not is_granted('ROLE_SUPER_ADMIN') %}
+                {{ form_widget(form.activityMessage , { attr: { disabled: 'disabled' } }) }} 
+            {% else %}
+                {{ form_widget(form.activityMessage) }} 
+            {% endif %}
             
             {% if event.activityMessage == null %}
                 <div id="activityMessageContentContainer" class="mt-2 {{ (event.activityMessage != null) ? '' : ' d-none ' }}">
-                    <label class="fw-500 text-light-gray" for="">Le contenu du message</label>
                     <div class="card-text preformatted" id="activityMessageContent"></div>
                 </div>
             {% else %}
                 <div id="activityMessageContentContainer" class="mt-2 {{ (event.activityMessage != null) ? '' : ' d-none ' }}">
-                    <label class="fw-500 text-light-gray" for="">Le contenu du message</label>
                     <div class="card-text preformatted" id="activityMessageContent">{{ event.activityMessage.description|raw }}</div>
                 </div>
             {% endif %}
@@ -314,7 +316,6 @@
 
     {# AUTOCOMPLETION PART -- start #}
     <div class="fs-14 text-base-color text-uppercase ls-1px fw-600 mt-5 mb-2"><i class="fa-solid fa-map-location-dot icon-large text-base-color me-1"></i>LE LIEU DE RENDEZ-VOUS<span class="w-120px h-1px bg-base-color d-none d-lg-inline-block align-middle position-relative top-minus-1px ms-10px lg-w-70px"></span></div>
-    {# <div class="pac-card p-1 {{ ((event != null and event.id != null and event.isPassed() == false) or is_granted('ROLE_SUPER_ADMIN')) ? '' : ' d-none ' }}" id="pac-card"> #}
     <div class="pac-card p-1 {{ (event.isPassed() == false or is_granted('ROLE_SUPER_ADMIN')) ? '' : ' d-none ' }}" id="pac-card">
         <div>
             <div id="title">Indiquez ici l'adresse pour auto-complétion</div>
