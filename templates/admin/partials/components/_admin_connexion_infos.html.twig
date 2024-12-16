@@ -1,7 +1,10 @@
 <div class="entry-meta fs-15 mb-50px">
     <div>
         <i class="text-dark-gray feather icon-feather-user"></i>
-        {{ app.user.firstName }} {{ app.user.lastName }}
+        Vous êtes connecté en tant que <span class="fw-600">{{ app.user.firstName|capitalize }} {{ app.user.lastName|capitalize }}</span>
     </div>
-    <a id="disconnectBtn" href="{{ path('app_logout')}}"><i class="fa-solid fa-power-off icon-medim text-base-color me-1"></i>Déconnexion</a>
+    <a id="disconnectBtn" href="{{ path('app_logout')}}">
+        <i class="fa-solid fa-power-off icon-medim text-base-color me-1 text-red"></i>
+        Déconnexion
+    </a>
 </div>

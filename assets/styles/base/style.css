@@ -6880,7 +6880,7 @@ header.sticky.sticky-active .navbar-brand .default-logo {
   width: 0;
 }
 header.sticky.sticky-active [data-header-hover=dark] {
-  background-color: var(--dark-gray) !important;
+  background-color: #192259 !important;
 }
 header.sticky.sticky-active [data-header-hover=dark] .navbar-nav .nav-item:hover .nav-link {
   color: var(--white);
@@ -7115,10 +7115,11 @@ header.sticky .navbar.disable-fixed {
   display: none;
 }
 .navbar .navbar-nav .nav-item:hover .nav-link, .navbar .navbar-nav .nav-item.active .nav-link {
-  opacity: 0.6;
+  opacity: 0.9;
+  border-color: var(--yellow);
 }
 .navbar .navbar-nav .nav-item .nav-link.active {
-  opacity: 0.6;
+  opacity: 1;
 }
 .navbar .navbar-nav .nav-link {
   font-size: 16px;

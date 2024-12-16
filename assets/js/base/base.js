@@ -36,7 +36,22 @@ document.addEventListener("DOMContentLoaded", (event) => {
             }
         }
     });
-    
+
+    // HEADER LINK ACTIVE 
+        // Sélectionner tous les liens avec la classe "nav-link"
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (navLinks) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', function () {
+                // Supprimer la classe "active" de tous les liens
+                navLinks.forEach(nav => nav.classList.remove('active'));
+
+                // Ajouter la classe "active" au lien cliqué
+                this.classList.add('active');
+            });
+        });
+    }
 
     // BACK HISTORIC LINK
     const backButton = document.getElementById('backButton');

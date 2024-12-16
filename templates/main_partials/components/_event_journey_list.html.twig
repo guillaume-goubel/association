@@ -36,11 +36,11 @@
         </div>
         
         <div class="col-md-3 col-xl-2">
-            <div class="fs-13"><i class="feather icon-feather-map-pin me-5px"></i>{{event.cityPlace}}</div>
+            <div class="fs-13"><i class="feather icon-feather-map-pin me-5px"></i>{{ event.cityPlace|length > 45 ? event.cityPlace|capitalize|slice(0, 45) ~ '...' : event.cityPlace|capitalize }}</div>
             <div>
-                <div><span class="fs-12">Début :</span>{{event.timeStartAt|date('H:i')}}</div>
+                <div><span class="fs-12">Début :</span><span class="fs-14 fw-600">{{ event.timeStartAt|date('H') }}h {{ event.timeStartAt|date('i') }}</span></div>
                 {% if event.timeEndAt != null %}
-                <div><span class="fs-12">Fin :</span>{{event.timeEndAt|date('H:i')}}</div>
+                <div><span class="fs-12">Fin :</span><span class="fs-14 fw-600">{{ event.timeEndAt|date('H') }}h {{ event.timeEndAt|date('i') }}</span></div>
                 {% endif %}
             </div>
         </div>

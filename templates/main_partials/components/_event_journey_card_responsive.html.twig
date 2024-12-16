@@ -86,7 +86,7 @@
                 <p class="fs-13 lh-small mb-4">
                     {{ event.name|length > 75 ? event.name|slice(0, 75) ~ '...' : event.name }}
                 </p>
-                <div class="pricing-footer w-55 mb-4" style="height:35px;">
+                <div class="pricing-footer-responsive w-55 mb-4" style="height:35px;">
                     <a href="{{ path('blog_index', { 'id': event.id }) }}" class="btn btn-very-small btn-transparent-base-color btn-round-edge-large border-1 w-100">Détails</a>
                 </div>
             </div>

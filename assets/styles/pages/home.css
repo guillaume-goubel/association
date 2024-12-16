@@ -1,9 +1,3 @@
-#main-banner-section{
-    background: url(https://craftohtml.themezaa.com/images/demo-restaurant-home-banner-bg.jpg);
-}
-#main-banner-circle{
-    background-color: #818D81;
-}
 @media only screen and (max-width: 600px) {
     #main-banner-time-infos{
         margin: auto;

@@ -22,6 +22,16 @@ body {
     line-height: 30px;
 }
 /* header */
+.nav-link{
+    border-bottom: 3px solid;
+    border-color: transparent;
+    opacity: 0.9;
+}
+.nav-link.active{
+    border-color: var(--yellow);
+    opacity: 1;
+}
+
 header .navbar-brand img {
     max-height: 49px;
 }
@@ -249,6 +259,9 @@ footer .elements-social ul li:last-child {
     transform: translateX(-50%);
 }
 .pricing-footer{
+    padding-top: 20px;
+}
+.pricing-footer-responsive{
     padding-top: 10px;
 }
 /* EVENT BUTTON ACTIONS */
